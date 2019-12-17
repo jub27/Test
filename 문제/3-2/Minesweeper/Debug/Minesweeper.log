@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\a11\source\repos\minesweeper\minesweeper\goto.h(5): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\a11\source\repos\minesweeper\minesweeper\main.cpp(8): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Minesweeper.vcxproj -> C:\Users\A11\source\repos\Minesweeper\Debug\Minesweeper.exe
