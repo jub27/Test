@@ -1,0 +1,3 @@
+﻿  BallMove.cpp
+e:\강의자료\winapi\winapi_2017\ballmove\ballmove.cpp(46): warning C4101: 'st' :참조되지 않은 지역 변수입니다.
+  BallMove.vcxproj -> E:\강의자료\WINAPI\WinAPI_2017\Debug\BallMove.exe

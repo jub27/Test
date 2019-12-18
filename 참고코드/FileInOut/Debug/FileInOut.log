@@ -1,0 +1,5 @@
+﻿  FileInOut.cpp
+f:\강의자료\winapi\winapi_2017\fileinout\fileinout.cpp(40): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
+f:\강의자료\winapi\winapi_2017\fileinout\fileinout.cpp(41): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
+f:\강의자료\winapi\winapi_2017\fileinout\fileinout.cpp(44): warning C4101: 'rt' :참조되지 않은 지역 변수입니다.
+  FileInOut.vcxproj -> F:\강의자료\WINAPI\WinAPI_2017\Debug\FileInOut.exe

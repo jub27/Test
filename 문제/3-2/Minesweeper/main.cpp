@@ -3,7 +3,8 @@
 #include "Map.h"
 #include <conio.h>
 
-int main() {
+int main() 
+{
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	srand(time(NULL));
 	Map* map = new Map();
@@ -11,10 +12,15 @@ int main() {
 	map->print();
 	int cur_y = 0, cur_x = 0;
 	gotoxy(0, 0);
-	while (1) {
-		if (_kbhit()) {
+	
+	while (1) 
+	{
+		if (_kbhit()) 
+		{
 			char c = _getch();
-			switch (c) {
+			
+			switch (c) 
+			{
 			case 'w':
 				cur_y--;
 				if (cur_y < 0)
@@ -36,14 +42,17 @@ int main() {
 					cur_x = MAP_SIZE - 1;
 				break;
 			case ENTER:
-				if (map->push(cur_x, cur_y) == false) {
+				if (map->push(cur_x, cur_y) == false) 
+				{
 					gotoxy(0, MAP_SIZE);
 					cout << "GAME OVER" << endl;
 					system("pause");
 					delete map;
 					return 0;
 				}
-				if (map->isClear()) {
+
+				if (map->isClear()) 
+				{
 					gotoxy(0, MAP_SIZE);
 					cout << "GAME CLEAR" << endl;
 					system("pause");

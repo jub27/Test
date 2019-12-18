@@ -1,0 +1,3 @@
+﻿  FileOpenDLG_Advanced.cpp
+f:\강의자료\winapi\winapi_2017\fileopendlg_advanced\fileopendlg_advanced.cpp(57): warning C4101: 'str' :참조되지 않은 지역 변수입니다.
+  FileOpenDLG_Advanced.vcxproj -> F:\강의자료\WINAPI\WinAPI_2017\Debug\FileOpenDLG_Advanced.exe

@@ -1,0 +1,8 @@
+﻿  Bitmap.cpp
+  Gamemanager.cpp
+  WinMain.cpp
+f:\강의자료\winapi\winapi_2017\bitmapclassdefault\winmain.cpp(43): warning C4101: 'MemDC' :참조되지 않은 지역 변수입니다.
+f:\강의자료\winapi\winapi_2017\bitmapclassdefault\winmain.cpp(45): warning C4101: 'OldBitMap' :참조되지 않은 지역 변수입니다.
+f:\강의자료\winapi\winapi_2017\bitmapclassdefault\winmain.cpp(45): warning C4101: 'MyBitMap' :참조되지 않은 지역 변수입니다.
+  코드를 생성하고 있습니다...
+  BitMapClassDefault.vcxproj -> F:\강의자료\WINAPI\WinAPI_2017\Debug\BitMapClassDefault.exe
