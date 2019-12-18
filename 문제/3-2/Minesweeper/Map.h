@@ -10,11 +10,13 @@ class Map
 {
 private:
 	vector<vector<Block*>> map;
+	int curBlockCount;
 public:
 	Map();
 	bool push(int x, int y);
 	void init();
 	void print();
+	bool isClear();
 	~Map();
 };
 

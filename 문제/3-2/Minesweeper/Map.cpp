@@ -2,6 +2,7 @@
 
 Map::Map()
 {
+	curBlockCount = MAP_SIZE * MAP_SIZE;
 }
 
 bool  Map::push(int x, int y) {
@@ -12,6 +13,7 @@ bool  Map::push(int x, int y) {
 	if (map[x][y]->isPushed())
 		return true;
 	map[x][y]->push();
+	curBlockCount--;
 	if (map[x][y]->isZeroBlock()) {
 		if (x > 0)
 			if (map[x - 1][y]->getType() == "normal")
@@ -79,6 +81,10 @@ void Map::print() {
 	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++)
 			map[i][j]->print();
+}
+
+bool Map::isClear() {
+	return curBlockCount == MINE_COUNT;
 }
 
 Map::~Map()

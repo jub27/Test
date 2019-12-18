@@ -10,6 +10,7 @@ int main() {
 	map->init();
 	map->print();
 	int cur_y = 0, cur_x = 0;
+	gotoxy(0, 0);
 	while (1) {
 		if (_kbhit()) {
 			char c = _getch();
@@ -38,6 +39,13 @@ int main() {
 				if (map->push(cur_x, cur_y) == false) {
 					gotoxy(0, MAP_SIZE);
 					cout << "GAME OVER" << endl;
+					system("pause");
+					delete map;
+					return 0;
+				}
+				if (map->isClear()) {
+					gotoxy(0, MAP_SIZE);
+					cout << "GAME CLEAR" << endl;
 					system("pause");
 					delete map;
 					return 0;
