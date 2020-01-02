@@ -1,0 +1,8 @@
+﻿  WinMain.cpp
+c:\users\a11\source\repos\animation\animation\winmain.cpp(50): warning C4101: 'hOldBitmap' :참조되지 않은 지역 변수입니다.
+c:\users\a11\source\repos\animation\animation\winmain.cpp(50): warning C4101: 'hImage' :참조되지 않은 지역 변수입니다.
+c:\users\a11\source\repos\animation\animation\winmain.cpp(52): warning C4101: 'bit' :참조되지 않은 지역 변수입니다.
+c:\users\a11\source\repos\animation\animation\winmain.cpp(49): warning C4101: 'hMemDC' :참조되지 않은 지역 변수입니다.
+c:\users\a11\source\repos\animation\animation\winmain.cpp(51): warning C4101: 'by' :참조되지 않은 지역 변수입니다.
+c:\users\a11\source\repos\animation\animation\winmain.cpp(51): warning C4101: 'bx' :참조되지 않은 지역 변수입니다.
+  Animation.vcxproj -> C:\Users\A11\source\repos\Animation\Debug\Animation.exe
