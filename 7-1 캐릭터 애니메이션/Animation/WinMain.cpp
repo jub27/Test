@@ -48,11 +48,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	static int degree = 0;
 	static int count = 0;
-	static int curDir = VK_DOWN;
-	static int prevDir = -1;
 	static bool moveFlag = true;
-	static int motion = 0;
-	static int speed = 5;
+	static bool jumpFlag = true;
 	switch (iMessage)
 	{
 	case WM_KEYDOWN:
@@ -63,25 +60,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		case VK_DOWN:
 			if (moveFlag) {
 				moveFlag = false;
-				prevDir = curDir;
-				curDir = wParam;
-				if (prevDir == curDir)
-					motion = (motion + 1) % 4;
+				character->SetPrevDir(character->GetCurDir());
+				character->SetCurDir(wParam);
+				if (character->GetCurDir() == character->GetPrevDir())
+					character->NextMotion();
 				else
-					motion = 0;
-				SetTimer(hWnd, 2, 1, NULL);
+					character->InitMotion();
+				SetTimer(hWnd, 2, 16, NULL);
 			}
 			break;
 		case VK_SPACE:
-			SetTimer(hWnd, 1, 10, NULL);
-			SendMessage(hWnd, WM_TIMER, 1, 0);
-			break;
+			if (jumpFlag) {
+				jumpFlag = false;
+				SetTimer(hWnd, 1, 10, NULL);
+				SendMessage(hWnd, WM_TIMER, 1, 0);
+				break;
+			}
 		}
 		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 
-		character->Draw(hdc, motion, curDir);
+		character->Draw(hdc);
 
 		EndPaint(hWnd, &ps);
 		return 0;
@@ -91,23 +91,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			character->Jump(degree);
 			degree += 10;
 			if (degree == 180) {
+				jumpFlag = true;
 				KillTimer(hWnd, 1);
 				degree = 0;
 			}
 			break;
 		case 2:
-			switch (curDir) {
+			switch (character->GetCurDir()) {
 			case VK_LEFT:
-				character->AddX(-speed);
+				character->MoveX(-1);
 				break;
 			case VK_RIGHT:
-				character->AddX(speed);
+				character->MoveX(1);
 				break;
 			case VK_UP:
-				character->AddY(-speed);
+				character->MoveY(-1);
 				break;
 			case VK_DOWN:
-				character->AddY(speed);
+				character->MoveY(1);
 				break;
 			}
 			count += 1;

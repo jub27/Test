@@ -13,15 +13,24 @@ private:
 	HBITMAP	m_pMyBitMap;
 	HBITMAP	m_pOldBitMap;
 	SIZE	m_size;
+	int curDir;
+	int prevDir;
+	int motion;
+	int speed;
 	double x, y;
 	double jumpY;
 public:
 	Character();
 	void Init(HWND hWnd, HINSTANCE hInst);
-	void Draw(HDC hdc, int motionNum, int dir);
+	void Draw(HDC hdc);
 	void Jump(int degree);
-	void AddX(double x);
-	void AddY(double y);
+	void MoveX(int dir);
+	void MoveY(int dir);
+	int GetCurDir();
+	int GetPrevDir();
+	void SetPrevDir(int dir);
+	void SetCurDir(int dir);
+	void NextMotion();
+	void InitMotion();
 	~Character();
 };
-
