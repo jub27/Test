@@ -66,7 +66,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 					character->NextMotion();
 				else
 					character->InitMotion();
-				SetTimer(hWnd, 2, 16, NULL);
+				SetTimer(hWnd, 2, 8, NULL);
 			}
 			break;
 		case VK_SPACE:

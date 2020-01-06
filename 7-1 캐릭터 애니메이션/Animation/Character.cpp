@@ -60,7 +60,6 @@ void Character::MoveY(int dir) {
 
 void Character::Jump(int degree) {
 	jumpY = sin(degree * 3.14 / 180) * -50;
-	InvalidateRect(hWnd, NULL, TRUE);
 }
 
 int Character::GetCurDir() {
