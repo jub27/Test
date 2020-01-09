@@ -21,7 +21,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 	WndClass.lpszMenuName = NULL;
 	WndClass.style = CS_HREDRAW | CS_VREDRAW;
 	RegisterClass(&WndClass);
-	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL,
+	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1100, 1080, NULL,
 		(HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	while (GetMessage(&Message, NULL, 0, 0))
@@ -33,11 +33,31 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 }
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
+	HDC hdc;
+	PAINTSTRUCT ps;
+	POINT in_Pt;
 	switch (iMessage)
 	{
+	case WM_CREATE:
+		GameManager::GetInstance()->Init(hWnd);
+		GameManager::GetInstance()->ResetBoard();
+		return 0;
+	case WM_LBUTTONDOWN:
+		in_Pt.x = LOWORD(lParam);
+		in_Pt.y = HIWORD(lParam);
+		GameManager::GetInstance()->Click(in_Pt.x, in_Pt.y);
+		InvalidateRect(hWnd, NULL, TRUE);
+		return 0;
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &ps);
+		GameManager::GetInstance()->ShowSelectable();
+		GameManager::GetInstance()->DrawBoard(hdc);
+		EndPaint(hWnd, &ps);
+		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
+
 	}
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
 }
