@@ -73,7 +73,7 @@ void GameManager::DrawBoard(HDC hdc) {
 	}
 }
 
-void GameManager::ShowSelectable() {
+void GameManager::CheckSelectable() {
 	ClearSelectable();
 	if (selectedX == -1 && selectedY == -1) {
 		if (curTeam == WHITE) {
@@ -96,12 +96,645 @@ void GameManager::ShowSelectable() {
 	else {
 		if (board[selectedY][selectedX]->GetTeam() == WHITE) {
 			if (board[selectedY][selectedX] == block[W_PAWN]) {
-				if (selectedY > 0)
-					selectable[selectedY - 1][selectedX] = true;
+				if (selectedY > 0) {
+					if (board[selectedY - 1][selectedX] == NULL)
+						selectable[selectedY - 1][selectedX] = true;
+					if (selectedX == 0) {
+						if (board[selectedY - 1][selectedX + 1] != NULL && board[selectedY - 1][selectedX + 1]->GetTeam() == BLACK)
+							selectable[selectedY - 1][selectedX + 1] = true;
+					}
+					else if (selectedX < BOARD_SIZE - 1) {
+						if (board[selectedY - 1][selectedX + 1] != NULL && board[selectedY - 1][selectedX + 1]->GetTeam() == BLACK)
+							selectable[selectedY - 1][selectedX + 1] = true;
+						if (board[selectedY - 1][selectedX - 1] != NULL && board[selectedY - 1][selectedX - 1]->GetTeam() == BLACK)
+							selectable[selectedY - 1][selectedX - 1] = true;
+					}
+					else {
+						if (board[selectedY - 1][selectedX - 1] != NULL && board[selectedY - 1][selectedX - 1]->GetTeam() == BLACK)
+							selectable[selectedY - 1][selectedX - 1] = true;
+					}
+				}
+			}
+			else if (board[selectedY][selectedX] == block[W_KNIGHT]) {
+				if(selectedY + 2 < BOARD_SIZE && selectedX + 1 < BOARD_SIZE)
+					if (board[selectedY + 2][selectedX + 1] == NULL || board[selectedY + 2][selectedX + 1]->GetTeam() == BLACK)
+						selectable[selectedY + 2][selectedX + 1] = true;
+
+				if (selectedY + 2 < BOARD_SIZE && selectedX - 1 >= 0 )
+					if (board[selectedY + 2][selectedX - 1] == NULL || board[selectedY + 2][selectedX - 1]->GetTeam() == BLACK)
+						selectable[selectedY + 2][selectedX - 1] = true;
+
+				if (selectedY - 2 >= 0 && selectedX + 1 < BOARD_SIZE)
+					if (board[selectedY - 2][selectedX + 1] == NULL || board[selectedY - 2][selectedX + 1]->GetTeam() == BLACK)
+						selectable[selectedY - 2][selectedX + 1] = true;
+
+				if (selectedY - 2 >= 0 && selectedX - 1 >= 0) 
+					if (board[selectedY - 2][selectedX - 1] == NULL || board[selectedY - 2][selectedX - 1]->GetTeam() == BLACK)
+						selectable[selectedY - 2][selectedX - 1] = true;
+
+				if (selectedY + 1 < BOARD_SIZE && selectedX + 2 < BOARD_SIZE)
+					if (board[selectedY + 1][selectedX + 2] == NULL || board[selectedY + 1][selectedX + 2]->GetTeam() == BLACK)
+						selectable[selectedY + 1][selectedX + 2] = true;
+
+				if (selectedY + 1 < BOARD_SIZE && selectedX - 2 >= 0)
+					if (board[selectedY + 1][selectedX - 2] == NULL || board[selectedY + 1][selectedX - 2]->GetTeam() == BLACK)
+						selectable[selectedY + 1][selectedX - 2] = true;
+
+				if (selectedY - 1 >= 0 && selectedX + 2 < BOARD_SIZE)
+					if (board[selectedY - 1][selectedX + 2] == NULL || board[selectedY - 1][selectedX + 2]->GetTeam() == BLACK)
+						selectable[selectedY - 1][selectedX + 2] = true;
+
+				if (selectedY -1 >= 0 && selectedX - 2 >= 0)
+					if (board[selectedY - 1][selectedX - 2] == NULL || board[selectedY -1][selectedX - 2]->GetTeam() == BLACK)
+						selectable[selectedY - 1][selectedX - 2] = true;
+
+			}
+			else if (board[selectedY][selectedX] == block[W_BISHOP]) {
+				int y = selectedY + 1, x = selectedX + 1;
+				while (x < BOARD_SIZE && y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y++;
+				}
+				y = selectedY + 1;
+				x = selectedX - 1;
+				while (x >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+					y++;
+				}
+				y = selectedY - 1;
+				x = selectedX - 1;
+				while (x >= 0 && y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+					y--;
+				}
+				y = selectedY - 1;
+				x = selectedX + 1;
+				while (x < BOARD_SIZE && y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y--;
+				}
+			}
+			else if (board[selectedY][selectedX] == block[W_ROOK]) {
+				int x = selectedX + 1;
+				int y = selectedY;
+				while (x < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+				}
+				x = selectedX - 1;
+				y = selectedY;
+				while (x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+				}
+				x = selectedX;
+				y = selectedY - 1;
+				while (y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y--;
+				}
+				x = selectedX;
+				y = selectedY + 1;
+				while (y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y++;
+				}
+			}
+			else if (board[selectedY][selectedX] == block[W_QUEEN]) {
+				int x, y;
+				x = selectedX;
+				y = selectedY - 1;
+				while (y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y--;
+				}
+				x = selectedX + 1;
+				y = selectedY - 1;
+				while (y >= 0 && x < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y--;
+				}
+				x = selectedX + 1;
+				y = selectedY;
+				while (x < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+				}
+				x = selectedX + 1;
+				y = selectedY + 1;
+				while (x < BOARD_SIZE && y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y++;
+				}
+				x = selectedX;
+				y = selectedY + 1;
+				while (y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y++;
+				}
+				x = selectedX - 1;
+				y = selectedY + 1;
+				while (y < BOARD_SIZE && x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y++;
+					x--;
+				}
+				x = selectedX - 1;
+				y = selectedY;
+				while (x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+				}
+				x = selectedX - 1;
+				y = selectedY - 1;
+				while (y >= 0 && x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == BLACK) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y--;
+					x--;
+				}
+			}
+			else if (board[selectedY][selectedX] == block[W_KING]) {
+				int x = selectedX;
+				int y = selectedY - 1;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				x++;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				y++;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				y++;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				x--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				x--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				y--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
+				y--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == BLACK)
+						selectable[y][x] = true;
+				}
 			}
 		}
 		else {
+			if (board[selectedY][selectedX] == block[B_PAWN]) {
+				if (selectedY < BOARD_SIZE-1) {
+					if(board[selectedY+1][selectedX] == NULL)
+						selectable[selectedY + 1][selectedX] = true;
+					if (selectedX == 0) {
+						if (board[selectedY + 1][selectedX + 1] != NULL && board[selectedY + 1][selectedX + 1]->GetTeam() == WHITE)
+							selectable[selectedY + 1][selectedX + 1] = true;
+					}
+					else if (selectedX < BOARD_SIZE - 1) {
+						if (board[selectedY + 1][selectedX + 1] != NULL && board[selectedY + 1][selectedX + 1]->GetTeam() == WHITE)
+							selectable[selectedY + 1][selectedX + 1] = true;
+						if (board[selectedY + 1][selectedX - 1] != NULL && board[selectedY + 1][selectedX - 1]->GetTeam() == WHITE)
+							selectable[selectedY + 1][selectedX - 1] = true;
+					}
+					else {
+						if (board[selectedY + 1][selectedX - 1] != NULL && board[selectedY + 1][selectedX - 1]->GetTeam() == WHITE)
+							selectable[selectedY+ 1][selectedX - 1] = true;
+					}
+				}
+			}
+			else if (board[selectedY][selectedX] == block[B_KNIGHT]) {
+				if (selectedY + 2 < BOARD_SIZE && selectedX + 1 < BOARD_SIZE)
+					if (board[selectedY + 2][selectedX + 1] == NULL || board[selectedY + 2][selectedX + 1]->GetTeam() == WHITE)
+						selectable[selectedY + 2][selectedX + 1] = true;
 
+				if (selectedY + 2 < BOARD_SIZE && selectedX - 1 >= 0)
+					if (board[selectedY + 2][selectedX - 1] == NULL || board[selectedY + 2][selectedX - 1]->GetTeam() == WHITE)
+						selectable[selectedY + 2][selectedX - 1] = true;
+
+				if (selectedY - 2 >= 0 && selectedX + 1 < BOARD_SIZE)
+					if (board[selectedY - 2][selectedX + 1] == NULL || board[selectedY - 2][selectedX + 1]->GetTeam() == WHITE)
+						selectable[selectedY - 2][selectedX + 1] = true;
+
+				if (selectedY - 2 >= 0 && selectedX - 1 >= 0)
+					if (board[selectedY - 2][selectedX - 1] == NULL || board[selectedY - 2][selectedX - 1]->GetTeam() == WHITE)
+						selectable[selectedY - 2][selectedX - 1] = true;
+
+				if (selectedY + 1 < BOARD_SIZE && selectedX + 2 < BOARD_SIZE)
+					if (board[selectedY + 1][selectedX + 2] == NULL || board[selectedY + 1][selectedX + 2]->GetTeam() == WHITE)
+						selectable[selectedY + 1][selectedX + 2] = true;
+
+				if (selectedY + 1 < BOARD_SIZE && selectedX - 2 >= 0)
+					if (board[selectedY + 1][selectedX - 2] == NULL || board[selectedY + 1][selectedX - 2]->GetTeam() == WHITE)
+						selectable[selectedY + 1][selectedX - 2] = true;
+
+				if (selectedY - 1 >= 0 && selectedX + 2 < BOARD_SIZE)
+					if (board[selectedY - 1][selectedX + 2] == NULL || board[selectedY - 1][selectedX + 2]->GetTeam() == WHITE)
+						selectable[selectedY - 1][selectedX + 2] = true;
+
+				if (selectedY - 1 >= 0 && selectedX - 2 >= 0)
+					if (board[selectedY - 1][selectedX - 2] == NULL || board[selectedY - 1][selectedX - 2]->GetTeam() == WHITE)
+						selectable[selectedY - 1][selectedX - 2] = true;
+
+			}
+			else if (board[selectedY][selectedX] == block[B_BISHOP]) {
+				int y = selectedY + 1, x = selectedX + 1;
+				while (x < BOARD_SIZE && y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y++;
+				}
+				y = selectedY + 1;
+				x = selectedX - 1;
+				while (x >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+					y++;
+				}
+				y = selectedY - 1;
+				x = selectedX - 1;
+				while (x >= 0 && y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+					y--;
+				}
+				y = selectedY - 1;
+				x = selectedX + 1;
+				while (x < BOARD_SIZE && y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y--;
+				}
+			}
+			else if (board[selectedY][selectedX] == block[B_ROOK]) {
+				int x = selectedX + 1;
+				int y = selectedY;
+				while (x < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+				}
+				x = selectedX - 1;
+				y = selectedY;
+				while (x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+				}
+				x = selectedX;
+				y = selectedY - 1;
+				while (y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y--;
+				}
+				x = selectedX;
+				y = selectedY + 1;
+				while (y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y++;
+				}
+			}
+			else if (board[selectedY][selectedX] == block[B_QUEEN]) {
+				int x, y;
+				x = selectedX;
+				y = selectedY - 1;
+				while (y >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y--;
+				}
+				x = selectedX + 1;
+				y = selectedY - 1;
+				while (y >= 0 && x < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y--;
+				}
+				x = selectedX + 1;
+				y = selectedY;
+				while (x < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+				}
+				x = selectedX + 1;
+				y = selectedY + 1;
+				while (x < BOARD_SIZE && y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x++;
+					y++;
+				}
+				x = selectedX;
+				y = selectedY + 1;
+				while (y < BOARD_SIZE) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y++;
+				}
+				x = selectedX - 1;
+				y = selectedY + 1;
+				while (y < BOARD_SIZE && x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y++;
+					x--;
+				}
+				x = selectedX - 1;
+				y = selectedY;
+				while (x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					x--;
+				}
+				x = selectedX - 1;
+				y = selectedY - 1;
+				while (y >= 0 && x >= 0) {
+					if (board[y][x] == NULL)
+						selectable[y][x] = true;
+					else if (board[y][x]->GetTeam() == WHITE) {
+						selectable[y][x] = true;
+						break;
+					}
+					else
+						break;
+					y--;
+					x--;
+				}
+			}
+			else if (board[selectedY][selectedX] == block[B_KING]) {
+				int x = selectedX;
+				int y = selectedY - 1;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				x++;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				y++;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				y++;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				x--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				x--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				y--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+				y--;
+				if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+					if (board[y][x] == NULL || board[y][x]->GetTeam() == WHITE)
+						selectable[y][x] = true;
+				}
+			}
 		}
 	}
 }
@@ -115,6 +748,13 @@ void GameManager::Click(int x, int y) {
 			selectedY = y;
 		}
 		else {
+
+			board[y][x] = board[selectedY][selectedX];
+			board[selectedY][selectedX] = NULL;
+
+			selectedX = -1;
+			selectedY = -1;
+
 			if (curTeam == WHITE)
 				curTeam = BLACK;
 			else
@@ -123,6 +763,11 @@ void GameManager::Click(int x, int y) {
 	}
 	else 
 		return;
+}
+
+void GameManager::UnClick() {
+	selectedX = -1;
+	selectedY = -1;
 }
 
 void GameManager::ClearSelectable() {

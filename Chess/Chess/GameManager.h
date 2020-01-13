@@ -25,10 +25,11 @@ public:
 	}
 	GameManager();
 	void Init(HWND hWnd);
-	void ShowSelectable();
+	void CheckSelectable();
 	void ResetBoard();
 	void DrawBoard(HDC hdc);
 	void Click(int x, int y);
+	void UnClick();
 	void ClearSelectable();
 	~GameManager();
 };

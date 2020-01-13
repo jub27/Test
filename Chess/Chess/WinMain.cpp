@@ -48,9 +48,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		GameManager::GetInstance()->Click(in_Pt.x, in_Pt.y);
 		InvalidateRect(hWnd, NULL, TRUE);
 		return 0;
+	case WM_RBUTTONDOWN:
+		GameManager::GetInstance()->UnClick();
+		InvalidateRect(hWnd, NULL, TRUE);
+		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		GameManager::GetInstance()->ShowSelectable();
+		GameManager::GetInstance()->CheckSelectable();
 		GameManager::GetInstance()->DrawBoard(hdc);
 		EndPaint(hWnd, &ps);
 		return 0;
