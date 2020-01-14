@@ -26,8 +26,6 @@ void GameManager::Init(HWND hWnd) {
 }
 
 void GameManager::ResetBoard() {
-
-
 	for(int i = 0; i < BOARD_SIZE; i++)
 		for (int j = 0; j < BOARD_SIZE; j++) {
 				board[i][j] = NULL;
@@ -792,4 +790,6 @@ void GameManager::ClearSelectable() {
 
 GameManager::~GameManager()
 {
+	for (int i = 0; i < BITMAPNUMS; i++)
+		delete block[i];
 }

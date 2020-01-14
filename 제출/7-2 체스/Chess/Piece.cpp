@@ -25,7 +25,6 @@ void Piece::Init(HDC hdc, LPCWSTR source, Team team) {
 }
 void Piece::Draw(HDC hdc, int x, int y)
 {
-
 	TransparentBlt(hdc, x, y, m_size.cx, m_size.cy, MemDC, 0, 0,
 		m_size.cx, m_size.cy, RGB(255, 0, 255));
 }

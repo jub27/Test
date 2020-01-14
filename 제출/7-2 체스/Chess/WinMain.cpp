@@ -29,6 +29,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);
 	}
+	delete GameManager::GetInstance();
 	return (int)Message.wParam;
 }
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
