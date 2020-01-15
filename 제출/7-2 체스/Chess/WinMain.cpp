@@ -47,7 +47,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 		in_Pt.x = LOWORD(lParam);
 		in_Pt.y = HIWORD(lParam);
-		ClickResult = GameManager::GetInstance()->Click(in_Pt.x, in_Pt.y);
+		ClickResult = GameManager::GetInstance()->Click(in_Pt);
 		InvalidateRect(hWnd, NULL, TRUE);
 		if (ClickResult == 1) {
 			if (MessageBox(hWnd, L"다시 시작", L"WHITE WIN", MB_YESNO) == IDYES) {

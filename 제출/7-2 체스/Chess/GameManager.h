@@ -28,7 +28,7 @@ public:
 	void CheckSelectable();
 	void ResetBoard();
 	void DrawBoard(HDC hdc);
-	int Click(int x, int y);
+	int Click(POINT point);
 	void UnClick();
 	void ClearSelectable();
 	~GameManager();

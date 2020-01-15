@@ -745,12 +745,13 @@ void GameManager::CheckSelectable() {
 	}
 }
 
-int GameManager::Click(int x, int y) {
-	x = x / 125;
-	y = y / 125;
+int GameManager::Click(POINT point) {
 	int ret = 0;
-	if (x >= BOARD_SIZE || y >= BOARD_SIZE)
+	RECT inRect = { 0, 0, 125 * BOARD_SIZE, 125 * BOARD_SIZE };
+	if (!PtInRect(&inRect, point))
 		return ret;
+	int x = point.x / 125;
+	int y = point.y / 125;
 	if (selectable[y][x]) {
 		if (selectedX == -1 && selectedY == -1) {
 			selectedX = x;
