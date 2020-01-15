@@ -749,6 +749,8 @@ int GameManager::Click(int x, int y) {
 	x = x / 125;
 	y = y / 125;
 	int ret = 0;
+	if (x >= BOARD_SIZE || y >= BOARD_SIZE)
+		return ret;
 	if (selectable[y][x]) {
 		if (selectedX == -1 && selectedY == -1) {
 			selectedX = x;
