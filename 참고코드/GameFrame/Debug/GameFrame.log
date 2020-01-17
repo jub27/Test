@@ -1,4 +1,4 @@
-﻿  GameFrame.cpp
-  GameFrameWork.cpp
-  코드를 생성하고 있습니다...
-  GameFrame.vcxproj -> F:\강의자료\WINAPI\WinAPI_2017\Debug\GameFrame.exe
+﻿  GameFrameWork.cpp
+c:\users\a11\desktop\매\kimjaeyeop\참고코드\gameframe\gameframework.cpp(87): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\매\kimjaeyeop\참고코드\gameframe\gameframework.cpp(88): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GameFrame.vcxproj -> C:\Users\A11\Desktop\매\kimjaeyeop\참고코드\GameFrame\Debug\GameFrame.exe

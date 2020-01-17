@@ -84,8 +84,8 @@ void GameFrameWork::Update()
 
 		//원그리는 것 이것을 적절하게 조합하면 점프가 된다.
 		//점프 지속시간을 체크해서 위치나 상태를 초기화 해준다.
-		Player_x = m_fJumpX - cosf(m_fCurJumpTime * PI ) * 80;
-		Player_y = m_fJumpY - sinf(m_fCurJumpTime * PI ) * 80;
+		Player_x = m_fJumpX - cos(m_fCurJumpTime * PI ) * 80;
+		Player_y = m_fJumpY - sin(m_fCurJumpTime * PI ) * 80;
 
 		//점프 지속시간 체크용 초기화.
 		if (m_fCurJumpTime > 1.0f)
