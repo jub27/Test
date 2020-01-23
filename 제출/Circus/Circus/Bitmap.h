@@ -15,4 +15,3 @@ public:
 	void StretchDraw(HDC hdc, int x, int y);
 	~Bitmap();
 };
-

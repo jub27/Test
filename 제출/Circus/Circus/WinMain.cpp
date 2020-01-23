@@ -1,4 +1,5 @@
 #include<Windows.h>
+#include<time.h>
 #include "GameManager.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -27,6 +28,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 	ShowWindow(hWnd, nCmdShow);
 	HDC hdc;
 	hdc = GetDC(hWnd);
+	srand(time(NULL));
 	GameManager::GetInstance()->Init(hWnd);
 	while (true) {
 		if (PeekMessage(&Message, NULL, 0, 0, PM_REMOVE)) {
@@ -37,6 +39,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 		}
 		else {
 			GameManager::GetInstance()->Render();
+			if (GameManager::GetInstance()->CheckDie()) {
+				MessageBox(hWnd, L"Game Over", L"Game Over", MB_OK);
+				break;
+			}
 		}
 
 	}
@@ -51,4 +57,4 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
-}
+}
