@@ -37,6 +37,9 @@ private:
 
 	vector<pair<int, int>> Enemy;
 	vector<int> Front;
+	vector<double> FireRing;
+	vector<double> FireRing_Gold;
+
 
 	double PlayerX, PlayerY;
 	double JumpX, JumpY;
@@ -52,11 +55,15 @@ public:
 	}
 	GameManager();
 	void OperateInput();
-	void SetBack();
+	void DrawBack();
 	void SetFront();
-	void DrawMeter();
-	void UpdateFront();
+	void Update();
+	void DrawFront();
 	void DrawPlayer();
+	void DrawMeter();
+	void SetFireRing();
+	void DrawFireRingLeft();
+	void DrawFireRingRight();
 	void Jump();
 	bool CheckDie();
 	void Init(HWND hWnd);
