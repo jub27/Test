@@ -39,13 +39,23 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 		}
 		else {
 			GameManager::GetInstance()->Render();
-			if (GameManager::GetInstance()->CheckDie()) {
+			int result = GameManager::GetInstance()->CheckPlayer();
+			if (result == 0) {
 				MessageBox(hWnd, L"Game Over", L"Game Over", MB_OK);
 				break;
+			}
+			else if (result == 1) {
+				if (MessageBox(hWnd, L"다시 시작하시겠습니까?", L"Win", MB_YESNO) == IDYES) {
+					GameManager::GetInstance()->Release();
+					GameManager::GetInstance()->Init(hWnd);
+				}
+				else
+					break;
 			}
 		}
 
 	}
+	GameManager::GetInstance()->Release();
 	return (int)Message.wParam;
 }
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

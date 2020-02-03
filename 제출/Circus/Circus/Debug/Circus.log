@@ -1,40 +1,47 @@
 ﻿  GameManager.cpp
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(72): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(81): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(101): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(102): warning C4244: '인수': '_Ty'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Ty=double
-          ]
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(103): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(104): warning C4244: '인수': '_Ty'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Ty=double
-          ]
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(77): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\a11\desktop\circus\circus\gamemanager.cpp(108): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\a11\desktop\circus\circus\gamemanager.cpp(109): warning C4244: '인수': '_Ty'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Ty=double
           ]
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(110): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(111): warning C4244: '인수': '_Ty'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(115): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(116): warning C4244: '인수': '_Ty'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Ty=double
           ]
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(117): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(119): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(119): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(144): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(146): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(167): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(171): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(171): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(173): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(174): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(174): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\desktop\circus\circus\gamemanager.cpp(179): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(124): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(126): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(126): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(150): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(152): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(171): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(175): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(175): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(178): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(183): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(189): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(190): warning C4838: '_Ty'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+          with
+          [
+              _Ty=double
+          ]
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(190): warning C4244: '초기화 중': '_Ty'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(191): warning C4838: '_Ty'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+          with
+          [
+              _Ty=double
+          ]
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(191): warning C4244: '초기화 중': '_Ty'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+c:\users\a11\desktop\circus\circus\gamemanager.cpp(196): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Circus.vcxproj -> C:\Users\A11\Desktop\Circus\Debug\Circus.exe

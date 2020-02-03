@@ -23,9 +23,6 @@ private:
 	HDC		MemDC;
 	HBITMAP	MyBitMap;
 	HBITMAP	OldBitMap;
-	HDC		BackDC;
-	HBITMAP	Back_MyBitMap;
-	HBITMAP	Back_OldBitMap;
 	static GameManager * instance;
 	LPCWSTR source[BITMAP_NUMS] = { L"res\\back.bmp",L"res\\back_deco.bmp", L"res\\back_normal.bmp", L"res\\back_normal2.bmp", L"res\\cash.bmp", 
 		L"res\\die.bmp", L"res\\end.bmp", L"res\\enemy.bmp", L"res\\enemy_1b.bmp", L"res\\enemy_1f.bmp",L"res\\enemy_b.bmp",L"res\\enemy_f.bmp",L"res\\enemy_l.bmp", 
@@ -38,7 +35,7 @@ private:
 	vector<pair<int, int>> Enemy;
 	vector<int> Front;
 	vector<double> FireRing;
-	vector<double> FireRing_Gold;
+	//vector<double> FireRing_Gold;
 
 
 	double PlayerX, PlayerY;
@@ -47,6 +44,11 @@ private:
 	DWORD JumpTime;
 	double BackgroundMove;
 	double FrontMove;
+
+
+	DWORD FireRingTime;
+	DWORD FrontTime;
+	DWORD PlayerTime;
 public:
 	static GameManager* GetInstance() {
 		if (instance == NULL)
@@ -57,7 +59,6 @@ public:
 	void OperateInput();
 	void DrawBack();
 	void SetFront();
-	void Update();
 	void DrawFront();
 	void DrawPlayer();
 	void DrawMeter();
@@ -65,8 +66,10 @@ public:
 	void DrawFireRingLeft();
 	void DrawFireRingRight();
 	void Jump();
-	bool CheckDie();
+	int CheckPlayer();
+	void DrawEnd();
 	void Init(HWND hWnd);
 	void Render();
+	void Release();
 	~GameManager();
 };
