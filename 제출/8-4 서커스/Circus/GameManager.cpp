@@ -271,7 +271,7 @@ void GameManager::Render() {
 	DrawFireRingRight();
 	DrawEnd();
 	BitBlt(hdc, 0, 0, 1041, 433, MemDC, 0, 0, SRCCOPY);
-	ReleaseDC(m_hWnd, hdc);
+	ReleaseDC(m_hWnd, hdc);
 }
 
 GameManager::~GameManager()
