@@ -1,5 +1,1 @@
-﻿  Character.cpp
-c:\users\a11\desktop\매\kimjaeyeop\제출\8-1 getkeystate\animation\character.cpp(32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  WinMain.cpp
-  코드를 생성하고 있습니다...
-  Animation.vcxproj -> C:\Users\A11\Desktop\매\kimjaeyeop\제출\8-1 GETKEYSTATE\Debug\Animation.exe
+﻿  Animation.vcxproj -> C:\Users\A11\Desktop\매\kimjaeyeop\제출\8-1 GETKEYSTATE\Debug\Animation.exe
