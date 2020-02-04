@@ -50,7 +50,8 @@ void GameManager::OperateInput() {
 		if (PlayerX - BackgroundMove >= 200) {
 			if (BackgroundMove < 10086 - 1024)
 				BackgroundMove += 0.7;
-			PlayerX += 0.7;
+			if( PlayerX <= 10000 - 20)
+				PlayerX += 0.7;
 		}
 		else
 			PlayerX += 0.7;
@@ -94,7 +95,7 @@ void GameManager::SetFireRing() {
 			i++;
 	}
 	*/
-	if (GetTickCount() - FireRingTime >= 1000) {
+	if (GetTickCount() - FireRingTime >= 1000 && BackgroundMove < 10086 - 1024) {
 		int random = rand() % 100;
 		if (random < 30)
 			FireRing.push_back(1024.0f);
@@ -178,10 +179,7 @@ int GameManager::CheckPlayer() {
 	for (int i = 0; i < Front.size(); i++) {
 		RECT FrontRect = { Front[i], 300,   Front[i]+ 30, 300 + 50 };
 		if (IntersectRect(&temp, &PlayerRect, &FrontRect)) {
-			DrawBack();
-			DrawFront();
-			bitmap[DIE]->TransparentDraw(MemDC, PlayerX - BackgroundMove, PlayerY - JumpY);
-			BitBlt(GetDC(m_hWnd), 0, 0, 1041, 768, MemDC, 0, 0, SRCCOPY);
+			Die();
 			return 0;
 		}
 	}
@@ -190,12 +188,7 @@ int GameManager::CheckPlayer() {
 		RECT FireRect1 = { FireRing[i] + BackgroundMove + 17, 90,   FireRing[i] + BackgroundMove + 17 + 15, 90 + 15};
 		RECT FireRect2 = { FireRing[i] + BackgroundMove + 17, 90 + 110,   FireRing[i] + BackgroundMove + 17 + 15, 90 + 110 + 15 };
 		if (IntersectRect(&temp, &PlayerRect, &FireRect1) || IntersectRect(&temp, &PlayerRect, &FireRect2)) {
-			DrawBack();
-			DrawFront();
-			DrawFireRingLeft();
-			bitmap[DIE]->TransparentDraw(MemDC, PlayerX - BackgroundMove, PlayerY - JumpY);
-			DrawFireRingRight();
-			BitBlt(GetDC(m_hWnd), 0, 0, 1041, 768, MemDC, 0, 0, SRCCOPY);
+			Die();
 			return 0;
 		}
 	}
@@ -247,9 +240,16 @@ void GameManager::Jump() {
 }
 
 void GameManager::DrawEnd() {
-	if (BackgroundMove >= 10086 - 1024) {
-		bitmap[END]->TransparentDraw(MemDC, 1024 - 76, 300);
-	}
+	bitmap[END]->TransparentDraw(MemDC, 10086 - BackgroundMove - 76, 300);
+}
+
+void GameManager::Die() {
+	DrawBack();
+	DrawFront();
+	DrawFireRingLeft();
+	bitmap[DIE]->TransparentDraw(MemDC, PlayerX - BackgroundMove, PlayerY - JumpY);
+	DrawFireRingRight();
+	BitBlt(GetDC(m_hWnd), 0, 0, 1041, 768, MemDC, 0, 0, SRCCOPY);
 }
 
 void GameManager::Release(){

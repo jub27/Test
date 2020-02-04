@@ -65,6 +65,7 @@ public:
 	void SetFireRing();
 	void DrawFireRingLeft();
 	void DrawFireRingRight();
+	void Die();
 	void Jump();
 	int CheckPlayer();
 	void DrawEnd();
