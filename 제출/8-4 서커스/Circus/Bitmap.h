@@ -12,6 +12,6 @@ public:
 	void Init(HDC hdc, LPCWSTR source);
 	void TransparentDraw(HDC hdc, int x, int y);
 	void Draw(HDC hdc, int x, int y);
-	void StretchDraw(HDC hdc, int x, int y);
+	void StretchDraw(HDC hdc, int x, int y, double i);
 	~Bitmap();
 };

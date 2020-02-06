@@ -33,8 +33,8 @@ void Bitmap::Draw(HDC hdc, int x, int y)
 	BitBlt(hdc, x, y, size.cx, size.cy, MemDC, 0, 0, SRCCOPY);
 }
 
-void Bitmap::StretchDraw(HDC hdc, int x, int y) {
-	StretchBlt(hdc, x, y, size.cx, size.cy * 2, MemDC, 0, 0, size.cx, size.cy, SRCCOPY);
+void Bitmap::StretchDraw(HDC hdc, int x, int y, double i) {
+	StretchBlt(hdc, x, y, size.cx, size.cy * i, MemDC, 0, 0, size.cx, size.cy, SRCCOPY);
 }
 
 Bitmap::~Bitmap()

@@ -23,13 +23,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 	WndClass.lpszMenuName = NULL;
 	WndClass.style = CS_HREDRAW | CS_VREDRAW;
 	RegisterClass(&WndClass);
-	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 433,
+	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 533,
 		NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	HDC hdc;
 	hdc = GetDC(hWnd);
 	srand(time(NULL));
 	GameManager::GetInstance()->Init(hWnd);
+	GameManager::GetInstance()->InitLife();;
+	int GameState = -1;
 	while (true) {
 		if (PeekMessage(&Message, NULL, 0, 0, PM_REMOVE)) {
 			if (Message.message == WM_QUIT)
@@ -38,20 +40,29 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 			DispatchMessage(&Message);
 		}
 		else {
-			GameManager::GetInstance()->Render();
-			int result = GameManager::GetInstance()->CheckPlayer();
-			if (result == 0) {
-				MessageBox(hWnd, L"Game Over", L"Game Over", MB_OK);
-				break;
-			}
-			else if (result == 1) {
-				if (MessageBox(hWnd, L"다시 시작하시겠습니까?", L"Win", MB_YESNO) == IDYES) {
-					GameManager::GetInstance()->Release();
+			if(GameState == -1)
+				GameState = GameManager::GetInstance()->Title();
+			if (GameState == 0) {
+				GameManager::GetInstance()->Render();
+				int result = GameManager::GetInstance()->CheckPlayer();
+				if (result == 0) {
+					Sleep(1000);
+					int life = GameManager::GetInstance()->GetLife();
+					if (life == 0) {
+						GameManager::GetInstance()->InitLife();
+						GameState = -1;
+					}
 					GameManager::GetInstance()->Init(hWnd);
 				}
-				else
-					break;
+				else if (result == 1) {
+					Sleep(1000);
+					GameManager::GetInstance()->Init(hWnd);
+					GameManager::GetInstance()->InitLife();
+					GameState = -1;
+				}
 			}
+			else if (GameState == 1)
+				break;
 		}
 
 	}
