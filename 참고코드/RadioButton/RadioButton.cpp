@@ -60,10 +60,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	{
 		case WM_CREATE:
 
-			CreateWindow(TEXT("button"), TEXT("Graph"), WS_CHILD | WS_VISIBLE |
-				BS_GROUPBOX, 5, 5, 120, 110, hWnd, (HMENU)0, g_hInst, NULL);
-			CreateWindow(TEXT("button"), TEXT("Color"), WS_CHILD | WS_VISIBLE |
-				BS_GROUPBOX, 145, 5, 120, 110, hWnd, (HMENU)1, g_hInst, NULL);
+
 
 			r1 = CreateWindow(TEXT("button"), TEXT("Rectangle"), WS_CHILD | WS_VISIBLE |
 				BS_AUTORADIOBUTTON | WS_GROUP, 10, 20, 100, 30, hWnd, (HMENU)ID_R1, g_hInst, NULL);
@@ -71,7 +68,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				BS_AUTORADIOBUTTON, 10, 50, 100, 30, hWnd, (HMENU)ID_R2, g_hInst, NULL);
 
 			r3 = CreateWindow(TEXT("button"), TEXT("Rectangle"), WS_CHILD | WS_VISIBLE |
-				BS_AUTORADIOBUTTON | WS_GROUP, 150, 20, 100, 30, hWnd, (HMENU)ID_R3, g_hInst, NULL);
+				BS_AUTORADIOBUTTON , 150, 20, 100, 30, hWnd, (HMENU)ID_R3, g_hInst, NULL);
 			r4 = CreateWindow(TEXT("button"), TEXT("Ellipse"), WS_CHILD | WS_VISIBLE |
 				BS_AUTORADIOBUTTON, 150, 50, 100, 30, hWnd, (HMENU)ID_R4, g_hInst, NULL);
 			r5 = CreateWindow(TEXT("button"), TEXT("Rectangle"), WS_CHILD | WS_VISIBLE |
@@ -80,6 +77,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			CheckRadioButton(hWnd, ID_R1, ID_R2, ID_R1);
 			CheckRadioButton(hWnd, ID_R3, ID_R5, ID_R3);
 
+			CreateWindow(TEXT("button"), TEXT("Graph"), WS_CHILD | WS_VISIBLE |
+				BS_GROUPBOX, 5, 5, 120, 110, hWnd, (HMENU)0, g_hInst, NULL);
+			CreateWindow(TEXT("button"), TEXT("Color"), WS_CHILD | WS_VISIBLE |
+				BS_GROUPBOX, 145, 5, 120, 110, hWnd, (HMENU)1, g_hInst, NULL);
 			return 0;
 
 		case WM_COMMAND:

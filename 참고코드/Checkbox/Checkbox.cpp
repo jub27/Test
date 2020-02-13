@@ -54,9 +54,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			
 			return 0;
 		case WM_COMMAND:
-			
-			case 0:
-					if(SendMessage(c1, BM_GETCHECK, 0, 0) == BST_UNCHECKED)
+			switch (LOWORD(wParam)) {
+				case 0:
+					if (SendMessage(c1, BM_GETCHECK, 0, 0) == BST_UNCHECKED)
 					{
 						SendMessage(c1, BM_SETCHECK, BST_CHECKED, 0);
 						bEllipse = TRUE;
@@ -68,8 +68,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 					}
 
 					InvalidateRect(hWnd, NULL, TRUE);
-				break;
-			
+					break;
+			}
 			return 0;
 		
 		case WM_PAINT:
