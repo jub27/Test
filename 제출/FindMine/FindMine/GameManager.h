@@ -11,6 +11,10 @@
 #define START_Y_1 45
 #define START_X_2 43
 #define START_Y_2 45
+
+#define GAME_OVER 0
+#define RANGE_OUT 1
+#define CLICK_OK 2
 enum BITMAP_NAME {
 	BACK, BLOCK, BLOCK0, BLOCK1, BLOCK2, BLOCK3, BLOCK4, BLOCK5, BLOCK6, BLOCK7, BLOCK8, FLAG, MINE
 };
@@ -36,9 +40,12 @@ private:
 
 	int startX[3];
 	int startY[3];
-	////////////////////////////// 난이도별 x, y 길이 배열로 추가
+	int mineNumByDifficulty[3] = { 10, 40, 99 };
+	int width[3] = { 9, 16, 30 };
+	int height[3] = { 9, 16, 16 };
 	int difficulty;
 	int curMine;
+	bool gameStart;
 
 	Block map[16][30];
 	static GameManager * gameManager;
@@ -57,8 +64,10 @@ public:
 	void DrawBlocks();
 	void InitMap();
 	void SetDifficulty(int dif);
-	void LeftClick(int clickX, int clickY);
+	int LeftClick(int clickX, int clickY);
 	void RightClick(int clickX, int clickY);
 	void AddNearMine(int x, int y);
+	void DrawCurMineNume();
+	bool is_GameStart();
 	~GameManager();
 };

@@ -1,7 +1,8 @@
 #include<Windows.h>
 #include "resource.h"
 #include "GameManager.h"
-#include <time.h>
+#include <ctime>
+#include <cstdlib>
 
 BOOL CALLBACK DifficultyDlgProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -30,7 +31,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 		(HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	GameManager::GetInstance()->Init(hWnd);
 
 
@@ -46,15 +47,46 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	HDC hdc;
 	PAINTSTRUCT ps;
 	POINT pt;
+	static int time = 0;
+	char buffer[20];
+	RECT rt = { 160, 480, 180, 500 };
+	LPCSTR p;
 	switch (iMessage)
 	{
 	case WM_CREATE:
 		GameManager::GetInstance()->NewGame();
+		SetTimer(hWnd, 1, 1000, NULL);
+		SendMessage(hWnd, WM_TIMER, 1, 0); 
+		time = 0;
+
+		_itoa_s(time, buffer, 20, 10);
+		p = buffer;
+		DrawText(GetDC(hWnd), p, -1, &rt, DT_CENTER | DT_WORDBREAK);
+
+		return 0;
+	case WM_TIMER:
+		if (GameManager::GetInstance()->is_GameStart()) {
+			time++;
+			_itoa_s(time, buffer, 20, 10);
+			p = buffer;
+			DrawText(GetDC(hWnd), p, -1, &rt, DT_CENTER | DT_WORDBREAK);
+		}
 		return 0;
 	case WM_LBUTTONDOWN:
 		pt.x = LOWORD(lParam);
 		pt.y = HIWORD(lParam);
-		GameManager::GetInstance()->LeftClick(pt.x, pt.y);
+		if (GameManager::GetInstance()->LeftClick(pt.x, pt.y) == GAME_OVER) {
+			InvalidateRect(hWnd, NULL, TRUE);
+			if (MessageBox(hWnd, TEXT("다시 시작하겠습니까?"), TEXT("Game Over"), MB_YESNO) == IDYES) {
+				GameManager::GetInstance()->NewGame();
+				time = 0;
+			}
+			else {
+				KillTimer(hWnd, 1);
+				PostQuitMessage(0);
+				return 0;
+			}
+		}
 		InvalidateRect(hWnd, NULL, TRUE);
 		return 0;
 	case WM_RBUTTONDOWN:
@@ -66,7 +98,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case ID_40002:
-			DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DifficultyDlgProc);
+			if (DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DifficultyDlgProc) == 1) {
+				GameManager::GetInstance()->NewGame();
+				InvalidateRect(hWnd, NULL, TRUE);
+			}
 			break;
 		}
 		return 0;
@@ -76,6 +111,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		EndPaint(hWnd, &ps);
 		return 0;
 	case WM_DESTROY:
+		KillTimer(hWnd, 1);
 		PostQuitMessage(0);
 		return 0;
 	}
