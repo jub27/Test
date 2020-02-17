@@ -51,6 +51,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	char buffer[20];
 	RECT rt = { 160, 480, 180, 500 };
 	LPCSTR p;
+	int gameResult = 0;
+
 	switch (iMessage)
 	{
 	case WM_CREATE:
@@ -75,8 +77,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 		pt.x = LOWORD(lParam);
 		pt.y = HIWORD(lParam);
-		if (GameManager::GetInstance()->LeftClick(pt.x, pt.y) == GAME_OVER) {
-			InvalidateRect(hWnd, NULL, TRUE);
+		gameResult = GameManager::GetInstance()->LeftClick(pt.x, pt.y);
+		if (gameResult == GAME_OVER) {
+			InvalidateRect(hWnd, NULL, FALSE);
 			if (MessageBox(hWnd, TEXT("다시 시작하겠습니까?"), TEXT("Game Over"), MB_YESNO) == IDYES) {
 				GameManager::GetInstance()->NewGame();
 				time = 0;
@@ -87,22 +90,40 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				return 0;
 			}
 		}
-		InvalidateRect(hWnd, NULL, TRUE);
+		else if (gameResult == GAME_WIN) {
+			InvalidateRect(hWnd, NULL, FALSE);
+			if (MessageBox(hWnd, TEXT("다시 시작하겠습니까?"), TEXT("Game Win"), MB_YESNO) == IDYES) {
+				GameManager::GetInstance()->NewGame();
+				time = 0;
+			}
+			else {
+				KillTimer(hWnd, 1);
+				PostQuitMessage(0);
+				return 0;
+			}
+		}
+		InvalidateRect(hWnd, NULL, FALSE);
 		return 0;
 	case WM_RBUTTONDOWN:
 		pt.x = LOWORD(lParam);
 		pt.y = HIWORD(lParam);
 		GameManager::GetInstance()->RightClick(pt.x, pt.y);
-		InvalidateRect(hWnd, NULL, TRUE);
+		InvalidateRect(hWnd, NULL, FALSE);
 		return 0;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
+		case ID_40001:
+			GameManager::GetInstance()->NewGame();
+			time = 0;
+			InvalidateRect(hWnd, NULL, FALSE);
+			return 0;
 		case ID_40002:
 			if (DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DifficultyDlgProc) == 1) {
 				GameManager::GetInstance()->NewGame();
-				InvalidateRect(hWnd, NULL, TRUE);
+				time = 0;
+				InvalidateRect(hWnd, NULL, FALSE);
 			}
-			break;
+			return 0;
 		}
 		return 0;
 	case WM_PAINT:

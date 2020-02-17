@@ -15,6 +15,7 @@
 #define GAME_OVER 0
 #define RANGE_OUT 1
 #define CLICK_OK 2
+#define GAME_WIN 3
 enum BITMAP_NAME {
 	BACK, BLOCK, BLOCK0, BLOCK1, BLOCK2, BLOCK3, BLOCK4, BLOCK5, BLOCK6, BLOCK7, BLOCK8, FLAG, MINE
 };
@@ -45,7 +46,9 @@ private:
 	int height[3] = { 9, 16, 16 };
 	int difficulty;
 	int curMine;
+	int remainBlockNums;
 	bool gameStart;
+	int time;
 
 	Block map[16][30];
 	static GameManager * gameManager;
@@ -68,6 +71,8 @@ public:
 	void RightClick(int clickX, int clickY);
 	void AddNearMine(int x, int y);
 	void DrawCurMineNume();
+	void DrawTime();
 	bool is_GameStart();
+	void AddTime();
 	~GameManager();
 };

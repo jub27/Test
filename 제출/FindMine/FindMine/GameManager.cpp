@@ -33,8 +33,10 @@ void GameManager::NewGame() {
 	int mine = 0;
 	int mine_x = -1, mine_y = -1;
 	InitMap();
+	remainBlockNums = width[difficulty] * height[difficulty];
 	mine = mineNumByDifficulty[difficulty];
 	curMine = mine;
+	time = 0;
 	gameStart = false;
 	while (mine > 0) {
 		mine_x = rand() % width[difficulty];
@@ -111,10 +113,14 @@ int GameManager::LeftClick(int clickX, int clickY) {
 	if (!map[y][x].push && !map[y][x].flag) {
 		gameStart = true;
 		map[y][x].push = true;
+		remainBlockNums--;
 		if (map[y][x].mine) {
 			Draw();
 			return GAME_OVER;
 		}
+		if (remainBlockNums == mineNumByDifficulty[difficulty])
+			return GAME_WIN;
+		
 		if (map[y][x].nearMine == 0) {
 			LeftClick(clickX + 26, clickY + 26);
 			LeftClick(clickX + 26, clickY - 26);
@@ -133,6 +139,8 @@ void GameManager::RightClick(int clickX, int clickY) {
 	int x = (clickX - startX[difficulty]) / 26;
 	int y = (clickY - startY[difficulty]) / 26;
 	if (x < 0 || x >= width[difficulty] || y < 0 || y >= height[difficulty])
+		return;
+	if (map[y][x].push)
 		return;
 	if (map[y][x].flag)
 		curMine++;
@@ -157,6 +165,8 @@ void GameManager::SetDifficulty(int dif) {
 bool GameManager::is_GameStart() {
 	return gameStart;
 }
+
+
 
 GameManager::~GameManager()
 {
