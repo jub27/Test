@@ -51,15 +51,15 @@ Missile* Tank::Shot() {
 		missile_y = y + TANK_HEIGHT + MISSILE_HEIGHT / 2;
 		break;
 	case LEFT:
-		missile_x = x - MISSILE_HEIGHT;
+		missile_x = x - MISSILE_HEIGHT - 1;
 		missile_y = y + TANK_HEIGHT / 2 - MISSILE_WIDTH / 2;
 		break;
 	case RIGHT:
-		missile_x = x + TANK_WIDTH;
+		missile_x = x + TANK_WIDTH + 1;
 		missile_y = y + TANK_HEIGHT / 2 - MISSILE_WIDTH / 2;
 		break;
 	}
-	return new Missile(missile_x, missile_y, m_dir);
+	return new Missile(missile_x, missile_y, m_dir, Player);
 }
 
 bool Tank::Moveable(direction dir) {

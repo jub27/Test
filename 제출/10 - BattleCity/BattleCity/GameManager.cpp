@@ -15,9 +15,7 @@ void GameManager::InitGame(HWND hWnd) {
 		bitmap[i] = new Bitmap();
 		bitmap[i]->Init(MemDC, source[i]);
 	}
-	GameState = TITLE_MENU;
-	curStage = 1;
-	Player = NULL;
+	GameState = TITLE_MENU;	
 
 }
 
@@ -36,6 +34,7 @@ void GameManager::Title() {
 	BitBlt(pHDC, 0, 0, 600, 377, MemDC, 0, 0, SRCCOPY);
 	life = 3;
 	curStage = 1;
+	Player = NULL;
 	if (GetKeyState(VK_RETURN) & 0x8000)
 		GameState = choice;
 	else
@@ -366,7 +365,7 @@ void GameManager::TankMissileCollision() {
 				Player->GetX() + TANK_WIDTH, Player->GetY() + TANK_HEIGHT };
 			RECT rcTemp;
 			if (IntersectRect(&rcTemp, &playerRect, &missileRect)) {
-				if (!Player->is_Shield()) {
+				if (!Player->is_Shield() && !missileVector[i]->is_PlayerMissile()) {
 					Player->Explosion();
 				}
 				missileVector.erase(missileVector.begin() + i);
@@ -380,7 +379,7 @@ void GameManager::TankMissileCollision() {
 					enemyVector[j]->GetX() + TANK_WIDTH, enemyVector[j]->GetY() + TANK_HEIGHT };
 				RECT rcTemp;
 				if (IntersectRect(&rcTemp, &enemyRect, &missileRect)) {
-					if (!enemyVector[j]->is_Shield()) {
+					if (!enemyVector[j]->is_Shield() && missileVector[i]->is_PlayerMissile()) {
 						enemyVector[j]->Explosion();
 						curEnemyNums--;
 						if (curEnemyNums == 0 && curEnemyIndex == ENEMY_NUMS) {

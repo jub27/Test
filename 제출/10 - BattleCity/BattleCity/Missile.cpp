@@ -1,8 +1,9 @@
 #include "Missile.h"
-Missile::Missile(double x, double y, direction dir) {
+Missile::Missile(double x, double y, direction dir, bool playerMissile) {
 	this->x = x;
 	this->y = y;
 	this->dir = dir;
+	this->playerMissile = playerMissile;
 }
 bool Missile::Move() {
 	RECT rect = { x, y, x + MISSILE_WIDTH, y + MISSILE_HEIGHT / 2 };
@@ -39,6 +40,10 @@ double Missile::GetX() {
 
 double Missile::GetY() {
 	return y;
+}
+
+bool Missile::is_PlayerMissile() {
+	return playerMissile;
 }
 
 direction Missile::GetDir() {

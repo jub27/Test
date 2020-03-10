@@ -1,65 +1,10 @@
-﻿  GameManager.cpp
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(50): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(52): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(168): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(170): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(173): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(177): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(184): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(186): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(188): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(190): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(192): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(198): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(201): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(205): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(212): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(214): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(216): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(218): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(220): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(227): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(228): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(259): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(283): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(292): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(294): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(293): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(294): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(320): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(330): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(342): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(341): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(342): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(343): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(347): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(346): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(347): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(355): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(361): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(363): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(362): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(363): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(366): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(365): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(366): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(377): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(380): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(379): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\gamemanager.cpp(380): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Missile.cpp
-c:\users\a11\source\repos\battlecity\battlecity\missile.cpp(8): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\a11\source\repos\battlecity\battlecity\missile.cpp(8): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Tank.cpp
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(46): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(47): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(50): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(51): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(54): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(55): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(58): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\a11\source\repos\battlecity\battlecity\tank.cpp(59): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  WinMain.cpp
-c:\users\a11\source\repos\battlecity\battlecity\winmain.cpp(30): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  BattleCity.vcxproj -> C:\Users\A11\source\repos\BattleCity\Debug\BattleCity.exe
+﻿  Tank.cpp
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(46): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(47): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(50): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(51): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(54): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(55): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(58): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\a11\desktop\10 - battlecity\battlecity\tank.cpp(59): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  BattleCity.vcxproj -> C:\Users\A11\Desktop\10 - BattleCity\Debug\BattleCity.exe
