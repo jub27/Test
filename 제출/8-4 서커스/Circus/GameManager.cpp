@@ -113,9 +113,8 @@ int GameManager::Title() {
 	stars[t]->TransparentDraw(MemDC, 375, 102);
 	stars[(t + 1) % 3]->TransparentDraw(MemDC, 510, 102);
 	if (GetKeyState(VK_RETURN) & 0x8000) {
-		if (op == 0) {
+		if (op == 0)
 			return 0;
-		}
 		else if (op == 1)
 			return 1;
 	}
