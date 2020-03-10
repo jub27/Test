@@ -17,7 +17,7 @@ using namespace std;
 #define ENEMY_START_X_2 BLOCK_WIDTH * (MAP_SIZE - 2)
 #define ENEMY_START_Y 0
 
-#define ENEMY_NUMS 1
+#define ENEMY_NUMS 20
 
 #define TITLE_MENU 0
 #define GAME_START 1
@@ -44,7 +44,7 @@ private:
 	, "res\\tank_up_00.bmp", "res\\tank_up_01.bmp", "res\\e_down_00.bmp", "res\\e_down_01.bmp", "res\\e_left_00.bmp", "res\\e_left_01.bmp", "res\\e_right_00.bmp","res\\e_right_01.bmp"
 	, "res\\e_up_00.bmp", "res\\e_up_01.bmp", "res\\enemy_icon.bmp", "res\\explosion_00.bmp","res\\explosion_01.bmp" ,"res\\explosion_02.bmp" ,"res\\explosion_03.bmp"
 	, "res\\explosion_04.bmp","res\\missile_0.bmp", "res\\missile_1.bmp", "res\\missile_2.bmp", "res\\missile_3.bmp", "res\\player_icon.bmp"
-	, "res\\shield_00.bmp", "res\\shield_01.bmp","res\\stage_icon.bmp", "res\\Title.bmp", "res\\ui.bmp"};
+	, "res\\shield_00.bmp", "res\\shield_01.bmp","res\\stage_icon.bmp", "res\\Title.bmp", "res\\ui.bmp" };
 	Bitmap * bitmap[BITMAP_NUMS];
 
 	int curStage;

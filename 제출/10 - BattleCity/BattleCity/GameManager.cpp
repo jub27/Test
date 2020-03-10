@@ -17,6 +17,8 @@ void GameManager::InitGame(HWND hWnd) {
 	}
 	GameState = TITLE_MENU;
 	curStage = 1;
+	Player = NULL;
+
 }
 
 void GameManager::Title() {
@@ -26,7 +28,7 @@ void GameManager::Title() {
 	else if (GetKeyState(VK_DOWN) & 0x8000)
 		choice = GAME_EXIT;
 	bitmap[TITLE]->Draw(MemDC, 0, 0);
-	if(choice == GAME_START)
+	if (choice == GAME_START)
 		bitmap[MISSILE_RIGHT]->TransparentDraw(MemDC, 200, 180);
 	else
 		bitmap[MISSILE_RIGHT]->TransparentDraw(MemDC, 200, 240);
@@ -43,7 +45,8 @@ void GameManager::Title() {
 void GameManager::InitStage() {
 	Map::GetInstance()->LoadMap(curStage);
 	centerLive = true;
-	delete Player;
+	if (Player != NULL)
+		delete Player;
 	for (int i = 0; i < enemyVector.size(); i++)
 		delete enemyVector[i];
 	for (int i = 0; i < missileVector.size(); i++)
@@ -83,7 +86,7 @@ void GameManager::StartStage() {
 		return;
 	}
 
-	if (GetTickCount() >= stageClearTick && stageClearTick!= 0) {
+	if (GetTickCount() >= stageClearTick && stageClearTick != 0) {
 		initStage = false;
 		curStage++;
 		if (curStage == 6)
@@ -134,7 +137,7 @@ void GameManager::PrintUI() {
 }
 
 void GameManager::PrintMapNoBush() {
-	for(int i = 0; i < MAP_SIZE; i++)
+	for (int i = 0; i < MAP_SIZE; i++)
 		for (int j = 0; j < MAP_SIZE; j++) {
 			switch (Map::GetInstance()->GetBlockInfo(i, j)) {
 			case 'B':
@@ -246,7 +249,7 @@ void GameManager::MakeTank() {
 }
 
 void GameManager::PrintCommandCenter() {
-	if(centerLive)
+	if (centerLive)
 		bitmap[COMMAND_CENTER]->TransparentDraw(MemDC, (MAP_SIZE / 2 - 1) * BLOCK_WIDTH, (MAP_SIZE - 2) * BLOCK_HEIGHT);
 	else
 		bitmap[LOSE]->TransparentDraw(MemDC, (MAP_SIZE / 2 - 1) * BLOCK_WIDTH, (MAP_SIZE - 2) * BLOCK_HEIGHT);
@@ -306,7 +309,7 @@ void GameManager::Render() {
 }
 
 void GameManager::ShotMissile() {
-	Missile* m; 
+	Missile* m;
 	if (Player->GetState() == LIVE) {
 		if (GetKeyState(VK_SPACE) & 0x8000) {
 			m = Player->Shot();
@@ -338,7 +341,7 @@ void GameManager::MissileMissileCollision() {
 		RECT rect1 = { missileVector[i]->GetX(), missileVector[i]->GetY(),
 			missileVector[i]->GetX() + MISSILE_WIDTH, missileVector[i]->GetY() + MISSILE_HEIGHT };
 		for (int j = 0; j < missileVector.size(); j++) {
-			if(i == j)
+			if (i == j)
 				continue;
 			RECT rect2 = { missileVector[j]->GetX(), missileVector[j]->GetY(),
 			missileVector[j]->GetX() + MISSILE_WIDTH, missileVector[j]->GetY() + MISSILE_HEIGHT };
@@ -356,7 +359,7 @@ void GameManager::MissileMissileCollision() {
 
 void GameManager::TankMissileCollision() {
 	for (int i = 0; i < missileVector.size();) {
-		RECT missileRect = { missileVector[i]->GetX(), missileVector[i]->GetY(), 
+		RECT missileRect = { missileVector[i]->GetX(), missileVector[i]->GetY(),
 			missileVector[i]->GetX() + MISSILE_WIDTH, missileVector[i]->GetY() + MISSILE_HEIGHT };
 		if (Player->GetState() == LIVE) {
 			RECT playerRect = { Player->GetX(), Player->GetY(),
@@ -373,7 +376,7 @@ void GameManager::TankMissileCollision() {
 		bool flag = false;
 		for (int j = 0; j < enemyVector.size(); j++) {
 			if (enemyVector[j]->GetState() == LIVE) {
-				RECT enemyRect = { enemyVector[j]->GetX(), enemyVector[j]->GetY(), 
+				RECT enemyRect = { enemyVector[j]->GetX(), enemyVector[j]->GetY(),
 					enemyVector[j]->GetX() + TANK_WIDTH, enemyVector[j]->GetY() + TANK_HEIGHT };
 				RECT rcTemp;
 				if (IntersectRect(&rcTemp, &enemyRect, &missileRect)) {

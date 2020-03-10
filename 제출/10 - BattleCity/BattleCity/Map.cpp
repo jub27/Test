@@ -11,7 +11,7 @@ Map::~Map() {
 }
 
 void Map::LoadMap(int curStage) {
-	HANDLE hFile = CreateFile(stageFile[curStage-1], GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE hFile = CreateFile(stageFile[curStage - 1], GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	for (int i = 0; i < MAP_SIZE; i++)
 	{
 		for (int j = 0; j < MAP_SIZE; j++)
@@ -24,11 +24,11 @@ void Map::LoadMap(int curStage) {
 }
 
 bool Map::TankCollision(RECT rect) {
-	for (int i = 0; i < MAP_SIZE; i++){
+	for (int i = 0; i < MAP_SIZE; i++) {
 		for (int j = 0; j < MAP_SIZE; j++)
 		{
 			if (map[i][j] == 'n' || map[i][j] == 'w' || map[i][j] == 'W' ||
-				(i == 25 && j == 12) || (i == 24 && j == 12) || (i == 25 && j == 13) || (i == 24 && j== 13)) {
+				(i == 25 && j == 12) || (i == 24 && j == 12) || (i == 25 && j == 13) || (i == 24 && j == 13)) {
 				RECT m_rect = { BLOCK_WIDTH * j, BLOCK_HEIGHT * i ,BLOCK_WIDTH * (j + 1), BLOCK_HEIGHT * (i + 1) };
 				RECT rcTemp;
 				if (IntersectRect(&rcTemp, &rect, &m_rect))

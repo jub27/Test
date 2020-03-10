@@ -3,7 +3,7 @@
 #include "Missile.h"
 #include "Map.h"
 
-#define TANK_SPEED 1
+#define TANK_SPEED 0.2
 #define TANK_WIDTH 32
 #define TANK_HEIGHT 26
 
@@ -14,7 +14,7 @@ enum tank_state {
 class Tank
 {
 protected:
-	int x, y;
+	double x, y;
 	direction m_dir;
 	int motion;
 	tank_state state;
@@ -26,7 +26,7 @@ protected:
 	DWORD ShieldTick;
 	bool shield;
 public:
-	Tank(int x, int y, direction dir, bool Player);
+	Tank(double x, double y, direction dir, bool Player);
 	Missile * Shot();
 	void Move(direction dir);
 	bool Collision();

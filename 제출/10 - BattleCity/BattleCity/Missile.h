@@ -1,12 +1,12 @@
 #pragma once
 #include "Map.h"
-#define MISSILE_SPEED 2
+#define MISSILE_SPEED 0.5
 
 #define MISSILE_WIDTH 5
 #define MISSILE_HEIGHT 8
 
 enum direction {
-	DOWN, LEFT, RIGHT , UP
+	DOWN, LEFT, RIGHT, UP
 };
 
 class Missile
