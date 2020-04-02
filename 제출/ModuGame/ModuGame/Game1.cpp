@@ -47,7 +47,7 @@ void Game1::Init(HWND hWnd)
 	Board[1] = ((Color)(rand()%4));
 
 	point = 0;
-	paperPoint = 100;
+	paperPoint = 90;
 	comboCount = 0;
 	is_star = false;
 
@@ -94,6 +94,8 @@ void Game1::Update(float fETime)
 			feverLevel -= 1;
 			feverGauge = 99;
 		}
+		else
+			feverGauge = 0;
 	}
 	if (gameTime <= GetTickCount())
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_TITLE);
@@ -119,7 +121,7 @@ void Game1::Draw(HDC hdc)
 		m_pStar[feverLevel]->Draw(paperX + 30, paperY + 30);
 	}
 	m_pPoint->Init(to_string(point), 200, 20, DT_CENTER | DT_WORDBREAK);
-	m_pPaperPoint->Init(to_string(paperPoint), paperX + 50, paperY + 50, DT_CENTER | DT_WORDBREAK);
+	m_pPaperPoint->Init(to_string(paperPoint), paperX + 45, paperY + 50, DT_CENTER | DT_WORDBREAK);
 	m_pPoint->Draw();
 	m_pPaperPoint->Draw();
 }
@@ -232,7 +234,7 @@ void Game1::MovePaper() {
 			if (comboCount > 0)
 				paperPoint += 100;
 			else
-				paperPoint = 200;
+				paperPoint = 100;
 		}
 		else if (comboCount != 0 && comboCount % 5 == 0) {
 			is_star = true;

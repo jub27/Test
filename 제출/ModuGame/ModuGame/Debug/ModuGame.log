@@ -1,21 +1,31 @@
 ﻿  Game2.cpp
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(35,28): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(36,30): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(56,34): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(65,18): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(73,18): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(84,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(87,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(102,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(102,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(104,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(104,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(111,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(112,50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(112,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(124,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(125,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(126,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(130,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(131,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ModuGame.vcxproj -> C:\Users\user\Desktop\kimjaeyeop\제출\ModuGame\Debug\ModuGame.exe
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(41,28): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(42,30): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(43,28): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(68,21): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(81,34): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(93,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(93,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(95,38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(95,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(102,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(103,50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(103,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(105,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(106,56): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(106,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(125,18): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(133,18): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(144,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(147,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(162,16): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(170,16): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(181,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(184,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(197,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(198,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(199,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(203,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(204,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\ModuGame\Game2.cpp(215,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  ModuGame.vcxproj -> C:\Users\jy\Documents\GitHub\kimjaeyeop\제출\ModuGame\Debug\ModuGame.exe

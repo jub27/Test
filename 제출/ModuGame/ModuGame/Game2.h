@@ -47,7 +47,7 @@ struct Star {
 	}
 
 	bool rangeOut() {
-		if (x < 0 || y < 0 || x > 414 || y > 641)
+		if (x < -10 || y < -10 || x > 414 || y > 641)
 			return true;
 		return false;
 	}
@@ -61,6 +61,8 @@ private:
 	JEngine::BitMap* m_pFlight;
 	JEngine::BitMap* m_pBullet;
 	JEngine::BitMap* m_pExplosion[2];
+	JEngine::BitMap* m_pStar[3];
+	JEngine::BitMap* m_pFever[3];
 
 	JEngine::POINT flightPoint;
 
@@ -76,6 +78,10 @@ private:
 
 	float explosionTime;
 	float gameTime;
+
+	int feverLevel;
+	float feverGauge;
+
 public:
 	virtual void Init(HWND hWnd);
 	virtual bool Input(float fETime);
@@ -85,7 +91,8 @@ public:
 	//ool ClickEvent();
 	void UpdateBullet();
 	void UpdateStar();
-	bool collisionCheck();
+	bool BulletCollisionCheck();
+	bool StarCollisionCheck();
 
 	Game2();
 	~Game2();
