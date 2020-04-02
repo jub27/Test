@@ -20,6 +20,7 @@ private:
 	JEngine::Label* m_pPoint;
 	JEngine::Label* m_pPaperPoint;
 	JEngine::BitMap* m_pFever[3];
+	JEngine::BitMap* m_pStar[3];
 
 	Color Board[2];
 	bool is_moving;
@@ -27,6 +28,7 @@ private:
 	
 	int point;
 	int paperPoint;
+	bool is_star;
 
 	int comboCount;
 	int feverLevel;

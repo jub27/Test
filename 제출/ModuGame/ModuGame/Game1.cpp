@@ -34,7 +34,10 @@ void Game1::Init(HWND hWnd)
 	m_pFever[0] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever1.bmp");
 	m_pFever[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever2.bmp");
 	m_pFever[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever3.bmp");
-	
+	m_pStar[0] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar1.bmp");
+	m_pStar[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar2.bmp");
+	m_pStar[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar3.bmp");
+
 	m_pPoint = new JEngine::Label();
 	m_pPaperPoint = new JEngine::Label();
 
@@ -46,6 +49,7 @@ void Game1::Init(HWND hWnd)
 	point = 0;
 	paperPoint = 100;
 	comboCount = 0;
+	is_star = false;
 
 	feverLevel = 0;
 	feverGauge = 0;
@@ -111,6 +115,9 @@ void Game1::Draw(HDC hdc)
 	else if(feverLevel == 2)
 		m_pFever[1]->StretchDraw(20, 55, 1, 1);
 	m_pFever[feverLevel]->StretchDraw(20, 55, feverGauge / 100.0f , 1);
+	if (is_star) {
+		m_pStar[feverLevel]->Draw(paperX + 30, paperY + 30);
+	}
 	m_pPoint->Init(to_string(point), 200, 20, DT_CENTER | DT_WORDBREAK);
 	m_pPaperPoint->Init(to_string(paperPoint), paperX + 50, paperY + 50, DT_CENTER | DT_WORDBREAK);
 	m_pPoint->Draw();
@@ -221,15 +228,19 @@ void Game1::MovePaper() {
 				feverGauge = 100;
 		}
 		if (feverLevel > 0) {
+			is_star = true;
 			if (comboCount > 0)
 				paperPoint += 100;
 			else
 				paperPoint = 200;
 		}
 		else if (comboCount != 0 && comboCount % 5 == 0) {
+			is_star = true;
 			paperPoint = 100 * (comboCount / 5);
 		}
-		else
+		else {
 			paperPoint = 90;
+			is_star = false;
+		}
 	}
 }
