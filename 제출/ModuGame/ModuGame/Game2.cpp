@@ -31,6 +31,7 @@ void Game2::Init(HWND hWnd)
 	m_pBullet = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameBullet.bmp");
 	m_pExplosion[0] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\explosion1.bmp");
 	m_pExplosion[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\explosion2.bmp");
+	m_pExplosion[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\explosion3.bmp");
 	m_pStar[0] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar1.bmp");
 	m_pStar[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar2.bmp");
 	m_pStar[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar3.bmp");
@@ -38,6 +39,7 @@ void Game2::Init(HWND hWnd)
 	m_pFever[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever2.bmp");
 	m_pFever[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever3.bmp");
 	m_pFeverEffect = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FeverEffect3.bmp");
+	m_pTimeOver = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\TimeOver.bmp");
 
 	m_pPoint = new JEngine::Label();
 	m_pStarPoint = new JEngine::Label();
@@ -62,6 +64,9 @@ void Game2::Init(HWND hWnd)
 	starDealay = 500;
 
 	feverUp = false;
+
+	gameOver = false;
+	timeOver = false;
 }
 
 bool Game2::Input(float fETime)
@@ -75,7 +80,7 @@ bool Game2::Input(float fETime)
 
 void Game2::Update(float fETime)
 {
-	if (gameTime <= GetTickCount()) {
+	if (gameOver) {
 		int bestScore;
 		HANDLE hFile = CreateFile(saveData, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 		DWORD readB;
@@ -85,12 +90,16 @@ void Game2::Update(float fETime)
 			SaveScore();
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_TITLE);
 	}
+	if (gameTime <= GetTickCount() && !timeOver) {
+		timeOver = true;
+		timeOverTime = GetTickCount() + 1000;
+	}
 
 
 	StarCollisionCheck();
 	if (explosion == false && BulletCollisionCheck()) {
 		explosion = true;
-		explosionTime = GetTickCount() + 250;
+		explosionTime = GetTickCount() + 270;
 	}
 	flightPoint = JEngine::InputManager::GetInstance()->GetMousePoint();
 	flightPoint.x -= 30;
@@ -101,12 +110,21 @@ void Game2::Update(float fETime)
 
 void Game2::Draw(HDC hdc)
 {
+	if (timeOver) {
+		if (timeOverTime > GetTickCount())
+			m_pTimeOver->Draw(120, 300);
+		else
+			gameOver = true;
+		return;
+	}
 	m_pBack->DrawBitblt(0, 0);
 	if (explosion) {
-		if (GetTickCount() <= explosionTime + 125)
+		if (GetTickCount() <= explosionTime + 60)
 			m_pExplosion[0]->Draw(explosionX, explosionY);
-		else if (GetTickCount() <= explosionTime + 250)
+		else if (GetTickCount() <= explosionTime + 180)
 			m_pExplosion[1]->Draw(explosionX, explosionY);
+		else if (GetTickCount() <= explosionTime + 270)
+			m_pExplosion[2]->Draw(explosionX, explosionY);
 		else
 			explosion = false;
 	}
@@ -136,7 +154,7 @@ void Game2::Draw(HDC hdc)
 	m_pPoint->Draw();
 
 	if (feverLevel >= 1) {
-		if (GetTickCount() % 500 < 250)
+		if (GetTickCount() % 1000 < 250)
 			m_pFeverEffect->Draw(0, 0);
 	}
 }

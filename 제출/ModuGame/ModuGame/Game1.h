@@ -24,6 +24,7 @@ private:
 	JEngine::BitMap* m_pFever[3];
 	JEngine::BitMap* m_pStar[3];
 	JEngine::BitMap* m_pFeverEffect;
+	JEngine::BitMap* m_pTimeOver;
 
 	Color Board[2];
 	bool is_moving;
@@ -41,6 +42,10 @@ private:
 	float paperX, paperY;
 	float moveSpeed;
 	float time;
+
+	DWORD timeOverTime;
+	bool timeOver;
+	bool gameOver;
 public:
 	virtual void Init(HWND hWnd);
 	virtual bool Input(float fETime);

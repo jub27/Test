@@ -63,12 +63,13 @@ private:
 	JEngine::BitMap* m_pTimeBar;
 	JEngine::BitMap* m_pFlight;
 	JEngine::BitMap* m_pBullet;
-	JEngine::BitMap* m_pExplosion[2];
+	JEngine::BitMap* m_pExplosion[3];
 	JEngine::BitMap* m_pStar[3];
 	JEngine::BitMap* m_pFever[3];
 	JEngine::BitMap* m_pFeverEffect;
 	JEngine::Label* m_pPoint;
 	JEngine::Label* m_pStarPoint;
+	JEngine::BitMap* m_pTimeOver;
 
 	JEngine::POINT flightPoint;
 
@@ -94,6 +95,10 @@ private:
 	int point;
 
 	bool feverUp;
+
+	DWORD timeOverTime;
+	bool timeOver;
+	bool gameOver;
 
 public:
 	virtual void Init(HWND hWnd);

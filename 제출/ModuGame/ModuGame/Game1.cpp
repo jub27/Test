@@ -38,6 +38,7 @@ void Game1::Init(HWND hWnd)
 	m_pStar[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar2.bmp");
 	m_pStar[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar3.bmp");
 	m_pFeverEffect = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FeverEffect3.bmp");
+	m_pTimeOver = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\TimeOver.bmp");
 
 	m_pPoint = new JEngine::Label();
 	m_pPaperPoint = new JEngine::Label();
@@ -59,6 +60,9 @@ void Game1::Init(HWND hWnd)
 	paperX = 150;
 	paperY = 300;
 	gameTime = GetTickCount() + 45000;
+
+	gameOver = false;
+	timeOver = false;
 }
 
 bool Game1::Input(float fETime)
@@ -89,16 +93,7 @@ bool Game1::Input(float fETime)
 
 void Game1::Update(float fETime)
 {
-	feverGauge -= 0.01;
-	if (feverGauge < 0) {
-		if (feverLevel >= 1) {
-			feverLevel -= 1;
-			feverGauge = 99;
-		}
-		else
-			feverGauge = 0;
-	}
-	if (gameTime <= GetTickCount()) {
+	if (gameOver) {
 		int bestScore;
 		HANDLE hFile = CreateFile(saveData, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 		DWORD readB;
@@ -108,12 +103,33 @@ void Game1::Update(float fETime)
 			SaveScore();
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_TITLE);
 	}
+
+	feverGauge -= 0.01;
+	if (feverGauge < 0) {
+		if (feverLevel >= 1) {
+			feverLevel -= 1;
+			feverGauge = 99;
+		}
+		else
+			feverGauge = 0;
+	}
+	if (gameTime <= GetTickCount() && !timeOver) {
+		timeOver = true;
+		timeOverTime = GetTickCount() + 1000;
+	}
 	time = fETime;
 	MovePaper();
 }
 
 void Game1::Draw(HDC hdc)
 {
+	if (timeOver) {
+		if (timeOverTime > GetTickCount())
+			m_pTimeOver->Draw(120, 300);
+		else
+			gameOver = true;
+		return;
+	}
 	m_pBack->DrawBitblt(0, 0);
 	
 	if(is_moving)
@@ -134,7 +150,7 @@ void Game1::Draw(HDC hdc)
 	m_pPoint->Draw();
 	m_pPaperPoint->Draw();
 	if (feverLevel >= 1) {
-		if(GetTickCount() % 500 < 250)
+		if(GetTickCount() % 500 == 0)
 			m_pFeverEffect->Draw(0, 0);
 	}
 }
