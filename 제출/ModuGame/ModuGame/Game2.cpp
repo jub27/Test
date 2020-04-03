@@ -37,6 +37,10 @@ void Game2::Init(HWND hWnd)
 	m_pFever[0] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever1.bmp");
 	m_pFever[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever2.bmp");
 	m_pFever[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever3.bmp");
+	m_pFeverEffect = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FeverEffect3.bmp");
+
+	m_pPoint = new JEngine::Label();
+	m_pStarPoint = new JEngine::Label();
 
 	gameTime = GetTickCount() + 45000;
 	bulletTime = GetTickCount() + 1000;
@@ -45,10 +49,19 @@ void Game2::Init(HWND hWnd)
 	explosion = false;
 
 	flightPoint = JEngine::InputManager::GetInstance()->GetMousePoint();
+	flightPoint.x -= 30;
+	flightPoint.y -= 30;
 
 	feverLevel = 0;
 	feverGauge = 0;
 
+	starPoint = 100;
+	point = 0;
+
+	bulletDealay = 250;
+	starDealay = 500;
+
+	feverUp = false;
 }
 
 bool Game2::Input(float fETime)
@@ -62,18 +75,17 @@ bool Game2::Input(float fETime)
 
 void Game2::Update(float fETime)
 {
-	if (gameTime <= GetTickCount())
+	if (gameTime <= GetTickCount()) {
+		int bestScore;
+		HANDLE hFile = CreateFile(saveData, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+		DWORD readB;
+		ReadFile(hFile, &bestScore, sizeof(int), &readB, NULL);
+		CloseHandle(hFile);
+		if (point >= bestScore)
+			SaveScore();
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_TITLE);
-
-	feverGauge -= 0.005;
-	if (feverGauge < 0) {
-		if (feverLevel >= 1) {
-			feverLevel -= 1;
-			feverGauge = 99;
-		}
-		else
-			feverGauge = 0;
 	}
+
 
 	StarCollisionCheck();
 	if (explosion == false && BulletCollisionCheck()) {
@@ -81,6 +93,8 @@ void Game2::Update(float fETime)
 		explosionTime = GetTickCount() + 250;
 	}
 	flightPoint = JEngine::InputManager::GetInstance()->GetMousePoint();
+	flightPoint.x -= 30;
+	flightPoint.y -= 30;
 	UpdateBullet();
 	UpdateStar();
 }
@@ -103,18 +117,41 @@ void Game2::Draw(HDC hdc)
 		m_pBullet->Draw(bulletList[i]->x, bulletList[i]->y);
 	}
 	for (int i = 0; i < starList.size(); i++) {
-		m_pStar[feverLevel]->Draw(starList[i]->x, starList[i]->y);
+		m_pStar[feverLevel % 3]->Draw(starList[i]->x, starList[i]->y);
 	}
-	if (feverLevel == 1)
-		m_pFever[0]->StretchDraw(20, 55, 1, 1);
-	else if (feverLevel == 2)
-		m_pFever[1]->StretchDraw(20, 55, 1, 1);
-	m_pFever[feverLevel]->StretchDraw(20, 55, feverGauge / 100.0f, 1);
+	if (feverLevel >= 1) {
+		m_pFever[(feverLevel - 1) % 3]->StretchDraw(20, 55, 1, 1);
+	}
+	m_pFever[feverLevel % 3]->StretchDraw(20, 55, feverGauge / 100.0f, 1);
+
+	if (feverLevel > 3) {
+		int a = 0;
+	}
+
+	m_pPoint->Init(to_string(point), 200, 20, DT_CENTER | DT_WORDBREAK);
+	for (int i = 0; i < starList.size(); i++) {
+		m_pStarPoint->Init(to_string(starPoint), starList[i]->x + 15, starList[i]->y + 20, DT_CENTER | DT_WORDBREAK);
+		m_pStarPoint->Draw();
+	}
+	m_pPoint->Draw();
+
+	if (feverLevel >= 1) {
+		if (GetTickCount() % 500 < 250)
+			m_pFeverEffect->Draw(0, 0);
+	}
 }
 
 void Game2::Release()
 {
-
+	delete m_pPoint;
+	delete m_pStarPoint;
+	for (int i = 0; i < starList.size();i++) {
+		delete starList[i];
+	}
+	starList.clear();
+	for (int i = 0; i < bulletList.size(); i++)
+		delete bulletList[i];
+	bulletList.clear();
 }
 
 void Game2::UpdateBullet() {
@@ -139,7 +176,7 @@ void Game2::UpdateBullet() {
 			tempBullet = new Bullet(bulletX, bulletY, (flightPoint.x - bulletX) / 2000.0f, (flightPoint.y - bulletY) / 2000.0f);
 		}
 		bulletList.push_back(tempBullet);
-		bulletTime += 500;
+		bulletTime += bulletDealay;
 	}
 	for (int i = 0; i < bulletList.size(); i++) {
 		bulletList[i]->Move();
@@ -156,27 +193,36 @@ void Game2::UpdateBullet() {
 
 void Game2::UpdateStar() {///////////////////////////////////BULLET을 STAR로 수정
 	if (starTime <= GetTickCount()) {
-		Star* tempStar;
-		if (rand() % 2 == 0) {
-			float starX;
-			float starY = rand() % 641;
-			if (rand() % 2 == 0)
-				starX = 0;
-			else
-				starX = 414;
-			tempStar = new Star(starX, starY, (flightPoint.x - starX) / 2000.0f, (flightPoint.y - starY) / 2000.0f);
+		int starNums;
+		if (feverUp) {
+			starNums = 7;
+			feverUp = false;
 		}
-		else {
-			float starX = rand() % 414;;
-			float starY = 0;
-			if (rand() % 2 == 0)
-				starY = 0;
-			else
-				starY = 614;
-			tempStar = new Star(starX, starY, (flightPoint.x - starX) / 2000.0f, (flightPoint.y - starY) / 2000.0f);
+		else
+			starNums = 1;
+		for (int i = 0; i < starNums; i++) {
+			Star* tempStar;
+			if (rand() % 2 == 0) {
+				float starX;
+				float starY = rand() % 641;
+				if (rand() % 2 == 0)
+					starX = 0;
+				else
+					starX = 414;
+				tempStar = new Star(starX, starY, (flightPoint.x - starX) / 2000.0f, (flightPoint.y - starY) / 2000.0f);
+			}
+			else {
+				float starX = rand() % 414;;
+				float starY = 0;
+				if (rand() % 2 == 0)
+					starY = 0;
+				else
+					starY = 614;
+				tempStar = new Star(starX, starY, (flightPoint.x - starX) / 2000.0f, (flightPoint.y - starY) / 2000.0f);
+			}
+			starList.push_back(tempStar);
 		}
-		starList.push_back(tempStar);
-		starTime += 3000;
+		starTime += starDealay;
 	}
 	for (int i = 0; i < starList.size(); i++) {
 		starList[i]->Move();
@@ -202,6 +248,9 @@ bool Game2::BulletCollisionCheck() {
 			bulletList.erase(bulletList.begin() + i);
 			explosionX = flightPoint.x - 30;
 			explosionY = flightPoint.y - 30;
+			starPoint = 100;
+			feverLevel = 0;
+			feverGauge = 0;
 			return true;
 		}
 	}
@@ -209,6 +258,8 @@ bool Game2::BulletCollisionCheck() {
 }
 
 bool Game2::StarCollisionCheck() {
+	if (explosion)
+		return false;
 	RECT flightRect = { flightPoint.x + 3, flightPoint.y + 3, flightPoint.x + 67, flightPoint.y + 63 };
 	RECT starRect;
 	RECT temp;
@@ -217,17 +268,24 @@ bool Game2::StarCollisionCheck() {
 		if (IntersectRect(&temp,&flightRect, &starRect)) {
 			delete starList[i];
 			starList.erase(starList.begin() + i);
-			feverGauge += 30;
+			feverGauge += 8;
 			if (feverGauge > 100) {
-				if (feverLevel < 2) {
-					feverLevel++;
-					feverGauge = 15;
-				}
-				else
-					feverGauge = 100;
+				feverLevel++;
+				feverGauge = feverGauge -= 100;
+				feverUp = true;
+				starTime -= starDealay;
 			}
+			point += starPoint;
+			starPoint += 100;
 			return true;
 		}
 	}
 	return false;
+}
+
+void Game2::SaveScore() {
+	HANDLE hFile = CreateFile(saveData, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+	DWORD writeB;
+	WriteFile(hFile, &point, sizeof(int), &writeB, NULL);
+	CloseHandle(hFile);
 }

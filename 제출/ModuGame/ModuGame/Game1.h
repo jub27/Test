@@ -14,6 +14,8 @@ enum Direction {
 class Game1 : public JEngine::Scene
 {
 private:
+	LPCSTR saveData = "save1.txt";
+
 	JEngine::BitMap* m_pBack;
 	JEngine::BitMap* m_pColorList[4];
 	JEngine::BitMap* m_pTimeBar;
@@ -21,6 +23,7 @@ private:
 	JEngine::Label* m_pPaperPoint;
 	JEngine::BitMap* m_pFever[3];
 	JEngine::BitMap* m_pStar[3];
+	JEngine::BitMap* m_pFeverEffect;
 
 	Color Board[2];
 	bool is_moving;
@@ -47,7 +50,7 @@ public:
 	//ool ClickEvent();
 
 	void MovePaper();
-
+	void SaveScore();
 	Game1();
 	~Game1();
 };

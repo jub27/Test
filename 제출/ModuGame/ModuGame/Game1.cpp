@@ -37,6 +37,7 @@ void Game1::Init(HWND hWnd)
 	m_pStar[0] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar1.bmp");
 	m_pStar[1] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar2.bmp");
 	m_pStar[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FlightGameStar3.bmp");
+	m_pFeverEffect = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FeverEffect3.bmp");
 
 	m_pPoint = new JEngine::Label();
 	m_pPaperPoint = new JEngine::Label();
@@ -97,8 +98,16 @@ void Game1::Update(float fETime)
 		else
 			feverGauge = 0;
 	}
-	if (gameTime <= GetTickCount())
+	if (gameTime <= GetTickCount()) {
+		int bestScore;
+		HANDLE hFile = CreateFile(saveData, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+		DWORD readB;
+		ReadFile(hFile, &bestScore, sizeof(int), &readB, NULL);
+		CloseHandle(hFile);
+		if (point >= bestScore)
+			SaveScore();
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_TITLE);
+	}
 	time = fETime;
 	MovePaper();
 }
@@ -124,6 +133,10 @@ void Game1::Draw(HDC hdc)
 	m_pPaperPoint->Init(to_string(paperPoint), paperX + 45, paperY + 50, DT_CENTER | DT_WORDBREAK);
 	m_pPoint->Draw();
 	m_pPaperPoint->Draw();
+	if (feverLevel >= 1) {
+		if(GetTickCount() % 500 < 250)
+			m_pFeverEffect->Draw(0, 0);
+	}
 }
 
 void Game1::Release()
@@ -245,4 +258,11 @@ void Game1::MovePaper() {
 			is_star = false;
 		}
 	}
+}
+
+void Game1::SaveScore() {
+	HANDLE hFile = CreateFile(saveData, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+	DWORD writeB;
+	WriteFile(hFile, &point, sizeof(int), &writeB, NULL);
+	CloseHandle(hFile);
 }

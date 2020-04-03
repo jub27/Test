@@ -2,6 +2,7 @@
 #define GAME_WIDTH 414
 #define GAME_HEIGHT 641
 
+
 enum SCENE_INDEX
 {
 	SCENE_INDEX_TITLE,

@@ -1,6 +1,7 @@
 #pragma once
 #include "GlobalDefine.h"
 #include "JEngine.h"
+#include "Label.h"
 #include <vector>
 
 struct Bullet {
@@ -56,6 +57,8 @@ struct Star {
 class Game2 : public JEngine::Scene
 {
 private:
+	LPCSTR saveData = "save2.txt";
+
 	JEngine::BitMap* m_pBack;
 	JEngine::BitMap* m_pTimeBar;
 	JEngine::BitMap* m_pFlight;
@@ -63,14 +66,19 @@ private:
 	JEngine::BitMap* m_pExplosion[2];
 	JEngine::BitMap* m_pStar[3];
 	JEngine::BitMap* m_pFever[3];
+	JEngine::BitMap* m_pFeverEffect;
+	JEngine::Label* m_pPoint;
+	JEngine::Label* m_pStarPoint;
 
 	JEngine::POINT flightPoint;
 
 	vector<Bullet*> bulletList;
 	float bulletTime;
+	float bulletDealay;
 
 	vector<Star*> starList;
 	float starTime;
+	float starDealay;
 
 	bool explosion;
 	float explosionX;
@@ -81,6 +89,11 @@ private:
 
 	int feverLevel;
 	float feverGauge;
+
+	int starPoint;
+	int point;
+
+	bool feverUp;
 
 public:
 	virtual void Init(HWND hWnd);
@@ -93,6 +106,7 @@ public:
 	void UpdateStar();
 	bool BulletCollisionCheck();
 	bool StarCollisionCheck();
+	void SaveScore();
 
 	Game2();
 	~Game2();
