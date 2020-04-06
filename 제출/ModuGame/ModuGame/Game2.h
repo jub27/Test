@@ -70,7 +70,8 @@ private:
 	JEngine::Label* m_pPoint;
 	JEngine::Label* m_pStarPoint;
 	JEngine::BitMap* m_pTimeOver;
-
+	JEngine::BitMap* m_pFeverUI;
+	JEngine::BitMap* m_pTimeUI;
 	JEngine::POINT flightPoint;
 
 	vector<Bullet*> bulletList;

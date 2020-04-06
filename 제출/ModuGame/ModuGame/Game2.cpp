@@ -40,6 +40,8 @@ void Game2::Init(HWND hWnd)
 	m_pFever[2] = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\Fever3.bmp");
 	m_pFeverEffect = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FeverEffect3.bmp");
 	m_pTimeOver = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\TimeOver.bmp");
+	m_pFeverUI = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\FeverUI.bmp");
+	m_pTimeUI = JEngine::ResoucesManager::GetInstance()->GetBitmap("res\\TimeUI.bmp");
 
 	m_pPoint = new JEngine::Label();
 	m_pStarPoint = new JEngine::Label();
@@ -102,6 +104,14 @@ void Game2::Update(float fETime)
 		explosionTime = GetTickCount() + 270;
 	}
 	flightPoint = JEngine::InputManager::GetInstance()->GetMousePoint();
+	if (flightPoint.x < 30)
+		flightPoint.x = 30;
+	if (flightPoint.y < 121)
+		flightPoint.y = 121;
+	if (flightPoint.x > 384)
+		flightPoint.x = 384;
+	if (flightPoint.y > 580)
+		flightPoint.y = 580;
 	flightPoint.x -= 30;
 	flightPoint.y -= 30;
 	UpdateBullet();
@@ -118,6 +128,7 @@ void Game2::Draw(HDC hdc)
 		return;
 	}
 	m_pBack->DrawBitblt(0, 0);
+
 	if (explosion) {
 		if (GetTickCount() <= explosionTime + 60)
 			m_pExplosion[0]->Draw(explosionX, explosionY);
@@ -130,20 +141,12 @@ void Game2::Draw(HDC hdc)
 	}
 	else
 		m_pFlight->Draw(flightPoint);
-	m_pTimeBar->StretchDraw(25, 620, (gameTime - GetTickCount()) / 45000, 1);
+
 	for (int i = 0; i < bulletList.size(); i++) {
 		m_pBullet->Draw(bulletList[i]->x, bulletList[i]->y);
 	}
 	for (int i = 0; i < starList.size(); i++) {
 		m_pStar[feverLevel % 3]->Draw(starList[i]->x, starList[i]->y);
-	}
-	if (feverLevel >= 1) {
-		m_pFever[(feverLevel - 1) % 3]->StretchDraw(20, 55, 1, 1);
-	}
-	m_pFever[feverLevel % 3]->StretchDraw(20, 55, feverGauge / 100.0f, 1);
-
-	if (feverLevel > 3) {
-		int a = 0;
 	}
 
 	m_pPoint->Init(to_string(point), 200, 20, DT_CENTER | DT_WORDBREAK);
@@ -157,6 +160,15 @@ void Game2::Draw(HDC hdc)
 		if (GetTickCount() % 1000 < 250)
 			m_pFeverEffect->Draw(0, 0);
 	}
+
+	m_pTimeUI->Draw(0, 610);
+	m_pTimeBar->StretchDraw(25, 620, (gameTime - GetTickCount()) / 45000, 1);
+
+	m_pFeverUI->Draw(0, 0);
+	if (feverLevel >= 1) {
+		m_pFever[(feverLevel - 1) % 3]->StretchDraw(20, 55, 1, 1);
+	}
+	m_pFever[feverLevel % 3]->StretchDraw(20, 55, feverGauge / 100.0f, 1);
 }
 
 void Game2::Release()
