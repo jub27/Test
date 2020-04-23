@@ -18,6 +18,10 @@ char msg[BUF_SIZE];
 
 #define BOARD_SIZE 15
 
+enum GameState {
+	WATING, START, END
+};
+
 string board[BOARD_SIZE][BOARD_SIZE];
 
 string blank = "бр";
@@ -26,7 +30,15 @@ string white = "б█";
 
 int cur_x = 0, cur_y = 0;
 int playerNum = -1;
+int turn_Player = 0;
+int WinPlayer = -1;
+int gameState = WATING;
 
+void InitMap() {
+	for (int i = 0; i < BOARD_SIZE; i++)
+		for (int j = 0; j < BOARD_SIZE; j++)
+			board[i][j] = blank;
+}
 
 void PrintMap() {
 	for (int i = 0; i < BOARD_SIZE; i++) {
@@ -34,6 +46,62 @@ void PrintMap() {
 			cout << board[i][j];
 		cout << endl;
 	}
+} 
+
+void PrintInfo() {
+	gotoxy(0, 15);
+	cout << "You : Player" << playerNum << endl;
+	if (gameState == WATING)
+		cout << "Wating...." << endl;
+	else if (gameState == START)
+		cout << "Player" << turn_Player << "'s Turn" << endl;
+	else if (gameState == END)
+		cout << "Player" << WinPlayer << " Win!" << endl;
+	gotoxy(cur_x * 2, cur_y);
+}
+
+void PrintGame() {
+	system("cls");
+	PrintMap();
+	PrintInfo();
+}
+
+bool RangeCheck(int x, int y) {
+	if (x < 0 || y < 0 || x >= BOARD_SIZE || y >= BOARD_SIZE)
+		return false;
+	return true;
+}
+
+bool WinPattern(int y, int x, int dy, int dx) {
+	string pat = board[y][x];
+
+	for (int i = 0; i < 5; i++, x += dx, y += dy) {
+		if (RangeCheck(y, x) == false)
+			return false;
+		if (pat != board[y][x])
+			return false;
+	}
+	return true;
+}
+
+bool WinCheck() {
+	for (int y = 0; y < BOARD_SIZE; y++) {
+		for (int x = 0; x < BOARD_SIZE; x++) {
+			string pat = board[y][x];
+			if (pat != blank) {
+				if (WinPattern(y, x, 0, 1) || WinPattern(y, x, 0, -1) || WinPattern(y, x, 1, 0) ||
+					WinPattern(y, x, 1, 1) || WinPattern(y, x, 1, -1) || WinPattern(y, x, -1, -1) ||
+					WinPattern(y, x, -1, 0) || WinPattern(y, x, -1, 1)) {
+					if (pat == black)
+						WinPlayer = 0;
+					else
+						WinPlayer = 1;
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 void Play() {
@@ -59,7 +127,7 @@ void Play() {
 					cur_y++;
 				break;
 			case 13:
-				if (board[cur_x][cur_y] == blank) {
+				if (board[cur_y][cur_x] == blank && turn_Player == playerNum) {
 					return;
 				}
 				break;
@@ -112,21 +180,20 @@ unsigned WINAPI SendMsg(void* arg)   // send thread main
 {
 	SOCKET hSock = *((SOCKET*)arg);
 	char msg[3];
-
+	bool playerNumCheck = false;
 	while (1)
 	{
-		if (playerNum == -1) {
+		if (playerNum == -1 && !playerNumCheck) {
 			msg[0] = -1;
 			msg[1] = 0;
 			msg[2] = 0;
+			playerNumCheck = true;
 		}
 		else {
-			PrintMap();
 			Play();
 			msg[0] = playerNum;
 			msg[1] = cur_y;
 			msg[2] = cur_x;
-			cout << playerNum << endl;
 		}
 		send(hSock, msg, 3, 0);
 	}
@@ -139,22 +206,35 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 	int hSock = *((SOCKET*)arg);
 	char msg[3];
 	int strLen;
-
+	bool playerNumCheck = false;
 	while (1)
 	{
 		strLen = recv(hSock, msg, 3, 0);
 
 		if (strLen == -1)
 			return -1;
-		if (msg[0] == -1) {
+		if (msg[0] == -1 && !playerNumCheck) {
 			playerNum = msg[1];
+			playerNumCheck = true;
 		}
 		else {
-			if (msg[0] == 0)
-				board[msg[1]][msg[2]] = black;
-			else
-				board[msg[1]][msg[2]] = white;
+			if (msg[0] == 0) {
+				board[(int)msg[1]][(int)msg[2]] = black;
+				turn_Player = (turn_Player + 1) % 2;
+				if (WinCheck())
+					gameState = END;
+			}
+			else if (msg[0] == 1) {
+				board[(int)msg[1]][(int)msg[2]] = white;
+				turn_Player = (turn_Player + 1) % 2;
+				if (WinCheck())
+					gameState = END;
+			}
+			else {
+				gameState = START;
+			}
 		}
+		PrintGame();
 	}
 
 	return 0;
