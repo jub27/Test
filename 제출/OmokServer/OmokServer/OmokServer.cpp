@@ -50,7 +50,8 @@ int main()
 	{
 		clntAdrSz = sizeof(clntAdr);
 		hClntSock = accept(hServSock, (SOCKADDR*)&clntAdr, &clntAdrSz);
-
+		if (clntCnt == 2)
+			continue;
 		WaitForSingleObject(hMutex, INFINITE);
 
 		clntSocks[clntCnt++] = hClntSock;
@@ -98,6 +99,11 @@ unsigned WINAPI HandleClnt(void* arg)
 		else if( rMsg[0] == 0 || rMsg[0] == 1 ){ //플레이어가 플레이 하고나서
 			SendMsg(rMsg, 3, clntSocks[0]);
 			SendMsg(rMsg, 3, clntSocks[1]);
+		}
+		else if (rMsg[0] == 3) {
+			sMsg[0] = 3;
+			SendMsg(sMsg, 3, clntSocks[0]);
+			SendMsg(sMsg, 3, clntSocks[1]);
 		}
 
 	}

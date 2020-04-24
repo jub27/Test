@@ -55,8 +55,11 @@ void PrintInfo() {
 		cout << "Waiting...." << endl;
 	else if (gameState == START)
 		cout << "Player" << turn_Player << "'s Turn" << endl;
-	else if (gameState == END)
+	else if (gameState == END) {
 		cout << "Player" << WinPlayer << " Win!" << endl;
+		cout << "Start : Enter" << endl;
+	}
+	cout << "Exit : q" << endl;
 	gotoxy(cur_x * 2, cur_y);
 }
 
@@ -131,6 +134,8 @@ int Play() {
 					cur_y++;
 				break;
 			case 13:
+				if (gameState == END)
+					return 3;
 				if (board[cur_y][cur_x] == blank && turn_Player == playerNum && gameState == START) {
 					return 1;
 				}
@@ -184,12 +189,14 @@ unsigned WINAPI SendMsg(void* arg)   // send thread main
 {
 	SOCKET hSock = *((SOCKET*)arg);
 	char msg[3];
+	bool numCheck = false;
 	while (1)
 	{
-		if (playerNum == -1) {
+		if (playerNum == -1 && !numCheck) {
 			msg[0] = -1;
 			msg[1] = 0;
 			msg[2] = 0;
+			numCheck = true;
 			send(hSock, msg, 3, 0);
 		}
 		else {
@@ -202,6 +209,10 @@ unsigned WINAPI SendMsg(void* arg)   // send thread main
 				msg[0] = playerNum;
 				msg[1] = cur_y;
 				msg[2] = cur_x;
+				send(hSock, msg, 3, 0);
+			}
+			else if (ret == 3) {
+				msg[0] = 3;
 				send(hSock, msg, 3, 0);
 			}
 		}
@@ -243,6 +254,8 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 			playerNum = 0;
 		}
 		else if (msg[0] == 3) { //게임 시작
+			InitMap();
+			turn_Player = 0;
 			gameState = START;
 		}
 		PrintGame();
