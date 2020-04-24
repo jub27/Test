@@ -7,7 +7,7 @@ using namespace std;
 #define MAX_CLNT 2
 
 unsigned WINAPI HandleClnt(void* arg);
-void SendMsg(char* msg, int len);
+void SendMsg(char* msg, int len, SOCKET socket);
 void ErrorHandling(const char* msg);
 
 int clntCnt = 0;
@@ -77,7 +77,7 @@ unsigned WINAPI HandleClnt(void* arg)
 
 	while (recv(hClntSock, rMsg, 3, 0) != -1)
 	{
-		if (rMsg[0] == -1) {
+		if (rMsg[0] == -1) {//번호 요청 받았을 때
 			sMsg[0] = -1;
 			for (i = 0; i < clntCnt; i++)
 			{
@@ -88,11 +88,32 @@ unsigned WINAPI HandleClnt(void* arg)
 				}
 			}
 			sMsg[2] = 0;
-			SendMsg(sMsg, 3);
+			SendMsg(sMsg, 3, hClntSock);
+			if (clntCnt == 2) { //2명되면 게임시작
+				sMsg[0] = 3;
+				SendMsg(sMsg, 3, clntSocks[0]);
+				SendMsg(sMsg, 3, clntSocks[1]);
+			}
 		}
-		else {
-			SendMsg(rMsg, 3);
+		else if( rMsg[0] == 0 || rMsg[0] == 1 ){ //플레이어가 플레이 하고나서
+			SendMsg(rMsg, 3, clntSocks[0]);
+			SendMsg(rMsg, 3, clntSocks[1]);
 		}
+
+	}
+	///나갔을때 나머지 플레이어한테 알림
+	if (clntCnt == 2) {
+		int index = -1;
+		for (i = 0; i < clntCnt; i++)
+		{
+			if (hClntSock == clntSocks[i])
+			{
+				index = i;
+				break;
+			}
+		}
+		sMsg[0] = 2;
+		SendMsg(sMsg, 3, clntSocks[(index + 1) % 2]);
 	}
 
 	WaitForSingleObject(hMutex, INFINITE);
@@ -114,16 +135,11 @@ unsigned WINAPI HandleClnt(void* arg)
 	closesocket(hClntSock);
 	return 0;
 }
-void SendMsg(char* msg, int len)   // send to all
+
+void SendMsg(char* msg, int len, SOCKET clntSock)
 {
-	int i;
 	WaitForSingleObject(hMutex, INFINITE);
-
-	for (i = 0; i < clntCnt; i++)
-	{
-		send(clntSocks[i], msg, len, 0);
-	}
-
+	send(clntSock, msg, len, 0);
 	ReleaseMutex(hMutex);
 }
 

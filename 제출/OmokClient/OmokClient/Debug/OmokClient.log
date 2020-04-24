@@ -1,4 +1,4 @@
 ﻿  OmokClient.cpp
-C:\Users\user\Desktop\kimjaeyeop\제출\OmokClient\OmokClient\goto.h(5,16): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\user\Desktop\kimjaeyeop\제출\OmokClient\OmokClient\goto.h(5,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-  OmokClient.vcxproj -> C:\Users\user\Desktop\kimjaeyeop\제출\OmokClient\Debug\OmokClient.exe
+D:\github\kimjaeyeop\제출\OmokClient\OmokClient\goto.h(5,16): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\github\kimjaeyeop\제출\OmokClient\OmokClient\goto.h(5,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+  OmokClient.vcxproj -> D:\github\kimjaeyeop\제출\OmokClient\Debug\OmokClient.exe

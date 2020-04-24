@@ -19,7 +19,7 @@ char msg[BUF_SIZE];
 #define BOARD_SIZE 15
 
 enum GameState {
-	WATING, START, END
+	WAITING, START, END
 };
 
 string board[BOARD_SIZE][BOARD_SIZE];
@@ -32,7 +32,7 @@ int cur_x = 0, cur_y = 0;
 int playerNum = -1;
 int turn_Player = 0;
 int WinPlayer = -1;
-int gameState = WATING;
+int gameState = WAITING;
 
 void InitMap() {
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -51,8 +51,8 @@ void PrintMap() {
 void PrintInfo() {
 	gotoxy(0, 15);
 	cout << "You : Player" << playerNum << endl;
-	if (gameState == WATING)
-		cout << "Wating...." << endl;
+	if (gameState == WAITING)
+		cout << "Waiting...." << endl;
 	else if (gameState == START)
 		cout << "Player" << turn_Player << "'s Turn" << endl;
 	else if (gameState == END)
@@ -104,12 +104,16 @@ bool WinCheck() {
 	return false;
 }
 
-void Play() {
+int Play() {
 	char key;
 	while (1) {
+		if (playerNum == -1)
+			return 2;
 		if (_kbhit()) {
 			key = _getch();
 			switch (key) {
+			case 'q':
+				return 0;
 			case 72:
 				if (cur_y > 0)
 					cur_y--;
@@ -127,8 +131,8 @@ void Play() {
 					cur_y++;
 				break;
 			case 13:
-				if (board[cur_y][cur_x] == blank && turn_Player == playerNum) {
-					return;
+				if (board[cur_y][cur_x] == blank && turn_Player == playerNum && gameState == START) {
+					return 1;
 				}
 				break;
 			}
@@ -180,22 +184,27 @@ unsigned WINAPI SendMsg(void* arg)   // send thread main
 {
 	SOCKET hSock = *((SOCKET*)arg);
 	char msg[3];
-	bool playerNumCheck = false;
 	while (1)
 	{
-		if (playerNum == -1 && !playerNumCheck) {
+		if (playerNum == -1) {
 			msg[0] = -1;
 			msg[1] = 0;
 			msg[2] = 0;
-			playerNumCheck = true;
+			send(hSock, msg, 3, 0);
 		}
 		else {
-			Play();
-			msg[0] = playerNum;
-			msg[1] = cur_y;
-			msg[2] = cur_x;
+			int ret = Play();
+			if(ret == 0){
+				closesocket(hSock);
+				exit(0);
+			}
+			else if (ret == 1) {
+				msg[0] = playerNum;
+				msg[1] = cur_y;
+				msg[2] = cur_x;
+				send(hSock, msg, 3, 0);
+			}
 		}
-		send(hSock, msg, 3, 0);
 	}
 
 	return 0;
@@ -206,33 +215,35 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 	int hSock = *((SOCKET*)arg);
 	char msg[3];
 	int strLen;
-	bool playerNumCheck = false;
 	while (1)
 	{
 		strLen = recv(hSock, msg, 3, 0);
 
 		if (strLen == -1)
 			return -1;
-		if (msg[0] == -1 && !playerNumCheck) {
+		if (msg[0] == -1) { //플레이어 번호 받기
 			playerNum = msg[1];
-			playerNumCheck = true;
 		}
-		else {
-			if (msg[0] == 0) {
-				board[(int)msg[1]][(int)msg[2]] = black;
-				turn_Player = (turn_Player + 1) % 2;
-				if (WinCheck())
-					gameState = END;
-			}
-			else if (msg[0] == 1) {
-				board[(int)msg[1]][(int)msg[2]] = white;
-				turn_Player = (turn_Player + 1) % 2;
-				if (WinCheck())
-					gameState = END;
-			}
-			else {
-				gameState = START;
-			}
+		else if (msg[0] == 0) { //플레이어0이 하고나서
+			board[(int)msg[1]][(int)msg[2]] = black;
+			turn_Player = (turn_Player + 1) % 2;
+			if (WinCheck())
+				gameState = END;
+		}
+		else if (msg[0] == 1) { //플레이어1이 하고나서
+			board[(int)msg[1]][(int)msg[2]] = white;
+			turn_Player = (turn_Player + 1) % 2;
+			if (WinCheck())
+				gameState = END;
+		}
+		else if (msg[0] == 2){ //상대 나갔을때
+			InitMap();
+			gameState = WAITING;
+			turn_Player = 0;
+			playerNum = 0;
+		}
+		else if (msg[0] == 3) { //게임 시작
+			gameState = START;
 		}
 		PrintGame();
 	}
