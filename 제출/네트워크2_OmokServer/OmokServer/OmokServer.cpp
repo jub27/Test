@@ -10,6 +10,13 @@ unsigned WINAPI HandleClnt(void* arg);
 void SendMsg(char* msg, int len, SOCKET socket);
 void ErrorHandling(const char* msg);
 
+struct packet {
+	int inst;
+	int data1;
+	int data2;
+	int null;
+};
+
 int clntCnt = 0;
 SOCKET clntSocks[MAX_CLNT];
 HANDLE hMutex;
@@ -50,8 +57,14 @@ int main()
 	{
 		clntAdrSz = sizeof(clntAdr);
 		hClntSock = accept(hServSock, (SOCKADDR*)&clntAdr, &clntAdrSz);
-		if (clntCnt == 2)
+		
+		if (clntCnt == 2) {
+			packet msg;
+			msg.inst = -2;
+			send(hClntSock, (char*)&msg ,sizeof(msg), 0);
+			closesocket(hClntSock);
 			continue;
+		}
 		WaitForSingleObject(hMutex, INFINITE);
 
 		clntSocks[clntCnt++] = hClntSock;
@@ -73,37 +86,38 @@ unsigned WINAPI HandleClnt(void* arg)
 {
 	SOCKET hClntSock = *((SOCKET*)arg);
 	int strLen = 0, i;
-	char rMsg[3];
-	char sMsg[3];
 
-	while (recv(hClntSock, rMsg, 3, 0) != -1)
+	packet rMsg;
+	packet sMsg;
+
+	while (recv(hClntSock, (char *)&rMsg, sizeof(packet), 0) != -1)
 	{
-		if (rMsg[0] == -1) {//번호 요청 받았을 때
-			sMsg[0] = -1;
+		if (rMsg.inst == -1) {//번호 요청 받았을 때
+			sMsg.inst = -1;
 			for (i = 0; i < clntCnt; i++)
 			{
 				if (hClntSock == clntSocks[i])
 				{
-					sMsg[1] = i;
+					sMsg.data1 = i;
 					break;
 				}
 			}
-			sMsg[2] = 0;
-			SendMsg(sMsg, 3, hClntSock);
+			sMsg.data2 = 0;
+			SendMsg((char*)&sMsg, sizeof(sMsg), hClntSock);
 			if (clntCnt == 2) { //2명되면 게임시작
-				sMsg[0] = 3;
-				SendMsg(sMsg, 3, clntSocks[0]);
-				SendMsg(sMsg, 3, clntSocks[1]);
+				sMsg.inst = 3;
+				SendMsg((char*)&sMsg, 3, clntSocks[0]);
+				SendMsg((char*)&sMsg, 3, clntSocks[1]);
 			}
 		}
-		else if( rMsg[0] == 0 || rMsg[0] == 1 ){ //플레이어가 플레이 하고나서
-			SendMsg(rMsg, 3, clntSocks[0]);
-			SendMsg(rMsg, 3, clntSocks[1]);
+		else if( rMsg.inst == 0 || rMsg.inst == 1 ){ //플레이어가 플레이 하고나서
+			SendMsg((char*)&rMsg, 3, clntSocks[0]);
+			SendMsg((char*)&rMsg, 3, clntSocks[1]);
 		}
-		else if (rMsg[0] == 3) {
-			sMsg[0] = 3;
-			SendMsg(sMsg, 3, clntSocks[0]);
-			SendMsg(sMsg, 3, clntSocks[1]);
+		else if (rMsg.inst == 3) {
+			sMsg.inst = 3;
+			SendMsg((char*)&sMsg, 3, clntSocks[0]);
+			SendMsg((char*)&sMsg, 3, clntSocks[1]);
 		}
 
 	}
@@ -118,8 +132,8 @@ unsigned WINAPI HandleClnt(void* arg)
 				break;
 			}
 		}
-		sMsg[0] = 2;
-		SendMsg(sMsg, 3, clntSocks[(index + 1) % 2]);
+		sMsg.inst = 2;
+		SendMsg((char*)&sMsg, 3, clntSocks[(index + 1) % 2]);
 	}
 
 	WaitForSingleObject(hMutex, INFINITE);
@@ -145,7 +159,7 @@ unsigned WINAPI HandleClnt(void* arg)
 void SendMsg(char* msg, int len, SOCKET clntSock)
 {
 	WaitForSingleObject(hMutex, INFINITE);
-	send(clntSock, msg, len, 0);
+	send(clntSock, msg, sizeof(packet), 0);
 	ReleaseMutex(hMutex);
 }
 

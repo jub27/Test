@@ -15,6 +15,12 @@ void ErrorHandling(const char* msg);
 char name[NAME_SIZE] = "[DEFAULT]";
 char msg[BUF_SIZE];
 
+struct packet {
+	int inst;
+	int data1;
+	int data2;
+	int null;
+};
 
 #define BOARD_SIZE 15
 
@@ -33,6 +39,8 @@ int playerNum = -1;
 int turn_Player = 0;
 int WinPlayer = -1;
 int gameState = WAITING;
+
+bool enterGame = true;
 
 void InitMap() {
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -188,16 +196,18 @@ int main()
 unsigned WINAPI SendMsg(void* arg)   // send thread main
 {
 	SOCKET hSock = *((SOCKET*)arg);
-	char msg[3];
+	packet msg;
 	bool numCheck = false;
 	while (1)
 	{
+		if (enterGame == false)
+			return 0;
 		if (playerNum == -1 && !numCheck) {
-			msg[0] = -1;
-			msg[1] = 0;
-			msg[2] = 0;
+			msg.inst = -1;
+			msg.data1 = 0;
+			msg.data2 = 0;
 			numCheck = true;
-			send(hSock, msg, 3, 0);
+			send(hSock, (char*)&msg, sizeof(packet), 0);
 		}
 		else {
 			int ret = Play();
@@ -206,14 +216,14 @@ unsigned WINAPI SendMsg(void* arg)   // send thread main
 				exit(0);
 			}
 			else if (ret == 1) {
-				msg[0] = playerNum;
-				msg[1] = cur_y;
-				msg[2] = cur_x;
-				send(hSock, msg, 3, 0);
+				msg.inst = playerNum;
+				msg.data1 = cur_y;
+				msg.data2 = cur_x;
+				send(hSock, (char*)&msg, sizeof(packet), 0);
 			}
 			else if (ret == 3) {
-				msg[0] = 3;
-				send(hSock, msg, 3, 0);
+				msg.inst = 3;
+				send(hSock, (char*)&msg, sizeof(packet), 0);
 			}
 		}
 	}
@@ -224,36 +234,41 @@ unsigned WINAPI SendMsg(void* arg)   // send thread main
 unsigned WINAPI RecvMsg(void* arg)   // read thread main
 {
 	int hSock = *((SOCKET*)arg);
-	char msg[3];
+	packet msg;
 	int strLen;
 	while (1)
 	{
-		strLen = recv(hSock, msg, 3, 0);
+		strLen = recv(hSock, (char*)&msg, sizeof(packet), 0);
 
 		if (strLen == -1)
 			return -1;
-		if (msg[0] == -1) { //플레이어 번호 받기
-			playerNum = msg[1];
+		if (msg.inst == -2) {
+			enterGame = false;
+			cout << "다른 플레이어들이 게임중입니다." << endl;
+			return 0;
 		}
-		else if (msg[0] == 0) { //플레이어0이 하고나서
-			board[(int)msg[1]][(int)msg[2]] = black;
+		if (msg.inst == -1) { //플레이어 번호 받기
+			playerNum = msg.data1;
+		}
+		else if (msg.inst == 0) { //플레이어0이 하고나서
+			board[msg.data1][msg.data2] = black;
 			turn_Player = (turn_Player + 1) % 2;
 			if (WinCheck())
 				gameState = END;
 		}
-		else if (msg[0] == 1) { //플레이어1이 하고나서
-			board[(int)msg[1]][(int)msg[2]] = white;
+		else if (msg.inst == 1) { //플레이어1이 하고나서
+			board[msg.data1][msg.data2] = white;
 			turn_Player = (turn_Player + 1) % 2;
 			if (WinCheck())
 				gameState = END;
 		}
-		else if (msg[0] == 2){ //상대 나갔을때
+		else if (msg.inst == 2){ //상대 나갔을때
 			InitMap();
 			gameState = WAITING;
 			turn_Player = 0;
 			playerNum = 0;
 		}
-		else if (msg[0] == 3) { //게임 시작
+		else if (msg.inst == 3) { //게임 시작
 			InitMap();
 			turn_Player = 0;
 			gameState = START;
