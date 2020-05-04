@@ -1,0 +1,8 @@
+﻿  Overlapped_2.cpp
+f:\강의자료\newwinnetwork\examplecode\windownetwork\overlapped\overlapped_2\overlapped_2.cpp(128): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock2.h(1849): note: 'inet_ntoa' 선언을 참조하십시오.
+f:\강의자료\newwinnetwork\examplecode\windownetwork\overlapped\overlapped_2\overlapped_2.cpp(186): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock2.h(1849): note: 'inet_ntoa' 선언을 참조하십시오.
+f:\강의자료\newwinnetwork\examplecode\windownetwork\overlapped\overlapped_2\overlapped_2.cpp(202): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock2.h(1849): note: 'inet_ntoa' 선언을 참조하십시오.
+  Overlapped_2.vcxproj -> F:\강의자료\NEWWINNETWORK\ExampleCode\WindowNetwork\Overlapped\Debug\Overlapped_2.exe
