@@ -1,1 +1,4 @@
-﻿  ChatClient.vcxproj -> C:\Users\user\Desktop\kimjaeyeop\WindowNetwork\예제\ChatClient\Debug\ChatClient.exe
+﻿  ChatClient.cpp
+D:\github\kimjaeyeop\WindowNetwork\예제\ChatClient\ChatClient.cpp(65,1): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(1774): message : 'sprintf' 선언을 참조하십시오.
+  ChatClient.vcxproj -> D:\github\kimjaeyeop\WindowNetwork\예제\ChatClient\Debug\ChatClient.exe
