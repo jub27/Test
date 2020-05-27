@@ -1,8 +1,0 @@
-﻿  ChessServer.cpp
-C:\Users\user\Desktop\kimjaeyeop\제출\네트워크3_ChessServer\ChessServer\ChessServer.cpp(120,1): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1849): message : 'inet_ntoa' 선언을 참조하십시오.
-C:\Users\user\Desktop\kimjaeyeop\제출\네트워크3_ChessServer\ChessServer\ChessServer.cpp(130,1): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1849): message : 'inet_ntoa' 선언을 참조하십시오.
-C:\Users\user\Desktop\kimjaeyeop\제출\네트워크3_ChessServer\ChessServer\ChessServer.cpp(213,1): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1849): message : 'inet_ntoa' 선언을 참조하십시오.
-  ChessServer.vcxproj -> C:\Users\user\Desktop\kimjaeyeop\제출\네트워크3_ChessServer\Debug\ChessServer.exe

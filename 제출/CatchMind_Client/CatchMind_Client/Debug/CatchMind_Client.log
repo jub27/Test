@@ -1,3 +1,0 @@
-﻿  WinMain.cpp
-C:\Users\jy\source\repos\CatchMind_Client\CatchMind_Client\WinMain.cpp(45,9): warning C4101: 'hSndThread' :참조되지 않은 지역 변수입니다.
-  CatchMind_Client.vcxproj -> C:\Users\jy\source\repos\CatchMind_Client\Debug\CatchMind_Client.exe
