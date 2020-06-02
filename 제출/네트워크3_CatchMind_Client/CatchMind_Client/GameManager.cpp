@@ -21,11 +21,14 @@ void GameManager::Init(HWND hWnd, SOCKET sock) {
 	mouse.y = -1;
 	playerID = -1;
 	click = false;
-	gameStart = false;
 	firstMain = true;
 	firstExit = true;
+	firstRoom = true;
 	is_playerID = false;
+	draw = false;
 	curRoomNums = 0;
+	turn = true;
+	pos = -1;
 	for (int i = 0; i < MAX_ROOM_NUM; i++) {
 		roomList[i] = 0;
 	}
@@ -33,6 +36,14 @@ void GameManager::Init(HWND hWnd, SOCKET sock) {
 
 STATE GameManager::GetState() {
 	return state;
+}
+
+void GameManager::SetDrawFalse() {
+	draw = false;
+}
+
+void GameManager::SetDrawTrue() {
+	draw = true;
 }
 
 void GameManager::SetMousePoint(int x, int y) {
@@ -49,13 +60,14 @@ void GameManager::MainMenu() {
 		PlayerIDRequest();
 		is_playerID = true;
 	}
-	else {
-		if (playerID == -1)
-			return;
+	if (playerID != -1) {
+		if (firstMain) {
+			RoomListRequest();
+			firstMain = false;
+		}
 	}
-	if (firstMain) {
-		RoomListRequest();
-		firstMain = false;
+	else {
+		return;
 	}
 	bitmap[MAIN_BACKGROUND]->Draw(MemDC, 0, 0);
 	bitmap[ROOM_LIST]->Draw(MemDC, 100, 100);
@@ -79,11 +91,16 @@ void GameManager::MainMenu() {
 
 void GameManager::PlayerIDRequest() {
 	msg[0] = PLAYER_ID_REQUEST;
+	msg[1] = playerID;
 	send(sock, msg, BUF_SIZE, 0);
 }
 
 void GameManager::FirstMainInit() {
 	firstMain = true;
+}
+
+void GameManager::FirstRoomInit() {
+	firstRoom = true;
 }
 
 void GameManager::MakeRoomRequest() {
@@ -98,14 +115,15 @@ void GameManager::SetPlayerID(int playerID) {
 
 void GameManager::JoinRoomRequest(int roomNum) {
 	msg[0] = JOIN_ROOM_REQUEST;
-	msg[1] = roomNum;
-	msg[2] = playerID;
+	msg[1] = playerID;
+	msg[2] = roomNum;
 	send(sock, msg, BUF_SIZE, 0);
 	return;
 }
 
-void GameManager::JoinRoom(int roomNum) {
+void GameManager::JoinRoom(int roomNum, int pos) {
 	this->roomNum = roomNum;
+	this->pos = pos;
 	state = ROOM;
 	firstMain = true;
 	firstExit = true;
@@ -113,15 +131,31 @@ void GameManager::JoinRoom(int roomNum) {
 
 void GameManager::RoomListRequest() {
 	msg[0] = GET_ROOM_LIST;
+	msg[1] = playerID;
 	send(sock, msg, BUF_SIZE, 0);
 }
 
-void GameManager::Room() {
+void GameManager::RoomInfoRequest() {
+	msg[0] = ROOM_INFO_REQUEST;
+	msg[1] = playerID;
+	msg[2] = roomNum;
+	send(sock, msg, BUF_SIZE, 0);
+}
 
+void GameManager::SetRoomInfo(char * msg) {
+	for (int i = 0; i < MAX_ROOM_PLAYER; i++)
+		roomInfo[i] = msg[3 + i];
+}
+
+void GameManager::Room() {
+	if (firstRoom) {
+		RoomInfoRequest();
+		firstRoom = false;
+	}
 	bitmap[ROOM_BACKGROUND]->Draw(MemDC,0, 0);
 	bitmap[EXIT]->Draw(MemDC, 830, 35);
 	if (click) {
-		if (ClickCehck(830, 35) && !gameStart) {
+		if (ClickCehck(830, 35) && state != GAME_START) {
 			state = MAIN_MENU;
 			if (firstExit) {
 				ExitRoomRequest();
@@ -131,8 +165,39 @@ void GameManager::Room() {
 			click = false;
 		}
 	}
+	int x = 150; int y = 180;
+	int count = 0;
+	for (int i = 0; i < MAX_ROOM_PLAYER; i++, y += 103) {
+		if (roomInfo[i] != 0) {
+			count++;
+			char buf[256];
+			RECT rt = { x + 10, y + 10, x + 50, y + 30 };
+			sprintf_s(buf, "%d", roomInfo[i]);
+			DrawText(MemDC, buf, -1, &rt, DT_CENTER | DT_WORDBREAK);
+		}
+	}
+	if (count >= 2 && state != GAME_START) {
+		bitmap[START]->Draw(MemDC, 450, 300);
+		if (click) {
+			if (ClickCehck(450, 300)) {
+				GameStartRequest();
+				click = false;
+			}
+		}
+	}
+	if (state == GAME_START) {
+
+	}
 	click = false;
-	BitBlt(pHDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, MemDC, 0, 0, SRCCOPY);
+	if(state == ROOM)
+		BitBlt(pHDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, MemDC, 0, 0, SRCCOPY);
+}
+
+void GameManager::GameStartRequest() {
+	msg[0] = GAME_START_REQUEST;
+	msg[1] = playerID;
+	msg[2] = roomNum;
+	send(sock, msg, BUF_SIZE, 0);
 }
 
 void GameManager::ExitRoomRequest() {
@@ -144,11 +209,11 @@ void GameManager::ExitRoomRequest() {
 
 void GameManager::SetRoomList(char * msg) {
 	int j = 0;
-	curRoomNums = msg[1];
+	curRoomNums = msg[2];
 	for (int i = 0; i < MAX_ROOM_NUM; i++)
 		roomList[i] = 0;
-	for (int i = 0; i < (int)msg[1]; i++)
-		roomList[i] = (int)msg[2+i];
+	for (int i = 0; i < curRoomNums; i++)
+		roomList[i] = (int)msg[3+i];
 }
 
 bool GameManager::ClickCehck(int x, int y) {
@@ -156,13 +221,33 @@ bool GameManager::ClickCehck(int x, int y) {
 	return PtInRect(&in_Rect, mouse);
 }
 
+void GameManager::GameStart() {
+	state = GAME_START;
+}
+
 void GameManager::ExitRoom() {
 	roomNum = -1;
 	state = MAIN_MENU;
 }
 
+void GameManager::DrawRequest(int newX, int newY) {
+	msg[0] = DRAW_REQUEST;
+	msg[1] = playerID;
+	msg[2] = roomNum;
+	msg[3] = mouse.x;
+	msg[4] = mouse.y;
+	msg[5] = newX;
+	msg[6] = newY;
+	send(sock, msg, BUF_SIZE, 0);
+}
+
+void GameManager::DrawPen(int x1, int y1, int x2, int y2) {
+	MoveToEx(pHDC, x1, y1, NULL);
+	LineTo(pHDC, x2, y2);
+}
+
 void GameManager::ShowRoomList() {
-	int x = 120, y = 150;
+	int x = ROOM_START_X, y = ROOM_START_Y;
 	for (int i = 0; i < curRoomNums; i++) {
 		bitmap[ROOM_INFO]->Draw(MemDC, x, y);
 		RECT rt = { x+10, y+10, x + 50, y + 30 };
@@ -171,7 +256,7 @@ void GameManager::ShowRoomList() {
 		DrawText(MemDC, buf, -1, &rt, DT_CENTER | DT_WORDBREAK);
 		if (click) {
 			if (ClickCehck(x, y)) {
-				JoinRoomRequest(i + 1);
+				JoinRoomRequest(i);
 			}
 		}
 		y += 50;
@@ -179,8 +264,20 @@ void GameManager::ShowRoomList() {
 	
 }
 
+bool GameManager::GetTurn() {
+	return turn;
+}
+
 int GameManager::GetPlayerID() {
 	return playerID;
+}
+
+int GameManager::GetRoomNum() {
+	return roomNum;
+}
+
+bool GameManager::GetDraw() {
+	return draw;
 }
 
 GameManager::~GameManager() {

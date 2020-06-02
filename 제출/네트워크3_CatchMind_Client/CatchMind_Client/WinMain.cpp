@@ -77,6 +77,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 			case MAIN_MENU:
 				GameManager::GetInstance()->MainMenu();
 				break;
+			case GAME_START:
 			case ROOM:
 				GameManager::GetInstance()->Room();
 				break;
@@ -101,13 +102,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		return 0;
 	case WM_MOUSEMOVE:
+		if (GameManager::GetInstance()->GetTurn() && GameManager::GetInstance()->GetDraw()) {
+			GameManager::GetInstance()->DrawRequest(LOWORD(lParam), HIWORD(lParam));
+		}
 		GameManager::GetInstance()->SetMousePoint(LOWORD(lParam), HIWORD(lParam));
 		return 0;
 	case WM_LBUTTONDOWN:
 		GameManager::GetInstance()->SetMouseClick(false);
+		if (GameManager::GetInstance()->GetTurn()) {
+			GameManager::GetInstance()->SetDrawTrue();
+		}
 		return 0;
 	case WM_LBUTTONUP:
 		GameManager::GetInstance()->SetMouseClick(true);
+		if (GameManager::GetInstance()->GetTurn()) {
+			GameManager::GetInstance()->SetDrawFalse();
+		}
 		return 0;
 	}
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
@@ -132,19 +142,39 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		case JOIN_ROOM_ACCEPT:
-			if((int)msg[2] == GameManager::GetInstance()->GetPlayerID())
-				GameManager::GetInstance()->JoinRoom((int)msg[1]);
+			if((int)msg[1] == GameManager::GetInstance()->GetPlayerID())
+				GameManager::GetInstance()->JoinRoom((int)msg[2], (int)msg[3]);
+			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum())
+				GameManager::GetInstance()->FirstRoomInit();
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		case SET_PLAYER_ID:
 			GameManager::GetInstance()->SetPlayerID((int)msg[1]);
 			break;
 		case SET_ROOM_LIST:
-			GameManager::GetInstance()->SetRoomList(msg);
+			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID())
+				GameManager::GetInstance()->SetRoomList(msg);
+			break;
+		case ROOM_INFO_ACCEPT:
+			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID()) {
+				GameManager::GetInstance()->SetRoomInfo(msg);
+			}
+			break;
+		case GAME_START_ACCEPT:
+			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum()) {
+				GameManager::GetInstance()->GameStart();
+			}
+			break;
+		case DRAW_ACCEPT:
+			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum()) {
+				GameManager::GetInstance()->DrawPen((int)msg[3], (int)msg[4], (int)msg[5], (int)msg[6]);
+			}
 			break;
 		case EXIT_ROOM_ACCEPT:
 			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID())
 				GameManager::GetInstance()->ExitRoom();
+			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum())
+				GameManager::GetInstance()->FirstRoomInit();
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		}
