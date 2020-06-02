@@ -16,7 +16,7 @@ unsigned WINAPI RecvMsg(void* arg);
 void ErrorHandling(const char* msg);
 
 SOCKET hSock;
-char msg[BUF_SIZE];
+int msg[BUF_SIZE];
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmdParam, int nCmdShow)
 {
@@ -130,7 +130,7 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 
 	while (1)
 	{
-		strLen = recv(hSock, msg, BUF_SIZE, 0);
+		strLen = recv(hSock, (char *)msg, BUF_SIZE * sizeof(int), 0);
 
 		if (strLen == -1)
 			return -1;
@@ -163,11 +163,13 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 		case GAME_START_ACCEPT:
 			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum()) {
 				GameManager::GetInstance()->GameStart();
+				if (GameManager::GetInstance()->GetPlayerID() == msg[3])
+					GameManager::GetInstance()->SetTurnTrue();
 			}
 			break;
 		case DRAW_ACCEPT:
 			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum()) {
-				GameManager::GetInstance()->DrawPen((int)msg[3], (int)msg[4], (int)msg[5], (int)msg[6]);
+				GameManager::GetInstance()->AddLine(msg[3],msg[4],msg[5],msg[6]);
 			}
 			break;
 		case EXIT_ROOM_ACCEPT:

@@ -20,6 +20,8 @@ using namespace std;
 #define WRITE 5
 #define MAX_ROOM_NUM 5
 #define MAX_ROOM_PLAYER 4
+#define DRAW_COUNT 1
+
 #define PORT_NUM 3800
 
 typedef struct {
@@ -30,12 +32,14 @@ typedef struct {
 typedef struct {
 	OVERLAPPED overlapped;
 	WSABUF wsaBuf;
-	char buffer[BUF_SIZE];
+	char buffer[BUF_SIZE * sizeof(int)];
 	int rwMode;
 }PER_IO_DATA, * LPPER_IO_DATA;
 
 typedef struct {
 	bool started;
+	int curTurnPos;
+	vector<int> drawCount;
 	vector<int> userList;
 }Room;
 
@@ -46,6 +50,27 @@ vector<SOCKET> socketList;
 vector<Room*> roomList;
 
 int player_id = 1;
+
+void SetNextTurnUser(int roomNum) {
+	for (int i = roomList[roomNum]->curTurnPos + 1; ; i++) {
+		if (i >= MAX_ROOM_PLAYER)
+			i = 0;
+		if (roomList[roomNum]->userList[i] != 0) {
+			roomList[roomNum]->curTurnPos = i;
+			return;
+		}
+	}
+	return;
+}
+
+void SetFirstTurnUser(int roomNum) {
+	for (int i = 0; i < MAX_ROOM_PLAYER; i++) {
+		if (roomList[roomNum]->userList[i] != 0) {
+			roomList[roomNum]->curTurnPos = i;
+			break;
+		}
+	}
+}
 
 int playerNumsOfRoom(int roomNum) {
 	int ret = 0;
@@ -97,7 +122,7 @@ int main() {
 
 		ioInfo = (LPPER_IO_DATA)malloc(sizeof(PER_IO_DATA));
 		memset(&(ioInfo->overlapped), 0, sizeof(OVERLAPPED));
-		ioInfo->wsaBuf.len = BUF_SIZE;
+		ioInfo->wsaBuf.len = BUF_SIZE * sizeof(int);
 		ioInfo->wsaBuf.buf = ioInfo->buffer;
 		ioInfo->rwMode = READ;
 		WSARecv(handleInfo->hClntSock, &(ioInfo->wsaBuf), 1, &recvBytes, &flags, &(ioInfo->overlapped), NULL);
@@ -113,7 +138,7 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 	LPPER_IO_DATA ioInfo;
 	DWORD flags = 0;
 	bool allMessage = false;
-	char msg[BUF_SIZE];
+	int msg[BUF_SIZE];
 	int count = 0;
 	bool roomMaster = true;
 	while (1) {
@@ -127,16 +152,18 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 				free(ioInfo);
 				continue;
 			}
-			memcpy(msg, ioInfo->wsaBuf.buf, BUF_SIZE);
-			cout << (int)msg[0] <<"!!"<< endl;
+			memcpy(msg, ioInfo->wsaBuf.buf, BUF_SIZE*(sizeof(int)));
+			cout << msg[0] <<"!!"<< endl;
 			switch (msg[0]) {
 			case MAKE_ROOM_REQUEST:
 				if (roomList.size() < MAX_ROOM_NUM) {
 					msg[0] = MAKE_ROOM_ACCEPT;
 					roomList.push_back(new Room());
 					roomList[roomList.size() - 1]->started = false;
-					for(int i = 0; i < MAX_ROOM_PLAYER;i++)
+					for (int i = 0; i < MAX_ROOM_PLAYER; i++) {
 						roomList[roomList.size() - 1]->userList.push_back(0);
+						roomList[roomList.size() - 1]->drawCount.push_back(0);
+					}
 					msg[2] = roomList.size()-1;
 					allMessage = true;
 				}
@@ -178,6 +205,9 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 				break;
 			case GAME_START_REQUEST:
 				msg[0] = GAME_START_ACCEPT;
+				roomList[msg[2]]->started = true;
+				SetFirstTurnUser(msg[2]);
+				msg[3] = roomList[msg[2]]->userList[roomList[msg[2]]->curTurnPos];
 				allMessage = true;
 				break;
 			case DRAW_REQUEST:
@@ -200,8 +230,8 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 				for (int i = 0; i < socketList.size(); i++) {
 					ioInfo = (LPPER_IO_DATA)malloc(sizeof(PER_IO_DATA));
 					memset(&(ioInfo->overlapped), 0, sizeof(OVERLAPPED));
-					memcpy(ioInfo->buffer, msg, BUF_SIZE);
-					ioInfo->wsaBuf.len = BUF_SIZE;
+					memcpy(ioInfo->buffer, msg, BUF_SIZE * sizeof(int));
+					ioInfo->wsaBuf.len = BUF_SIZE * sizeof(int);
 					ioInfo->wsaBuf.buf = ioInfo->buffer;
 					ioInfo->rwMode = WRITE;
 					WSASend(socketList[i], &(ioInfo->wsaBuf), 1, NULL, 0, &(ioInfo->overlapped), NULL);
@@ -210,8 +240,8 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 			else {
 				ioInfo = (LPPER_IO_DATA)malloc(sizeof(PER_IO_DATA));
 				memset(&(ioInfo->overlapped), 0, sizeof(OVERLAPPED));
-				memcpy(ioInfo->buffer, msg, BUF_SIZE);
-				ioInfo->wsaBuf.len = BUF_SIZE;
+				memcpy(ioInfo->buffer, msg, BUF_SIZE * sizeof(int));
+				ioInfo->wsaBuf.len = BUF_SIZE * sizeof(int);
 				ioInfo->wsaBuf.buf = ioInfo->buffer;
 				ioInfo->rwMode = WRITE;
 				WSASend(sock, &(ioInfo->wsaBuf), 1, NULL, 0, &(ioInfo->overlapped), NULL);
@@ -219,7 +249,7 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 
 			ioInfo = (LPPER_IO_DATA)malloc(sizeof(PER_IO_DATA));
 			memset(&(ioInfo->overlapped), 0, sizeof(OVERLAPPED));
-			ioInfo->wsaBuf.len = BUF_SIZE;
+			ioInfo->wsaBuf.len = BUF_SIZE * sizeof(int);
 			ioInfo->wsaBuf.buf = ioInfo->buffer;
 			ioInfo->rwMode = READ;
 			WSARecv(sock, &(ioInfo->wsaBuf), 1, NULL, &flags, &(ioInfo->overlapped), NULL);

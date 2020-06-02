@@ -19,6 +19,14 @@ using namespace std;
 #define ROOM_START_X 120
 #define ROOM_START_Y 150
 
+#define BOARD_X_START 250
+#define BOARD_Y_START 151
+#define BOARD_X_END 770
+#define BOARD_Y_END 468
+
+#define EDIT_BOX_X 200
+#define EDIT_BOX_Y 22
+
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID
 	, GET_ROOM_LIST, SET_ROOM_LIST, EXIT_ROOM_REQUEST, EXIT_ROOM_ACCEPT, ROOM_INFO_REQUEST, ROOM_INFO_ACCEPT
@@ -32,6 +40,10 @@ enum bitmaps {
 enum STATE {
 	MAIN_MENU, ROOM, GAME_EXIT, GAME_START
 };
+
+typedef struct {
+	int x1, y1, x2, y2;
+}Line;
 
 class GameManager
 {
@@ -50,7 +62,7 @@ private:
 	SOCKET sock;
 	bool click;
 	bool draw;
-
+	vector<Line> lineList;
 	int roomNum;
 	int playerID;
 	int roomList[MAX_ROOM_NUM];
@@ -58,11 +70,13 @@ private:
 	int curRoomNums;
 	int pos;
 	bool turn;
-	char msg[BUF_SIZE];
+	int msg[BUF_SIZE];
 	bool firstMain;
 	bool firstExit;
 	bool firstRoom;
 	bool is_playerID;
+	HWND edit;
+	HDC editHDC;
 public:
 	GameManager();
 	static GameManager* GetInstance() {
@@ -73,14 +87,15 @@ public:
 	void MainMenu();
 	void Room();
 	void ShowRoomList();
-	void SetRoomList(char * msg);
+	void SetRoomList(int * msg);
 	void RoomListRequest();
 	void MakeRoomRequest();
 	void ExitRoomRequest();
 	void RoomInfoRequest();
 	void GameStartRequest();
 	void GameStart();
-	void SetRoomInfo(char* msg);
+	void SetRoomInfo(int * msg);
+	void SetTurnTrue();
 	void ExitRoom();
 	void JoinRoomRequest(int roomNum);
 	void JoinRoom(int roomNum, int pos);
@@ -93,7 +108,8 @@ public:
 	void SetDrawTrue();
 	void SetDrawFalse();
 	void DrawRequest(int newX, int newY);
-	void DrawPen(int x1, int y1, int x2, int y2);
+	void AddLine(int x1, int y1, int x2, int y2);
+	bool RangeCheck(int x, int y);
 	int GetPlayerID();
 	int GetRoomNum();
 	bool GetTurn();

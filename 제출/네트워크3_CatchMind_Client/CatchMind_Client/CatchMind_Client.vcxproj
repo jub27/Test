@@ -147,6 +147,10 @@
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CatchMind_Client.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
