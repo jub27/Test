@@ -96,6 +96,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 	return (int)Message.wParam;
 }
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam){
+	static char str[128];
 	switch (iMessage)
 	{
 	case WM_DESTROY:
@@ -117,6 +118,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		GameManager::GetInstance()->SetMouseClick(true);
 		if (GameManager::GetInstance()->GetTurn()) {
 			GameManager::GetInstance()->SetDrawFalse();
+		}
+		return 0;
+	case WM_COMMAND:
+		switch (LOWORD(wParam)) {
+		case EDIT_ID:
+			switch (HIWORD(wParam)) {
+			case EN_CHANGE:
+				GetWindowText(GameManager::GetInstance()->GetEdit(), str, 128);
+				SetWindowText(hWnd, str);
+			}
 		}
 		return 0;
 	}

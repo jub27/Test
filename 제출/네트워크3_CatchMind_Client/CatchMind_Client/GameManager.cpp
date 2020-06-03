@@ -87,7 +87,7 @@ void GameManager::MainMenu() {
 	}
 	ShowRoomList();
 	click = false;
-	BitBlt(pHDC, 0, 0, GAME_WIDTH, GAME_HEIGHT - EDIT_BOX_Y*3, MemDC, 0, 0, SRCCOPY);
+	BitBlt(pHDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, MemDC, 0, 0, SRCCOPY);
 }
 
 void GameManager::PlayerIDRequest() {
@@ -151,7 +151,7 @@ void GameManager::SetRoomInfo(int * msg) {
 void GameManager::Room() {
 	if (firstRoom) {
 		RoomInfoRequest();
-		edit = CreateWindow("EDIT", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 10, GAME_HEIGHT - EDIT_BOX_Y*3, 200, 22, m_hWnd, NULL, NULL, NULL);
+		edit = CreateWindow("EDIT", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, EDIT_BOX_X, EDIT_BOX_Y, EDIT_BOX_X_SIZE, EDIT_BOX_Y_SIZE, m_hWnd, (HMENU)EDIT_ID, NULL, NULL);
 		firstRoom = false;
 	}
 	bitmap[ROOM_BACKGROUND]->Draw(MemDC,0, 0);
@@ -195,7 +195,10 @@ void GameManager::Room() {
 	}
 	click = false;
 
-	BitBlt(pHDC, 0, 0, GAME_WIDTH, GAME_HEIGHT - EDIT_BOX_Y*3, MemDC, 0, 0, SRCCOPY);
+	BitBlt(pHDC, 0, 0, GAME_WIDTH, EDIT_BOX_Y, MemDC, 0, 0, SRCCOPY);
+	BitBlt(pHDC, 0, EDIT_BOX_Y + EDIT_BOX_Y_SIZE, GAME_WIDTH, GAME_HEIGHT - (EDIT_BOX_Y + EDIT_BOX_Y_SIZE), MemDC, 0, EDIT_BOX_Y + EDIT_BOX_Y_SIZE, SRCCOPY);
+	BitBlt(pHDC, 0, EDIT_BOX_Y,EDIT_BOX_X, EDIT_BOX_Y_SIZE, MemDC, 0, EDIT_BOX_Y, SRCCOPY);
+	BitBlt(pHDC, EDIT_BOX_X + EDIT_BOX_X_SIZE, EDIT_BOX_Y, GAME_WIDTH - (EDIT_BOX_X+EDIT_BOX_X_SIZE), GAME_HEIGHT - EDIT_BOX_Y, MemDC, EDIT_BOX_X + EDIT_BOX_X_SIZE, EDIT_BOX_Y, SRCCOPY);
 }
 
 void GameManager::GameStartRequest() {
@@ -297,6 +300,10 @@ int GameManager::GetRoomNum() {
 
 bool GameManager::GetDraw() {
 	return draw;
+}
+
+HWND GameManager::GetEdit() {
+	return edit;
 }
 
 GameManager::~GameManager() {

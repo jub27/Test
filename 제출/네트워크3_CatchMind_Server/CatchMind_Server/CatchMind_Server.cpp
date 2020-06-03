@@ -6,6 +6,14 @@
 #include <vector>
 #include <Ws2tcpip.h> //inet_pton 
 
+/*
+edit에서 문자열 가져와서 엔터 누르면 보내기
+정답 데이터 저장해놓기
+턴 넘기기
+게임 끝내기
+클라이언트가 중간에 나갔을때 어떻게 처리할까..
+*/
+
 // vs warning and winsock error 
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID

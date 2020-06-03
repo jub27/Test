@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=v4.0:PlatformToolSet=v142:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0
-Debug|Win32|C:\Users\user\Desktop\kimjaeyeop\제출\네트워크3_CatchMind_Client\|
+PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.26.28801:TargetPlatformVersion=10.0.18362.0:
+Debug|Win32|D:\깃헙\kimjaeyeop\제출\네트워크3_CatchMind_Client\|

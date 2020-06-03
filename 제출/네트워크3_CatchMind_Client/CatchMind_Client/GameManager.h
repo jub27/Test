@@ -5,6 +5,8 @@
 
 using namespace std;
 
+#define EDIT_ID 1
+
 #define BITMAP_NUMS 8
 #define BUF_SIZE 12
 #define MAX_ROOM_NUM 5
@@ -24,8 +26,11 @@ using namespace std;
 #define BOARD_X_END 770
 #define BOARD_Y_END 468
 
-#define EDIT_BOX_X 200
-#define EDIT_BOX_Y 22
+#define EDIT_BOX_X 550
+#define EDIT_BOX_Y 590
+#define EDIT_BOX_X_SIZE 200
+#define EDIT_BOX_Y_SIZE 22
+
 
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID
@@ -76,7 +81,6 @@ private:
 	bool firstRoom;
 	bool is_playerID;
 	HWND edit;
-	HDC editHDC;
 public:
 	GameManager();
 	static GameManager* GetInstance() {
@@ -114,6 +118,7 @@ public:
 	int GetRoomNum();
 	bool GetTurn();
 	bool GetDraw();
+	HWND GetEdit();
 	void FirstMainInit();
 	void FirstRoomInit();
 	bool ClickCehck(int x, int y);
