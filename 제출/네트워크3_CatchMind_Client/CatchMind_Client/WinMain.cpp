@@ -16,7 +16,6 @@ unsigned WINAPI RecvMsg(void* arg);
 void ErrorHandling(const char* msg);
 
 SOCKET hSock;
-int msg[BUF_SIZE];
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmdParam, int nCmdShow)
 {
@@ -96,7 +95,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPervlnstance, LPSTR lpszCmd
 	return (int)Message.wParam;
 }
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam){
-	static char str[128];
+	char str[128];
 	switch (iMessage)
 	{
 	case WM_DESTROY:
@@ -120,13 +119,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			GameManager::GetInstance()->SetDrawFalse();
 		}
 		return 0;
+	case WM_KEYDOWN:
+		switch (wParam) {
+		case VK_RETURN:
+			if (GameManager::GetInstance()->GetState() == GAME_START && GameManager::GetInstance()->GetTurn() == false) {
+				GetWindowText(GameManager::GetInstance()->GetEdit(), str, 128);
+				GameManager::GetInstance()->SendAnswer(str);
+			}
+		}
+		return 0;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case EDIT_ID:
 			switch (HIWORD(wParam)) {
 			case EN_CHANGE:
-				GetWindowText(GameManager::GetInstance()->GetEdit(), str, 128);
-				SetWindowText(hWnd, str);
+				break;
 			}
 		}
 		return 0;
@@ -138,61 +145,76 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 {
 	int hSock = *((SOCKET*)arg);
 	int strLen;
-
+	Packet* packet;
 	while (1)
 	{
-		strLen = recv(hSock, (char *)msg, BUF_SIZE * sizeof(int), 0);
+		packet = new Packet();
+		strLen = recv(hSock, (char *)packet, sizeof(Packet), 0);
 
 		if (strLen == -1)
 			return -1;
-		switch (msg[0]) {
+		switch (packet->inst) {
 		case MAKE_ROOM_ACCEPT:
-			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID()) {
-				GameManager::GetInstance()->JoinRoomRequest((int)msg[2]);
+			if (packet->playerID == GameManager::GetInstance()->GetPlayerID()) {
+				GameManager::GetInstance()->JoinRoomRequest(packet->data[0]);
 			}
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		case JOIN_ROOM_ACCEPT:
-			if((int)msg[1] == GameManager::GetInstance()->GetPlayerID())
-				GameManager::GetInstance()->JoinRoom((int)msg[2], (int)msg[3]);
-			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum())
+			if(packet->playerID == GameManager::GetInstance()->GetPlayerID())
+				GameManager::GetInstance()->JoinRoom(packet->data[0], packet->data[1]);
+			if (packet->data[0] == GameManager::GetInstance()->GetRoomNum())
 				GameManager::GetInstance()->FirstRoomInit();
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		case SET_PLAYER_ID:
-			GameManager::GetInstance()->SetPlayerID((int)msg[1]);
+			GameManager::GetInstance()->SetPlayerID(packet->data[0]);
 			break;
 		case SET_ROOM_LIST:
-			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID())
-				GameManager::GetInstance()->SetRoomList(msg);
+			if (packet->playerID == GameManager::GetInstance()->GetPlayerID())
+				GameManager::GetInstance()->SetRoomList(packet->data);
 			break;
 		case ROOM_INFO_ACCEPT:
-			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID()) {
-				GameManager::GetInstance()->SetRoomInfo(msg);
+			if (packet->playerID == GameManager::GetInstance()->GetPlayerID()) {
+				GameManager::GetInstance()->SetRoomInfo(packet->data);
 			}
 			break;
 		case GAME_START_ACCEPT:
-			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum()) {
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
 				GameManager::GetInstance()->GameStart();
-				if (GameManager::GetInstance()->GetPlayerID() == msg[3])
-					GameManager::GetInstance()->SetTurnTrue();
+				if (GameManager::GetInstance()->GetPlayerID() == packet->data[0])
+					GameManager::GetInstance()->SetTurnTrue(packet->answer);
 			}
 			break;
 		case DRAW_ACCEPT:
-			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum()) {
-				GameManager::GetInstance()->AddLine(msg[3],msg[4],msg[5],msg[6]);
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
+				GameManager::GetInstance()->AddLine(packet->data[0], packet->data[1], packet->data[2], packet->data[3]);
+			}
+			break;
+		case ANSWER_RESULT_FROM_SERVER:
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
+				if (packet->data[0] == 1) {
+					if (packet->data[1] == -1) {
+						GameManager::GetInstance()->InitRoom();
+					}
+					else {
+						if (GameManager::GetInstance()->GetPlayerID() == packet->data[1])
+							GameManager::GetInstance()->SetTurnTrue(packet->answer);
+						else
+							GameManager::GetInstance()->SetTurnFalse();
+					}
+				}
 			}
 			break;
 		case EXIT_ROOM_ACCEPT:
-			if ((int)msg[1] == GameManager::GetInstance()->GetPlayerID())
+			if (packet->playerID == GameManager::GetInstance()->GetPlayerID())
 				GameManager::GetInstance()->ExitRoom();
-			if ((int)msg[2] == GameManager::GetInstance()->GetRoomNum())
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum())
 				GameManager::GetInstance()->FirstRoomInit();
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		}
 	}
-
 	return 0;
 }
 

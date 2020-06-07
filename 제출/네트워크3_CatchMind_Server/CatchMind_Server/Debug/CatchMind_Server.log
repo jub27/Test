@@ -1,1 +1,5 @@
-﻿  CatchMind_Server.vcxproj -> D:\깃헙\kimjaeyeop\제출\네트워크3_CatchMind_Server\Debug\CatchMind_Server.exe
+﻿  CatchMind_Server.cpp
+D:\깃헙\kimjaeyeop\제출\네트워크3_CatchMind_Server\CatchMind_Server\CatchMind_Server.cpp(132,14): warning C4996: 'WSASocketA': Use WSASocketW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+D:\깃헙\kimjaeyeop\제출\네트워크3_CatchMind_Server\CatchMind_Server\CatchMind_Server.cpp(224,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\깃헙\kimjaeyeop\제출\네트워크3_CatchMind_Server\CatchMind_Server\CatchMind_Server.cpp(280,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CatchMind_Server.vcxproj -> D:\깃헙\kimjaeyeop\제출\네트워크3_CatchMind_Server\Debug\CatchMind_Server.exe

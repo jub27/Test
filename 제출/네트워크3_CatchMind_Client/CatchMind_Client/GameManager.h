@@ -8,7 +8,7 @@ using namespace std;
 #define EDIT_ID 1
 
 #define BITMAP_NUMS 8
-#define BUF_SIZE 12
+#define DATA_SIZE 12
 #define MAX_ROOM_NUM 5
 #define MAX_ROOM_PLAYER 4
 
@@ -32,10 +32,18 @@ using namespace std;
 #define EDIT_BOX_Y_SIZE 22
 
 
+typedef struct {
+	int inst;
+	int playerID;
+	int roomNum;
+	int data[DATA_SIZE];
+	char answer[128];
+}Packet;
+
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID
 	, GET_ROOM_LIST, SET_ROOM_LIST, EXIT_ROOM_REQUEST, EXIT_ROOM_ACCEPT, ROOM_INFO_REQUEST, ROOM_INFO_ACCEPT
-	, GAME_START_REQUEST, GAME_START_ACCEPT, DRAW_REQUEST, DRAW_ACCEPT
+	, GAME_START_REQUEST, GAME_START_ACCEPT, DRAW_REQUEST, DRAW_ACCEPT, ANSWER_FROM_CLIENT, ANSWER_RESULT_FROM_SERVER
 };
 
 enum bitmaps {
@@ -74,12 +82,14 @@ private:
 	int roomInfo[MAX_ROOM_PLAYER];
 	int curRoomNums;
 	int pos;
+	int point;
 	bool turn;
-	int msg[BUF_SIZE];
+	Packet * packet;
 	bool firstMain;
 	bool firstExit;
 	bool firstRoom;
 	bool is_playerID;
+	char answer[128];
 	HWND edit;
 public:
 	GameManager();
@@ -97,14 +107,17 @@ public:
 	void ExitRoomRequest();
 	void RoomInfoRequest();
 	void GameStartRequest();
+	void SendAnswer(char * str);
 	void GameStart();
 	void SetRoomInfo(int * msg);
-	void SetTurnTrue();
+	void SetTurnTrue(char * answer);
+	void SetTurnFalse();
 	void ExitRoom();
 	void JoinRoomRequest(int roomNum);
 	void JoinRoom(int roomNum, int pos);
 	void Init(HWND hWnd, SOCKET sock);
 	STATE GetState();
+	void AddPoint();
 	void SetMousePoint(int x, int y);
 	void SetMouseClick(bool c);
 	void PlayerIDRequest();
@@ -114,6 +127,7 @@ public:
 	void DrawRequest(int newX, int newY);
 	void AddLine(int x1, int y1, int x2, int y2);
 	bool RangeCheck(int x, int y);
+	void InitRoom();
 	int GetPlayerID();
 	int GetRoomNum();
 	bool GetTurn();

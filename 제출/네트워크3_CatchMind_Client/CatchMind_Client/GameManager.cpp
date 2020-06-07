@@ -27,12 +27,13 @@ void GameManager::Init(HWND hWnd, SOCKET sock) {
 	is_playerID = false;
 	draw = false;
 	curRoomNums = 0;
+	point = 0;
 	turn = false;
 	pos = -1;
+	edit = NULL;
 	for (int i = 0; i < MAX_ROOM_NUM; i++) {
 		roomList[i] = 0;
 	}
-
 }
 
 STATE GameManager::GetState() {
@@ -91,9 +92,12 @@ void GameManager::MainMenu() {
 }
 
 void GameManager::PlayerIDRequest() {
-	msg[0] = PLAYER_ID_REQUEST;
-	msg[1] = playerID;
-	send(sock,(char *) msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = PLAYER_ID_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock,(char *)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::FirstMainInit() {
@@ -105,9 +109,12 @@ void GameManager::FirstRoomInit() {
 }
 
 void GameManager::MakeRoomRequest() {
-	msg[0] = MAKE_ROOM_REQUEST;
-	msg[1] = playerID;
-	send(sock, (char*)msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = MAKE_ROOM_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::SetPlayerID(int playerID) {
@@ -115,11 +122,12 @@ void GameManager::SetPlayerID(int playerID) {
 }
 
 void GameManager::JoinRoomRequest(int roomNum) {
-	msg[0] = JOIN_ROOM_REQUEST;
-	msg[1] = playerID;
-	msg[2] = roomNum;
-	send(sock, (char*)msg, BUF_SIZE * sizeof(int), 0);
-	return;
+	packet = new Packet();
+	packet->inst = JOIN_ROOM_REQUEST;
+	packet->playerID = playerID;
+	packet->data[0] = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::JoinRoom(int roomNum, int pos) {
@@ -131,29 +139,35 @@ void GameManager::JoinRoom(int roomNum, int pos) {
 }
 
 void GameManager::RoomListRequest() {
-	msg[0] = GET_ROOM_LIST;
-	msg[1] = playerID;
-	send(sock, (char*)msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = GET_ROOM_LIST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::RoomInfoRequest() {
-	msg[0] = ROOM_INFO_REQUEST;
-	msg[1] = playerID;
-	msg[2] = roomNum;
-	send(sock, (char*)msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = ROOM_INFO_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::SetRoomInfo(int * msg) {
 	for (int i = 0; i < MAX_ROOM_PLAYER; i++)
-		roomInfo[i] = msg[3 + i];
+		roomInfo[i] = msg[i];
 }
 
 void GameManager::Room() {
 	if (firstRoom) {
 		RoomInfoRequest();
-		edit = CreateWindow("EDIT", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, EDIT_BOX_X, EDIT_BOX_Y, EDIT_BOX_X_SIZE, EDIT_BOX_Y_SIZE, m_hWnd, (HMENU)EDIT_ID, NULL, NULL);
 		firstRoom = false;
 	}
+	if(edit == NULL)
+		edit = CreateWindow("EDIT", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, EDIT_BOX_X, EDIT_BOX_Y, EDIT_BOX_X_SIZE, EDIT_BOX_Y_SIZE, m_hWnd, (HMENU)EDIT_ID, NULL, NULL);
 	bitmap[ROOM_BACKGROUND]->Draw(MemDC,0, 0);
 	bitmap[EXIT]->Draw(MemDC, 830, 35);
 	if (click) {
@@ -178,7 +192,7 @@ void GameManager::Room() {
 			DrawText(MemDC, buf, -1, &rt, DT_CENTER | DT_WORDBREAK);
 		}
 	}
-	if (count >= 2 && state != GAME_START) {
+	if (count >= 2 && state == ROOM) {
 		bitmap[START]->Draw(MemDC, 450, 300);
 		if (click) {
 			if (ClickCehck(450, 300)) {
@@ -192,6 +206,12 @@ void GameManager::Room() {
 			MoveToEx(MemDC, lineList[i].x1, lineList[i].y1, NULL);
 			LineTo(MemDC, lineList[i].x2, lineList[i].y2);
 		}
+		if (turn) {
+			RECT rt = {500,100,550,150 };
+			char buf[256];
+			sprintf_s(buf, "%s", answer);
+			DrawText(MemDC, buf, -1, &rt, DT_CENTER | DT_WORDBREAK);
+		}
 	}
 	click = false;
 
@@ -201,27 +221,48 @@ void GameManager::Room() {
 	BitBlt(pHDC, EDIT_BOX_X + EDIT_BOX_X_SIZE, EDIT_BOX_Y, GAME_WIDTH - (EDIT_BOX_X+EDIT_BOX_X_SIZE), GAME_HEIGHT - EDIT_BOX_Y, MemDC, EDIT_BOX_X + EDIT_BOX_X_SIZE, EDIT_BOX_Y, SRCCOPY);
 }
 
+void GameManager::InitRoom() {
+	lineList.clear();
+	state = ROOM;
+	turn = false;
+	strcpy_s(answer, "");
+}
+
 void GameManager::GameStartRequest() {
-	msg[0] = GAME_START_REQUEST;
-	msg[1] = playerID;
-	msg[2] = roomNum;
-	send(sock, (char*)msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = GAME_START_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
+}
+
+void GameManager::SendAnswer(char * str) {
+	packet = new Packet();
+	packet->inst = ANSWER_FROM_CLIENT;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	strcpy_s(packet->answer, str);
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::ExitRoomRequest() {
-	msg[0] = EXIT_ROOM_REQUEST;
-	msg[1] = playerID;
-	msg[2] = roomNum;
-	send(sock, (char*)msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = EXIT_ROOM_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
 void GameManager::SetRoomList(int * msg) {
 	int j = 0;
-	curRoomNums = msg[2];
+	curRoomNums = msg[0];
 	for (int i = 0; i < MAX_ROOM_NUM; i++)
 		roomList[i] = 0;
 	for (int i = 0; i < curRoomNums; i++)
-		roomList[i] = (int)msg[3+i];
+		roomList[i] = msg[1+i];
 }
 
 bool GameManager::ClickCehck(int x, int y) {
@@ -249,17 +290,20 @@ bool GameManager::RangeCheck(int x, int y) {
 void GameManager::DrawRequest(int newX, int newY) {
 	if (!RangeCheck(mouse.x, mouse.y) || !RangeCheck(newX, newY))
 		return;
-	msg[0] = DRAW_REQUEST;
-	msg[1] = playerID;
-	msg[2] = roomNum;
-	msg[3] = mouse.x;
-	msg[4] = mouse.y;
-	msg[5] = newX;
-	msg[6] = newY;
-	send(sock, (char *)msg, BUF_SIZE * sizeof(int), 0);
+	packet = new Packet();
+	packet->inst = DRAW_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	packet->data[0] = mouse.x;
+	packet->data[1] = mouse.y;
+	packet->data[2] = newX;
+	packet->data[3] = newY;
+	send(sock, (char *)packet, sizeof(Packet), 0);
+	free(packet);
 }
 
-void GameManager::SetTurnTrue() {
+void GameManager::SetTurnTrue(char* answer) {
+	strcpy_s(this->answer, answer);
 	turn = true;
 }
 
@@ -284,6 +328,10 @@ void GameManager::ShowRoomList() {
 		y += 50;
 	}
 	
+}
+
+void GameManager::SetTurnFalse() {
+	turn = false;
 }
 
 bool GameManager::GetTurn() {
