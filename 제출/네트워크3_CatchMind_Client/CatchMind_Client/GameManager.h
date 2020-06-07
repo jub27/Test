@@ -7,7 +7,7 @@ using namespace std;
 
 #define EDIT_ID 1
 
-#define BITMAP_NUMS 8
+#define BITMAP_NUMS 11
 #define DATA_SIZE 12
 #define MAX_ROOM_NUM 5
 #define MAX_ROOM_PLAYER 4
@@ -43,20 +43,26 @@ typedef struct {
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID
 	, GET_ROOM_LIST, SET_ROOM_LIST, EXIT_ROOM_REQUEST, EXIT_ROOM_ACCEPT, ROOM_INFO_REQUEST, ROOM_INFO_ACCEPT
-	, GAME_START_REQUEST, GAME_START_ACCEPT, DRAW_REQUEST, DRAW_ACCEPT, ANSWER_FROM_CLIENT, ANSWER_RESULT_FROM_SERVER
+	, GAME_START_REQUEST, GAME_START_ACCEPT, PEN_DRAW_REQUEST, PEN_DRAW_ACCEPT, ANSWER_FROM_CLIENT, ANSWER_RESULT_FROM_SERVER
+	, ERASER_DRAW_REQUEST, ERASER_DRAW_ACCEPT, ERASE_ALL_REQUEST, ERASE_ALL_ACCEPT
 };
 
 enum bitmaps {
-	MAIN_BACKGROUND, MAKE_ROOM, EXIT, ROOM_LIST, ROOM_BACKGROUND, ROOM_INFO, CHARACTER, START
+	MAIN_BACKGROUND, MAKE_ROOM, EXIT, ROOM_LIST, ROOM_BACKGROUND, ROOM_INFO, CHARACTER, START, PEN, ERASER, ERASE_ALL
 };
 
 enum STATE {
 	MAIN_MENU, ROOM, GAME_EXIT, GAME_START
 };
 
+enum PAINTING_TOOL {
+	PEN_, ERASER_
+};
+
 typedef struct {
+	PAINTING_TOOL pt;
 	int x1, y1, x2, y2;
-}Line;
+}DrawPattern;
 
 class GameManager
 {
@@ -68,14 +74,14 @@ private:
 	HBITMAP	OldBitMap;
 	static GameManager* instance;
 	LPCSTR source[BITMAP_NUMS] = {"res\\MAIN_BACKGROUND.bmp","res\\MAKE_ROOM.bmp","res\\EXIT.bmp", "res\\ROOM_LIST.bmp", "res\\ROOM_BACKGROUND.bmp"
-	, "res\\ROOM_INFO.bmp", "res\\CHARACTER.bmp", "res\\START.bmp"};
+	, "res\\ROOM_INFO.bmp", "res\\CHARACTER.bmp", "res\\START.bmp", "res\\Pen.bmp", "res\\ERASER.bmp", "res\\ERASE_ALL.bmp"};
 	Bitmap* bitmap[BITMAP_NUMS];
 	STATE state;
 	POINT mouse;
 	SOCKET sock;
 	bool click;
 	bool draw;
-	vector<Line> lineList;
+	vector<DrawPattern> drawList;
 	int roomNum;
 	int playerID;
 	int roomList[MAX_ROOM_NUM];
@@ -91,6 +97,7 @@ private:
 	bool is_playerID;
 	char answer[128];
 	HWND edit;
+	PAINTING_TOOL paintingTool;
 public:
 	GameManager();
 	static GameManager* GetInstance() {
@@ -107,6 +114,7 @@ public:
 	void ExitRoomRequest();
 	void RoomInfoRequest();
 	void GameStartRequest();
+	void EraseAllRequest();
 	void SendAnswer(char * str);
 	void GameStart();
 	void SetRoomInfo(int * msg);
@@ -117,15 +125,17 @@ public:
 	void JoinRoom(int roomNum, int pos);
 	void Init(HWND hWnd, SOCKET sock);
 	STATE GetState();
-	void AddPoint();
+	void EraseAll();
 	void SetMousePoint(int x, int y);
 	void SetMouseClick(bool c);
 	void PlayerIDRequest();
 	void SetPlayerID(int playerID);
 	void SetDrawTrue();
 	void SetDrawFalse();
-	void DrawRequest(int newX, int newY);
-	void AddLine(int x1, int y1, int x2, int y2);
+	void PenDrawRequest(int newX, int newY);
+	void EraseDrawRequest(int x, int y);
+	void AddPen(int x1, int y1, int x2, int y2);
+	void AddEraser(int x, int y);
 	bool RangeCheck(int x, int y);
 	void InitRoom();
 	int GetPlayerID();
@@ -136,5 +146,6 @@ public:
 	void FirstMainInit();
 	void FirstRoomInit();
 	bool ClickCehck(int x, int y);
+	PAINTING_TOOL GetPaintingTool();
 	~GameManager();
 };

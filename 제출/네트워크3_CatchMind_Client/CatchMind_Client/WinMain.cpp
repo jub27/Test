@@ -99,11 +99,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	switch (iMessage)
 	{
 	case WM_DESTROY:
+		GameManager::GetInstance()->ExitRoomRequest();
 		PostQuitMessage(0);
 		return 0;
 	case WM_MOUSEMOVE:
 		if (GameManager::GetInstance()->GetTurn() && GameManager::GetInstance()->GetDraw()) {
-			GameManager::GetInstance()->DrawRequest(LOWORD(lParam), HIWORD(lParam));
+			switch (GameManager::GetInstance()->GetPaintingTool()) {
+			case PEN_:
+				GameManager::GetInstance()->PenDrawRequest(LOWORD(lParam), HIWORD(lParam));
+				break;
+			case ERASER_:
+				GameManager::GetInstance()->EraseDrawRequest(LOWORD(lParam), HIWORD(lParam));
+				break;
+			}
 		}
 		GameManager::GetInstance()->SetMousePoint(LOWORD(lParam), HIWORD(lParam));
 		return 0;
@@ -119,20 +127,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			GameManager::GetInstance()->SetDrawFalse();
 		}
 		return 0;
-	case WM_KEYDOWN:
-		switch (wParam) {
-		case VK_RETURN:
-			if (GameManager::GetInstance()->GetState() == GAME_START && GameManager::GetInstance()->GetTurn() == false) {
-				GetWindowText(GameManager::GetInstance()->GetEdit(), str, 128);
-				GameManager::GetInstance()->SendAnswer(str);
-			}
-		}
-		return 0;
 	case WM_COMMAND:
 		switch (LOWORD(wParam)) {
 		case EDIT_ID:
 			switch (HIWORD(wParam)) {
 			case EN_CHANGE:
+				if (GetKeyState(VK_RETURN) & 0x8000) {
+					if (GameManager::GetInstance()->GetState() == GAME_START && GameManager::GetInstance()->GetTurn() == false) {
+						GetWindowText(GameManager::GetInstance()->GetEdit(), str, 128);
+						GameManager::GetInstance()->SendAnswer(str);
+					}
+				}
 				break;
 			}
 		}
@@ -186,9 +191,19 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 					GameManager::GetInstance()->SetTurnTrue(packet->answer);
 			}
 			break;
-		case DRAW_ACCEPT:
+		case PEN_DRAW_ACCEPT:
 			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
-				GameManager::GetInstance()->AddLine(packet->data[0], packet->data[1], packet->data[2], packet->data[3]);
+				GameManager::GetInstance()->AddPen(packet->data[0], packet->data[1], packet->data[2], packet->data[3]);
+			}
+			break;
+		case ERASER_DRAW_ACCEPT:
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
+				GameManager::GetInstance()->AddEraser(packet->data[0], packet->data[1]);
+			}
+			break;
+		case ERASE_ALL_ACCEPT:
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
+				GameManager::GetInstance()->EraseAll();
 			}
 			break;
 		case ANSWER_RESULT_FROM_SERVER:
@@ -209,8 +224,11 @@ unsigned WINAPI RecvMsg(void* arg)   // read thread main
 		case EXIT_ROOM_ACCEPT:
 			if (packet->playerID == GameManager::GetInstance()->GetPlayerID())
 				GameManager::GetInstance()->ExitRoom();
-			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum())
+			if (packet->roomNum == GameManager::GetInstance()->GetRoomNum()) {
+				if (packet->data[0] == -1)
+					GameManager::GetInstance()->InitRoom();
 				GameManager::GetInstance()->FirstRoomInit();
+			}
 			GameManager::GetInstance()->FirstMainInit();
 			break;
 		}

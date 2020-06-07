@@ -17,6 +17,7 @@ void GameManager::Init(HWND hWnd, SOCKET sock) {
 	}
 	this->sock = sock;
 	state = MAIN_MENU;
+	paintingTool = PEN_;
 	mouse.x = -1;
 	mouse.y = -1;
 	playerID = -1;
@@ -26,6 +27,7 @@ void GameManager::Init(HWND hWnd, SOCKET sock) {
 	firstRoom = true;
 	is_playerID = false;
 	draw = false;
+	roomNum = -1;
 	curRoomNums = 0;
 	point = 0;
 	turn = false;
@@ -181,6 +183,24 @@ void GameManager::Room() {
 			click = false;
 		}
 	}
+	bitmap[ERASER]->Draw(MemDC, 450, 500);
+	if (click) {
+		if (ClickCehck(450, 500) && turn) {
+			paintingTool = ERASER_;
+		}
+	}
+	bitmap[PEN]->Draw(MemDC, 350, 500);
+	if (click) {
+		if (ClickCehck(350, 500) && turn) {
+			paintingTool = PEN_;
+		}
+	}
+	bitmap[ERASE_ALL]->Draw(MemDC, 550, 500);
+	if (click) {
+		if (ClickCehck(550, 500) && turn) {
+			EraseAllRequest();
+		}
+	}
 	int x = 150; int y = 180;
 	int count = 0;
 	for (int i = 0; i < MAX_ROOM_PLAYER; i++, y += 103) {
@@ -201,10 +221,16 @@ void GameManager::Room() {
 			}
 		}
 	}
+	
 	if (state == GAME_START) {
-		for (int i = 0; i < lineList.size(); i++) {
-			MoveToEx(MemDC, lineList[i].x1, lineList[i].y1, NULL);
-			LineTo(MemDC, lineList[i].x2, lineList[i].y2);
+		for (int i = 0; i < drawList.size(); i++) {
+			if (drawList[i].pt == PEN_) {
+				MoveToEx(MemDC, drawList[i].x1, drawList[i].y1, NULL);
+				LineTo(MemDC, drawList[i].x2, drawList[i].y2);
+			}
+			else if(drawList[i].pt == ERASER_) {
+				
+			}
 		}
 		if (turn) {
 			RECT rt = {500,100,550,150 };
@@ -222,7 +248,7 @@ void GameManager::Room() {
 }
 
 void GameManager::InitRoom() {
-	lineList.clear();
+	drawList.clear();
 	state = ROOM;
 	turn = false;
 	strcpy_s(answer, "");
@@ -287,11 +313,15 @@ bool GameManager::RangeCheck(int x, int y) {
 	return true;
 }
 
-void GameManager::DrawRequest(int newX, int newY) {
+PAINTING_TOOL GameManager::GetPaintingTool() {
+	return paintingTool;
+}
+
+void GameManager::PenDrawRequest(int newX, int newY) {
 	if (!RangeCheck(mouse.x, mouse.y) || !RangeCheck(newX, newY))
 		return;
 	packet = new Packet();
-	packet->inst = DRAW_REQUEST;
+	packet->inst = PEN_DRAW_REQUEST;
 	packet->playerID = playerID;
 	packet->roomNum = roomNum;
 	packet->data[0] = mouse.x;
@@ -302,14 +332,51 @@ void GameManager::DrawRequest(int newX, int newY) {
 	free(packet);
 }
 
+void GameManager::EraseDrawRequest(int x, int y) {
+	if (!RangeCheck(x, y))
+		return;
+	packet = new Packet();
+	packet->inst = ERASER_DRAW_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	packet->data[0] = x;
+	packet->data[1] = y;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
+}
+
+void GameManager::EraseAll() {
+	drawList.clear();
+}
+
 void GameManager::SetTurnTrue(char* answer) {
 	strcpy_s(this->answer, answer);
 	turn = true;
 }
 
-void GameManager::AddLine(int x1, int y1, int x2, int y2) {
-	Line a = { x1, y1, x2, y2 };
-	lineList.push_back(a);
+void GameManager::EraseAllRequest() {
+	packet = new Packet();
+	packet->inst = ERASE_ALL_REQUEST;
+	packet->playerID = playerID;
+	packet->roomNum = roomNum;
+	send(sock, (char*)packet, sizeof(Packet), 0);
+	free(packet);
+}
+
+void GameManager::AddPen(int x1, int y1, int x2, int y2) {
+	DrawPattern a = { PEN_ ,x1, y1, x2, y2 };
+	drawList.push_back(a);
+}
+
+void GameManager::AddEraser(int x, int y) {
+	for (int i = 0; i < drawList.size(); ) {
+		if (abs(drawList[i].x1 - x) <= 10 && abs(drawList[i].y1 - y) <= 10) {
+			drawList.erase(drawList.begin() + i);
+		}
+		else {
+			i++;
+		}
+	}
 }
 
 void GameManager::ShowRoomList() {

@@ -18,7 +18,8 @@ edit에서 문자열 가져와서 엔터 누르면 보내기
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID
 	, GET_ROOM_LIST, SET_ROOM_LIST, EXIT_ROOM_REQUEST, EXIT_ROOM_ACCEPT, ROOM_INFO_REQUEST, ROOM_INFO_ACCEPT
-	, GAME_START_REQUEST, GAME_START_ACCEPT, DRAW_REQUEST, DRAW_ACCEPT, ANSWER_FROM_CLIENT, ANSWER_RESULT_FROM_SERVER
+	, GAME_START_REQUEST, GAME_START_ACCEPT, PEN_DRAW_REQUEST, PEN_DRAW_ACCEPT, ANSWER_FROM_CLIENT, ANSWER_RESULT_FROM_SERVER
+	, ERASER_DRAW_REQUEST, ERASER_DRAW_ACCEPT, ERASE_ALL_REQUEST, ERASE_ALL_ACCEPT
 };
 
 using namespace std;
@@ -242,8 +243,16 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 				strcpy_s(roomList[packet->roomNum]->curAnswer, packet->answer);
 				allMessage = true;
 				break;
-			case DRAW_REQUEST:
-				packet->inst = DRAW_ACCEPT;
+			case PEN_DRAW_REQUEST:
+				packet->inst = PEN_DRAW_ACCEPT;
+				allMessage = true;
+				break;
+			case ERASER_DRAW_REQUEST:
+				packet->inst = ERASER_DRAW_ACCEPT;
+				allMessage = true;
+				break;
+			case ERASE_ALL_REQUEST:
+				packet->inst = ERASE_ALL_ACCEPT;
 				allMessage = true;
 				break;
 			case ANSWER_FROM_CLIENT:
@@ -266,11 +275,19 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 				break;
 			case EXIT_ROOM_REQUEST:
 				packet->inst = EXIT_ROOM_ACCEPT;
-				for (vector<int>::iterator iter = roomList[packet->roomNum]->userList.begin(); iter != roomList[packet->roomNum]->userList.end(); iter++) {
-					if ((*iter) == packet->playerID) {
-						(*iter) = 0;
-						break;
+				if (packet->roomNum != -1) {
+					for (int i = 0; i < roomList[packet->roomNum]->userList.size(); i++) {
+						if (roomList[packet->roomNum]->userList[i] == packet->playerID) {
+							roomList[packet->roomNum]->userList[i] = 0;
+							break;
+						}
 					}
+					if (roomList[packet->roomNum]->started) {
+						InitRoom(packet->roomNum);
+						packet->data[0] = -1;
+					}
+					else
+						packet->data[0] = 0;
 				}
 				allMessage = true;
 				break;
