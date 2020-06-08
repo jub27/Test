@@ -1,3 +1,0 @@
-﻿  WinMain.cpp
-c:\users\a11\desktop\꾀꼬리\kimjaeyeop\3-1\movingcirclebykey\winmain.cpp(76): warning C4101: 'st' :참조되지 않은 지역 변수입니다.
-  MovingCircleByKey.vcxproj -> C:\Users\A11\Desktop\꾀꼬리\kimjaeyeop\3-1\Debug\MovingCircleByKey.exe

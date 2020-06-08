@@ -1,7 +1,0 @@
-﻿  MyBitmap.cpp
-  WinMain.cpp
-c:\users\a11\desktop\bitmapclick\bitmapclick\winmain.cpp(53): warning C4101: 'oldBitmap' :참조되지 않은 지역 변수입니다.
-c:\users\a11\desktop\bitmapclick\bitmapclick\winmain.cpp(51): warning C4101: 'MemDC' :참조되지 않은 지역 변수입니다.
-c:\users\a11\desktop\bitmapclick\bitmapclick\winmain.cpp(53): warning C4101: 'myBitmap' :참조되지 않은 지역 변수입니다.
-  코드를 생성하고 있습니다...
-  BitmapClick.vcxproj -> C:\Users\A11\Desktop\BitmapClick\Debug\BitmapClick.exe

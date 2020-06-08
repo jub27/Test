@@ -1,3 +1,0 @@
-﻿  WinMain.cpp
-c:\users\a11\source\repos\maptool\maptool\winmain.cpp(143): warning C4101: 'str' :참조되지 않은 지역 변수입니다.
-  Maptool.vcxproj -> C:\Users\A11\source\repos\Maptool\Debug\Maptool.exe

@@ -1,3 +1,0 @@
-﻿  WinMain.cpp
-c:\users\a11\desktop\매\kimjaeyeop\제출\9 지뢰찾기\findmine\winmain.cpp(148): warning C4101: 'hRadio' :참조되지 않은 지역 변수입니다.
-  FindMine.vcxproj -> C:\Users\A11\Desktop\매\kimjaeyeop\제출\9 지뢰찾기\Debug\FindMine.exe
