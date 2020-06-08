@@ -136,6 +136,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 					if (GameManager::GetInstance()->GetState() == GAME_START && GameManager::GetInstance()->GetTurn() == false) {
 						GetWindowText(GameManager::GetInstance()->GetEdit(), str, 128);
 						GameManager::GetInstance()->SendAnswer(str);
+						
 					}
 				}
 				break;

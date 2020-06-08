@@ -1,19 +1,14 @@
 #include <iostream>
-#include <stdlib.h>
 #include <process.h>
+#include <cstdlib>
 #include <winsock2.h>
 #include <windows.h>
 #include <vector>
 #include <ctime>
-#include <cstdlib>
+#include <random>
 #include <Ws2tcpip.h> //inet_pton 
 
-/*
-edit에서 문자열 가져와서 엔터 누르면 보내기
-턴 넘기기
-게임 끝내기
-클라이언트가 중간에 나갔을때 어떻게 처리할까..
-*/
+using namespace std;
 
 enum INST {
 	MAKE_ROOM_REQUEST, MAKE_ROOM_ACCEPT, JOIN_ROOM_REQUEST, JOIN_ROOM_ACCEPT, PLAYER_ID_REQUEST, SET_PLAYER_ID
@@ -22,7 +17,6 @@ enum INST {
 	, ERASER_DRAW_REQUEST, ERASER_DRAW_ACCEPT, ERASE_ALL_REQUEST, ERASE_ALL_ACCEPT
 };
 
-using namespace std;
 
 #define DATA_SIZE 12
 #define ANSWER_SIZE 10
@@ -110,6 +104,7 @@ void InitRoom(int roomNum) {
 		roomList[roomNum]->started = false;
 	}
 }
+default_random_engine engine;
 
 int main() {
 	WSADATA wsaData;
@@ -117,14 +112,13 @@ int main() {
 	SYSTEM_INFO sysInfo;
 	LPPER_IO_DATA ioInfo;
 	LPPER_HANDLE_DATA handleInfo;
-
+	engine.seed(time(0));
 	SOCKET hServSock;
 	SOCKADDR_IN servAdr;
 	DWORD recvBytes, i, flags = 0;
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 		ErrorHandling("WSAStartup() error");
-
-
+	srand((unsigned int)time(NULL));
 	hComPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
 	GetSystemInfo(&sysInfo);
 	for (i = 0; i < sysInfo.dwNumberOfProcessors; i++)
@@ -172,7 +166,7 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 	int count = 0;
 	bool roomMaster = true;
 	while (1) {
-		GetQueuedCompletionStatus(hComPort, &bytesTrans, (LPDWORD)&handleInfo, (LPOVERLAPPED*)&ioInfo, INFINITE);
+		GetQueuedCompletionStatus(hComPort, &bytesTrans, (PULONG_PTR)&handleInfo, (LPOVERLAPPED*)&ioInfo, INFINITE);
 		sock = handleInfo->hClntSock;
 
 		if (ioInfo->rwMode == READ) {
@@ -239,7 +233,7 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 				roomList[packet->roomNum]->started = true;
 				SetFirstTurnUser(packet->roomNum);
 				packet->data[0] = roomList[packet->roomNum]->userList[roomList[packet->roomNum]->curTurnPos];
-				strcpy_s(packet->answer, answerList[rand() % ANSWER_SIZE]);
+				strcpy_s(packet->answer, answerList[engine() % ANSWER_SIZE]);
 				strcpy_s(roomList[packet->roomNum]->curAnswer, packet->answer);
 				allMessage = true;
 				break;
@@ -261,7 +255,7 @@ unsigned int WINAPI EchoThreadMain(LPVOID pComPort) {
 					packet->data[0] = 1;
 					if (SetNextTurnUser(packet->roomNum)) {
 						packet->data[1] = roomList[packet->roomNum]->userList[roomList[packet->roomNum]->curTurnPos];
-						strcpy_s(packet->answer, answerList[rand() % ANSWER_SIZE]);
+						strcpy_s(packet->answer, answerList[engine() % ANSWER_SIZE]);
 						strcpy_s(roomList[packet->roomNum]->curAnswer, packet->answer);
 					}
 					else {
