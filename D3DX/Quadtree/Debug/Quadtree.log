@@ -1,0 +1,5 @@
+﻿  Quadtree.cpp
+c:\sos\leeseoungjun\d3dx\quadtree\quadtree.cpp(132): warning C4316: 'ZCamera': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  ZTerrain.cpp
+  코드를 생성하고 있습니다...
+  Quadtree.vcxproj -> C:\sos\LeeSeoungJun\D3DX\Quadtree\Debug\Quadtree.exe

@@ -1,0 +1,6 @@
+﻿  Animation.cpp
+c:\sos\leeseoungjun\d3dx\animation\animation.cpp(228): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+c:\sos\leeseoungjun\d3dx\animation\animation.cpp(229): warning C4101: 'z' :참조되지 않은 지역 변수입니다.
+c:\sos\leeseoungjun\d3dx\animation\animation.cpp(229): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
+c:\sos\leeseoungjun\d3dx\animation\animation.cpp(229): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
+  Animation.vcxproj -> C:\sos\LeeSeoungJun\D3DX\Animation\Debug\Animation.exe

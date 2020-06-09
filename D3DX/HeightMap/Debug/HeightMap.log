@@ -1,0 +1,12 @@
+﻿  ZFLog.cpp
+c:\sos\leeseoungjun\d3dx\heightmap\zflog.cpp(10): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: 'strcpy' 선언을 참조하십시오.
+c:\sos\leeseoungjun\d3dx\heightmap\zflog.cpp(64): warning C4996: '_strdate': This function or variable may be unsafe. Consider using _strdate_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(290): note: '_strdate' 선언을 참조하십시오.
+c:\sos\leeseoungjun\d3dx\heightmap\zflog.cpp(65): warning C4996: '_strtime': This function or variable may be unsafe. Consider using _strtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(306): note: '_strtime' 선언을 참조하십시오.
+c:\sos\leeseoungjun\d3dx\heightmap\zflog.cpp(66): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1469): note: 'vsprintf' 선언을 참조하십시오.
+c:\sos\leeseoungjun\d3dx\heightmap\zflog.cpp(78): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: 'fopen' 선언을 참조하십시오.
+  HeightMap.vcxproj -> C:\sos\LeeSeoungJun\D3DX\HeightMap\Debug\HeightMap.exe

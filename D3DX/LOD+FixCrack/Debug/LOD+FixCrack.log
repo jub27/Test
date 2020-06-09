@@ -1,0 +1,3 @@
+﻿  FixCrack.cpp
+c:\sos\leeseoungjun\d3dx\lod+fixcrack\fixcrack.cpp(139): warning C4316: 'ZCamera': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  LOD+FixCrack.vcxproj -> C:\sos\LeeSeoungJun\D3DX\LOD+FixCrack\Debug\LOD+FixCrack.exe
