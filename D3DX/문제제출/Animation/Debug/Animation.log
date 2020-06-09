@@ -1,5 +1,0 @@
-﻿  Animation.cpp
-c:\users\admin\documents\work\학원\leeseoungjun\d3dx\문제제출\animation\animation.cpp(234): warning C4101: 'z' :참조되지 않은 지역 변수입니다.
-c:\users\admin\documents\work\학원\leeseoungjun\d3dx\문제제출\animation\animation.cpp(234): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
-c:\users\admin\documents\work\학원\leeseoungjun\d3dx\문제제출\animation\animation.cpp(234): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
-  Animation.vcxproj -> C:\Users\admin\Documents\Work\학원\LeeSeoungJun\D3DX\문제제출\Animation\Debug\Animation.exe

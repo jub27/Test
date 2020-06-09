@@ -1,3 +1,0 @@
-﻿  Texture.cpp
-c:\sos\leeseoungjun\d3dx\연습과 실험\texture\texture.cpp(277): warning C4002: 함수 같은 매크로 호출 'CreateWindowW'에 대해 인수가 너무 많습니다.
-  Texture.vcxproj -> C:\sos\LeeSeoungJun\D3DX\연습과 실험\Texture\Debug\Texture.exe

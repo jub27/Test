@@ -1,3 +1,0 @@
-﻿  IndexBuffer.cpp
-c:\sos\leeseoungjun\d3dx\문제제출\indexbuffer\indexbuffer.cpp(176): warning C4002: 함수 같은 매크로 호출 'CreateWindowW'에 대해 인수가 너무 많습니다.
-  IndexBuffer.vcxproj -> C:\sos\LeeSeoungJun\D3DX\문제제출\IndexBuffer\Debug\IndexBuffer.exe
