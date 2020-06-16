@@ -217,11 +217,11 @@ void SetupMatrices()
 
 	UINT iTime = timeGetTime() % 1000; // float 연산의 정밀도를 위해서 1000으로 나머지 연산한다.
 
-	//FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f; // 1000밀리초마다 한 바퀴씩(2 * pi) 회전 애니메이션 행렬을 만든다.
+	FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f; // 1000밀리초마다 한 바퀴씩(2 * pi) 회전 애니메이션 행렬을 만든다.
 
-	D3DXMatrixRotationY(&matWorld, GetTickCount() / 500.0f);
+	//D3DXMatrixRotationY(&matWorld, GetTickCount() / 500.0f);
 
-	//D3DXMatrixRotationY(&matWorld, fAngle); // Y축을 회전축으로 회전 행렬을 생성한다.
+	D3DXMatrixRotationY(&matWorld, fAngle); // Y축을 회전축으로 회전 행렬을 생성한다.
 
 	g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld); // 생성한 회전 행렬을 월드 행렬로 디바이스에 설정한다.
 
