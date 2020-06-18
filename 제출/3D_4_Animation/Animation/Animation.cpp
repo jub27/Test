@@ -303,7 +303,7 @@ void Render()
 
 	g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 255), 1.0f, 0);
 
-	g_Font->DrawText(NULL, "방향키 = 각도, WASD = 이동", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
+	g_Font->DrawText(NULL, "방향키 = 각도, WASD = 이동, space = 정지", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
 
 	Animate();
 
