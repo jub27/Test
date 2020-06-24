@@ -361,7 +361,7 @@ VOID Render()
 {
     // 후면버퍼와 Z버퍼 초기화
     g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
-    g_Font->DrawText(NULL, "방향키 위아래, WASD = 이동, Q,E = Z축 이동", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+    g_Font->DrawText(NULL, "방향키 위아래, WASD = 이동, Q,E = Z축 회전", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
     // 애니메이션 행렬설정
     Animate();
     // 렌더링 시작
