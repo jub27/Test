@@ -14,6 +14,9 @@
 #define WINDOW_TITLE	"HeightMap+Camera"
 #define BMP_HEIGHTMAP	"map128.bmp"
 
+LPD3DXFONT				g_Font;
+RECT					g_Rect;
+
 Camera* g_pCamera = NULL;
 HWND g_hwnd = NULL;
 
@@ -73,7 +76,8 @@ HRESULT InitD3D(HWND hWnd)
 
     // Z버퍼기능을 켠다.
     g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-
+    D3DXCreateFont(g_pd3dDevice, 20, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+        DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "Arial", &g_Font);
     return S_OK;
 }
 
@@ -282,11 +286,11 @@ void ProcessKey(void)
     if (GetAsyncKeyState(VK_DOWN)) g_pCamera->MoveLocalY(-0.5f);
     if (GetAsyncKeyState('D')) g_pCamera->MoveLocalX(0.5f);
     if (GetAsyncKeyState('A')) g_pCamera->MoveLocalX(-0.5f);
-    if (GetAsyncKeyState('Q') && rotateZ < M_PI / 2) {
+    if (GetAsyncKeyState('E') && rotateZ < M_PI / 2) {
         rotateZ += M_PI / 90;
         g_pCamera->RotateLocalZ(M_PI / 90);
     }
-    else if (GetAsyncKeyState('E') && rotateZ > -M_PI / 2) {
+    else if (GetAsyncKeyState('Q') && rotateZ > -M_PI / 2) {
         rotateZ += -M_PI / 90;
         g_pCamera->RotateLocalZ(-M_PI / 90);
     }
@@ -357,7 +361,7 @@ VOID Render()
 {
     // 후면버퍼와 Z버퍼 초기화
     g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
-
+    g_Font->DrawText(NULL, "방향키 위아래, WASD = 이동, Q,E = Z축 이동", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
     // 애니메이션 행렬설정
     Animate();
     // 렌더링 시작
