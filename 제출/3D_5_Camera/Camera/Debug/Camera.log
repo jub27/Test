@@ -1,0 +1,17 @@
+﻿  HeightMap.cpp
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(162,36): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(163,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(164,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(166,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(167,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(168,46): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(286,29): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(287,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(290,30): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(291,43): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(295,33): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(296,47): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(299,33): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(300,46): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Camera\HeightMap.cpp(419,27): warning C4316: 'Camera': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  Camera.vcxproj -> D:\새 폴더 (2)\kimjaeyeop\제출\3D_5_1_Camera\Debug\Camera.exe

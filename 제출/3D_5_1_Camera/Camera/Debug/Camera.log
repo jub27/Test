@@ -1,9 +1,0 @@
-﻿  HeightMap.cpp
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(159,36): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(160,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(161,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(163,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(164,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(165,46): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera\Camera\HeightMap.cpp(398,27): warning C4316: 'Camera': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-  Camera.vcxproj -> C:\Users\user\source\repos\Camera\Debug\Camera.exe
