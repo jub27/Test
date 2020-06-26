@@ -7,6 +7,9 @@ Camera::Camera() {
 	D3DXMatrixIdentity(&m_matView);
 	D3DXMatrixIdentity(&m_matBill);
 	SetView(&eye, &lookAt, &up);
+	rotateX = 0;
+	rotateY = 0;
+	rotateZ = 0;
 }
 
 D3DXMATRIXA16* Camera::SetView(D3DXVECTOR3* pvEye, D3DXVECTOR3* pvLookAt, D3DXVECTOR3* pvUp) {
@@ -22,7 +25,6 @@ D3DXMATRIXA16* Camera::SetView(D3DXVECTOR3* pvEye, D3DXVECTOR3* pvLookAt, D3DXVE
 	m_matBill._41 = 0.0f;
 	m_matBill._42 = 0.0f;
 	m_matBill._43 = 0.0f;
-
 	return &m_matView;
 }
 
@@ -33,7 +35,7 @@ D3DXMATRIXA16* Camera::RotateLocalX(float angle) {
 	D3DXVECTOR3 vNewDst;
 	D3DXVec3TransformCoord(&vNewDst, &m_vView, &matRot);
 	vNewDst += m_vEye;
-
+	rotateY += angle;
 	return SetView(&m_vEye, &vNewDst, &m_vUp);
 }
 
@@ -44,19 +46,18 @@ D3DXMATRIXA16* Camera::RotateLocalY(float angle) {
 	D3DXVECTOR3 vNewDst;
 	D3DXVec3TransformCoord(&vNewDst, &m_vView, &matRot);
 	vNewDst += m_vEye;
-
+	rotateX += angle;
 	return SetView(&m_vEye, &vNewDst, &m_vUp);
 }
 
 D3DXMATRIXA16* Camera::RotateLocalZ(float angle) {
 	D3DXMATRIXA16 matRot;
-	D3DXMatrixRotationAxis(&matRot, &m_vLookAt, angle);
+	D3DXMatrixRotationAxis(&matRot, &m_vView , angle);
 
 	D3DXVECTOR3 vNewDst;
-	D3DXVec3TransformCoord(&vNewDst, &m_vView, &matRot);
-	vNewDst += m_vEye;
-
-	return SetView(&m_vEye, &vNewDst, &m_vUp);
+	D3DXVec3TransformCoord(&vNewDst, &m_vUp, &matRot);
+	rotateZ += angle;
+	return SetView(&m_vEye, &m_vLookAt, &vNewDst);
 }
 
 D3DXMATRIXA16* Camera::MoveLocalX(float dist) {

@@ -18,18 +18,24 @@ private:
 	D3DXMATRIXA16 m_matView;
 	D3DXMATRIXA16 m_matBill;
 	D3DXMATRIXA16* m_matBlock;
+
+	float rotateX, rotateY, rotateZ;
 public:
 	Camera();
+	float GetRotateX() { return rotateX; }
+	float GetRotateY() { return rotateY; }
+	float GetRotateZ() { return rotateZ; }
 	D3DXMATRIXA16* GetViewMatrix() { return &m_matView; }
 	D3DXMATRIXA16* GetBillMatrix() { return &m_matBill; }
-	void InitBlock(D3DXMATRIXA16* matBlock);
 	D3DXMATRIXA16* SetView(D3DXVECTOR3* pvEye, D3DXVECTOR3* pvLookAt, D3DXVECTOR3* pvUp);
 	void SetEye(D3DXVECTOR3* pv) { m_vEye = *pv; }
+	D3DXVECTOR3* GetCross() { return &m_vCross; }
 	D3DXVECTOR3* GetEye() { return &m_vEye; }
 	void SetLookAt(D3DXVECTOR3* pv) { m_vLookAt = *pv; }
 	D3DXVECTOR3* GetLookat() { return &m_vLookAt; }
 	void SetUp(D3DXVECTOR3* pv) { m_vUp = *pv; }
 	D3DXVECTOR3* GetUp() { return &m_vUp; }
+	D3DXVECTOR3* GetView() { return &m_vView; }
 	void Flush() { SetView(&m_vEye, &m_vLookAt, &m_vUp); }
 	D3DXMATRIXA16* RotateLocalX(float angle);
 	D3DXMATRIXA16* RotateLocalY(float angle);

@@ -228,19 +228,24 @@ D3DXMATRIXA16 g_matTMMoon;
 D3DXMATRIXA16 g_matRMoon;
 D3DXMATRIXA16 g_matRevMoon;
 */
+	D3DXVECTOR3 nomalpVec(0, 1, 0);
+
 	D3DXMatrixIdentity(&g_matTMSun);
 
 	D3DXMatrixRotationY(&g_matRSun, GetTickCount() / 5000.0f);
 
+
+
 	D3DXMatrixScaling(&g_matSEarth, 0.5f, 0.5f, 0.5f);
+
+	D3DXMatrixRotationAxis(&g_matRevEarth, &nomalpVec, GetTickCount() / 2500.0f);
 
 	D3DXMatrixTranslation(&g_matTMEarth, 3, 0, 0);
 
 	D3DXMatrixRotationY(&g_matREarth, GetTickCount() / 5000.0f);
 
-	D3DXVECTOR3 nomalpVec(0, 1, 0);
 
-	D3DXMatrixRotationAxis(&g_matRevEarth, &nomalpVec, GetTickCount() / 2500.0f);
+
 
 	D3DXMatrixScaling(&g_matSMoon, 0.5f, 0.5f, 0.5f);
 

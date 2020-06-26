@@ -1,19 +1,18 @@
 ﻿  Map.cpp
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(124,11): warning C4101: 'pIndices' :참조되지 않은 지역 변수입니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(214,36): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(215,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(216,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(218,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(219,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(220,46): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(259,33): warning C4244: '인수': 'DWORD'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(359,29): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(360,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(363,30): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(364,43): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(368,33): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(369,47): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(372,33): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(373,46): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\user\source\repos\Camera2\Camera2\Map.cpp(499,27): warning C4316: 'Camera': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-  Camera2.vcxproj -> C:\Users\user\source\repos\Camera2\Debug\Camera2.exe
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(126,11): warning C4101: 'pIndices' :참조되지 않은 지역 변수입니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(216,36): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(217,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(218,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(220,42): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(221,40): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(222,46): warning C4244: '=': 'unsigned long'에서 'WORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(362,33): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(363,46): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(368,34): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(369,47): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(374,33): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(375,47): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(378,33): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(379,46): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Camera2\Map.cpp(514,27): warning C4316: 'Camera': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  Camera2.vcxproj -> D:\새 폴더 (2)\kimjaeyeop\제출\Camera2\Debug\Camera2.exe

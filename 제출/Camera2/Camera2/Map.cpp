@@ -31,7 +31,9 @@ LPDIRECT3DINDEXBUFFER9	g_pBlockIB = NULL;
 LPDIRECT3DTEXTURE9		g_pTexHeight = NULL;
 LPDIRECT3DTEXTURE9		g_pTexDiffuse = NULL;
 D3DXMATRIXA16			g_matAni;
-D3DXMATRIXA16			g_matBlock;
+D3DXMATRIXA16			g_matBlockTm;
+D3DXMATRIXA16			g_matBlockRev;
+D3DXMATRIXA16			g_matCameraTm;
 
 DWORD					g_cxHeight = 0;
 DWORD					g_czHeight = 0;
@@ -255,8 +257,8 @@ void SetupCamera()
     g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
     // 뷰 행렬을 설정
-    D3DXVECTOR3 vEyePt(0.0f, 100.0f, -100.0f);
-    D3DXVECTOR3 vLookatPt(0.0f, g_dwBlockY, 0.0f);
+    D3DXVECTOR3 vEyePt(0.0f, 40.0f, -100.0f);
+    D3DXVECTOR3 vLookatPt(0.0f, 40.0f, 0.0f);
     D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
     D3DXMATRIXA16 matView;
     D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
@@ -355,13 +357,17 @@ void ProcessKey(void)
     if (GetAsyncKeyState(VK_DOWN)) g_pCamera->MoveLocalY(-0.5f);
     if (GetAsyncKeyState('D')) g_pCamera->MoveLocalX(0.5f);
     if (GetAsyncKeyState('A')) g_pCamera->MoveLocalX(-0.5f);
-    if (GetAsyncKeyState('E') && rotateZ < M_PI / 2) {
-        rotateZ += M_PI / 90;
-        g_pCamera->RotateLocalZ(M_PI / 90);
+    if (GetAsyncKeyState('E')) {
+        if (rotateZ < M_PI / 2) {
+            rotateZ += M_PI / 90;
+            g_pCamera->RotateLocalZ(M_PI / 90);
+        }
     }
-    else if (GetAsyncKeyState('Q') && rotateZ > -M_PI / 2) {
-        rotateZ += -M_PI / 90;
-        g_pCamera->RotateLocalZ(-M_PI / 90);
+    else if (GetAsyncKeyState('Q')) {
+        if (rotateZ > -M_PI / 2) {
+            rotateZ += -M_PI / 90;
+            g_pCamera->RotateLocalZ(-M_PI / 90);
+        }
     }
     else {
         if (rotateZ > M_PI / 90) {
@@ -391,8 +397,16 @@ VOID Animate()
     // Y축 회전행렬
 //	D3DXMatrixRotationY( &g_matAni, d / 1000.0f );
     D3DXMatrixIdentity(&g_matAni);
-    D3DXMatrixIdentity(&g_matBlock);
-    D3DXMatrixTranslation(&g_matBlock, g_pCamera->GetEye()->x, g_pCamera->GetEye()->y, g_pCamera->GetEye()->z);
+    D3DXMatrixIdentity(&g_matBlockTm);
+    D3DXMatrixIdentity(&g_matBlockRev);
+    D3DXMatrixIdentity(&g_matCameraTm);
+
+    D3DXMatrixTranslation(&g_matCameraTm, g_pCamera->GetEye()->x, g_pCamera->GetEye()->y, g_pCamera->GetEye()->z);
+    
+    D3DXMatrixTranslation(&g_matBlockTm, 0, 0, 50);
+    D3DXMatrixRotationAxis(&g_matBlockRev, g_pCamera->GetCross(), g_pCamera->GetRotateY());
+    D3DXMatrixRotationAxis(&g_matBlockRev, g_pCamera->GetView(), g_pCamera->GetRotateZ());
+    D3DXMatrixRotationAxis(&g_matBlockRev, g_pCamera->GetUp(), g_pCamera->GetRotateX());
 
     SetupLights();
     ProcessInputs();
@@ -426,7 +440,7 @@ void DrawMesh(D3DXMATRIXA16* pMat)
     g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
     g_pd3dDevice->SetIndices(g_pIB);
     g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, g_cxHeight * g_czHeight, 0, (g_cxHeight - 1) * (g_czHeight - 1) * 2);
-    g_pd3dDevice->SetTransform(D3DTS_WORLD, &g_matBlock);
+    g_pd3dDevice->SetTransform(D3DTS_WORLD, &(g_matBlockTm * g_matBlockRev * g_matCameraTm));
     g_pd3dDevice->SetStreamSource(0, g_pBlockVB, 0, sizeof(CUSTOMVERTEX_));
     g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
     g_pd3dDevice->SetIndices(g_pBlockIB);
@@ -437,7 +451,8 @@ VOID Render()
 {
     // 후면버퍼와 Z버퍼 초기화
     g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0);
-    g_Font->DrawText(NULL, "방향키 위아래, WASD = 이동, Q,E = Z축 회전", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+    if(g_pCamera->GetUp()->y == 1.0f)
+        g_Font->DrawText(NULL, "방향키 위아래, WASD = 이동, Q,E = Z축 회전", -1, &g_Rect, DT_NOCLIP, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
     // 애니메이션 행렬설정
     Animate();
     // 렌더링 시작
