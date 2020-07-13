@@ -1,0 +1,6 @@
+Index,Name,ATKPoint,HitPoint,Speed,SkinColor
+int,string,List<int>,List<int>,float,List<int>
+인덱스,이름,공격수치,체력수치,스피드,피부색깔
+1,좀비하수인,5;10,10;30,1,0;255;0
+2,좀비전사,10;15,30;50,2,0;0;255
+3,좀비대장,15;30,50;100,3,255;0;0
