@@ -28,6 +28,7 @@ public class EnemyControl : MonoBehaviour
     private float attackStopDistance = 1.8f;
     private bool hitEnd = true;
     private int randomDir;
+    public bool preAttack = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -131,6 +132,12 @@ public class EnemyControl : MonoBehaviour
 
     void Chasing()
     {
+        if (target == null)
+        {
+            state = State.Idle;
+            InitParameter();
+            return;
+        }
         if (!hitEnd)
             return;
         if (Vector3.Distance(transform.position, target.position) <= attackStopDistance)
@@ -168,7 +175,15 @@ public class EnemyControl : MonoBehaviour
 
     void Attacking()
     {
-        transform.forward = target.position - transform.position;
+        if (target == null)
+        {
+            state = State.Idle;
+            InitParameter();
+            return;
+        }
+        Vector3 dir = target.position - transform.position;
+        dir.y = 0;
+        transform.forward = dir;
         if (Vector3.Distance(transform.position, target.position) > attackStopDistance && attackEnd)
         {
             state = State.Chasing;
@@ -190,6 +205,7 @@ public class EnemyControl : MonoBehaviour
 
     public void AttackEnd()
     {
+        print("@@@");
         state = State.Chasing;
         InitParameter();
         animator.SetBool("Chase", true);

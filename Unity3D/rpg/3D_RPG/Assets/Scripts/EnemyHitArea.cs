@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyHitArea : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    EnemyControl ec;
+    CharacterStatus cs;
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        ec = transform.root.gameObject.GetComponent<EnemyControl>();
+        cs = transform.root.gameObject.GetComponent<CharacterStatus>();
     }
 
     // Update is called once per frame
@@ -19,8 +21,12 @@ public class EnemyHitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        ec.SetChasing(other.transform.root.transform);
         transform.root.gameObject.GetComponent<EnemyAttack>().AttackDisable();
-        transform.root.gameObject.GetComponent<CharacterStatus>().OnDamage(other.transform.root.gameObject.GetComponent<PlayerAttack>().power);
-        transform.root.gameObject.GetComponent<EnemyControl>().OnDamage();
+        cs.OnDamage(other.transform.root.gameObject.GetComponent<PlayerAttack>().power);
+        if (!cs.dead)
+        {
+            ec.OnDamage();
+        }
     }
 }

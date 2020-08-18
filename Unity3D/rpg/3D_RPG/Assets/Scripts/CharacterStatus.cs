@@ -22,6 +22,8 @@ public class CharacterStatus : MonoBehaviour
 
     public void OnDamage(float damage)
     {
+        if (dead)
+            return;
         hp -= damage;
         if(hp <= 0)
         {

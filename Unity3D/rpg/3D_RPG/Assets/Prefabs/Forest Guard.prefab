@@ -66,7 +66,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6771146459571353613}
-  - component: {fileID: 8898362124731476435}
   m_Layer: 14
   m_Name: RayForward
   m_TagString: Untagged
@@ -88,20 +87,6 @@ Transform:
   m_Father: {fileID: 6452369632027479402}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8898362124731476435
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4853680240641757356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6452369632027447424
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +358,6 @@ GameObject:
   - component: {fileID: 5309870439583666230}
   - component: {fileID: 8753787821793140447}
   - component: {fileID: 3459566050320937046}
-  - component: {fileID: 3983451101256441124}
   - component: {fileID: -1695750288022470418}
   - component: {fileID: 2214675343990792992}
   m_Layer: 14
@@ -465,20 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayForward: {fileID: 6771146459571353613}
---- !u!114 &3983451101256441124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6452369632027447434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b2168bb6aada846851ea1b6082d19d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  dead: 0
+  preAttack: 1
 --- !u!54 &-1695750288022470418
 Rigidbody:
   m_ObjectHideFlags: 0

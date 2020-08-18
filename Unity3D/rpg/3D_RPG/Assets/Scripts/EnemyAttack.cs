@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     public GameObject weapon;
-    CapsuleCollider cc;
+    Collider cc;
     public float power = 5;
     // Start is called before the first frame update
     void Start()
     {
-        cc = weapon.GetComponent<CapsuleCollider>();
+        cc = weapon.GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -26,11 +26,13 @@ public class EnemyAttack : MonoBehaviour
 
     public void AttackEnable()
     {
+        print("AE");
         cc.enabled = true;
     }
 
     public void AttackDisable()
     {
+        print("AD");
         cc.enabled = false;
     }
 }

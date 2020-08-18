@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SearchPlayer : MonoBehaviour
 {
+    EnemyControl ec;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ec = transform.root.gameObject.GetComponent<EnemyControl>();
     }
 
     // Update is called once per frame
@@ -18,6 +19,7 @@ public class SearchPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.root.gameObject.GetComponent<EnemyControl>().SetChasing(other.transform.root.transform);
+        if(ec.preAttack)
+            transform.root.gameObject.GetComponent<EnemyControl>().SetChasing(other.transform.root.transform);
     }
 }
