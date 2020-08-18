@@ -6,11 +6,12 @@ public class PlayerAttack : MonoBehaviour
 {
     public GameObject weapon;
     CapsuleCollider cc;
-    public float power;
+    public float power = 10;
     // Start is called before the first frame update
     void Start()
     {
         cc = weapon.GetComponent<CapsuleCollider>();
+        cc.enabled = false;
     }
 
     // Update is called once per frame

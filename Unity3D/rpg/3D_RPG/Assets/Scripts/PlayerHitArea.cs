@@ -19,6 +19,8 @@ public class PlayerHitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        transform.root.gameObject.GetComponent<PlayerAttack>().AttackDisable();
+        transform.root.gameObject.GetComponent<CharacterStatus>().OnDamage(other.transform.root.gameObject.GetComponent<EnemyAttack>().power);
         transform.root.gameObject.GetComponent<CharacterMove>().OnDamage();
     }
 }

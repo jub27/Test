@@ -13,6 +13,7 @@ public class CharacterMove : MonoBehaviour
     private bool isJumping = false;
     public bool isRunning = false;
     public bool isBlocking = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,13 +42,13 @@ public class CharacterMove : MonoBehaviour
     {
         if (isBlocking)
             return;
-        Vector3 snapDown = Vector3.zero;
+        Vector3 snapGround = Vector3.zero;
         if (characterController.isGrounded)
-            snapDown = Vector3.down;
+            snapGround = Vector3.down;
         Vector3 moveVector = dir * movingSpeed * Time.deltaTime;
         if (isRunning)
             moveVector *= runningSpeed;
-        characterController.Move(moveVector + snapDown);
+        characterController.Move(moveVector + snapGround);
         playerAnimator.SetFloat("MoveSpeed", moveVector.magnitude);
     }
 

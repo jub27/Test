@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class EnemyHitArea : MonoBehaviour
 {
+    Rigidbody rigidbody;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -18,6 +19,8 @@ public class EnemyHitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.root.gameObject.GetComponent<CharacterMove>().OnDamage();
+        transform.root.gameObject.GetComponent<EnemyAttack>().AttackDisable();
+        transform.root.gameObject.GetComponent<CharacterStatus>().OnDamage(other.transform.root.gameObject.GetComponent<PlayerAttack>().power);
+        transform.root.gameObject.GetComponent<EnemyControl>().OnDamage();
     }
 }

@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public GameObject weapon;
     CapsuleCollider cc;
-    public float power;
+    public float power = 5;
     // Start is called before the first frame update
     void Start()
     {

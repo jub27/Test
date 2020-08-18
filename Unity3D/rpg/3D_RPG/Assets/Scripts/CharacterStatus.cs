@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class CharacterStatus : MonoBehaviour
 {
-
+    Animator animator;
     public float hp = 100;
-    public float power = 10;
+    public bool dead = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         
     }
 
     public void OnDamage(float damage)
     {
         hp -= damage;
+        if(hp <= 0)
+        {
+            dead = true;
+            animator.SetTrigger("Dead");
+        }
     }
 }
