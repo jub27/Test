@@ -42,7 +42,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
@@ -58,7 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013197107feb67f47b2abd381cd2b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cs: {fileID: 0}
+  damageText: {fileID: 4536828431963716415, guid: 2fe137ef670f9ca48acf975c618d4d84,
+    type: 3}
+  damagePrintPos: {fileID: 7062147212730759488}
 --- !u!1 &2583799923695477088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,6 +1338,7 @@ Transform:
   - {fileID: 2582550880034019418}
   - {fileID: 2582297968706003738}
   - {fileID: 2564625049561093391}
+  - {fileID: 7062147212730759488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7431,4 +7434,34 @@ Transform:
   - {fileID: 2582448195143891506}
   m_Father: {fileID: 2582321729378900388}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8706683134286075152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7062147212730759488}
+  m_Layer: 13
+  m_Name: DamagePrintPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7062147212730759488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706683134286075152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.189, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2582400315889992350}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

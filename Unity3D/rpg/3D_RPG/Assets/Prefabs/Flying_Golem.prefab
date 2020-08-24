@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225102abd5bc95345b5f5ddb58e4f1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageText: {fileID: 4536828431963716415, guid: ce93775610c06ac4f88230fda401594b,
+    type: 3}
+  damagePrintPos: {fileID: 4856583168344457688}
 --- !u!136 &6416135488675132418
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -115,6 +118,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bde56822d5060849a0b53503abd525d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4979837146096133553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4856583168344457688}
+  m_Layer: 0
+  m_Name: DamagePrintPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4856583168344457688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979837146096133553}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 34.87213, y: 76.1, z: 1.9}
+  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_Children: []
+  m_Father: {fileID: 9159676740662365057}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7066185632804356008
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +788,7 @@ Transform:
   - {fileID: 7482372050085802619}
   - {fileID: 8682058191813473597}
   - {fileID: 9167855941057350176}
+  - {fileID: 4856583168344457688}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -817,8 +851,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b90946adebffc2418a53f0281e28939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   rayForward: {fileID: 9167855941057350176}
-  preAttack: 1
+  attackStopDistance: 1.8
+  retunStartDistance: 20
+  preAttack: 0
 --- !u!54 &2701030761657401370
 Rigidbody:
   m_ObjectHideFlags: 0

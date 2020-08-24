@@ -60,7 +60,7 @@ public class CameraControl : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(target, direction, out hit, distance, layerMask.value))
+        if (Physics.Raycast(target, direction, out hit, distance, 1 << LayerMask.NameToLayer("Ground")))
             return hit.distance - 0.2f; // Closer Radius
         else
             return distance;

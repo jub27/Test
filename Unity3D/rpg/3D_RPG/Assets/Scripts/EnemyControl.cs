@@ -6,7 +6,7 @@ public class EnemyControl : MonoBehaviour
 {
     enum State
     {
-        Idle, Walking, Chasing, Attacking
+        Idle, Walking, Chasing, Attacking, Return
     }
 
     private State state;
@@ -21,11 +21,12 @@ public class EnemyControl : MonoBehaviour
     private Vector3 basePosition;
     private Vector3 destination;
     private Vector3 curDir;
-    private Transform target = null;
+    public Transform target = null;
     public Transform rayForward;
     private bool attackEnd = true;
     private float walkStopDistance = 1.0f;
-    private float attackStopDistance = 1.8f;
+    public float attackStopDistance = 1.8f;
+    public float retunStartDistance = 20.0f;
     private bool hitEnd = true;
     private int randomDir;
     public bool preAttack = false;
@@ -83,6 +84,9 @@ public class EnemyControl : MonoBehaviour
             case State.Attacking:
                 Attacking();
                 break;
+            case State.Return:
+                Return();
+                break;
         }
     }
 
@@ -120,6 +124,36 @@ public class EnemyControl : MonoBehaviour
 
     }
 
+    void Return()
+    {
+        destination.y = transform.position.y;
+        if (Vector3.Distance(transform.position, destination) <= walkStopDistance)
+        {
+            state = State.Idle;
+            InitParameter();
+            delayTime = Random.Range(0.0f, 4.0f);
+        }
+        else
+        {
+            if (CollisionAvoid())
+            {
+                curDir = transform.right;
+                curDir.y = 0;
+                curDir.Normalize();
+                transform.position += curDir * walkSpeed * Time.deltaTime;
+            }
+            else
+            {
+                curDir = destination - transform.position;
+                curDir.y = 0;
+                curDir.Normalize();
+                transform.forward = curDir;
+                transform.position += curDir * walkSpeed * Time.deltaTime;
+            }
+
+        }
+    }
+
     public void SetChasing(Transform target)
     {
         if (!hitEnd)
@@ -140,6 +174,15 @@ public class EnemyControl : MonoBehaviour
         }
         if (!hitEnd)
             return;
+        if ((target.position - transform.position).magnitude >= retunStartDistance)
+        {
+            state = State.Return;
+            InitParameter();
+            animator.SetBool("Walk", true);
+            Vector2 randomValue = Random.insideUnitCircle * walkRange;
+            destination = basePosition + new Vector3(randomValue.x, 0.0f, randomValue.y);
+            return;
+        }
         if (Vector3.Distance(transform.position, target.position) <= attackStopDistance)
         {
             state = State.Attacking;
@@ -205,7 +248,6 @@ public class EnemyControl : MonoBehaviour
 
     public void AttackEnd()
     {
-        print("@@@");
         state = State.Chasing;
         InitParameter();
         animator.SetBool("Chase", true);

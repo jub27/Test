@@ -1,22 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class CharacterStatus : MonoBehaviour
 {
     Animator animator;
-    public float hp = 100;
+    public float maxHp = 100;
+    private float curHp;
     public bool dead = false;
+    public Slider hpSlider;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        curHp = maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(hpSlider != null)
+        {
+            hpSlider.value = curHp / maxHp;
+        }
         
     }
 
@@ -24,8 +30,8 @@ public class CharacterStatus : MonoBehaviour
     {
         if (dead)
             return;
-        hp -= damage;
-        if(hp <= 0)
+        curHp -= damage;
+        if(curHp <= 0)
         {
             dead = true;
             animator.SetTrigger("Dead");

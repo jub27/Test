@@ -386,6 +386,7 @@ Transform:
   - {fileID: 1804785837805499790}
   - {fileID: 795857788}
   - {fileID: 6771146459571353613}
+  - {fileID: 3468120720070675558}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -448,7 +449,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b90946adebffc2418a53f0281e28939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   rayForward: {fileID: 6771146459571353613}
+  attackStopDistance: 1.8
+  retunStartDistance: 20
   preAttack: 1
 --- !u!54 &-1695750288022470418
 Rigidbody:
@@ -2323,6 +2327,36 @@ Transform:
   m_Father: {fileID: 6452369632027479388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7872746511119657354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3468120720070675558}
+  m_Layer: 0
+  m_Name: DamagePrintPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3468120720070675558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7872746511119657354}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.802795, y: 73.7, z: 5.155945}
+  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_Children: []
+  m_Father: {fileID: 6452369632027479402}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8688654884661474975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,6 +2401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225102abd5bc95345b5f5ddb58e4f1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageText: {fileID: 4536828431963716415, guid: ce93775610c06ac4f88230fda401594b,
+    type: 3}
+  damagePrintPos: {fileID: 3468120720070675558}
 --- !u!136 &5746765078998964875
 CapsuleCollider:
   m_ObjectHideFlags: 0

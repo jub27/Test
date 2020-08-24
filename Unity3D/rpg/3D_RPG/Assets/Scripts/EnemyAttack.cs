@@ -26,13 +26,11 @@ public class EnemyAttack : MonoBehaviour
 
     public void AttackEnable()
     {
-        print("AE");
         cc.enabled = true;
     }
 
     public void AttackDisable()
     {
-        print("AD");
         cc.enabled = false;
     }
 }
