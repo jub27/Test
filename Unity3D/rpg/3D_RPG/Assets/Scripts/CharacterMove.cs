@@ -14,6 +14,9 @@ public class CharacterMove : MonoBehaviour
     private bool isJumping = false;
     public bool isRunning = false;
     public bool isBlocking = false;
+    public Transform skillFirePosition;
+    public int curSkillNum = 0;
+    public GameObject[] skillList;
 
     // Start is called before the first frame update
     void Start()
@@ -72,14 +75,24 @@ public class CharacterMove : MonoBehaviour
         playerAnimator.SetBool("Jump", true);
     }
 
-    public void Block()
+    public void Skill()
     {
         if (cs.dead)
         {
             return;
         }
         isBlocking = true;
-        playerAnimator.SetBool("Block", isBlocking);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 mousePoint = new Vector3();
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10000f))
+        {
+            mousePoint = hit.point;
+        }
+        mousePoint.y = skillFirePosition.position.y;
+        skillFirePosition.forward = (mousePoint - skillFirePosition.position).normalized;
+        skillList[curSkillNum].SetActive(true);
+        playerAnimator.SetTrigger("Skill");
     }
 
     public void UnBlock()
@@ -89,7 +102,6 @@ public class CharacterMove : MonoBehaviour
             return;
         }
         isBlocking = false;
-        playerAnimator.SetBool("Block", isBlocking);
     }
 
     public void SetPlayerDirection(Vector3 playerDir)

@@ -16,4 +16,9 @@ public class ParticleCollider : MonoBehaviour
     {
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+    }
 }

@@ -25,30 +25,25 @@ public class PlayerHitArea : MonoBehaviour
     {
         if (cs.dead)
             return;
-        transform.root.gameObject.GetComponent<PlayerAttack>().AttackDisable();
-        if (other.transform.root.gameObject.GetComponent<EnemyAttack>() != null)
+        transform.root.GetComponent<PlayerAttack>().AttackDisable();
+        if (other.transform.root.GetComponent<EnemyAttack>() != null)
         {
-            transform.root.gameObject.GetComponent<CharacterStatus>().OnDamage(other.transform.root.gameObject.GetComponent<EnemyAttack>().power);
+            transform.root.GetComponent<CharacterStatus>().OnDamage(other.transform.root.GetComponent<EnemyAttack>().power);
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.transform.root.gameObject.GetComponent<EnemyAttack>().power;
+            dt.damage = other.transform.root.GetComponent<EnemyAttack>().power;
+        }
+        else if (other.GetComponent<RangeWeapon>() != null)
+        {
+            transform.root.GetComponent<CharacterStatus>().OnDamage(other.GetComponent<RangeWeapon>().power);
+            DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
+            dt.damage = other.GetComponent<RangeWeapon>().power;
         }
         else
         {
-            transform.root.gameObject.GetComponent<CharacterStatus>().OnDamage(other.gameObject.GetComponent<RangeWeapon>().power);
+            transform.root.GetComponent<CharacterStatus>().OnDamage(other.GetComponent<ParticleCollider>().power);
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.gameObject.GetComponent<RangeWeapon>().power;
+            dt.damage = other.GetComponent<ParticleCollider>().power;
         }
-        transform.root.gameObject.GetComponent<CharacterMove>().OnDamage();
-    }
-
-    private void OnParticleCollision(GameObject other)
-    {
-        if (cs.dead)
-            return;
-        transform.root.gameObject.GetComponent<PlayerAttack>().AttackDisable();
-        transform.root.gameObject.GetComponent<CharacterStatus>().OnDamage(other.GetComponent<ParticleCollider>().power);
-        DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-        dt.damage = other.GetComponent<ParticleCollider>().power;
-        transform.root.gameObject.GetComponent<CharacterMove>().OnDamage();
+        transform.root.GetComponent<CharacterMove>().OnDamage();
     }
 }

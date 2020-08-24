@@ -26,9 +26,20 @@ public class EnemyHitArea : MonoBehaviour
         ec.SetChasing(other.transform.root.transform);
         if(transform.root.gameObject.GetComponent<EnemyAttack>() != null)
             transform.root.gameObject.GetComponent<EnemyAttack>().AttackDisable();
-        cs.OnDamage(other.transform.root.gameObject.GetComponent<PlayerAttack>().power);
+
+        float damage = 0;
+        if(other.GetComponent<ParticleCollider>() != null)
+        {
+            damage = other.GetComponent<ParticleCollider>().power;
+        }
+        else
+        {
+            damage = other.transform.root.GetComponent<PlayerAttack>().power;
+        }
+
+        cs.OnDamage(damage);
         DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-        dt.damage = other.transform.root.gameObject.GetComponent<PlayerAttack>().power;
+        dt.damage = damage;
         if (!cs.dead)
         {
             ec.OnDamage();

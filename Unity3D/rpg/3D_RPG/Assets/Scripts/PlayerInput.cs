@@ -55,11 +55,31 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            cm.Block();
+            cm.Skill();
         }
         if (Input.GetMouseButtonUp(1))
         {
             cm.UnBlock();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            cm.curSkillNum = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            cm.curSkillNum = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            cm.curSkillNum = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            cm.curSkillNum = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            cm.curSkillNum = 4;
         }
     }
 }
