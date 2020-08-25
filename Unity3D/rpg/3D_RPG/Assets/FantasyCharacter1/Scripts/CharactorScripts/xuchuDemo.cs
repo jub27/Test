@@ -22,14 +22,14 @@ public class dongzuoDemo : MonoBehaviour {
 	}
 
     float padding = 2.5f;
-    List<PosBullet> allList = new List<PosBullet>();
+    List<PosBullet1> allList = new List<PosBullet1>();
     IEnumerator delayBullet()
     {
         int count = 3;
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(attackBullet);
-            PosBullet bullet = obj.GetComponent<PosBullet>();
+            PosBullet1 bullet = obj.GetComponent<PosBullet1>();
             bullet.player = transform;
             bullet.effectObj = damageEffect1;
             Vector3 startPos = transform.position + new Vector3(Random.Range(-padding, padding), Random.Range(1f, 2f), Random.Range(-padding, padding));
@@ -46,7 +46,7 @@ public class dongzuoDemo : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(attackBullet);
-            PosBullet bullet = obj.GetComponent<PosBullet>();
+            PosBullet1 bullet = obj.GetComponent<PosBullet1>();
             bullet.player = transform;
             bullet.effectObj = damageEffect1;
             Vector3 startPos = transform.position + new Vector3(Random.Range(-padding, padding), Random.Range(1f, 3f), Random.Range(-padding, padding));
@@ -70,7 +70,7 @@ public class dongzuoDemo : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(attackBullet);
-            PosBullet bullet = obj.GetComponent<PosBullet>();
+            PosBullet1 bullet = obj.GetComponent<PosBullet1>();
             bullet.player = transform;
             bullet.effectObj = damageEffect1;
             Vector3 startPos = transform.position + new Vector3(Random.Range(-padding, padding), Random.Range(1f, 3f), Random.Range(-padding, padding));
@@ -89,7 +89,7 @@ public class dongzuoDemo : MonoBehaviour {
         ParticleScaler1 scale = obj.GetComponent<ParticleScaler1>();
         for (int i = 0; i < allList.Count; i++)
         {
-            PosBullet bullet = allList[i];
+            PosBullet1 bullet = allList[i];
             if(bullet != null && bullet.gameObject != null)
             {
                 bullet.tarPos = transform.position + new Vector3(0f, yoff, 0f);
@@ -100,8 +100,8 @@ public class dongzuoDemo : MonoBehaviour {
            
         }
         yield return new WaitForSeconds(1f);
-        PosBullet b = obj.GetComponent<PosBullet>();
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        PosBullet1 b = obj.GetComponent<PosBullet1>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         Vector3 attackedPos = MathUtil1.findChild(c.transform, "attackedPivot").position;
         b.tarPos = attackedPos;
         b.player = transform;
@@ -115,7 +115,7 @@ public class dongzuoDemo : MonoBehaviour {
 
     void preAction(string actionName)
     {
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         string[] arr = actionName.Split('|');
         string name = arr[0];
         switch(name)
@@ -177,7 +177,7 @@ public class dongzuoDemo : MonoBehaviour {
     IEnumerator delayAttacked()
     {
         yield return new WaitForSeconds(1.5f);
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         c.attacked();
         //yield return new WaitForSeconds(2.5f);
         //c.attacked();

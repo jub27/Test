@@ -26,9 +26,9 @@ public class caopiDemo : MonoBehaviour {
         int count = 10;
         for (int i = 0; i < count; i++)
         {
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             GameObject obj = GameObject.Instantiate(ultimateBullet);
-            CurvelBullet bullet = obj.GetComponent<CurvelBullet>();
+            CurvelBullet2 bullet = obj.GetComponent<CurvelBullet2>();
             bullet.player = transform;
             bullet.target = c.transform;
            
@@ -55,9 +55,9 @@ public class caopiDemo : MonoBehaviour {
         int count = 10;
         for (int i = 0; i < count; i++)
         {
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             GameObject obj = GameObject.Instantiate(magic2Bullet);
-            CurvelBullet bullet = obj.GetComponent<CurvelBullet>();
+            CurvelBullet2 bullet = obj.GetComponent<CurvelBullet2>();
             bullet.player = transform;
             bullet.target = c.transform;
 
@@ -81,7 +81,7 @@ public class caopiDemo : MonoBehaviour {
 
     void preAction(string actionName)
     {
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         string[] arr = actionName.Split('|');
         string name = arr[0];
         switch(name)
@@ -90,7 +90,7 @@ public class caopiDemo : MonoBehaviour {
                 if(attackBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(attackBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -101,7 +101,7 @@ public class caopiDemo : MonoBehaviour {
                 if (attackBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(attackBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -114,7 +114,7 @@ public class caopiDemo : MonoBehaviour {
                 if (attackBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(attackBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect2;

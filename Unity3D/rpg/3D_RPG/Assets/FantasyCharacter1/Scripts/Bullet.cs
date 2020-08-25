@@ -104,7 +104,7 @@ public class Bullet:MonoBehaviour
             GameObject.Destroy(gameObject);
             return;
         }
-        AttackedController1 c = target.GetComponent<AttackedController1>();
+        AttackedController c = target.GetComponent<AttackedController>();
         if(c != null)
         {
             c.attacked();

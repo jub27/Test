@@ -13980,7 +13980,6 @@ GameObject:
   - component: {fileID: 4899002125526544214}
   - component: {fileID: 6558363857643786370}
   - component: {fileID: 8053762951936092682}
-  - component: {fileID: 1941748845910496474}
   m_Layer: 0
   m_Name: zhugeliangbullet2
   m_TagString: Untagged
@@ -18682,24 +18681,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93af21ba1ed398a4c9fdd35562f936e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  bulletState: 0
-  player: {fileID: 0}
-  target: {fileID: 0}
-  effectObj: {fileID: 0}
-  effectPos: 0
---- !u!114 &1941748845910496474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8295391205625448778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f008bf5541ad0d48a85e66c15369100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5

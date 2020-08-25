@@ -28,9 +28,9 @@ public class huanggaiDemo : MonoBehaviour {
         int count = 2;
         for (int i = 0; i < count; i++)
         {
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             GameObject obj = GameObject.Instantiate(attackBullet);
-            CurvelBullet bullet = obj.GetComponent<CurvelBullet>();
+            CurvelBullet1 bullet = obj.GetComponent<CurvelBullet1>();
             bullet.player = transform;
             bullet.target = c.transform;
 
@@ -57,9 +57,9 @@ public class huanggaiDemo : MonoBehaviour {
         int count = 4;
         for (int i = 0; i < count; i++)
         {
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             GameObject obj = GameObject.Instantiate(attackBullet);
-            CurvelBullet bullet = obj.GetComponent<CurvelBullet>();
+            CurvelBullet1 bullet = obj.GetComponent<CurvelBullet1>();
             bullet.player = transform;
             bullet.target = c.transform;
 
@@ -86,9 +86,9 @@ public class huanggaiDemo : MonoBehaviour {
         int count = 8;
         for (int i = 0; i < count; i++)
         {
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             GameObject obj = GameObject.Instantiate(attackBullet);
-            CurvelBullet bullet = obj.GetComponent<CurvelBullet>();
+            CurvelBullet1 bullet = obj.GetComponent<CurvelBullet1>();
             bullet.player = transform;
             bullet.target = c.transform;
             bullet.effectObj = damageEffect4;
@@ -131,7 +131,7 @@ public class huanggaiDemo : MonoBehaviour {
                 if (magicBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magicBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -152,7 +152,7 @@ public class huanggaiDemo : MonoBehaviour {
                 if (magic2Bullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magic2Bullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect2;
@@ -196,7 +196,7 @@ public class huanggaiDemo : MonoBehaviour {
     IEnumerator delayAttacked()
     {
         yield return new WaitForSeconds(1.5f);
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         c.attacked();
         //yield return new WaitForSeconds(2.5f);
         //c.attacked();

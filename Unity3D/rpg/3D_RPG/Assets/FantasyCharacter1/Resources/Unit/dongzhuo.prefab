@@ -14499,7 +14499,7 @@ GameObject:
   - component: {fileID: 1016883889734314614}
   - component: {fileID: 2090453213992011832}
   - component: {fileID: 4391687942451337432}
-  - component: {fileID: 677881236708425066}
+  - component: {fileID: 3420890165737965367}
   m_Layer: 0
   m_Name: dongzhuo
   m_TagString: Untagged
@@ -14567,7 +14567,7 @@ MonoBehaviour:
   AttackEffect:
   - {fileID: 3087844279382411124}
   Magic2Effect: []
---- !u!114 &677881236708425066
+--- !u!114 &3420890165737965367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14576,7 +14576,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 819919101799412445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2a48440cd09e948b6230dbb7459dc3, type: 3}
+  m_Script: {fileID: 11500000, guid: d85a04ab8ceee9743a1f1ff8104bab98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 100006, guid: ca44bd8dd1aac8743b07dbee70c654b5, type: 3}

@@ -7513,8 +7513,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5172934297159568819}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: 0.358}
+  m_LocalRotation: {x: 0, y: 0.2588191, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 0.61, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4709694287633437}
@@ -7524,7 +7524,7 @@ Transform:
   - {fileID: 7336647152424502148}
   m_Father: {fileID: 2582400315889992350}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
 --- !u!1 &8706683134286075152
 GameObject:
   m_ObjectHideFlags: 0
@@ -7610,19 +7610,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114708832031907692, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
-        type: 3}
-      propertyPath: CollidesWith.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
     - target: {fileID: 1507721824581290, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114708832031907692, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+        type: 3}
+      propertyPath: CollidesWith.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708832031907692, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+        type: 3}
+      propertyPath: DestroyTimeDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114081965130707938, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 198504854169033056, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
         type: 3}
-      propertyPath: CollisionModule.enabled
-      value: 1
+      propertyPath: useRigidbodyForVelocity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198504854169033056, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
         type: 3}
@@ -7632,7 +7642,7 @@ PrefabInstance:
     - target: {fileID: 198504854169033056, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
         type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
-      value: 2048
+      value: 2304
       objectReference: {fileID: 0}
     - target: {fileID: 198504854169033056, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
         type: 3}

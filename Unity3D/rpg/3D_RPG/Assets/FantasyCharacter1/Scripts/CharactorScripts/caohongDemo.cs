@@ -29,7 +29,7 @@ public class caorenDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect5);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.3f);
             if (i % 2 == 0)
@@ -47,7 +47,7 @@ public class caorenDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect5);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.2f);
             if (i % 2 == 0)
@@ -65,7 +65,7 @@ public class caorenDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect5);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.05f);
             if (i % 2 == 0)
@@ -83,7 +83,7 @@ public class caorenDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect5);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.5f);
             if (i % 2 == 0)
@@ -97,7 +97,7 @@ public class caorenDemo : MonoBehaviour {
     }
     void preAction(string actionName)
     {
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         string[] arr = actionName.Split('|');
         string name = arr[0];
         switch(name)
@@ -158,7 +158,7 @@ public class caorenDemo : MonoBehaviour {
     IEnumerator delayAttacked()
     {
         yield return new WaitForSeconds(1.5f);
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         c.attacked();
         //yield return new WaitForSeconds(2.5f);
         //c.attacked();

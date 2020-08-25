@@ -23,11 +23,11 @@ public class caocaoDemo : MonoBehaviour {
     IEnumerator delayBullet()
     {
         int count = 5;
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(attackBullet);
-            PosBullet bullet = obj.GetComponent<PosBullet>();
+            PosBullet1 bullet = obj.GetComponent<PosBullet1>();
             bullet.player = transform;
             Vector3 newPos = c.transform.position + new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
             Vector3 attackedPos = MathUtil1.findChild(c.transform, "attackedPivot").position;
@@ -54,11 +54,11 @@ public class caocaoDemo : MonoBehaviour {
     IEnumerator delayBullet1()
     {
         int count = 20;
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(attackBullet);
-            PosBullet bullet = obj.GetComponent<PosBullet>();
+            PosBullet1 bullet = obj.GetComponent<PosBullet1>();
             bullet.player = transform;
             Vector3 newPos = c.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(5f, 10f), Random.Range(-1f, 1f));
             Vector3 attackedPos = MathUtil1.findChild(c.transform, "attackedPivot").position;
@@ -77,7 +77,7 @@ public class caocaoDemo : MonoBehaviour {
 
     void preAction(string actionName)
     {
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         string[] arr = actionName.Split('|');
         string name = arr[0];
         switch(name)
@@ -97,7 +97,7 @@ public class caocaoDemo : MonoBehaviour {
                 if (magicBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magicBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -119,7 +119,7 @@ public class caocaoDemo : MonoBehaviour {
                 if (magic2Bullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magic2Bullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect2;
@@ -163,7 +163,7 @@ public class caocaoDemo : MonoBehaviour {
     IEnumerator delayAttacked()
     {
         yield return new WaitForSeconds(1.5f);
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         c.attacked();
         //yield return new WaitForSeconds(2.5f);
         //c.attacked();

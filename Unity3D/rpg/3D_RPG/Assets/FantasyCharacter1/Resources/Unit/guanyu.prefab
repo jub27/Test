@@ -58346,7 +58346,7 @@ GameObject:
   - component: {fileID: 6923096673145660945}
   - component: {fileID: 4165465740952059077}
   - component: {fileID: 7733164329723079977}
-  - component: {fileID: 3940234121829883270}
+  - component: {fileID: 8601023433502234862}
   m_Layer: 0
   m_Name: guanyu
   m_TagString: Untagged
@@ -58415,7 +58415,7 @@ MonoBehaviour:
   AttackEffect:
   - {fileID: 7221561323241612620}
   Magic2Effect: []
---- !u!114 &3940234121829883270
+--- !u!114 &8601023433502234862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58424,7 +58424,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6283161516049648916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ad14dc566b29b4691a1e683d9e5ee6, type: 3}
+  m_Script: {fileID: 11500000, guid: bb64421a4e0b64a468411f2bbff17d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 0}

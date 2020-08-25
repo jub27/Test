@@ -43512,7 +43512,7 @@ GameObject:
   - component: {fileID: 5396003031114112841}
   - component: {fileID: 535791970465610688}
   - component: {fileID: 448519182059059}
-  - component: {fileID: 5679721242663885521}
+  - component: {fileID: 3825593197211067374}
   m_Layer: 0
   m_Name: huatuo
   m_TagString: Untagged
@@ -43578,7 +43578,7 @@ MonoBehaviour:
   AttackEffect: []
   Magic2Effect:
   - {fileID: 1646797306423881194}
---- !u!114 &5679721242663885521
+--- !u!114 &3825593197211067374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43587,7 +43587,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5094882361980355210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e69956099f9558741841918710edeb97, type: 3}
+  m_Script: {fileID: 11500000, guid: d52d7118476a32040bb6a0f184d5df0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 100006, guid: 26959577dfe8d3a439df5084ca534b55, type: 3}

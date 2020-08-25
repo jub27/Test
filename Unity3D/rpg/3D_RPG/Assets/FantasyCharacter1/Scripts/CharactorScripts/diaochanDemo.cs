@@ -28,7 +28,7 @@ public class guanyuDemo : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(ultimateBullet);
-            PosBullet bullet = obj.GetComponent<PosBullet>();
+            PosBullet1 bullet = obj.GetComponent<PosBullet1>();
             bullet.player = transform;
             bullet.startPos = transform.position + new Vector3(0f, 0.01f, 0f);
             bullet.tarPos = MathUtil1.calcTargetPosByRotation(transform, angle + i * 18f, 10f);
@@ -37,7 +37,7 @@ public class guanyuDemo : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
             if(i % 6 == 0)
             {
-                AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+                AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
                 c.attacked();
                 if (damageEffect2 != null)
                 {
@@ -53,7 +53,7 @@ public class guanyuDemo : MonoBehaviour {
 
     void preAction(string actionName)
     {
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         string[] arr = actionName.Split('|');
         string name = arr[0];
         switch(name)
@@ -90,7 +90,7 @@ public class guanyuDemo : MonoBehaviour {
                 if (magic2Bullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magic2Bullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect2;

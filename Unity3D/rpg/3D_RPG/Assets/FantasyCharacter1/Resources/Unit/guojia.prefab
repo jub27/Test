@@ -5306,7 +5306,7 @@ GameObject:
   - component: {fileID: 3743520482909612316}
   - component: {fileID: 8012187950486906461}
   - component: {fileID: 4067515085375785072}
-  - component: {fileID: 2738957799614426721}
+  - component: {fileID: 8198497029612030370}
   m_Layer: 0
   m_Name: guojia
   m_TagString: Untagged
@@ -5370,7 +5370,7 @@ MonoBehaviour:
   AttackEffect: []
   Magic2Effect:
   - {fileID: 635675362438963304}
---- !u!114 &2738957799614426721
+--- !u!114 &8198497029612030370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5379,7 +5379,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075111908810362504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee7e7faf2652e084f91dabe9b46d1bcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 003b964b2002b074da3227a2143429d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 100000, guid: 06e8fa00d4708b54698c2c5700698bcd, type: 3}

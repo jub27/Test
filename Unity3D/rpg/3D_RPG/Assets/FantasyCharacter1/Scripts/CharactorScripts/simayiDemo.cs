@@ -32,7 +32,7 @@ public class guojiaDemo : MonoBehaviour {
                 if(attackBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(attackBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -44,7 +44,7 @@ public class guojiaDemo : MonoBehaviour {
                 if (magicBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magicBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -56,7 +56,7 @@ public class guojiaDemo : MonoBehaviour {
                 if (magic2Bullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magic2Bullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect2;
@@ -77,7 +77,7 @@ public class guojiaDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect4);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.3f);
             if (i % 2 == 0)
@@ -95,7 +95,7 @@ public class guojiaDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect4);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.2f);
             if (i % 2 == 0)
@@ -113,7 +113,7 @@ public class guojiaDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect4);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.05f);
             if (i % 2 == 0)
@@ -131,7 +131,7 @@ public class guojiaDemo : MonoBehaviour {
         {
             GameObject obj = GameObject.Instantiate(damageEffect4);
 
-            AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+            AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
             obj.transform.position = c.transform.position + new Vector3(Random.Range(-padding, padding), 0.12f, Random.Range(-padding, padding));
             yield return new WaitForSeconds(0.5f);
             if (i % 2 == 0)

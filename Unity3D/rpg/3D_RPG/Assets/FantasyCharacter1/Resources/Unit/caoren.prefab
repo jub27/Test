@@ -28994,7 +28994,7 @@ GameObject:
   - component: {fileID: 730437059}
   - component: {fileID: 730437058}
   - component: {fileID: 730437057}
-  - component: {fileID: 4938762408172025869}
+  - component: {fileID: 730437056}
   m_Layer: 0
   m_Name: caoren
   m_TagString: Untagged
@@ -29064,7 +29064,7 @@ MonoBehaviour:
   Magic2Effect:
   - {fileID: 424011638}
   - {fileID: 1519475986}
---- !u!114 &4938762408172025869
+--- !u!114 &730437056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29073,7 +29073,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 730437055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7747abea853bc3c4ab8b5aff2515d7c7, type: 3}
+  m_Script: {fileID: 11500000, guid: abad4257dd42aa0478d717923813c1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 0}

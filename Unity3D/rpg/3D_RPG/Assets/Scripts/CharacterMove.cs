@@ -82,6 +82,7 @@ public class CharacterMove : MonoBehaviour
             return;
         }
         isBlocking = true;
+        /*
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 mousePoint = new Vector3();
         RaycastHit hit;
@@ -91,6 +92,7 @@ public class CharacterMove : MonoBehaviour
         }
         mousePoint.y = skillFirePosition.position.y;
         skillFirePosition.forward = (mousePoint - skillFirePosition.position).normalized;
+        */
         skillList[curSkillNum].SetActive(true);
         playerAnimator.SetTrigger("Skill");
     }

@@ -4657,7 +4657,6 @@ GameObject:
   - component: {fileID: 1806102238645319522}
   - component: {fileID: 790021780373873432}
   - component: {fileID: 4436015615032742534}
-  - component: {fileID: 1592791427748759444}
   m_Layer: 0
   m_Name: zhugelinagbullet3
   m_TagString: Untagged
@@ -9376,25 +9375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  bulletState: 0
-  player: {fileID: 0}
-  target: {fileID: 0}
-  effectObj: {fileID: 0}
-  effectPos: 0
-  flag: 1
---- !u!114 &1592791427748759444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647450186840175440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97634ea2189cd854eabb6c16a154be13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
   bulletState: 0
   player: {fileID: 0}
   target: {fileID: 0}

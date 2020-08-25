@@ -1440,7 +1440,7 @@ GameObject:
   - component: {fileID: 400088}
   - component: {fileID: 9500000}
   - component: {fileID: 11400000}
-  - component: {fileID: 963883367530388698}
+  - component: {fileID: 8061250833464795019}
   m_Layer: 0
   m_Name: caocao
   m_TagString: Untagged
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   AttackEffect:
   - {fileID: 11400002}
   Magic2Effect: []
---- !u!114 &963883367530388698
+--- !u!114 &8061250833464795019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd43fa9597fc93c4bb223e9d1e141ea8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ed20d1088621ac42a5a1e6e0d7351d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 100000, guid: ff6940d378a0ae54f867de2e98e118eb, type: 3}

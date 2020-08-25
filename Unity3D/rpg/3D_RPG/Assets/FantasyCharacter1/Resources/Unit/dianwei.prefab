@@ -87320,7 +87320,7 @@ GameObject:
   - component: {fileID: 6787592865770017922}
   - component: {fileID: 5347419311633054879}
   - component: {fileID: 8822782950295654161}
-  - component: {fileID: 5415288061693130471}
+  - component: {fileID: 818472729392270870}
   m_Layer: 0
   m_Name: dianwei
   m_TagString: Untagged
@@ -87385,7 +87385,7 @@ MonoBehaviour:
   - {fileID: 7866660542104397826}
   AttackEffect: []
   Magic2Effect: []
---- !u!114 &5415288061693130471
+--- !u!114 &818472729392270870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87394,7 +87394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6803563930360671879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b0c3ab538e81f49a8ea64c66abdc76, type: 3}
+  m_Script: {fileID: 11500000, guid: 92f5c1c1f811cfe4db971c4889ba4d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBullet: {fileID: 100006, guid: bec2e80d9f8b6714ca0b390183f09016, type: 3}

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,11 +25,11 @@ public class huatuoDemo : MonoBehaviour {
     IEnumerator delayBullet3()
     {
         int count = 12;
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         List<RotateBullet1> list = new List<RotateBullet1>();
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = GameObject.Instantiate(rbullet);
+            GameObject obj = GameObject.Instantiate(ultimateBullet);
             RotateBullet1 bullet = obj.GetComponent<RotateBullet1>();
             bullet.player = c.transform;
             bullet.effectObj = damageEffect2;
@@ -53,11 +53,11 @@ public class huatuoDemo : MonoBehaviour {
     IEnumerator delayBullet4()
     {
         int count = 12;
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         List<RotateBullet1> list = new List<RotateBullet1>();
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = GameObject.Instantiate(rbullet);
+            GameObject obj = GameObject.Instantiate(ultimateBullet);
             RotateBullet1 bullet = obj.GetComponent<RotateBullet1>();
             bullet.player = c.transform;
             bullet.effectObj = damageEffect1;
@@ -81,11 +81,11 @@ public class huatuoDemo : MonoBehaviour {
     IEnumerator delayBullet5()
     {
         int count = 12;
-        AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+        AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
         List<RotateBullet1> list = new List<RotateBullet1>();
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = GameObject.Instantiate(rbullet);
+            GameObject obj = GameObject.Instantiate(ultimateBullet);
             RotateBullet1 bullet = obj.GetComponent<RotateBullet1>();
             bullet.player = c.transform;
             bullet.effectObj = damageEffect3;
@@ -112,7 +112,7 @@ public class huatuoDemo : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(rbullet);
-            RotateBullet bullet = obj.GetComponent<RotateBullet>();
+            RotateBullet2 bullet = obj.GetComponent<RotateBullet2>();
             bullet.player = transform;
             bullet.effectObj = damageEffect1;
             bullet.bulleting();
@@ -120,7 +120,7 @@ public class huatuoDemo : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
             if (i % 9 == 0)
             {
-                AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+                AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
                 c.attacked();
                 if (damageEffect2 != null)
                 {
@@ -140,7 +140,7 @@ public class huatuoDemo : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             GameObject obj = GameObject.Instantiate(rbullet);
-            RotateBullet bullet = obj.GetComponent<RotateBullet>();
+            RotateBullet2 bullet = obj.GetComponent<RotateBullet2>();
             bullet.player = transform;
             bullet.effectObj = damageEffect1;
             bullet.bulleting();
@@ -149,7 +149,7 @@ public class huatuoDemo : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
             if (i % 9 == 0)
             {
-                AttackedController c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController>();
+                AttackedController1 c = GameObject.Find("bigzhangjiao (1)").GetComponent<AttackedController1>();
                 c.attacked();
                 if (damageEffect2 != null)
                 {
@@ -173,7 +173,7 @@ public class huatuoDemo : MonoBehaviour {
                 if(attackBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(attackBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -185,7 +185,7 @@ public class huatuoDemo : MonoBehaviour {
                 if (magicBullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magicBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect1;
@@ -197,7 +197,7 @@ public class huatuoDemo : MonoBehaviour {
                 if (magic2Bullet != null)
                 {
                     GameObject obj = GameObject.Instantiate(magic2Bullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    NormalBullet1 bullet = obj.GetComponent<NormalBullet1>();
                     bullet.player = transform;
                     bullet.target = GameObject.Find("bigzhangjiao (1)").transform;
                     bullet.effectObj = damageEffect2;
