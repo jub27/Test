@@ -5,16 +5,13 @@ Properties {
 	_TintColor ("Tint Color", Color) = (0.5,0.5,0.5,0.5)
 	_MainTex ("Particle Texture", 2D) = "white" {}
 	_InvFade ("Soft Particles Factor", Range(0.01,3.0)) = 1.0
-	_Speed("_Speed", Float) = 30
 }
 
 Category {
 	Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
-	Blend SrcAlpha One
-	AlphaTest Greater .01
-	ColorMask RGB
-	Cull Off Lighting Off ZWrite Off Fog { Color (0,0,0,0) }
-	
+	Blend SrcAlpha OneMinusSrcAlpha
+	Cull Off
+	ZWrite off
 	SubShader {
 		Pass {
 		
@@ -63,15 +60,9 @@ Category {
 			float _Speed;
 			fixed4 frag (v2f i) : COLOR
 			{
-				#ifdef SOFTPARTICLES_ON
-				float sceneZ = LinearEyeDepth (UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos))));
-				float partZ = i.projPos.z;
-				float fade = saturate (_InvFade * (sceneZ-partZ));
-				i.color.a *= fade;
-				#endif
-				float u_x = i.texcoord.x -  _Time * _Speed;
+				float u_x = i.texcoord.x;
 				float2 uv = float2(u_x, i.texcoord.y);
-				return 2.0f * i.color * _TintColor * tex2D(_MainTex, uv);
+				return 1.2* i.color * _TintColor * tex2D(_MainTex, uv);
 			}
 			ENDCG 
 		}

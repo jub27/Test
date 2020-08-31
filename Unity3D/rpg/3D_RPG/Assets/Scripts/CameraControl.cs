@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public Transform target;
-    private CharacterMove cm;
+    private Transform target;
+    private PlayerControl cm;
     private LayerMask layerMask = 8;
     private Vector3 targetOffset = new Vector3(0.0f, 1.5f, 0.0f);
     private float currentDistance = 10.0f;
@@ -21,7 +21,8 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cm = GameObject.Find("Player").GetComponent<CharacterMove>();
+        target = GameObject.Find("Player").GetComponent<Transform>();
+        cm = GameObject.Find("Player").GetComponent<PlayerControl>();
         Vector3 angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;

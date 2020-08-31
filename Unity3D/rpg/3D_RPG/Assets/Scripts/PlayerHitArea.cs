@@ -44,6 +44,6 @@ public class PlayerHitArea : MonoBehaviour
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
             dt.damage = other.GetComponent<ParticleCollider>().power;
         }
-        transform.root.GetComponent<CharacterMove>().OnDamage();
+        transform.root.GetComponent<PlayerControl>().OnDamage();
     }
 }

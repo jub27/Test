@@ -7676,14 +7676,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4381305748646771057}
     m_Modifications:
-    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
-      propertyPath: m_Name
-      value: Effect3_Optimized
-      objectReference: {fileID: 0}
-    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4412271280512140, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7726,6 +7718,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4412271280512140, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
+      propertyPath: m_Name
+      value: Effect3_Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7822,14 +7822,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4381305748646771057}
     m_Modifications:
-    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
-      propertyPath: m_Name
-      value: Effect4_Optimized
-      objectReference: {fileID: 0}
-    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4122084914545308, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0007063647
@@ -7874,6 +7866,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
+      propertyPath: m_Name
+      value: Effect4_Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
 --- !u!4 &8233364882417117496 stripped
@@ -7895,14 +7895,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4381305748646771057}
     m_Modifications:
-    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
-      propertyPath: m_Name
-      value: Effect5_Optimized
-      objectReference: {fileID: 0}
-    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4587759617001296, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.93
@@ -7945,6 +7937,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587759617001296, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
+      propertyPath: m_Name
+      value: Effect5_Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
