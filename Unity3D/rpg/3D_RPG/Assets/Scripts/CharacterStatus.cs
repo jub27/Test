@@ -7,6 +7,7 @@ public class CharacterStatus : MonoBehaviour
     Animator animator;
     public float maxHp = 100;
     private float curHp;
+    public float exp = 10;
     public bool dead = false;
     public Slider hpSlider;
     // Start is called before the first frame update
@@ -19,10 +20,6 @@ public class CharacterStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hpSlider != null)
-        {
-            hpSlider.value = curHp / maxHp;
-        }
         
     }
 

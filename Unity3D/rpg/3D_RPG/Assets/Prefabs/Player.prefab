@@ -1358,9 +1358,9 @@ GameObject:
   - component: {fileID: 296790634}
   - component: {fileID: 296790631}
   - component: {fileID: 296790632}
-  - component: {fileID: 7272647651162761874}
   - component: {fileID: 1258964499342051175}
   - component: {fileID: 927137171}
+  - component: {fileID: 1646029898}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -1449,7 +1449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85902d75436506428bf3c298c66b6d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRunning: 0
   isBlocking: 0
   skillFirePosition: {fileID: 4381305748646771057}
   curSkillNum: 0
@@ -1459,21 +1458,6 @@ MonoBehaviour:
   - {fileID: 8235555203489026378}
   - {fileID: 8284673199319636794}
   - {fileID: 7333333749281577148}
---- !u!114 &7272647651162761874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2584018799616303668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b2168bb6aada846851ea1b6082d19d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 1000
-  dead: 0
-  hpSlider: {fileID: 0}
 --- !u!114 &1258964499342051175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,6 +1486,25 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1646029898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584018799616303668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c524ceeefd3c3b345b3adc833ea9b49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  maxMp: 100
+  maxExp: 100
+  dead: 0
+  hpSlider: {fileID: 0}
+  mpSlider: {fileID: 0}
+  expSlider: {fileID: 0}
 --- !u!1 &2584023005350841272
 GameObject:
   m_ObjectHideFlags: 0
@@ -7676,6 +7679,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4381305748646771057}
     m_Modifications:
+    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
+      propertyPath: m_Name
+      value: Effect3_Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4412271280512140, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7718,14 +7729,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4412271280512140, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
-      propertyPath: m_Name
-      value: Effect3_Optimized
-      objectReference: {fileID: 0}
-    - target: {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7822,6 +7825,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4381305748646771057}
     m_Modifications:
+    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
+      propertyPath: m_Name
+      value: Effect4_Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4122084914545308, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0007063647
@@ -7866,14 +7877,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
-      propertyPath: m_Name
-      value: Effect4_Optimized
-      objectReference: {fileID: 0}
-    - target: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
 --- !u!4 &8233364882417117496 stripped
@@ -7895,6 +7898,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4381305748646771057}
     m_Modifications:
+    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
+      propertyPath: m_Name
+      value: Effect5_Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4587759617001296, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.93
@@ -7937,14 +7948,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587759617001296, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
-      propertyPath: m_Name
-      value: Effect5_Optimized
-      objectReference: {fileID: 0}
-    - target: {fileID: 1530326935255954, guid: 3fc0a26d09ca89a4f8ef0e417730ffd2, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

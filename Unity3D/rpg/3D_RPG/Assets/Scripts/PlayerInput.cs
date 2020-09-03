@@ -24,14 +24,14 @@ public class PlayerInput : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
-            cm.isRunning = true;
+            playerAnimator.SetBool("Run", true);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            cm.isRunning = false;
+            playerAnimator.SetBool("Run", false);
         }
 
-        if(h != 0 || v != 0)
+        if(h != 0 || v != 0 && !playerAnimator.GetBool("Attack"))
         {
             Vector3 vVec = Camera.main.transform.forward;
             vVec.y = 0;
@@ -43,14 +43,23 @@ public class PlayerInput : MonoBehaviour
             hVec *= h;
             cm.Move(vVec + hVec);
         }
+        else
+        {
+            playerAnimator.SetBool("Run", false);
+            playerAnimator.SetBool("Walk", false);
+        }
         if(characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            cm.Jump();
+            if (!playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
+                cm.Jump();
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            playerAnimator.SetTrigger("Attack");
+            if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
+            {
+                playerAnimator.SetBool("Attack", true);
+            }
         }
 
         if (Input.GetMouseButtonDown(1))

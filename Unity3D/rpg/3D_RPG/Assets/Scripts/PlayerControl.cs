@@ -6,13 +6,11 @@ public class PlayerControl : MonoBehaviour
 {
     Animator playerAnimator;
     CharacterController characterController;
-    private CharacterStatus cs;
+    private PlayerStatus cs;
     private float movingSpeed = 4.5f;
     private float runningSpeed = 2.5f;
     private float gravity = -20.0f; //가속도
     private float yVelocity = -1; // 속도
-    private bool isJumping = false;
-    public bool isRunning = false;
     public bool isBlocking = false;
     public Transform skillFirePosition;
     public int curSkillNum = 0;
@@ -38,7 +36,7 @@ public class PlayerControl : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
-        cs = GetComponent<CharacterStatus>();
+        cs = GetComponent<PlayerStatus>();
     }
 
     // Update is called once per frame
@@ -70,14 +68,16 @@ public class PlayerControl : MonoBehaviour
         }
         if (isBlocking)
             return;
+        playerAnimator.SetBool("Walk", true);
         Vector3 snapGround = Vector3.zero;
         if (characterController.isGrounded)
             snapGround = Vector3.down;
         Vector3 moveVector = dir * movingSpeed * Time.deltaTime;
-        if (isRunning)
+        if (playerAnimator.GetBool("Run"))
+        {
             moveVector *= runningSpeed;
+        }
         characterController.Move(moveVector + snapGround);
-        playerAnimator.SetFloat("MoveSpeed", moveVector.magnitude);
     }
 
     public void Jump()

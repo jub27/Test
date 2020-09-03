@@ -46,6 +46,7 @@ public class EnemyHitArea : MonoBehaviour
         }
         else
         {
+            PlayerControl.instance.GetComponent<PlayerStatus>().GetExp(cs.exp);
             GetComponent<Collider>().enabled = false;
         }
     }

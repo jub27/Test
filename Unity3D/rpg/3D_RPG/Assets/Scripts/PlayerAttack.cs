@@ -7,10 +7,12 @@ public class PlayerAttack : MonoBehaviour
     public GameObject weapon;
     CapsuleCollider cc;
     public float power = 10;
+    Animator playerAnimator;
     // Start is called before the first frame update
     void Start()
     {
         cc = weapon.GetComponent<CapsuleCollider>();
+        playerAnimator = GetComponent<Animator>();
         cc.enabled = false;
     }
 
@@ -34,5 +36,8 @@ public class PlayerAttack : MonoBehaviour
     {
         cc.enabled = false;
     }
-
+    public void AttackEnd()
+    {
+        playerAnimator.SetBool("Attack", false);
+    }
 }
