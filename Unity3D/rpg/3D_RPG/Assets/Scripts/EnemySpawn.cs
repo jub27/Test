@@ -8,6 +8,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject enemyPrefab;
     private GameObject[] enemies;
     public float spawnDelay = 7.0f;
+    private float spawnRange = 4.0f;
     private float curTime;
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,8 @@ public class EnemySpawn : MonoBehaviour
         {
             if(enemies[i] == null)
             {
-                enemies[i] = Instantiate(enemyPrefab, transform.position, transform.rotation);
+                Vector2 randomValue = Random.insideUnitCircle * spawnRange;
+                enemies[i] = Instantiate(enemyPrefab, transform.position + new Vector3(randomValue.x, 0, randomValue.y), transform.rotation);
                 break;
             }
         }

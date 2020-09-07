@@ -13,9 +13,9 @@ public class PlayerStatus : MonoBehaviour
     public float maxExp = 100;
     private float curExp;
     public bool dead = false;
-    public Slider hpSlider;
-    public Slider mpSlider;
-    public Slider expSlider;
+    public Slider expUI;
+    public Image hpUI;
+    public Image mpUI;
     public Text levelText;
     // Start is called before the first frame update
     void Start()
@@ -25,9 +25,9 @@ public class PlayerStatus : MonoBehaviour
         curHp = maxHp;
         curMp = maxMp;
         curExp = 0;
-        hpSlider.value = curHp / maxHp;
-        mpSlider.value = curMp / maxMp;
-        expSlider.value = curExp / maxExp;
+        hpUI.fillAmount = curHp / maxHp;
+        mpUI.fillAmount = curMp / maxMp;
+        expUI.value = curExp / maxExp;
         levelText.text = "Lv." + level;
     }
 
@@ -47,7 +47,7 @@ public class PlayerStatus : MonoBehaviour
             dead = true;
             animator.SetTrigger("Dead");
         }
-        hpSlider.value = curHp / maxHp;
+        hpUI.fillAmount = curHp / maxHp;
     }
     public void GetExp(float exp)
     {
@@ -62,9 +62,9 @@ public class PlayerStatus : MonoBehaviour
             maxMp = maxMp * 1.2f;
             curMp = maxMp;
             levelText.text = "Lv." + level;
-            hpSlider.value = curHp / maxHp;
-            mpSlider.value = curMp / maxMp;
+            hpUI.fillAmount = curHp / maxHp;
+            mpUI.fillAmount = curMp / maxMp;
         }
-        expSlider.value = curExp / maxExp;
+        expUI.value = curExp / maxExp;
     }
 }
