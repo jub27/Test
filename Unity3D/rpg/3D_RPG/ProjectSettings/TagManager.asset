@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collide
+  - Effects
+  - Icon
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - Enemy
   - SearchPlayer
   - EnemyRangeAttack
-  - 
+  - Item
   - 
   - 
   - 

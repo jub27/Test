@@ -30,6 +30,7 @@ public class EnemyControl : MonoBehaviour
     private bool hitEnd = true;
     private int randomDir;
     public bool preAttack = false;
+    public Item dropItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -293,5 +294,13 @@ public class EnemyControl : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void DropItem()
+    {
+        float random = Random.Range(0, 100);
+        if (random < 100)
+        {
+            Instantiate(dropItem, transform.position, transform.rotation);
+        }
     }
 }

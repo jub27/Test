@@ -10,10 +10,12 @@ public class CharacterStatus : MonoBehaviour
     public float exp = 10;
     public bool dead = false;
     public Slider hpSlider;
+    private EnemyControl ec;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        ec = GetComponent<EnemyControl>();
         curHp = maxHp;
     }
 
@@ -31,6 +33,7 @@ public class CharacterStatus : MonoBehaviour
         if(curHp <= 0)
         {
             dead = true;
+            ec.DropItem();
             animator.SetTrigger("Dead");
         }
     }

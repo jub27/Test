@@ -22,7 +22,7 @@ public class PlayerInput : MonoBehaviour
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
-        if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
             playerAnimator.SetBool("Run", true);
         }
@@ -89,6 +89,9 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             cm.curSkillNum = 4;
+        }
+        if (Input.GetKeyDown(KeyCode.I)){
+            InventorySystem.instance.InventoryOpenClose();
         }
     }
 }

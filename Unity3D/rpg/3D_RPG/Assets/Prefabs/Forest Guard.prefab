@@ -421,8 +421,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b2168bb6aada846851ea1b6082d19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  maxHp: 100
+  exp: 10
   dead: 0
+  hpSlider: {fileID: 0}
 --- !u!114 &8753787821793140447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +456,8 @@ MonoBehaviour:
   attackStopDistance: 1.8
   retunStartDistance: 20
   preAttack: 1
+  dropItem: {fileID: 8320937043071758335, guid: 96585deccf96920409f19a1bbd2f31da,
+    type: 3}
 --- !u!54 &-1695750288022470418
 Rigidbody:
   m_ObjectHideFlags: 0
