@@ -7,13 +7,14 @@ public class PlayerInput : MonoBehaviour
     CharacterController characterController;
     PlayerControl cm;
     Animator playerAnimator;
-
+    PlayerAttack pa;
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         cm = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
+        pa = GetComponent<PlayerAttack>();
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class PlayerInput : MonoBehaviour
             playerAnimator.SetBool("Run", false);
         }
 
-        if(h != 0 || v != 0 && !playerAnimator.GetBool("Attack"))
+        if( (h != 0 || v != 0) && !playerAnimator.GetBool("Attack"))
         {
             Vector3 vVec = Camera.main.transform.forward;
             vVec.y = 0;
@@ -56,9 +57,18 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
+            if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump"))
             {
-                playerAnimator.SetBool("Attack", true);
+                playerAnimator.SetBool("Walk", false);
+                if (pa.attakEnd)
+                {
+                    playerAnimator.SetBool("Attack", true);
+                    pa.attakEnd = false;
+                }
+                if (pa.combo)
+                {
+                    playerAnimator.SetBool("Combo", true);
+                }
             }
         }
 

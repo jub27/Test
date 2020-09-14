@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour
     CapsuleCollider cc;
     public float power = 10;
     Animator playerAnimator;
+    public bool combo = false;
+    public bool attakEnd = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,25 @@ public class PlayerAttack : MonoBehaviour
     }
     public void AttackEnd()
     {
+ 
+    }
+
+    public void ComboStart()
+    {
+        combo = true;
+        playerAnimator.SetBool("Combo", false);
+    }
+
+    public void ComboEnd()
+    {
+        combo = false;
+    }
+
+    public void ResetAttack()
+    {
+        attakEnd = true;
+        combo = false;
         playerAnimator.SetBool("Attack", false);
+        playerAnimator.SetBool("Combo", false);
     }
 }

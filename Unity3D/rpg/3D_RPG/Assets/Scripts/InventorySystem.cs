@@ -8,11 +8,21 @@ public class InventorySystem : MonoBehaviour
 
     private Vector3 offset;
     private bool check = false;
+
+    public Material[] outLine;
+    public ItemSlot[] itemSlots;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+
+            outLine = new Material[4];
+            outLine[0] = Resources.Load("Common", typeof(Material)) as Material;
+            outLine[1] = Resources.Load("UnCommon", typeof(Material)) as Material;
+            outLine[2] = Resources.Load("Epic", typeof(Material)) as Material;
+            outLine[3] = Resources.Load("Legendary", typeof(Material)) as Material;
         }
         else
         {
@@ -43,6 +53,18 @@ public class InventorySystem : MonoBehaviour
         else
         {
             check = false;
+        }
+    }
+
+    public void PutItem(ItemSystem.ItemData item)
+    {
+        for(int i = 0; i < itemSlots.Length; i++)
+        {
+            if (itemSlots[i].empty)
+            {
+                itemSlots[i].SetItem(item);
+                break;
+            }
         }
     }
 

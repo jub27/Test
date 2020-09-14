@@ -252,6 +252,7 @@
     <Compile Include="Assets\Scripts\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\Scripts\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\ItemSystem.cs" />
     <Compile Include="Assets\Scripts\ParticleCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
@@ -316,6 +317,7 @@
     <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaMain.cginc" />
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\Shaders\Portal\RFX4_PortalMask.shader" />
     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
+    <None Include="Assets\SpriteOutline\Shaders\SpriteOutline.shader" />
     <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaSkin.cginc" />
     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
     <None Include="Assets\RPG Character Animation Pack FREE\Elements\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
@@ -425,22 +427,22 @@
     <None Include="Assets\KriptoFX\Realistic Effects Pack v4\PostEffects\Mobile\Resources\RFX4_Bloom.shader" />
     <None Include="Assets\RPG Character Animation Pack FREE\Elements\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -626,13 +628,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.14f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/dosss/Desktop/github/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>E:/ㅉㅁ/kimjaeyeop/Unity3D/rpg/3D_RPG/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
