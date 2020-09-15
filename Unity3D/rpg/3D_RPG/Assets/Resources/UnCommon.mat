@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: UnCommon
   m_Shader: {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
-  m_ShaderKeywords: _OUTLINEENABLED_ON _OUTLINEMODE_SOLID _OUTLINEPOSITION_INSIDE_UNDER_SPRITE
+  m_ShaderKeywords: _OUTLINEENABLED_ON _OUTLINEMODE_GRADIENT _OUTLINEPOSITION_INSIDE_UNDER_SPRITE
     _OUTLINESHAPE_FRAME _TILEMODE_STRETCH
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -75,14 +75,14 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineEnabled: 1
-    - _OutlineMode: 0
+    - _OutlineMode: 1
     - _OutlinePosition: 0
     - _OutlineShape: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Thickness: 5
+    - _Thickness: 15
     - _TileMode: 0
     - _UVSec: 0
     - _Weight: 0.5

@@ -23,12 +23,14 @@ public class ItemSystem : MonoBehaviour
         public string name;
         public ItemType itemType;
         public ItemGrade itemGrade;
-        public ItemData(int id, string name, ItemType itemType, ItemGrade itemGrade)
+        public string itemInfo;
+        public ItemData(int id, string name, ItemType itemType, ItemGrade itemGrade, string itemInfo)
         {
             this.id = id;
             this.name = name;
             this.itemType = itemType;
             this.itemGrade = itemGrade;
+            this.itemInfo = itemInfo;
         }
     }
 

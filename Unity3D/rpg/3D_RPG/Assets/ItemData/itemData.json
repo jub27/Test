@@ -4,61 +4,71 @@
             "id": 1,
             "name": "hp_potion",
             "itemType": 0,
-            "itemGrade": 0
+            "itemGrade": 0,
+			"itemInfo" :"hp 50 È¸º¹"
         },
 		{
             "id": 2,
             "name": "mp_potion",
             "itemType": 0,
-            "itemGrade": 0
+            "itemGrade": 0,
+			"itemInfo" :"mp 50 È¸º¹"
         },
 		{
             "id": 1000,
             "name": "Sword_Common",
             "itemType": 1,
-            "itemGrade": 0
+            "itemGrade": 0,
+			"itemInfo" :"¹«±â"
         },
 		{
             "id": 1001,
             "name": "Sword_UnCommon",
             "itemType": 1,
-            "itemGrade": 1
+            "itemGrade": 1,
+			"itemInfo" :"¹«±â"
         },
 		{
             "id": 1002,
             "name": "Sword_Epic",
             "itemType": 1,
-            "itemGrade": 2
+            "itemGrade": 2,
+			"itemInfo" :"¹«±â"
         },
 		{
             "id": 1003,
             "name": "Sword_Legendary",
             "itemType": 1,
-            "itemGrade": 3
+            "itemGrade": 3,
+			"itemInfo" :"¹«±â"
         },
 		{
 			"id": 2000,
             "name": "Armor_Common",
             "itemType": 2,
-            "itemGrade": 0
+            "itemGrade": 0,
+			"itemInfo" :"°©¿Ê"
 		},
 		{
 			"id": 2001,
             "name": "Armor_UnCommon",
             "itemType": 2,
-            "itemGrade": 1
+            "itemGrade": 1,
+			"itemInfo" :"°©¿Ê"
 		},
 		{
 			"id": 2002,
             "name": "Armor_Epic",
             "itemType": 2,
-            "itemGrade": 2
+            "itemGrade": 2,
+			"itemInfo" :"°©¿Ê"
 		},
 		{
 			"id": 2003,
             "name": "Armor_Legendary",
             "itemType": 2,
-            "itemGrade": 3
+            "itemGrade": 3,
+			"itemInfo" :"°©¿Ê"
 		}
     ]
 }

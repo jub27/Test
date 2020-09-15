@@ -9,7 +9,7 @@ public class InventorySystem : MonoBehaviour
     private Vector3 offset;
     private bool check = false;
 
-    public Material[] outLine;
+    public Color[] outLine;
     public ItemSlot[] itemSlots;
 
     private void Awake()
@@ -18,11 +18,11 @@ public class InventorySystem : MonoBehaviour
         {
             instance = this;
 
-            outLine = new Material[4];
-            outLine[0] = Resources.Load("Common", typeof(Material)) as Material;
-            outLine[1] = Resources.Load("UnCommon", typeof(Material)) as Material;
-            outLine[2] = Resources.Load("Epic", typeof(Material)) as Material;
-            outLine[3] = Resources.Load("Legendary", typeof(Material)) as Material;
+            outLine = new Color[4];
+            outLine[0] = new Color(1, 1, 1, 0.5f);
+            outLine[1] = new Color(0, 0.4688f, 1, 0.5f);
+            outLine[2] = new Color(1, 0, 0.9584f, 0.5f);
+            outLine[3] = new Color(1, 0.5854f, 0, 0.5f);
         }
         else
         {
@@ -58,12 +58,41 @@ public class InventorySystem : MonoBehaviour
 
     public void PutItem(ItemSystem.ItemData item)
     {
-        for(int i = 0; i < itemSlots.Length; i++)
+        if (item.itemType != ItemSystem.ItemType.CONSUMED)
         {
-            if (itemSlots[i].empty)
+            for (int i = 0; i < itemSlots.Length; i++)
             {
-                itemSlots[i].SetItem(item);
-                break;
+                if (itemSlots[i].empty)
+                {
+                    itemSlots[i].SetItem(item);
+                    break;
+                }
+            }
+        }
+        else if(item.itemType == ItemSystem.ItemType.CONSUMED)
+        {
+            int j = -1;
+            int k = 0;
+            int m = -1;
+            for (; k < itemSlots.Length; k++)
+            {
+                if (!itemSlots[k].empty && itemSlots[k].item.id == item.id)
+                {
+                    j = k;
+                    break;
+                }
+                if(m == -1 && itemSlots[k].empty)
+                {
+                    m = k;
+                }
+            }
+            if(j != -1)
+            {
+                itemSlots[j].AddNums();
+            }
+            else if(m != -1)
+            {
+                itemSlots[m].SetItem(item);
             }
         }
     }
