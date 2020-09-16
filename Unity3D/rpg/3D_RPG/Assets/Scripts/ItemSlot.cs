@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text;
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public ItemSystem.ItemData item;
     public Image image_child;
@@ -13,6 +13,7 @@ public class ItemSlot : MonoBehaviour
     public GameObject itemInfo;
     private int itemNums;
     public bool empty;
+    public bool equiped;
 
     // Start is called before the first frame update
     private void Start()
@@ -21,17 +22,17 @@ public class ItemSlot : MonoBehaviour
         itemNums_Text = GetComponentInChildren<Text>();
         itemNums = 0;
         empty = true;
+        equiped = false;
     }
 
     public void SetItem(ItemSystem.ItemData item)
     {
         this.item = item;
         image_child.sprite = ItemSystem.instance.item_Sprites[item.id];
-        image_child.color = new Color(255, 255, 255, 255);
+        image_child.color = new Color(1, 1, 1, 1);
         image.color = InventorySystem.instance.outLine[(int)item.itemGrade];
         itemNums = 1;
         itemInfo.GetComponentInChildren<Text>().text = item.itemInfo;
-        print(item.itemInfo);
         if (item.itemType == ItemSystem.ItemType.CONSUMED)
         {
             itemNums_Text.text = "x" + itemNums.ToString();
@@ -53,6 +54,31 @@ public class ItemSlot : MonoBehaviour
         itemInfo.SetActive(false);
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (equiped)
+            {
+                if (InventorySystem.instance.PutItem(item))
+                {
+                    equiped = false;
+                    image_child.sprite = null;
+                    image_child.color = new Color(1, 1, 1, 0);
+                    image.color = new Color(1, 1, 1, 0.39f);
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                //////////////////////////////////////////////////////////인벤토리 -> 장비로 가는거
+            }
+        }
+    }
 
     public void ShowInfo()
     {

@@ -17,7 +17,7 @@ public class EnemyControl : MonoBehaviour
     private float yVelocity = -1;
     private float gravity = -1.0f;
     private Animator animator;
-    private CharacterStatus cs;
+    private EnemyStatus cs;
     private Vector3 basePosition;
     private Vector3 destination;
     private Vector3 curDir;
@@ -31,6 +31,7 @@ public class EnemyControl : MonoBehaviour
     private int randomDir;
     public bool preAttack = false;
     public Item dropItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class EnemyControl : MonoBehaviour
         basePosition = transform.position;
         delayTime = 0;
         animator = GetComponent<Animator>();
-        cs = GetComponent<CharacterStatus>();
+        cs = GetComponent<EnemyStatus>();
         randomDir = Random.Range(0, 2);
     }
 
@@ -295,6 +296,7 @@ public class EnemyControl : MonoBehaviour
         }
         return false;
     }
+
     public void DropItem()
     {
         float random = Random.Range(0, 100);

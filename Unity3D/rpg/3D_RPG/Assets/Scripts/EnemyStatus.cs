@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class CharacterStatus : MonoBehaviour
+public class EnemyStatus : MonoBehaviour
 {
     Animator animator;
     public float maxHp = 100;

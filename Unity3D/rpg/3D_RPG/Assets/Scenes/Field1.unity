@@ -2434,7 +2434,7 @@ PrefabInstance:
     - target: {fileID: 8984486095533512525, guid: e8316935bb4e2ab4bb48254a7ba85dd9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7569761515201534287, guid: e8316935bb4e2ab4bb48254a7ba85dd9,
         type: 3}
@@ -24758,7 +24758,7 @@ PrefabInstance:
     - target: {fileID: 7124430735626633064, guid: e8316935bb4e2ab4bb48254a7ba85dd9,
         type: 3}
       propertyPath: maxEnemyCount
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8316935bb4e2ab4bb48254a7ba85dd9, type: 3}
@@ -53802,7 +53802,7 @@ PrefabInstance:
     - target: {fileID: 8984486095533512525, guid: e8316935bb4e2ab4bb48254a7ba85dd9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7569761515201534287, guid: e8316935bb4e2ab4bb48254a7ba85dd9,
         type: 3}

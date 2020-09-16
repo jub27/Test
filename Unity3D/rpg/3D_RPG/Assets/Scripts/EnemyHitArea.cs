@@ -5,14 +5,14 @@ using UnityEngine;
 public class EnemyHitArea : MonoBehaviour
 {
     EnemyControl ec;
-    CharacterStatus cs;
+    EnemyStatus cs;
     public DamageText damageText;
     public Transform damagePrintPos;
     // Start is called before the first frame update
     void Start()
     {
         ec = transform.root.gameObject.GetComponent<EnemyControl>();
-        cs = transform.root.gameObject.GetComponent<CharacterStatus>();
+        cs = transform.root.gameObject.GetComponent<EnemyStatus>();
     }
 
     // Update is called once per frame

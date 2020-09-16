@@ -56,7 +56,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void PutItem(ItemSystem.ItemData item)
+    public bool PutItem(ItemSystem.ItemData item)
     {
         if (item.itemType != ItemSystem.ItemType.CONSUMED)
         {
@@ -65,7 +65,7 @@ public class InventorySystem : MonoBehaviour
                 if (itemSlots[i].empty)
                 {
                     itemSlots[i].SetItem(item);
-                    break;
+                    return true;
                 }
             }
         }
@@ -89,13 +89,17 @@ public class InventorySystem : MonoBehaviour
             if(j != -1)
             {
                 itemSlots[j].AddNums();
+                return true;
             }
             else if(m != -1)
             {
                 itemSlots[m].SetItem(item);
+                return true;
             }
         }
+        return false;
     }
+
 
     public void InventoryOpenClose()
     {
