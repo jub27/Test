@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Text;
 public class ItemSlot : MonoBehaviour
 {
     public ItemSystem.ItemData item;
@@ -30,6 +31,7 @@ public class ItemSlot : MonoBehaviour
         image.color = InventorySystem.instance.outLine[(int)item.itemGrade];
         itemNums = 1;
         itemInfo.GetComponentInChildren<Text>().text = item.itemInfo;
+        print(item.itemInfo);
         if (item.itemType == ItemSystem.ItemType.CONSUMED)
         {
             itemNums_Text.text = "x" + itemNums.ToString();
