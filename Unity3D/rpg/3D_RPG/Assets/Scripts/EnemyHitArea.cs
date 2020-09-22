@@ -34,7 +34,7 @@ public class EnemyHitArea : MonoBehaviour
         }
         else
         {
-            damage = other.transform.root.GetComponent<PlayerAttack>().power;
+            damage = other.transform.root.GetComponent<PlayerStatus>().attack;
         }
 
         cs.OnDamage(damage);

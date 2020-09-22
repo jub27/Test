@@ -7,22 +7,18 @@ public class PlayerInput : MonoBehaviour
     CharacterController characterController;
     PlayerControl cm;
     Animator playerAnimator;
-    PlayerAttack pa;
+    public GameObject escMenu;
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         cm = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
-        pa = GetComponent<PlayerAttack>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
-
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
             playerAnimator.SetBool("Run", true);
@@ -32,23 +28,6 @@ public class PlayerInput : MonoBehaviour
             playerAnimator.SetBool("Run", false);
         }
 
-        if( (h != 0 || v != 0) && !playerAnimator.GetBool("Attack"))
-        {
-            Vector3 vVec = Camera.main.transform.forward;
-            vVec.y = 0;
-            vVec.Normalize();
-            vVec *= v;
-            Vector3 hVec = Camera.main.transform.right;
-            hVec.y = 0;
-            hVec.Normalize();
-            hVec *= h;
-            cm.Move(vVec + hVec);
-        }
-        else
-        {
-            playerAnimator.SetBool("Run", false);
-            playerAnimator.SetBool("Walk", false);
-        }
         if(characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             if (!playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
@@ -57,21 +36,20 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump"))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 mousePoint = new Vector3();
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Ground")))
             {
-                playerAnimator.SetBool("Walk", false);
-                if (pa.attakEnd)
-                {
-                    playerAnimator.SetBool("Attack", true);
-                    pa.attakEnd = false;
-                }
-                if (pa.combo)
-                {
-                    playerAnimator.SetBool("Combo", true);
-                }
+                mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                cm.SetDestination(mousePoint);
+            }
+            if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Enemy")))
+            {
+                mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                cm.SetTarget(hit.collider.gameObject);
             }
         }
-
         if (Input.GetMouseButtonDown(1))
         {
             cm.Skill();
@@ -102,6 +80,23 @@ public class PlayerInput : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I)){
             InventorySystem.instance.InventoryOpenClose();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CharacterInfoSystem.instance.CheacterInfoOpenClose();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(escMenu.activeSelf == false)
+            {
+                escMenu.SetActive(true);
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                escMenu.SetActive(false);
+                Time.timeScale = 1.0f;
+            }
         }
     }
 }

@@ -16,29 +16,14 @@ public class ItemSystem : MonoBehaviour
     {
         CONSUMED, WEAPON, ARMOR
     }
-    [System.Serializable]
-    public struct ItemData
-    {
-        public int id;
-        public string name;
-        public ItemType itemType;
-        public ItemGrade itemGrade;
-        public string itemInfo;
-        public ItemData(int id, string name, ItemType itemType, ItemGrade itemGrade, string itemInfo)
-        {
-            this.id = id;
-            this.name = name;
-            this.itemType = itemType;
-            this.itemGrade = itemGrade;
-            this.itemInfo = itemInfo;
-        }
-    }
 
     static public ItemSystem instance = null;
     [System.Serializable]
     public struct ItemList
     {
-        public ItemData[] itemData_list;
+        public ConsumeData[] consumeData_list;
+        public WeaponData[] weaponData_list;
+        public ArmorData[] armorData_list;
     }
     public ItemList itemList;
 

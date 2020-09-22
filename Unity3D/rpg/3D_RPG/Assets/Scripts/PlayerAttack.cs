@@ -6,7 +6,6 @@ public class PlayerAttack : MonoBehaviour
 {
     public GameObject weapon;
     CapsuleCollider cc;
-    public float power = 10;
     Animator playerAnimator;
     public bool combo = false;
     public bool attakEnd = true;

@@ -28,21 +28,21 @@ public class PlayerHitArea : MonoBehaviour
         transform.root.GetComponent<PlayerAttack>().AttackDisable();
         if (other.transform.root.GetComponent<EnemyAttack>() != null)
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(other.transform.root.GetComponent<EnemyAttack>().power);
+            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.transform.root.GetComponent<EnemyAttack>().power - ps.defense, 0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.transform.root.GetComponent<EnemyAttack>().power;
+            dt.damage = other.transform.root.GetComponent<EnemyAttack>().power - ps.defense;
         }
         else if (other.GetComponent<RangeWeapon>() != null)
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(other.GetComponent<RangeWeapon>().power);
+            transform.root.GetComponent<PlayerStatus>().OnDamage( Mathf.Max(other.GetComponent<RangeWeapon>().power - ps.defense, 0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.GetComponent<RangeWeapon>().power;
+            dt.damage = other.GetComponent<RangeWeapon>().power - ps.defense;
         }
         else
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(other.GetComponent<ParticleCollider>().power);
+            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.GetComponent<ParticleCollider>().power - ps.defense,0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.GetComponent<ParticleCollider>().power;
+            dt.damage = other.GetComponent<ParticleCollider>().power - ps.defense;
         }
         transform.root.GetComponent<PlayerControl>().OnDamage();
     }

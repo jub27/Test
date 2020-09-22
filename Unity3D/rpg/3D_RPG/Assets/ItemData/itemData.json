@@ -1,74 +1,88 @@
 ﻿{
-    "itemData_list": [
+    "consumeData_list": [
         {
             "id": 1,
             "name": "hp_potion",
             "itemType": 0,
             "itemGrade": 0,
-			"itemInfo" :"hp 50 회복"
+			"itemInfo" :"hp 50 회복",
+			"point" : 50
         },
 		{
             "id": 2,
             "name": "mp_potion",
             "itemType": 0,
             "itemGrade": 0,
-			"itemInfo" :"mp 50 회복"
-        },
+			"itemInfo" :"mp 50 회복",
+			"point" : 50
+        }
+    ],
+	"weaponData_list": [
 		{
             "id": 1000,
             "name": "Sword_Common",
             "itemType": 1,
             "itemGrade": 0,
-			"itemInfo" :"무기"
+			"itemInfo" :"무기",
+			"attack" : 10
         },
 		{
             "id": 1001,
             "name": "Sword_UnCommon",
             "itemType": 1,
             "itemGrade": 1,
-			"itemInfo" :"무기"
+			"itemInfo" :"무기",
+			"attack" : 20
         },
 		{
             "id": 1002,
             "name": "Sword_Epic",
             "itemType": 1,
             "itemGrade": 2,
-			"itemInfo" :"무기"
+			"itemInfo" :"무기",
+			"attack" : 30
         },
 		{
             "id": 1003,
             "name": "Sword_Legendary",
             "itemType": 1,
             "itemGrade": 3,
-			"itemInfo" :"무기"
-        },
+			"itemInfo" :"무기",
+			"attack" : 40
+        }
+	],
+	"armorData_list":[
 		{
 			"id": 2000,
             "name": "Armor_Common",
             "itemType": 2,
             "itemGrade": 0,
-			"itemInfo" :"갑옷"
+			"itemInfo" :"갑옷",
+			"defense" : 1
 		},
 		{
 			"id": 2001,
             "name": "Armor_UnCommon",
             "itemType": 2,
             "itemGrade": 1,
-			"itemInfo" :"갑옷"
+			"itemInfo" :"갑옷",
+			"defense" : 2
 		},
 		{
 			"id": 2002,
             "name": "Armor_Epic",
             "itemType": 2,
             "itemGrade": 2,
-			"itemInfo" :"갑옷"
+			"itemInfo" :"갑옷",
+			"defense" : 3
 		},
 		{
 			"id": 2003,
             "name": "Armor_Legendary",
             "itemType": 2,
             "itemGrade": 3,
-			"itemInfo" :"갑옷"
+			"itemInfo" :"갑옷",
+			"defense" : 5
 		}
-    ]
+	]
 }

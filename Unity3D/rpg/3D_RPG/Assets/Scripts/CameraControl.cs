@@ -7,7 +7,7 @@ public class CameraControl : MonoBehaviour
     private Transform target;
     private PlayerControl cm;
     private LayerMask layerMask = 8;
-    private Vector3 targetOffset = new Vector3(0.0f, 1.5f, 0.0f);
+    private Vector3 targetOffset = new Vector3(0.0f, 10.5f, -10.0f);
     private float currentDistance = 10.0f;
     private float distance = 10.0f;
 
@@ -31,7 +31,9 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.position = target.position + targetOffset;
+        transform.forward = (target.position - transform.position).normalized;
+        /*
         x += Input.GetAxis("Mouse X") * 4.0f;
         y -= Input.GetAxis("Mouse Y") * 3.2f;
 
@@ -56,6 +58,7 @@ public class CameraControl : MonoBehaviour
         playerDir.y = 0;
         playerDir.Normalize();
         cm.SetPlayerDirection(playerDir);
+        */
     }
 
     private float AdjustLineOfSight(Vector3 target, Vector3 direction)

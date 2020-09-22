@@ -17,12 +17,6 @@ public class InventorySystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-
-            outLine = new Color[4];
-            outLine[0] = new Color(1, 1, 1, 0.5f);
-            outLine[1] = new Color(0, 0.4688f, 1, 0.5f);
-            outLine[2] = new Color(1, 0, 0.9584f, 0.5f);
-            outLine[3] = new Color(1, 0.5854f, 0, 0.5f);
         }
         else
         {
@@ -33,6 +27,26 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
+        for(int i = 0; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].index = i;
+        }
+        outLine = new Color[4];
+        outLine[0] = new Color(1, 1, 1, 0.5f);
+        outLine[1] = new Color(0, 0.4688f, 1, 0.5f);
+        outLine[2] = new Color(1, 0, 0.9584f, 0.5f);
+        outLine[3] = new Color(1, 0.5854f, 0, 0.5f);
+        if (GameManager.instance.is_loaded)
+        {
+            for (int i = 0; i < GameManager.instance.load_data.inventory.Length; i++)
+            {
+                if (GameManager.instance.load_data.inventory[i].id != 0)
+                {
+                    PutItem(GameManager.instance.load_data.inventory[i], i);
+                }
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -56,8 +70,13 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public bool PutItem(ItemSystem.ItemData item)
+    public bool PutItem(ItemData item, int index = -1)
     {
+        if (index != -1)
+        {
+            itemSlots[index].SetItem(item);
+            return true;
+        }
         if (item.itemType != ItemSystem.ItemType.CONSUMED)
         {
             for (int i = 0; i < itemSlots.Length; i++)

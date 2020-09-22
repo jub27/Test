@@ -6,26 +6,28 @@ using UnityEngine.EventSystems;
 using System.Text;
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    public ItemSystem.ItemData item;
+    public ItemData item;
     public Image image_child;
     private Image image;
     private Text itemNums_Text;
     public GameObject itemInfo;
     private int itemNums;
-    public bool empty;
+    public bool empty = true;
     public bool equiped;
-
-    // Start is called before the first frame update
-    private void Start()
+    public int index;
+    static int count = 0;
+    private PlayerStatus ps;
+    private void Awake()
     {
         image = GetComponent<Image>();
         itemNums_Text = GetComponentInChildren<Text>();
+        ps = GameObject.Find("Player").GetComponent<PlayerStatus>();
         itemNums = 0;
         empty = true;
         equiped = false;
     }
 
-    public void SetItem(ItemSystem.ItemData item)
+    public void SetItem(ItemData item)
     {
         this.item = item;
         image_child.sprite = ItemSystem.instance.item_Sprites[item.id];
@@ -39,6 +41,18 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             itemNums_Text.gameObject.SetActive(true);
         }
         empty = false;
+    }
+
+    public void UnSetItem()
+    {
+        image_child.sprite = null;
+        image_child.color = new Color(1, 1, 1, 0);
+        image.color = new Color(1, 1, 1, 0.39f);
+        itemNums = 0;
+        itemInfo.GetComponentInChildren<Text>().text = "";
+        itemInfo.SetActive(false);
+        equiped = false;
+        empty = true;
     }
 
     public void AddNums()
@@ -56,27 +70,78 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (empty)
+        {
+            return;
+        }
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (equiped)
             {
-                if (InventorySystem.instance.PutItem(item))
-                {
-                    equiped = false;
-                    image_child.sprite = null;
-                    image_child.color = new Color(1, 1, 1, 0);
-                    image.color = new Color(1, 1, 1, 0.39f);
-
-                }
-                else
-                {
-
-                }
+                UnEquip(-1);
             }
             else
             {
-                //////////////////////////////////////////////////////////인벤토리 -> 장비로 가는거
+                if(item.itemType == ItemSystem.ItemType.CONSUMED)
+                {
+                    if(item.id == 1) // hp포션
+                    {
+                        ps.DrinkHpPotion(30);
+                        itemNums--;
+                        if(itemNums == 0)
+                        {
+                            UnSetItem();
+                        }
+                    }
+                    else if(item.id == 2)// mp포션
+                    {
+                        ps.DrinkMpPotion(30);
+                        itemNums--;
+                        if (itemNums == 0)
+                        {
+                            UnSetItem();
+                        }
+                    }
+                    return;
+                }
+                else if(item.itemType == ItemSystem.ItemType.ARMOR)
+                {
+                    ItemData temp = item;
+                    UnSetItem();
+                    if (CharacterInfoSystem.instance.armorSlot.empty == false)
+                    {
+                        ArmorData adata = CharacterInfoSystem.instance.armorSlot.item as ArmorData;
+                        ps.UpdateDefense(-adata.defense);
+                        CharacterInfoSystem.instance.armorSlot.UnEquip(index);
+                    }
+                    CharacterInfoSystem.instance.armorSlot.SetItem(temp);
+                    CharacterInfoSystem.instance.armorSlot.equiped = true;
+                    ps.UpdateDefense((temp as ArmorData).defense);
+                }
+                else if (item.itemType == ItemSystem.ItemType.WEAPON)
+                {
+                    ItemData temp = item;
+                    UnSetItem();
+                    if (CharacterInfoSystem.instance.weaponSlot.empty == false)
+                    {
+                        WeaponData wdata = CharacterInfoSystem.instance.weaponSlot.item as WeaponData;
+                        ps.UpdateAttack(-wdata.attack);
+                        CharacterInfoSystem.instance.weaponSlot.UnEquip(index);
+
+                    }
+                    CharacterInfoSystem.instance.weaponSlot.SetItem(temp);
+                    CharacterInfoSystem.instance.weaponSlot.equiped = true;
+                    ps.UpdateAttack((temp as WeaponData).attack);
+                }
             }
+        }
+    }
+
+    public void UnEquip(int i)
+    {
+        if (InventorySystem.instance.PutItem(item, i))
+        {
+            UnSetItem();
         }
     }
 

@@ -12,17 +12,19 @@ public class PlayerControl : MonoBehaviour
     private float gravity = -20.0f; //가속도
     private float yVelocity = -1; // 속도
     public bool isBlocking = false;
+    private Vector3 destination;
+    private GameObject target;
     public Transform skillFirePosition;
     public int curSkillNum = 0;
     public GameObject[] skillList;
-
-    static public GameObject instance = null;
+    static public PlayerControl instance = null;
+    PlayerAttack pa;
 
     private void Awake()
     {
         if(instance == null)
         {
-            instance = gameObject;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -37,6 +39,8 @@ public class PlayerControl : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
         cs = GetComponent<PlayerStatus>();
+        pa = GetComponent<PlayerAttack>();
+        target = null;
     }
 
     // Update is called once per frame
@@ -46,6 +50,9 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
+        if (target != null)
+            destination = target.transform.position;
+        Move();
         yVelocity += gravity * Time.deltaTime;
         playerAnimator.SetFloat("Y_Speed", yVelocity);
         characterController.Move(Vector3.up * yVelocity * Time.deltaTime);
@@ -60,7 +67,17 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 dir)
+    public void SetDestination(Vector3 destination)
+    {
+        this.destination = destination;
+    }
+
+    public void SetTarget(GameObject enemy)
+    {
+        target = enemy;
+    }
+
+    public void Move()
     {
         if (cs.dead)
         {
@@ -68,16 +85,54 @@ public class PlayerControl : MonoBehaviour
         }
         if (isBlocking)
             return;
+        destination.y = transform.position.y;
+        if (target != null)
+        {
+            if ((transform.position - destination).magnitude < 1.5f)
+            {
+                transform.position = destination;
+                playerAnimator.SetBool("Walk", false);
+                Attack();
+                return;
+            }
+        }
+        else
+        {
+            if ((transform.position - destination).magnitude < 0.2f)
+            {
+                transform.position = destination;
+                playerAnimator.SetBool("Walk", false);
+                return;
+            }
+        }
+        transform.forward = (destination - transform.position).normalized;
         playerAnimator.SetBool("Walk", true);
         Vector3 snapGround = Vector3.zero;
         if (characterController.isGrounded)
             snapGround = Vector3.down;
-        Vector3 moveVector = dir * movingSpeed * Time.deltaTime;
+        Vector3 moveVector = (destination - transform.position).normalized * movingSpeed * Time.deltaTime;
         if (playerAnimator.GetBool("Run"))
         {
             moveVector *= runningSpeed;
         }
         characterController.Move(moveVector + snapGround);
+    }
+
+    public void Attack()
+    {
+        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump"))
+        {
+            playerAnimator.SetBool("Walk", false);
+            if (pa.attakEnd)
+            {
+                playerAnimator.SetBool("Attack", true);
+                pa.attakEnd = false;
+            }
+            if (pa.combo)
+            {
+                playerAnimator.SetBool("Combo", true);
+            }
+        }
     }
 
     public void Jump()

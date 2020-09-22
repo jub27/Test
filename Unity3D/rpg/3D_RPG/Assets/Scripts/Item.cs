@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
 {
     public GameObject[] Effects;
     private Rigidbody rigid;
-    public ItemSystem.ItemData itemData;
+    public ItemData itemData;
     private TextMeshPro tm;
 
     // Start is called before the first frame update
@@ -15,9 +15,23 @@ public class Item : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         tm = GetComponentInChildren<TextMeshPro>();
-        int random = (int)Random.Range(0, ItemSystem.instance.itemList.itemData_list.Length);
-
-        itemData = (ItemSystem.ItemData)(ItemSystem.instance.itemList.itemData_list[random]);
+        int itemType = (int)Random.Range(0, 3);
+        int random = -1;
+        if(itemType == (int)ItemSystem.ItemType.CONSUMED)
+        {
+            random = (int)Random.Range(0, ItemSystem.instance.itemList.consumeData_list.Length);
+            itemData = (ItemSystem.instance.itemList.consumeData_list[random]);
+        }
+        else if(itemType == (int)ItemSystem.ItemType.WEAPON)
+        {
+            random = (int)Random.Range(0, ItemSystem.instance.itemList.weaponData_list.Length);
+            itemData = (ItemSystem.instance.itemList.weaponData_list[random]);
+        }
+        else
+        {
+            random = (int)Random.Range(0, ItemSystem.instance.itemList.armorData_list.Length);
+            itemData = (ItemSystem.instance.itemList.armorData_list[random]);
+        }
 
         if(itemData.itemGrade == ItemSystem.ItemGrade.LEGENDARY)
         {

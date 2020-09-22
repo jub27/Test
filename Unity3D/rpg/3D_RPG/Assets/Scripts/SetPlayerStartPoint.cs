@@ -8,6 +8,7 @@ public class SetPlayerStartPoint : MonoBehaviour
     void Start()
     {
         PlayerControl.instance.transform.position = transform.position;
+        PlayerControl.instance.SetDestination(transform.position);
     }
 
     // Update is called once per frame
