@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
         public float maxHp;
         public float curMp;
         public float maxMp;
-        public ItemData weapon;
-        public ItemData armor;
+        public WeaponData weapon;
+        public ArmorData armor;
         public ItemData[] inventory;
         public user_data(string id, string password)
         {
@@ -42,12 +42,12 @@ public class GameManager : MonoBehaviour
             maxHp = 100;
             curMp = 100;
             maxMp = 100;
-            weapon = null;
-            armor = null;
-            inventory = new ItemData[InventorySystem.instance.itemSlots.Length];
-            for (int i = 0; i < InventorySystem.instance.itemSlots.Length; i++)
+            weapon = new WeaponData(0, "", 0, 0, "",0);
+            armor = new ArmorData(0, "", 0, 0, "",0);
+            inventory = new ItemData[42];
+            for (int i = 0; i < 42; i++)
             {
-                inventory[i] = null;
+                inventory[i] = new ItemData(0, "", 0, 0, "");
             }
         }
     }
@@ -90,32 +90,32 @@ public class GameManager : MonoBehaviour
 
     public bool AddNewUsersData(string id, string password)
     {
-        if (GameManager.instance.user_data_dict.ContainsKey(id))
+        if (user_data_dict.ContainsKey(id))
         {
             return false;
         }
-        GameManager.user_data temp = new GameManager.user_data(id, password);
-        SaveUserData(temp);
-        GameManager.instance.user_data_dict.Add(id, temp);
-        GameManager.instance.load_data = GameManager.instance.user_data_dict[id];
-        GameManager.instance.is_loaded = true;
-        return true;
-    }
-
-    public void SaveUserData(GameManager.user_data temp)
-    {
-        GameManager.instance.users_data_list.Add(temp);
+        user_data temp = new user_data(id, password);
+        users_data_list.Add(temp);
         sd.users_data_arr = new user_data[users_data_list.Count];
         for (int i = 0; i < users_data_list.Count; i++)
         {
             sd.users_data_arr[i] = users_data_list[i];
         }
+        user_data_dict.Add(id, temp);
+        load_data = instance.user_data_dict[id];
+        is_loaded = true;
+        SaveUserData();
+        return true;
+    }
+
+    public void SaveUserData()
+    {
         string jsonData = JsonUtility.ToJson(sd, true);
         string path = Application.dataPath + "/UsersData/usersData" + ".json";
         File.WriteAllText(path, jsonData);
     }
 
-    void ExitGame()
+    public void ExitGame()
     {
         user_data temp = new user_data(load_data.id, load_data.password);
         ps = GameObject.Find("Player").GetComponent<PlayerStatus>();
@@ -126,14 +126,23 @@ public class GameManager : MonoBehaviour
         temp.curHp = ps.curHp;
         temp.maxMp = ps.maxMp;
         temp.curMp = ps.curMp;
-        temp.attack = ps.attack;
-        temp.defense = ps.defense;
-        temp.weapon = CharacterInfoSystem.instance.weaponSlot.item;
-        temp.armor = CharacterInfoSystem.instance.armorSlot.item;
-        for(int i = 0; i < InventorySystem.instance.itemSlots.Length; i++)
+        temp.attack = ps.attack - (CharacterInfoSystem.instance.weaponSlot.item as WeaponData).attack;
+        temp.defense = ps.defense - (CharacterInfoSystem.instance.armorSlot.item as ArmorData).defense;
+        temp.weapon = CharacterInfoSystem.instance.weaponSlot.item as WeaponData;
+        temp.armor = CharacterInfoSystem.instance.armorSlot.item as ArmorData;
+        for (int i = 0; i < InventorySystem.instance.itemSlots.Length; i++)
         {
             temp.inventory[i] = InventorySystem.instance.itemSlots[i].item;
         }
+        for (int i = 0; i < sd.users_data_arr.Length; i++)
+        {
+            if(sd.users_data_arr[i].id == temp.id)
+            {
+                print(11);
+                sd.users_data_arr[i] = temp;
+            }
+        }
         user_data_dict[temp.id] = temp;
+        SaveUserData();
     }
 }

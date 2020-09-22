@@ -45,6 +45,15 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void UnSetItem()
     {
+        if(item.itemType == ItemSystem.ItemType.WEAPON)
+        {
+            ps.attack -= (item as WeaponData).attack;
+        }
+        else if (item.itemType == ItemSystem.ItemType.ARMOR)
+        {
+            ps.defense -= (item as ArmorData).defense;
+        }
+        item = new ItemData(0, "", 0, 0, "");
         image_child.sprite = null;
         image_child.color = new Color(1, 1, 1, 0);
         image.color = new Color(1, 1, 1, 0.39f);

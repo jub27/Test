@@ -8,7 +8,7 @@ public class CharacterInfoSystem : MonoBehaviour
 
     public ItemSlot weaponSlot;
     public ItemSlot armorSlot;
-
+    public PlayerStatus ps;
     private void Awake()
     {
         if (instance == null)
@@ -27,9 +27,15 @@ public class CharacterInfoSystem : MonoBehaviour
         if (GameManager.instance.is_loaded)
         {
             if (GameManager.instance.load_data.weapon != null && GameManager.instance.load_data.weapon.id != 0)
+            {
                 weaponSlot.SetItem(GameManager.instance.load_data.weapon);
+                ps.attack += GameManager.instance.load_data.weapon.attack;
+            }
             else if (GameManager.instance.load_data.armor != null && GameManager.instance.load_data.armor.id != 0)
+            {
                 armorSlot.SetItem(GameManager.instance.load_data.armor);
+                ps.defense += GameManager.instance.load_data.armor.defense;
+            }
         }
     }
 
