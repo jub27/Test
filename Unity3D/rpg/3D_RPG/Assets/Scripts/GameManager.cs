@@ -13,6 +13,18 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, user_data> user_data_dict;
 
     [System.Serializable]
+    public struct slot_data
+    {
+        public int item_id;
+        public int item_nums;
+        public slot_data(int id, int nums)
+        {
+            this.item_id = id;
+            this.item_nums = nums;
+        }
+    }
+
+    [System.Serializable]
     public struct user_data
     {
         public string id;
@@ -26,9 +38,9 @@ public class GameManager : MonoBehaviour
         public float maxHp;
         public float curMp;
         public float maxMp;
-        public WeaponData weapon;
-        public ArmorData armor;
-        public ItemData[] inventory;
+        public int weapon;
+        public int armor;
+        public slot_data[] inventory;
         public user_data(string id, string password)
         {
             this.id = id;
@@ -42,12 +54,12 @@ public class GameManager : MonoBehaviour
             maxHp = 100;
             curMp = 100;
             maxMp = 100;
-            weapon = new WeaponData(0, "", 0, 0, "",0);
-            armor = new ArmorData(0, "", 0, 0, "",0);
-            inventory = new ItemData[42];
+            weapon = 0;
+            armor = 0;
+            inventory = new slot_data[42];
             for (int i = 0; i < 42; i++)
             {
-                inventory[i] = new ItemData(0, "", 0, 0, "");
+                inventory[i] = new slot_data(0,0);
             }
         }
     }
@@ -126,23 +138,32 @@ public class GameManager : MonoBehaviour
         temp.curHp = ps.curHp;
         temp.maxMp = ps.maxMp;
         temp.curMp = ps.curMp;
-        temp.attack = ps.attack - (CharacterInfoSystem.instance.weaponSlot.item as WeaponData).attack;
-        temp.defense = ps.defense - (CharacterInfoSystem.instance.armorSlot.item as ArmorData).defense;
-        temp.weapon = CharacterInfoSystem.instance.weaponSlot.item as WeaponData;
-        temp.armor = CharacterInfoSystem.instance.armorSlot.item as ArmorData;
+        temp.attack = ps.attack;
+        if(CharacterInfoSystem.instance.weaponSlot.item_id != 0)
+        {
+            temp.attack -= ItemSystem.instance.weapon_dict[CharacterInfoSystem.instance.weaponSlot.item_id].attack;
+        }
+        temp.defense = ps.defense;
+        if(CharacterInfoSystem.instance.armorSlot.item_id != 0)
+        {
+            temp.defense -= ItemSystem.instance.armor_dict[CharacterInfoSystem.instance.armorSlot.item_id].defense;
+        }
+        temp.weapon = CharacterInfoSystem.instance.weaponSlot.item_id;
+        temp.armor = CharacterInfoSystem.instance.armorSlot.item_id;
         for (int i = 0; i < InventorySystem.instance.itemSlots.Length; i++)
         {
-            temp.inventory[i] = InventorySystem.instance.itemSlots[i].item;
+            temp.inventory[i].item_id = InventorySystem.instance.itemSlots[i].item_id;
+            temp.inventory[i].item_nums = InventorySystem.instance.itemSlots[i].item_nums;
         }
         for (int i = 0; i < sd.users_data_arr.Length; i++)
         {
             if(sd.users_data_arr[i].id == temp.id)
             {
-                print(11);
                 sd.users_data_arr[i] = temp;
             }
         }
         user_data_dict[temp.id] = temp;
         SaveUserData();
+        Application.Quit();
     }
 }

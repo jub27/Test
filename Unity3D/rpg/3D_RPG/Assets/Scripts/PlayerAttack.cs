@@ -31,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
     public void AttackEnable()
     {
         cc.enabled = true;
+        attakEnd = false;
     }
 
     public void AttackDisable()
@@ -39,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
     }
     public void AttackEnd()
     {
- 
+        attakEnd = true;
     }
 
     public void ComboStart()

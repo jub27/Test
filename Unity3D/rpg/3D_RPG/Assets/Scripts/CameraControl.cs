@@ -7,12 +7,12 @@ public class CameraControl : MonoBehaviour
     private Transform target;
     private PlayerControl cm;
     private LayerMask layerMask = 8;
-    private Vector3 targetOffset = new Vector3(0.0f, 10.5f, -10.0f);
-    private float currentDistance = 10.0f;
+    private float currentDistance = 15.0f;
+    private float wheelDistance = 5.0f;
     private float distance = 10.0f;
 
     private float x = 0.0f;
-    private float y = 0.0f;
+    private float y = -50.0f;
 
     private float distanceVelocity = 0.0f;
 
@@ -23,24 +23,28 @@ public class CameraControl : MonoBehaviour
     {
         target = GameObject.Find("Player").GetComponent<Transform>();
         cm = GameObject.Find("Player").GetComponent<PlayerControl>();
-        Vector3 angles = transform.eulerAngles;
-        x = angles.y;
-        y = angles.x;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = target.position + targetOffset;
-        transform.forward = (target.position - transform.position).normalized;
-        /*
-        x += Input.GetAxis("Mouse X") * 4.0f;
-        y -= Input.GetAxis("Mouse Y") * 3.2f;
-
-        y = Mathf.Clamp(y, -20, 80);
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        currentDistance = Mathf.Clamp(currentDistance - wheelDistance*wheelInput, 5.0f, 15.0f);
+        if (Input.GetMouseButton(2))
+        {
+            x += Input.GetAxis("Mouse X") * 4.0f;
+            y -= Input.GetAxis("Mouse Y") * 3.2f;
+        }
+        y = Mathf.Clamp(y, -80, 20);
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
 
+        transform.position = target.transform.position + rotation * Vector3.forward * currentDistance;
+
+        transform.forward = (target.transform.position - transform.position).normalized;
+
+        /*
         Vector3 targetPos = target.position + targetOffset;
 
         Vector3 direction = rotation * -Vector3.forward;
@@ -52,7 +56,7 @@ public class CameraControl : MonoBehaviour
         transform.rotation = rotation;
 
         transform.position = targetPos + direction * currentDistance;
-
+        /*
         //캐릭터 정면을 카메라 정면으로 설정
         Vector3 playerDir = transform.forward;
         playerDir.y = 0;

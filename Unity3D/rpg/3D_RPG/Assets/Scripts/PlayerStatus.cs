@@ -39,6 +39,18 @@ public class PlayerStatus : MonoBehaviour
             attack_stat.text = "공격력 : " + attack.ToString();
             defense_stat.text = "방어력 : " + defense.ToString();
             level_stat.text = "레벨 : " + level.ToString();
+            if (GameManager.instance.load_data.weapon != 0)
+            {
+                CharacterInfoSystem.instance.weaponSlot.SetItem(GameManager.instance.load_data.weapon);
+                CharacterInfoSystem.instance.weaponSlot.equiped = true;
+                UpdateAttack(ItemSystem.instance.weapon_dict[GameManager.instance.load_data.weapon].attack);
+            }
+            if (GameManager.instance.load_data.armor != 0)
+            {
+                CharacterInfoSystem.instance.armorSlot.SetItem(GameManager.instance.load_data.armor);
+                CharacterInfoSystem.instance.armorSlot.equiped = true;
+                UpdateDefense(ItemSystem.instance.armor_dict[GameManager.instance.load_data.armor].defense);
+            }
         }
         else
         {

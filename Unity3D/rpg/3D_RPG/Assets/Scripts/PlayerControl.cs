@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     private float yVelocity = -1; // 속도
     public bool isBlocking = false;
     private Vector3 destination;
-    private GameObject target;
+    private EnemyStatus target;
     public Transform skillFirePosition;
     public int curSkillNum = 0;
     public GameObject[] skillList;
@@ -50,8 +50,6 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
-        if (target != null)
-            destination = target.transform.position;
         Move();
         yVelocity += gravity * Time.deltaTime;
         playerAnimator.SetFloat("Y_Speed", yVelocity);
@@ -63,18 +61,20 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            playerAnimator.SetBool("Jump", true);
+            //playerAnimator.SetBool("Jump", true);
         }
     }
 
     public void SetDestination(Vector3 destination)
     {
         this.destination = destination;
+        target = null;
     }
 
     public void SetTarget(GameObject enemy)
     {
-        target = enemy;
+        target = enemy.GetComponent<EnemyStatus>();
+        destination = target.transform.position;
     }
 
     public void Move()
@@ -86,11 +86,12 @@ public class PlayerControl : MonoBehaviour
         if (isBlocking)
             return;
         destination.y = transform.position.y;
-        if (target != null)
+        if (target != null && !target.dead)
         {
             if ((transform.position - destination).magnitude < 1.5f)
             {
-                transform.position = destination;
+                destination = transform.position;
+                transform.forward = (target.transform.position - transform.position).normalized;
                 playerAnimator.SetBool("Walk", false);
                 Attack();
                 return;

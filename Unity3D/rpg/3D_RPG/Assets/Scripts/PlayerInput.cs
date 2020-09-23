@@ -28,11 +28,11 @@ public class PlayerInput : MonoBehaviour
             playerAnimator.SetBool("Run", false);
         }
 
-        if(characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            if (!playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
-                cm.Jump();
-        }
+        //if(characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (!playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
+        //        cm.Jump();
+        //}
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -52,7 +52,7 @@ public class PlayerInput : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            cm.Skill();
+            //cm.Skill();
         }
         if (Input.GetMouseButtonUp(1))
         {

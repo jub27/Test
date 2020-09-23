@@ -6,80 +6,82 @@ using UnityEngine.EventSystems;
 using System.Text;
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    public ItemData item;
+    public int item_id;
+    public int item_nums;
+    public bool equiped;
+
+
     public Image image_child;
     private Image image;
     private Text itemNums_Text;
     public GameObject itemInfo;
-    private int itemNums;
-    public bool empty = true;
-    public bool equiped;
     public int index;
-    static int count = 0;
     private PlayerStatus ps;
     private void Awake()
     {
         image = GetComponent<Image>();
         itemNums_Text = GetComponentInChildren<Text>();
         ps = GameObject.Find("Player").GetComponent<PlayerStatus>();
-        itemNums = 0;
-        empty = true;
+        item_nums = 0;
         equiped = false;
     }
 
-    public void SetItem(ItemData item)
+    public void SetItem(int id)
     {
-        this.item = item;
-        image_child.sprite = ItemSystem.instance.item_Sprites[item.id];
+        item_id = id;
+        image_child.sprite = ItemSystem.instance.item_Sprites[item_id];
         image_child.color = new Color(1, 1, 1, 1);
-        image.color = InventorySystem.instance.outLine[(int)item.itemGrade];
-        itemNums = 1;
-        itemInfo.GetComponentInChildren<Text>().text = item.itemInfo;
-        if (item.itemType == ItemSystem.ItemType.CONSUMED)
+        item_nums = 1;
+        if (item_id < 1000)
         {
-            itemNums_Text.text = "x" + itemNums.ToString();
+            image.color = InventorySystem.instance.outLine[(int)ItemSystem.instance.consume_dict[item_id].itemGrade];
+            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.consume_dict[item_id].itemInfo;
+        }
+        else if(item_id < 2000)
+        {
+            image.color = InventorySystem.instance.outLine[(int)ItemSystem.instance.weapon_dict[item_id].itemGrade];
+            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.weapon_dict[item_id].itemInfo;
+        }
+        else if(item_id < 3000)
+        {
+            image.color = InventorySystem.instance.outLine[(int)ItemSystem.instance.armor_dict[item_id].itemGrade];
+            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.armor_dict[item_id].itemInfo;
+        }
+        if (item_id < 1000)
+        {
+            itemNums_Text.text = "x" + item_nums.ToString();
             itemNums_Text.gameObject.SetActive(true);
         }
-        empty = false;
     }
 
     public void UnSetItem()
     {
-        if(item.itemType == ItemSystem.ItemType.WEAPON)
-        {
-            ps.attack -= (item as WeaponData).attack;
-        }
-        else if (item.itemType == ItemSystem.ItemType.ARMOR)
-        {
-            ps.defense -= (item as ArmorData).defense;
-        }
-        item = new ItemData(0, "", 0, 0, "");
+        item_id = 0;
         image_child.sprite = null;
         image_child.color = new Color(1, 1, 1, 0);
         image.color = new Color(1, 1, 1, 0.39f);
-        itemNums = 0;
+        item_nums = 0;
         itemInfo.GetComponentInChildren<Text>().text = "";
         itemInfo.SetActive(false);
         equiped = false;
-        empty = true;
     }
 
     public void AddNums()
     {
-        itemNums++;
-        itemNums_Text.text = "x" + itemNums.ToString();
+        item_nums++;
+        itemNums_Text.text = "x" + item_nums.ToString();
     }
 
     public void CloseInfo()
     {
-        if (empty)
+        if (item_id == 0)
             return;
         itemInfo.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (empty)
+        if (item_id == 0)
         {
             return;
         }
@@ -91,56 +93,56 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             }
             else
             {
-                if(item.itemType == ItemSystem.ItemType.CONSUMED)
+                if(item_id < 1000)
                 {
-                    if(item.id == 1) // hp포션
+                    if(item_id == 1) // hp포션
                     {
                         ps.DrinkHpPotion(30);
-                        itemNums--;
-                        if(itemNums == 0)
+                        item_nums--;
+                        itemNums_Text.text = "x" + item_nums.ToString();
+                        if (item_nums == 0)
                         {
+                            itemNums_Text.text = "";
                             UnSetItem();
                         }
                     }
-                    else if(item.id == 2)// mp포션
+                    else if(item_id == 2)// mp포션
                     {
                         ps.DrinkMpPotion(30);
-                        itemNums--;
-                        if (itemNums == 0)
+                        item_nums--;
+                        itemNums_Text.text = "x" + item_nums.ToString();
+                        if (item_nums == 0)
                         {
+                            itemNums_Text.text = "";
                             UnSetItem();
                         }
                     }
                     return;
                 }
-                else if(item.itemType == ItemSystem.ItemType.ARMOR)
+                else if(item_id < 2000)
                 {
-                    ItemData temp = item;
+                    int temp = item_id;
                     UnSetItem();
-                    if (CharacterInfoSystem.instance.armorSlot.empty == false)
+                    if (CharacterInfoSystem.instance.weaponSlot.item_id != 0)
                     {
-                        ArmorData adata = CharacterInfoSystem.instance.armorSlot.item as ArmorData;
-                        ps.UpdateDefense(-adata.defense);
-                        CharacterInfoSystem.instance.armorSlot.UnEquip(index);
-                    }
-                    CharacterInfoSystem.instance.armorSlot.SetItem(temp);
-                    CharacterInfoSystem.instance.armorSlot.equiped = true;
-                    ps.UpdateDefense((temp as ArmorData).defense);
-                }
-                else if (item.itemType == ItemSystem.ItemType.WEAPON)
-                {
-                    ItemData temp = item;
-                    UnSetItem();
-                    if (CharacterInfoSystem.instance.weaponSlot.empty == false)
-                    {
-                        WeaponData wdata = CharacterInfoSystem.instance.weaponSlot.item as WeaponData;
-                        ps.UpdateAttack(-wdata.attack);
                         CharacterInfoSystem.instance.weaponSlot.UnEquip(index);
 
                     }
                     CharacterInfoSystem.instance.weaponSlot.SetItem(temp);
                     CharacterInfoSystem.instance.weaponSlot.equiped = true;
-                    ps.UpdateAttack((temp as WeaponData).attack);
+                    ps.UpdateAttack(ItemSystem.instance.weapon_dict[temp].attack);
+                }
+                else if (item_id < 3000)
+                {
+                    int temp = item_id;
+                    UnSetItem();
+                    if (CharacterInfoSystem.instance.armorSlot.item_id != 0)
+                    {
+                        CharacterInfoSystem.instance.armorSlot.UnEquip(index);
+                    }
+                    CharacterInfoSystem.instance.armorSlot.SetItem(temp);
+                    CharacterInfoSystem.instance.armorSlot.equiped = true;
+                    ps.UpdateDefense(ItemSystem.instance.armor_dict[temp].defense);
                 }
             }
         }
@@ -148,15 +150,23 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void UnEquip(int i)
     {
-        if (InventorySystem.instance.PutItem(item, i))
+        if (InventorySystem.instance.PutItem(item_id, i))
         {
+            if(item_id < 2000)
+            {
+                ps.UpdateAttack(-(ItemSystem.instance.weapon_dict[item_id].attack));
+            }
+            else if (item_id < 3000)
+            {
+                ps.UpdateDefense(-(ItemSystem.instance.armor_dict[item_id].defense));
+            }
             UnSetItem();
         }
     }
 
     public void ShowInfo()
     {
-        if (empty)
+        if (item_id == 0)
             return;
         itemInfo.SetActive(true);
 

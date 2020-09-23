@@ -12,6 +12,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void Login()
     {
+        if (id.text == "" || password.text == "")
+        {
+            notify.text = "아이디 또는 비밀번호를 입력해주세요.";
+            return;
+        }
         if (GameManager.instance.user_data_dict.ContainsKey(id.text))
         {
             if (GameManager.instance.user_data_dict[id.text].password == password.text)
@@ -33,6 +38,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void AddNewUser()
     {
+        if(id.text == "" || password.text == "")
+        {
+            notify.text = "아이디 또는 비밀번호를 입력해주세요.";
+            return;
+        }
         if(GameManager.instance.AddNewUsersData(id.text, password.text))
         {
             SceneManager.LoadScene("Town");
@@ -41,5 +51,10 @@ public class MainMenuManager : MonoBehaviour
         {
             notify.text = "이미 존재하는 아이디 입니다.";
         }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

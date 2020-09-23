@@ -9,6 +9,8 @@ public class CharacterInfoSystem : MonoBehaviour
     public ItemSlot weaponSlot;
     public ItemSlot armorSlot;
     public PlayerStatus ps;
+    private bool check = false;
+    private Vector3 offset;
     private void Awake()
     {
         if (instance == null)
@@ -24,25 +26,27 @@ public class CharacterInfoSystem : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-        if (GameManager.instance.is_loaded)
-        {
-            if (GameManager.instance.load_data.weapon != null && GameManager.instance.load_data.weapon.id != 0)
-            {
-                weaponSlot.SetItem(GameManager.instance.load_data.weapon);
-                ps.attack += GameManager.instance.load_data.weapon.attack;
-            }
-            else if (GameManager.instance.load_data.armor != null && GameManager.instance.load_data.armor.id != 0)
-            {
-                armorSlot.SetItem(GameManager.instance.load_data.armor);
-                ps.defense += GameManager.instance.load_data.armor.defense;
-            }
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (GetComponentInChildren<DragWindow>().isMoving)
+        {
+            if (check == false)
+            {
+                offset = transform.position - GetComponentInChildren<DragWindow>().baseMousePosition;
+                check = true;
+            }
+            else
+            {
+                transform.position = Input.mousePosition + offset;
+            }
+        }
+        else
+        {
+            check = false;
+        }
     }
 
     public void CheacterInfoOpenClose()

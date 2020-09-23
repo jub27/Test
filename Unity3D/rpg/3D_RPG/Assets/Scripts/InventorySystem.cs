@@ -40,9 +40,9 @@ public class InventorySystem : MonoBehaviour
         {
             for (int i = 0; i < GameManager.instance.load_data.inventory.Length; i++)
             {
-                if (GameManager.instance.load_data.inventory[i].id != 0)
+                if (GameManager.instance.load_data.inventory[i].item_id != 0)
                 {
-                    PutItem(GameManager.instance.load_data.inventory[i], i);
+                    PutItem(GameManager.instance.load_data.inventory[i].item_id, i);
                 }
             }
         }
@@ -70,37 +70,37 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public bool PutItem(ItemData item, int index = -1)
+    public bool PutItem(int item_id, int index = -1)
     {
         if (index != -1)
         {
-            itemSlots[index].SetItem(item);
+            itemSlots[index].SetItem(item_id);
             return true;
         }
-        if (item.itemType != ItemSystem.ItemType.CONSUMED)
+        if (item_id >= 1000)
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (itemSlots[i].empty)
+                if (itemSlots[i].item_id == 0)
                 {
-                    itemSlots[i].SetItem(item);
+                    itemSlots[i].SetItem(item_id);
                     return true;
                 }
             }
         }
-        else if(item.itemType == ItemSystem.ItemType.CONSUMED)
+        else if(item_id < 1000)
         {
             int j = -1;
             int k = 0;
             int m = -1;
             for (; k < itemSlots.Length; k++)
             {
-                if (!itemSlots[k].empty && itemSlots[k].item.id == item.id)
+                if (itemSlots[k].item_id != 0 && itemSlots[k].item_id == item_id)
                 {
                     j = k;
                     break;
                 }
-                if(m == -1 && itemSlots[k].empty)
+                if(m == -1 && itemSlots[k].item_id == 0)
                 {
                     m = k;
                 }
@@ -112,7 +112,7 @@ public class InventorySystem : MonoBehaviour
             }
             else if(m != -1)
             {
-                itemSlots[m].SetItem(item);
+                itemSlots[m].SetItem(item_id);
                 return true;
             }
         }
