@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
-    Animator playerAnimator;
-    CharacterController characterController;
+    private Animator playerAnimator;
+    private CharacterController characterController;
+    private PlayerAttack pa;
     private PlayerStatus cs;
     private float movingSpeed = 4.5f;
     private float runningSpeed = 2.5f;
@@ -14,11 +16,7 @@ public class PlayerControl : MonoBehaviour
     public bool isBlocking = false;
     private Vector3 destination;
     private EnemyStatus target;
-    public Transform skillFirePosition;
-    public int curSkillNum = 0;
-    public GameObject[] skillList;
     static public PlayerControl instance = null;
-    PlayerAttack pa;
 
     private void Awake()
     {
@@ -136,52 +134,6 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Jump()
-    {
-        if (cs.dead)
-        {
-            return;
-        }
-        yVelocity = 10;
-        playerAnimator.SetBool("Jump", true);
-    }
-
-    public void Skill()
-    {
-        if (cs.dead)
-        {
-            return;
-        }
-        isBlocking = true;
-        /*
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 mousePoint = new Vector3();
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 10000f))
-        {
-            mousePoint = hit.point;
-        }
-        mousePoint.y = skillFirePosition.position.y;
-        skillFirePosition.forward = (mousePoint - skillFirePosition.position).normalized;
-        */
-        skillList[curSkillNum].SetActive(true);
-        playerAnimator.SetTrigger("Skill");
-    }
-
-    public void UnBlock()
-    {
-        if (cs.dead)
-        {
-            return;
-        }
-        isBlocking = false;
-    }
-
-    public void SetPlayerDirection(Vector3 playerDir)
-    {
-        transform.forward = playerDir;
-    }
-    
     public void OnDamage()
     {
         if (cs.dead)
@@ -191,8 +143,18 @@ public class PlayerControl : MonoBehaviour
         playerAnimator.SetTrigger("Damaged");
     }
 
-    public void Die()
+    public IEnumerator Die()
     {
-        Destroy(this.gameObject);
+        playerAnimator.SetTrigger("Dead");
+        cs.dead = true;
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("Town");
+        cs.dead = false;
+        cs.curExp = 0;
+        cs.curHp = cs.maxHp;
+        cs.curMp = cs.maxMp;
+        cs.UpdateUI();
+        playerAnimator.SetTrigger("Hukkatsu");
+        yield break;
     }
 }

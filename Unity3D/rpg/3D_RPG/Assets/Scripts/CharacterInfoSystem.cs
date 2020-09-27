@@ -8,19 +8,14 @@ public class CharacterInfoSystem : MonoBehaviour
 
     public ItemSlot weaponSlot;
     public ItemSlot armorSlot;
-    public PlayerStatus ps;
     private bool check = false;
     private Vector3 offset;
     private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
     // Start is called before the first frame update
     void Start()
@@ -34,26 +29,21 @@ public class CharacterInfoSystem : MonoBehaviour
         if (GetComponentInChildren<DragWindow>().isMoving)
         {
             if (check == false)
-            {
-                offset = transform.position - GetComponentInChildren<DragWindow>().baseMousePosition;
                 check = true;
-            }
             else
-            {
                 transform.position = Input.mousePosition + offset;
-            }
         }
         else
-        {
             check = false;
-        }
     }
 
-    public void CheacterInfoOpenClose()
+    public void CheacterInfoOpen()
     {
-        if (gameObject.activeSelf == false)
-            gameObject.SetActive(true);
-        else
-            gameObject.SetActive(false);
+        gameObject.SetActive(true);
+    }
+
+    public void CheacterInfoClose()
+    {
+        gameObject.SetActive(false);
     }
 }

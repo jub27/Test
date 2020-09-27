@@ -31,7 +31,7 @@ public class EnemyControl : MonoBehaviour
     private int randomDir;
     public bool preAttack = false;
     public Item dropItem;
-
+    public Gold dropGold;
     // Start is called before the first frame update
     void Start()
     {
@@ -300,9 +300,18 @@ public class EnemyControl : MonoBehaviour
     public void DropItem()
     {
         float random = Random.Range(0, 100);
-        if (random < 100)
+        if (random < 50)
         {
             Instantiate(dropItem, transform.position, transform.rotation);
+        }
+    }
+
+    public void DropGold()
+    {
+        float random = Random.Range(0, 100);
+        if (random < 50)
+        {
+            Instantiate(dropGold, transform.position, transform.rotation);
         }
     }
 }

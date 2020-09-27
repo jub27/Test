@@ -13,12 +13,6 @@ public class EnemyAttack : MonoBehaviour
         cc = weapon.GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         cc.enabled = false;

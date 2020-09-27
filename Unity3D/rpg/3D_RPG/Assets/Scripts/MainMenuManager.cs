@@ -21,8 +21,7 @@ public class MainMenuManager : MonoBehaviour
         {
             if (GameManager.instance.user_data_dict[id.text].password == password.text)
             {
-                GameManager.instance.load_data = GameManager.instance.user_data_dict[id.text];
-                GameManager.instance.is_loaded = true;
+                GameManager.instance.cur_user_data = GameManager.instance.user_data_dict[id.text];
                 SceneManager.LoadScene("Town");
             }
             else

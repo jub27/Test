@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerStatus : MonoBehaviour
 {
-    Animator animator;
     public int level;
     public float maxHp = 100;
     public float curHp;
@@ -13,57 +12,57 @@ public class PlayerStatus : MonoBehaviour
     public float maxExp = 100;
     public float curExp;
     public bool dead = false;
+    public int gold;
+    public float attack;
+    public float defense;
+
     public Slider expUI;
     public Image hpUI;
     public Image mpUI;
-    public float attack;
-    public float defense;
     public Text attack_stat;
     public Text defense_stat;
     public Text level_stat;
+    public Text gold_text;
+
+    public static PlayerStatus instance = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (GameManager.instance.is_loaded)
+        if (instance == null)
         {
-            level = GameManager.instance.load_data.level;
-            attack = GameManager.instance.load_data.attack;
-            defense = GameManager.instance.load_data.defense;
-            maxHp = GameManager.instance.load_data.maxHp;
-            curHp = GameManager.instance.load_data.curHp;
-            maxExp = GameManager.instance.load_data.maxExp;
-            curExp = GameManager.instance.load_data.curExp;
-            maxMp = GameManager.instance.load_data.maxMp;
-            curMp = GameManager.instance.load_data.curMp;
+            instance = this;
+            level = GameManager.instance.cur_user_data.level;
+            attack = GameManager.instance.cur_user_data.attack;
+            defense = GameManager.instance.cur_user_data.defense;
+            maxHp = GameManager.instance.cur_user_data.maxHp;
+            curHp = GameManager.instance.cur_user_data.curHp;
+            maxExp = GameManager.instance.cur_user_data.maxExp;
+            curExp = GameManager.instance.cur_user_data.curExp;
+            maxMp = GameManager.instance.cur_user_data.maxMp;
+            curMp = GameManager.instance.cur_user_data.curMp;
             attack_stat.text = "공격력 : " + attack.ToString();
             defense_stat.text = "방어력 : " + defense.ToString();
             level_stat.text = "레벨 : " + level.ToString();
-            if (GameManager.instance.load_data.weapon != 0)
+            gold = GameManager.instance.cur_user_data.gold;
+            gold_text.text = gold.ToString();
+            if (GameManager.instance.cur_user_data.weapon != 0)
             {
-                CharacterInfoSystem.instance.weaponSlot.SetItem(GameManager.instance.load_data.weapon);
+                CharacterInfoSystem.instance.weaponSlot.SetItem(GameManager.instance.cur_user_data.weapon);
                 CharacterInfoSystem.instance.weaponSlot.equiped = true;
-                UpdateAttack(ItemSystem.instance.weapon_dict[GameManager.instance.load_data.weapon].attack);
+                UpdateAttack(ItemSystem.instance.weapon_dict[GameManager.instance.cur_user_data.weapon].attack);
             }
-            if (GameManager.instance.load_data.armor != 0)
+            if (GameManager.instance.cur_user_data.armor != 0)
             {
-                CharacterInfoSystem.instance.armorSlot.SetItem(GameManager.instance.load_data.armor);
+                CharacterInfoSystem.instance.armorSlot.SetItem(GameManager.instance.cur_user_data.armor);
                 CharacterInfoSystem.instance.armorSlot.equiped = true;
-                UpdateDefense(ItemSystem.instance.armor_dict[GameManager.instance.load_data.armor].defense);
+                UpdateDefense(ItemSystem.instance.armor_dict[GameManager.instance.cur_user_data.armor].defense);
             }
+
         }
         else
         {
-            level = 1;
-            animator = GetComponent<Animator>();
-            curHp = maxHp;
-            curMp = maxMp;
-            curExp = 0;
-            attack = 10;
-            attack_stat.text = "공격력 : " + attack.ToString();
-            defense = 0;
-            defense_stat.text = "방어력 : " + defense.ToString();
-            level_stat.text = "레벨 : " + level.ToString();
+            Destroy(gameObject);
         }
     }
 
@@ -80,13 +79,13 @@ public class PlayerStatus : MonoBehaviour
         curHp -= damage;
         if (curHp <= 0)
         {
-            dead = true;
-            animator.SetTrigger("Dead");
+            PlayerControl.instance.StartCoroutine("Die");
         }
     }
     public void GetExp(float exp)
     {
         curExp += exp;
+
         if (curExp >= maxExp)
         {
             level++;
@@ -111,7 +110,7 @@ public class PlayerStatus : MonoBehaviour
     public void DrinkHpPotion(int hp)
     {
         curHp += hp;
-        if(curHp >= maxHp)
+        if (curHp >= maxHp)
         {
             curHp = maxHp;
         }
@@ -135,5 +134,11 @@ public class PlayerStatus : MonoBehaviour
     {
         this.defense += defense;
         defense_stat.text = "방어력 : " + this.defense.ToString();
+    }
+
+    public void UpdateGold(int gold)
+    {
+        this.gold += gold;
+        gold_text.text = this.gold.ToString();
     }
 }

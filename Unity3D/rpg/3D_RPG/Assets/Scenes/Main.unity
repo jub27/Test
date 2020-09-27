@@ -1729,6 +1729,7 @@ MonoBehaviour:
     maxMp: 0
     weapon: 0
     armor: 0
+    gold: 0
     inventory: []
   users_data_list: []
   sd:

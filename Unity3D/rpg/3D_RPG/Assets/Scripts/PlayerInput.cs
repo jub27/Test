@@ -27,13 +27,6 @@ public class PlayerInput : MonoBehaviour
         {
             playerAnimator.SetBool("Run", false);
         }
-
-        //if(characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (!playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump") && !playerAnimator.GetBool("Attack"))
-        //        cm.Jump();
-        //}
-
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,46 +37,28 @@ public class PlayerInput : MonoBehaviour
                 mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
                 cm.SetDestination(mousePoint);
             }
+            if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("NPC")))
+            {
+                mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            }
             if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Enemy")))
             {
                 mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
                 cm.SetTarget(hit.collider.gameObject);
             }
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            //cm.Skill();
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            cm.UnBlock();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            cm.curSkillNum = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            cm.curSkillNum = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            cm.curSkillNum = 2;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            cm.curSkillNum = 3;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            cm.curSkillNum = 4;
-        }
         if (Input.GetKeyDown(KeyCode.I)){
-            InventorySystem.instance.InventoryOpenClose();
+            if (InventorySystem.instance.gameObject.activeSelf == false)
+                InventorySystem.instance.InventoryOpen();
+            else
+                InventorySystem.instance.InventoryClose();
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            CharacterInfoSystem.instance.CheacterInfoOpenClose();
+            if (CharacterInfoSystem.instance.gameObject.activeSelf == false)
+                CharacterInfoSystem.instance.CheacterInfoOpen();
+            else
+                CharacterInfoSystem.instance.CheacterInfoClose();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {

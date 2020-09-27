@@ -7,17 +7,6 @@ public class DragWindow : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool isMoving = false;
     public Vector3 baseMousePosition;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

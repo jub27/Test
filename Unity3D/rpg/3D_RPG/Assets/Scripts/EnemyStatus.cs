@@ -34,6 +34,7 @@ public class EnemyStatus : MonoBehaviour
         {
             dead = true;
             ec.DropItem();
+            ec.DropGold();
             animator.SetTrigger("Dead");
         }
     }

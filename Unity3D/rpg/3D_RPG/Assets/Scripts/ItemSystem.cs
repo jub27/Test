@@ -26,6 +26,7 @@ public class ItemSystem : MonoBehaviour
         public int itemType;
         public int itemGrade;
         public string itemInfo;
+        public int price;
         public int point;
     }
     [System.Serializable]
@@ -36,6 +37,7 @@ public class ItemSystem : MonoBehaviour
         public int itemType;
         public int itemGrade;
         public string itemInfo;
+        public int price;
         public float attack;
     }
     [System.Serializable]
@@ -46,6 +48,7 @@ public class ItemSystem : MonoBehaviour
         public int itemType;
         public int itemGrade;
         public string itemInfo;
+        public int price;
         public float defense;
     }
 

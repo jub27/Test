@@ -7,10 +7,7 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager instance = null;
     private PlayerStatus ps;
-
-    public bool is_loaded = false;
-    public user_data load_data;
-    public Dictionary<string, user_data> user_data_dict;
+    public user_data cur_user_data;
 
     [System.Serializable]
     public struct slot_data
@@ -40,6 +37,7 @@ public class GameManager : MonoBehaviour
         public float maxMp;
         public int weapon;
         public int armor;
+        public int gold;
         public slot_data[] inventory;
         public user_data(string id, string password)
         {
@@ -56,6 +54,7 @@ public class GameManager : MonoBehaviour
             maxMp = 100;
             weapon = 0;
             armor = 0;
+            gold = 0;
             inventory = new slot_data[42];
             for (int i = 0; i < 42; i++)
             {
@@ -63,15 +62,16 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public List<user_data> users_data_list;
 
     [System.Serializable]
     public struct SaveData
     {
         public user_data[] users_data_arr;
     }
-    public SaveData sd;
-    private void Awake()
+    public SaveData sd; // json으로 저장할 전체 유저들 데이터
+    public Dictionary<string, user_data> user_data_dict; // 로그인 할때 id, password 참조할 dictionary
+    public List<user_data> users_data_list; // 새로 캐릭터 생성할때마다 이 리스트에 저장, json으로 저장할때는 SaveData 형태로 바꿔서 저장
+    private void Awake()// json 데이터 읽어와서 유저 데이터, list, dictionary 초기화
     {
         if (instance == null)
         {
@@ -95,12 +95,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
-    public bool AddNewUsersData(string id, string password)
+    public bool AddNewUsersData(string id, string password) // 새로 생성한 유저를 dictionary에 추가하고 json형태로 저장,성공하면 true, 실패하면 false 반환
     {
         if (user_data_dict.ContainsKey(id))
         {
@@ -114,22 +109,14 @@ public class GameManager : MonoBehaviour
             sd.users_data_arr[i] = users_data_list[i];
         }
         user_data_dict.Add(id, temp);
-        load_data = instance.user_data_dict[id];
-        is_loaded = true;
-        SaveUserData();
+        cur_user_data = instance.user_data_dict[id];
+        SaveCurUserData();
         return true;
     }
 
-    public void SaveUserData()
+    public void SaveCurUserData() // 현재 유저 데이터를 json 으로 저장
     {
-        string jsonData = JsonUtility.ToJson(sd, true);
-        string path = Application.dataPath + "/UsersData/usersData" + ".json";
-        File.WriteAllText(path, jsonData);
-    }
-
-    public void ExitGame()
-    {
-        user_data temp = new user_data(load_data.id, load_data.password);
+        user_data temp = new user_data(cur_user_data.id, cur_user_data.password);
         ps = GameObject.Find("Player").GetComponent<PlayerStatus>();
         temp.level = ps.level;
         temp.maxExp = ps.maxExp;
@@ -139,17 +126,18 @@ public class GameManager : MonoBehaviour
         temp.maxMp = ps.maxMp;
         temp.curMp = ps.curMp;
         temp.attack = ps.attack;
-        if(CharacterInfoSystem.instance.weaponSlot.item_id != 0)
+        if (CharacterInfoSystem.instance.weaponSlot.item_id != 0)
         {
             temp.attack -= ItemSystem.instance.weapon_dict[CharacterInfoSystem.instance.weaponSlot.item_id].attack;
         }
         temp.defense = ps.defense;
-        if(CharacterInfoSystem.instance.armorSlot.item_id != 0)
+        if (CharacterInfoSystem.instance.armorSlot.item_id != 0)
         {
             temp.defense -= ItemSystem.instance.armor_dict[CharacterInfoSystem.instance.armorSlot.item_id].defense;
         }
         temp.weapon = CharacterInfoSystem.instance.weaponSlot.item_id;
         temp.armor = CharacterInfoSystem.instance.armorSlot.item_id;
+        temp.gold = ps.gold;
         for (int i = 0; i < InventorySystem.instance.itemSlots.Length; i++)
         {
             temp.inventory[i].item_id = InventorySystem.instance.itemSlots[i].item_id;
@@ -157,13 +145,20 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < sd.users_data_arr.Length; i++)
         {
-            if(sd.users_data_arr[i].id == temp.id)
+            if (sd.users_data_arr[i].id == temp.id)
             {
                 sd.users_data_arr[i] = temp;
             }
         }
         user_data_dict[temp.id] = temp;
-        SaveUserData();
+        string jsonData = JsonUtility.ToJson(sd, true);
+        string path = Application.dataPath + "/UsersData/usersData" + ".json";
+        File.WriteAllText(path, jsonData);
+    }
+
+    public void ExitGame() // ESC - 게임 종료 버튼을 눌렀을때 수행됨
+    {
+        SaveCurUserData();
         Application.Quit();
     }
 }

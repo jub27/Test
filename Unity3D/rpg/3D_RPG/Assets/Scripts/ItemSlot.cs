@@ -9,7 +9,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public int item_id;
     public int item_nums;
     public bool equiped;
-
+    public bool shop_item;
+    public int price;
 
     public Image image_child;
     private Image image;
@@ -24,6 +25,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         ps = GameObject.Find("Player").GetComponent<PlayerStatus>();
         item_nums = 0;
         equiped = false;
+        shop_item = false;
+        price = 0;
     }
 
     public void SetItem(int id)
@@ -35,17 +38,20 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         if (item_id < 1000)
         {
             image.color = InventorySystem.instance.outLine[(int)ItemSystem.instance.consume_dict[item_id].itemGrade];
-            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.consume_dict[item_id].itemInfo;
+            price = ItemSystem.instance.consume_dict[item_id].price;
+            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.consume_dict[item_id].itemInfo +"\n판매가격 : " + price.ToString();
         }
         else if(item_id < 2000)
         {
             image.color = InventorySystem.instance.outLine[(int)ItemSystem.instance.weapon_dict[item_id].itemGrade];
-            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.weapon_dict[item_id].itemInfo;
+            price = ItemSystem.instance.weapon_dict[item_id].price;
+            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.weapon_dict[item_id].itemInfo + "\n공격력 : " + ItemSystem.instance.weapon_dict[item_id].attack.ToString() + "\n판매가격 : " + price.ToString();
         }
         else if(item_id < 3000)
         {
             image.color = InventorySystem.instance.outLine[(int)ItemSystem.instance.armor_dict[item_id].itemGrade];
-            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.armor_dict[item_id].itemInfo;
+            price = ItemSystem.instance.armor_dict[item_id].price;
+            itemInfo.GetComponentInChildren<Text>().text = ItemSystem.instance.armor_dict[item_id].itemInfo + "\n방어력 : " + ItemSystem.instance.armor_dict[item_id].defense.ToString() + "\n판매가격 : " + price.ToString();
         }
         if (item_id < 1000)
         {
@@ -90,6 +96,16 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             if (equiped)
             {
                 UnEquip(-1);
+            }
+            else if (shop_item)
+            {
+                if(ps.gold >= price)
+                {
+                    if (InventorySystem.instance.PutItem(item_id))
+                    {
+                        ps.UpdateGold(-price);
+                    }
+                }
             }
             else
             {

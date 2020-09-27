@@ -17,6 +17,16 @@ public class InventorySystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            gameObject.SetActive(false);
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                itemSlots[i].index = i;
+            }
+            outLine = new Color[4];
+            outLine[0] = new Color(1, 1, 1, 0.5f);
+            outLine[1] = new Color(0, 0.4688f, 1, 0.5f);
+            outLine[2] = new Color(1, 0, 0.9584f, 0.5f);
+            outLine[3] = new Color(1, 0.5854f, 0, 0.5f);
         }
         else
         {
@@ -26,27 +36,13 @@ public class InventorySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
-        for(int i = 0; i < itemSlots.Length; i++)
+        for (int i = 0; i < GameManager.instance.cur_user_data.inventory.Length; i++)
         {
-            itemSlots[i].index = i;
-        }
-        outLine = new Color[4];
-        outLine[0] = new Color(1, 1, 1, 0.5f);
-        outLine[1] = new Color(0, 0.4688f, 1, 0.5f);
-        outLine[2] = new Color(1, 0, 0.9584f, 0.5f);
-        outLine[3] = new Color(1, 0.5854f, 0, 0.5f);
-        if (GameManager.instance.is_loaded)
-        {
-            for (int i = 0; i < GameManager.instance.load_data.inventory.Length; i++)
+            if (GameManager.instance.cur_user_data.inventory[i].item_id != 0)
             {
-                if (GameManager.instance.load_data.inventory[i].item_id != 0)
-                {
-                    PutItem(GameManager.instance.load_data.inventory[i].item_id, i);
-                }
+                PutItem(GameManager.instance.cur_user_data.inventory[i].item_id, i);
             }
         }
-
     }
 
     // Update is called once per frame
@@ -54,7 +50,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (GetComponentInChildren<DragWindow>().isMoving)
         {
-            if(check == false)
+            if (check == false)
             {
                 offset = transform.position - GetComponentInChildren<DragWindow>().baseMousePosition;
                 check = true;
@@ -88,7 +84,7 @@ public class InventorySystem : MonoBehaviour
                 }
             }
         }
-        else if(item_id < 1000)
+        else if (item_id < 1000)
         {
             int j = -1;
             int k = 0;
@@ -100,17 +96,17 @@ public class InventorySystem : MonoBehaviour
                     j = k;
                     break;
                 }
-                if(m == -1 && itemSlots[k].item_id == 0)
+                if (m == -1 && itemSlots[k].item_id == 0)
                 {
                     m = k;
                 }
             }
-            if(j != -1)
+            if (j != -1)
             {
                 itemSlots[j].AddNums();
                 return true;
             }
-            else if(m != -1)
+            else if (m != -1)
             {
                 itemSlots[m].SetItem(item_id);
                 return true;
@@ -120,11 +116,13 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    public void InventoryOpenClose()
+    public void InventoryOpen()
     {
-        if (gameObject.activeSelf == false)
-            gameObject.SetActive(true);
-        else
-            gameObject.SetActive(false);
+        gameObject.SetActive(true);
+    }
+
+    public void InventoryClose()
+    {
+        gameObject.SetActive(false);
     }
 }

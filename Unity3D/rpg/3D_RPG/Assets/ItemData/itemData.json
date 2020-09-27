@@ -6,6 +6,7 @@
             "itemType": 0,
             "itemGrade": 0,
 			"itemInfo" :"hp 50 회복",
+			"price" : 100,
 			"point" : 50
         },
 		{
@@ -14,6 +15,7 @@
             "itemType": 0,
             "itemGrade": 0,
 			"itemInfo" :"mp 50 회복",
+			"price" : 100,
 			"point" : 50
         }
     ],
@@ -24,6 +26,7 @@
             "itemType": 1,
             "itemGrade": 0,
 			"itemInfo" :"무기",
+			"price" : 100,
 			"attack" : 10
         },
 		{
@@ -32,6 +35,7 @@
             "itemType": 1,
             "itemGrade": 1,
 			"itemInfo" :"무기",
+			"price" : 200,
 			"attack" : 20
         },
 		{
@@ -40,6 +44,7 @@
             "itemType": 1,
             "itemGrade": 2,
 			"itemInfo" :"무기",
+			"price" : 250,
 			"attack" : 30
         },
 		{
@@ -48,6 +53,7 @@
             "itemType": 1,
             "itemGrade": 3,
 			"itemInfo" :"무기",
+			"price" : 300,
 			"attack" : 40
         }
 	],
@@ -58,6 +64,7 @@
             "itemType": 2,
             "itemGrade": 0,
 			"itemInfo" :"갑옷",
+			"price" : 100,
 			"defense" : 1
 		},
 		{
@@ -66,6 +73,7 @@
             "itemType": 2,
             "itemGrade": 1,
 			"itemInfo" :"갑옷",
+			"price" : 200,
 			"defense" : 2
 		},
 		{
@@ -74,6 +82,7 @@
             "itemType": 2,
             "itemGrade": 2,
 			"itemInfo" :"갑옷",
+			"price" : 250,
 			"defense" : 3
 		},
 		{
@@ -82,6 +91,7 @@
             "itemType": 2,
             "itemGrade": 3,
 			"itemInfo" :"갑옷",
+			"price" : 300,
 			"defense" : 5
 		}
 	]
