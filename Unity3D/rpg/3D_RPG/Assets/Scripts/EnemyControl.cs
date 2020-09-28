@@ -25,7 +25,7 @@ public class EnemyControl : MonoBehaviour
     public Transform rayForward;
     private bool attackEnd = true;
     private float walkStopDistance = 1.0f;
-    public float attackStopDistance = 1.8f;
+    public float attackStopDistance = 1.5f;
     public float retunStartDistance = 20.0f;
     private bool hitEnd = true;
     private int randomDir;
@@ -75,7 +75,6 @@ public class EnemyControl : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                Idle();
                 break;
             case State.Walking:
                 Walking();
@@ -103,7 +102,7 @@ public class EnemyControl : MonoBehaviour
         }
         else
         {
-            if (CollisionAvoid())
+            if (CollisionCheck())
             {
                 curDir = transform.right;
                 curDir.y = 0;
@@ -121,10 +120,6 @@ public class EnemyControl : MonoBehaviour
 
         }
     }
-    void Idle()
-    {
-
-    }
 
     void Return()
     {
@@ -137,7 +132,7 @@ public class EnemyControl : MonoBehaviour
         }
         else
         {
-            if (CollisionAvoid())
+            if (CollisionCheck())
             {
                 curDir = transform.right;
                 curDir.y = 0;
@@ -195,7 +190,7 @@ public class EnemyControl : MonoBehaviour
         }
         else
         {
-            if (CollisionAvoid())
+            if (CollisionCheck())
             {
                 if (randomDir == 0)
                     curDir = transform.right;
@@ -269,11 +264,6 @@ public class EnemyControl : MonoBehaviour
         animator.SetTrigger("Hit");
     }
 
-    public void Die()
-    {
-        Destroy(this.gameObject);
-    }
-
     float CheckBelow()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -285,7 +275,7 @@ public class EnemyControl : MonoBehaviour
         return 0;
     }
 
-    bool CollisionAvoid()
+    bool CollisionCheck()
     {
         Vector3 dir = Vector3.zero;
         Ray ray = new Ray(rayForward.position, transform.forward);
@@ -313,5 +303,13 @@ public class EnemyControl : MonoBehaviour
         {
             Instantiate(dropGold, transform.position, transform.rotation);
         }
+    }
+
+    public IEnumerator Die()
+    {
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(1.0f);
+        Destroy(gameObject);
+        yield break;
     }
 }

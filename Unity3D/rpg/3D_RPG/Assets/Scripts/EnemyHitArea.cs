@@ -15,12 +15,6 @@ public class EnemyHitArea : MonoBehaviour
         cs = transform.root.gameObject.GetComponent<EnemyStatus>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         ec.SetChasing(other.transform.root.transform);
@@ -28,9 +22,9 @@ public class EnemyHitArea : MonoBehaviour
             transform.root.gameObject.GetComponent<EnemyAttack>().AttackDisable();
 
         float damage = 0;
-        if(other.GetComponent<ParticleCollider>() != null)
+        if(other.GetComponent<SkillAttack>() != null)
         {
-            damage = other.GetComponent<ParticleCollider>().power;
+            damage = other.GetComponent<SkillAttack>().power;
         }
         else
         {

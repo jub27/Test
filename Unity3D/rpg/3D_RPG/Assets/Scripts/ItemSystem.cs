@@ -60,8 +60,8 @@ public class ItemSystem : MonoBehaviour
         public ArmorData[] armorData_list;
 
     }
-    public ItemList itemList;
 
+    public ItemList itemList;
     public Dictionary<int, Sprite> item_Sprites;
     public Dictionary<int, ConsumeData> consume_dict;
     public Dictionary<int, WeaponData> weapon_dict;

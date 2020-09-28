@@ -6,18 +6,30 @@
             "level": 1,
             "attack": 10.0,
             "defense": 0.0,
-            "curExp": 0.0,
+            "curExp": 30.0,
             "maxExp": 100.0,
-            "curHp": 100.0,
+            "curHp": 80.0,
             "maxHp": 100.0,
             "curMp": 100.0,
             "maxMp": 100.0,
-            "weapon": 1001,
-            "armor": 0,
-            "gold": 3745,
+            "weapon": 1002,
+            "armor": 2001,
+            "gold": 3831,
             "inventory": [
                 {
                     "item_id": 2000,
+                    "item_nums": 1
+                },
+                {
+                    "item_id": 1001,
+                    "item_nums": 1
+                },
+                {
+                    "item_id": 2,
+                    "item_nums": 1
+                },
+                {
+                    "item_id": 1,
                     "item_nums": 1
                 },
                 {
@@ -25,20 +37,8 @@
                     "item_nums": 1
                 },
                 {
-                    "item_id": 2,
-                    "item_nums": 5
-                },
-                {
-                    "item_id": 1,
-                    "item_nums": 8
-                },
-                {
-                    "item_id": 0,
-                    "item_nums": 0
-                },
-                {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2001,
+                    "item_nums": 1
                 },
                 {
                     "item_id": 0,

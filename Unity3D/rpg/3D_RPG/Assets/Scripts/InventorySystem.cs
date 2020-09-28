@@ -17,7 +17,6 @@ public class InventorySystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            gameObject.SetActive(false);
             for (int i = 0; i < itemSlots.Length; i++)
             {
                 itemSlots[i].index = i;
@@ -43,6 +42,7 @@ public class InventorySystem : MonoBehaviour
                 PutItem(GameManager.instance.cur_user_data.inventory[i].item_id, i);
             }
         }
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

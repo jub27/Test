@@ -11,18 +11,12 @@ public class EnemyStatus : MonoBehaviour
     public bool dead = false;
     public Slider hpSlider;
     private EnemyControl ec;
-    // Start is called before the first frame update
+
     void Start()
     {
         animator = GetComponent<Animator>();
         ec = GetComponent<EnemyControl>();
         curHp = maxHp;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnDamage(float damage)
@@ -35,7 +29,7 @@ public class EnemyStatus : MonoBehaviour
             dead = true;
             ec.DropItem();
             ec.DropGold();
-            animator.SetTrigger("Dead");
+            ec.StartCoroutine("Die");
         }
     }
 }

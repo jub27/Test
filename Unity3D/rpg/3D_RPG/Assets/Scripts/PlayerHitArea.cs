@@ -40,9 +40,9 @@ public class PlayerHitArea : MonoBehaviour
         }
         else
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.GetComponent<ParticleCollider>().power - ps.defense,0));
+            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.GetComponent<SkillAttack>().power - ps.defense,0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.GetComponent<ParticleCollider>().power - ps.defense;
+            dt.damage = other.GetComponent<SkillAttack>().power - ps.defense;
         }
         transform.root.GetComponent<PlayerControl>().OnDamage();
     }

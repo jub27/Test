@@ -10,14 +10,13 @@ public class EnemySpawn : MonoBehaviour
     public float spawnDelay = 7.0f;
     private float spawnRange = 4.0f;
     private float curTime;
-    // Start is called before the first frame update
+
     void Start()
     {
         enemies = new GameObject[maxEnemyCount];
         curTime = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         curTime += Time.deltaTime;

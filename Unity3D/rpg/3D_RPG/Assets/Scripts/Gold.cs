@@ -9,7 +9,7 @@ public class Gold : MonoBehaviour
     private Rigidbody rigid;
     private TextMeshPro tm;
     private int gold = 0;
-    // Start is called before the first frame update
+
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
