@@ -16,11 +16,13 @@ public class PlayerControl : MonoBehaviour
     public bool isBlocking = false;
     private Vector3 destination;
     private EnemyStatus target;
+    public SkillAttack[] SkillList;
+    public GameObject SkillFirePosition;
     static public PlayerControl instance = null;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -119,7 +121,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Attack()
     {
-        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Jump"))
+        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged"))
         {
             playerAnimator.SetBool("Walk", false);
             if (pa.attakEnd)
@@ -131,6 +133,32 @@ public class PlayerControl : MonoBehaviour
             {
                 playerAnimator.SetBool("Combo", true);
             }
+        }
+    }
+
+    public void Skill(int i)
+    {
+        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Attack"))
+        {
+            Vector3 position = new Vector3();
+            Quaternion rotation = new Quaternion();
+            if (SkillList[i].skillType == 1)
+            {
+                position = SkillFirePosition.transform.position;
+                rotation = SkillFirePosition.transform.rotation;
+            }
+            else
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Ground")))
+                {
+                    position = hit.point;
+                }
+            }
+            playerAnimator.SetTrigger("Skill");
+            Instantiate(SkillList[i], position, rotation);
+
         }
     }
 

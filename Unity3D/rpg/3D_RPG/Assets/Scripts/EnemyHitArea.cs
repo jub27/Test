@@ -17,14 +17,14 @@ public class EnemyHitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ec.SetChasing(other.transform.root.transform);
+        ec.SetChasing(PlayerStatus.instance.transform);
         if(transform.root.gameObject.GetComponent<EnemyAttack>() != null)
             transform.root.gameObject.GetComponent<EnemyAttack>().AttackDisable();
 
         float damage = 0;
-        if(other.GetComponent<SkillAttack>() != null)
+        if(other.transform.root.GetComponent<SkillAttack>() != null)
         {
-            damage = other.GetComponent<SkillAttack>().power;
+            damage = other.transform.root.GetComponent<SkillAttack>().power;
         }
         else
         {

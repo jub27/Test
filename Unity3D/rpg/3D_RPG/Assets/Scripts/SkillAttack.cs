@@ -5,29 +5,39 @@ using UnityEngine;
 public class SkillAttack : MonoBehaviour
 {
     public float power;
-    public float[] startTime;
-    Collider skill_collider;
+    public float[] colliderActiveTime;
+    public float[] sklllPower;
+    public int skillType; // 1은 스킬 위치가 플레이어로부터 나가는 스킬, 2는 위치를 마우스로 지정하는 스킬
+    public Collider skill_collider;
     void Start()
     {
         skill_collider = GetComponent<Collider>();
+        skill_collider.enabled = false;
         StartCoroutine("SkillControl");
+        Destroy(gameObject, 10.0f);
     }
 
     IEnumerator SkillControl()
     {
-        for(int i = 1; i < startTime.Length; i++)
+        for(int i = 0; i < colliderActiveTime.Length; i++)
         {
-            skill_collider.enabled = false;
-            yield return new WaitForSeconds(startTime[i] - startTime[i-1]);
+            float waitTime;
+            if (i == 0)
+                waitTime = colliderActiveTime[i] - 0;
+            else
+                waitTime = colliderActiveTime[i] - colliderActiveTime[i-1];
+            yield return new WaitForSeconds(waitTime);
+            power = sklllPower[i];
             StartCoroutine("SkillColliderEnable");
         }
+        skill_collider.enabled = true; //지속아닌 스킬일때
         yield break;
     }
 
     IEnumerator SkillColliderEnable()
     {
         skill_collider.enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         skill_collider.enabled = false;
         yield break;
     }

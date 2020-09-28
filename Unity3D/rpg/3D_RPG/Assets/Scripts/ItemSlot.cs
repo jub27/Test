@@ -8,6 +8,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public int item_id;
     public int item_nums;
+
     public bool equiped;
     public bool shop_item;
     public int price;
@@ -152,7 +153,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 {
                     int temp = item_id;
                     UnSetItem();
-                    if (CharacterInfoSystem.instance.armorSlot.item_id != 0)
+                    if (CharacterInfoSystem.instance.armorSlot.item_id != 0)    
                     {
                         CharacterInfoSystem.instance.armorSlot.UnEquip(index);
                     }

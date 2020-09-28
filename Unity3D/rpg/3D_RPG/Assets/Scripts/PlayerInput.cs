@@ -47,6 +47,24 @@ public class PlayerInput : MonoBehaviour
                 cm.SetTarget(hit.collider.gameObject);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            cm.Skill(0);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            cm.Skill(1);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            cm.Skill(2);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            cm.Skill(3);
+        }
+
         if (Input.GetKeyDown(KeyCode.I)){
             if (InventorySystem.instance.gameObject.activeSelf == false)
                 InventorySystem.instance.InventoryOpen();

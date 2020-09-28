@@ -110,7 +110,9 @@ public class GameManager : MonoBehaviour
         }
         user_data_dict.Add(id, temp);
         cur_user_data = instance.user_data_dict[id];
-        SaveCurUserData();
+        string jsonData = JsonUtility.ToJson(sd, true);
+        string path = Application.dataPath + "/UsersData/usersData" + ".json";
+        File.WriteAllText(path, jsonData);
         return true;
     }
 
