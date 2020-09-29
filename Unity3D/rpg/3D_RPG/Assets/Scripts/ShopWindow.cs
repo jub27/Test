@@ -5,15 +5,17 @@ using UnityEngine;
 public class ShopWindow : MonoBehaviour
 {
     public GameObject shop;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static ShopWindow instance = null;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

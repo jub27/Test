@@ -19,6 +19,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public GameObject itemInfo;
     public int index;
     private PlayerStatus ps;
+    
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -110,11 +111,30 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             }
             else
             {
+                if (ShopWindow.instance.shop.gameObject.activeSelf)
+                {
+                    if (item_id < 1000)
+                    {
+                        ps.UpdateGold(ItemSystem.instance.consume_dict[item_id].price);
+                        item_nums--;
+                        itemNums_Text.text = "x" + item_nums.ToString();
+                        if (item_nums == 0)
+                        {
+                            itemNums_Text.text = "";
+                            UnSetItem();
+                        }
+                    }
+                    else if (item_id < 2000)
+                        ps.UpdateGold(ItemSystem.instance.weapon_dict[item_id].price);
+                    else if (item_id < 3000)
+                        ps.UpdateGold(ItemSystem.instance.armor_dict[item_id].price);
+                    UnSetItem();
+                }
                 if(item_id < 1000)
                 {
                     if(item_id == 1) // hp포션
                     {
-                        ps.DrinkHpPotion(30);
+                        ps.DrinkHpPotion(50);
                         item_nums--;
                         itemNums_Text.text = "x" + item_nums.ToString();
                         if (item_nums == 0)
@@ -125,7 +145,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                     }
                     else if(item_id == 2)// mp포션
                     {
-                        ps.DrinkMpPotion(30);
+                        ps.DrinkMpPotion(50);
                         item_nums--;
                         itemNums_Text.text = "x" + item_nums.ToString();
                         if (item_nums == 0)

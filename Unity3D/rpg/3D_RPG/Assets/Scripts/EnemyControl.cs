@@ -225,6 +225,8 @@ public class EnemyControl : MonoBehaviour
         InitParameter();
         hitEnd = false;
         animator.SetTrigger("Hit");
+        navMeshAgent.isStopped = true;
+        navMeshAgent.ResetPath();
     }
 
     float CheckBelow()

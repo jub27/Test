@@ -29,6 +29,8 @@ public class EnemyHitArea : MonoBehaviour
         else
         {
             damage = other.transform.root.GetComponent<PlayerStatus>().attack;
+            if (CharacterInfoSystem.instance.weaponSlot.item_id != 0)
+                damage += ItemSystem.instance.weapon_dict[CharacterInfoSystem.instance.weaponSlot.item_id].attack;
         }
 
         cs.OnDamage(damage);

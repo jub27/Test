@@ -9,6 +9,7 @@ public class SkillAttack : MonoBehaviour
     public float[] sklllPower;
     public int skillType; // 1은 스킬 위치가 플레이어로부터 나가는 스킬, 2는 위치를 마우스로 지정하는 스킬
     public Collider skill_collider;
+    public int skill_num;
     void Start()
     {
         if (skill_collider = GetComponent<Collider>())

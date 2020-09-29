@@ -50,11 +50,19 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            cm.Skill(0);
+            if (PlayerStatus.instance.curMp > 10)
+            {
+                if (cm.Skill(0))
+                    PlayerStatus.instance.curMp -= 10;
+            }
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            cm.Skill(1);
+            if (PlayerStatus.instance.curMp > 30)
+            {
+                if(cm.Skill(1))
+                    PlayerStatus.instance.curMp -= 30;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.I)){

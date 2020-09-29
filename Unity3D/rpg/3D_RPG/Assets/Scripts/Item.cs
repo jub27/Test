@@ -74,8 +74,8 @@ public class Item : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            InventorySystem.instance.PutItem(item_id);
-            Destroy(gameObject);
+            if(InventorySystem.instance.PutItem(item_id))
+                Destroy(gameObject);
         }
     }
 }

@@ -123,9 +123,9 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Skill(int i)
+    public bool Skill(int i)
     {
-        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Attack") && !playerAnimator.GetBool("Walk"))
+        if (SkillCoolTimeSystem.instance.skillCools[i].skill_cool && !playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Attack") && !playerAnimator.GetBool("Walk"))
         {
             Vector3 position = new Vector3();
             Quaternion rotation = new Quaternion();
@@ -154,8 +154,10 @@ public class PlayerControl : MonoBehaviour
             }
             playerAnimator.SetTrigger("Skill");
             Instantiate(SkillList[i], position, rotation);
-
+            SkillCoolTimeSystem.instance.skillCools[i].CoolStart();
+            return true;
         }
+        return false;
     }
 
     public void OnDamage()
