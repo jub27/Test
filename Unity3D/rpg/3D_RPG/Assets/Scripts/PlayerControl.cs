@@ -13,11 +13,9 @@ public class PlayerControl : MonoBehaviour
     private float runningSpeed = 2.5f;
     private float gravity = -20.0f; //가속도
     private float yVelocity = -1; // 속도
-    public bool isBlocking = false;
     private Vector3 destination;
     private EnemyStatus target;
     public SkillAttack[] SkillList;
-    public GameObject SkillFirePosition;
     static public PlayerControl instance = null;
 
     private void Awake()
@@ -54,15 +52,6 @@ public class PlayerControl : MonoBehaviour
         yVelocity += gravity * Time.deltaTime;
         playerAnimator.SetFloat("Y_Speed", yVelocity);
         characterController.Move(Vector3.up * yVelocity * Time.deltaTime);
-        if (characterController.isGrounded)
-        {
-            yVelocity = 0;
-            playerAnimator.SetBool("Jump", false);
-        }
-        else
-        {
-            //playerAnimator.SetBool("Jump", true);
-        }
     }
 
     public void SetDestination(Vector3 destination)
@@ -83,8 +72,6 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
-        if (isBlocking)
-            return;
         destination.y = transform.position.y;
         if (target != null && !target.dead)
         {
@@ -138,14 +125,23 @@ public class PlayerControl : MonoBehaviour
 
     public void Skill(int i)
     {
-        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Attack"))
+        if (!playerAnimator.GetBool("Run") && !playerAnimator.GetBool("Damaged") && !playerAnimator.GetBool("Attack") && !playerAnimator.GetBool("Walk"))
         {
             Vector3 position = new Vector3();
             Quaternion rotation = new Quaternion();
             if (SkillList[i].skillType == 1)
             {
-                position = SkillFirePosition.transform.position;
-                rotation = SkillFirePosition.transform.rotation;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Ground")))
+                {
+                    position = hit.point;
+                }
+                Vector3 dir = (position - SkillFirePosition.instance.transform.position).normalized;
+                SkillFirePosition.instance.transform.forward = dir;
+                transform.forward = (new Vector3(position.x, transform.position.y, position.z) - transform.position).normalized;
+                position = SkillFirePosition.instance.transform.position;
+                rotation = SkillFirePosition.instance.transform.rotation;
             }
             else
             {

@@ -128,15 +128,7 @@ public class GameManager : MonoBehaviour
         temp.maxMp = ps.maxMp;
         temp.curMp = ps.curMp;
         temp.attack = ps.attack;
-        if (CharacterInfoSystem.instance.weaponSlot.item_id != 0)
-        {
-            temp.attack -= ItemSystem.instance.weapon_dict[CharacterInfoSystem.instance.weaponSlot.item_id].attack;
-        }
         temp.defense = ps.defense;
-        if (CharacterInfoSystem.instance.armorSlot.item_id != 0)
-        {
-            temp.defense -= ItemSystem.instance.armor_dict[CharacterInfoSystem.instance.armorSlot.item_id].defense;
-        }
         temp.weapon = CharacterInfoSystem.instance.weaponSlot.item_id;
         temp.armor = CharacterInfoSystem.instance.armorSlot.item_id;
         temp.gold = ps.gold;

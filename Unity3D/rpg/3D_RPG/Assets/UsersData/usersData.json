@@ -3,50 +3,50 @@
         {
             "id": "asd",
             "password": "123",
-            "level": 1,
+            "level": 3,
             "attack": 10.0,
             "defense": 0.0,
-            "curExp": 30.0,
-            "maxExp": 100.0,
-            "curHp": 100.0,
-            "maxHp": 100.0,
-            "curMp": 100.0,
-            "maxMp": 100.0,
+            "curExp": 79.99999237060547,
+            "maxExp": 144.00001525878907,
+            "curHp": 144.00001525878907,
+            "maxHp": 144.00001525878907,
+            "curMp": 144.00001525878907,
+            "maxMp": 144.00001525878907,
             "weapon": 0,
             "armor": 0,
-            "gold": 58,
+            "gold": 336,
             "inventory": [
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1003,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2,
+                    "item_nums": 3
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1000,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1000,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1002,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2002,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2001,
+                    "item_nums": 1
                 },
                 {
                     "item_id": 0,

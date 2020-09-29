@@ -56,14 +56,6 @@ public class PlayerInput : MonoBehaviour
         {
             cm.Skill(1);
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            cm.Skill(2);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            cm.Skill(3);
-        }
 
         if (Input.GetKeyDown(KeyCode.I)){
             if (InventorySystem.instance.gameObject.activeSelf == false)

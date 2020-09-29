@@ -147,7 +147,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                     }
                     CharacterInfoSystem.instance.weaponSlot.SetItem(temp);
                     CharacterInfoSystem.instance.weaponSlot.equiped = true;
-                    ps.UpdateAttack(ItemSystem.instance.weapon_dict[temp].attack);
+                    ps.UpdateAttack();
                 }
                 else if (item_id < 3000)
                 {
@@ -159,7 +159,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                     }
                     CharacterInfoSystem.instance.armorSlot.SetItem(temp);
                     CharacterInfoSystem.instance.armorSlot.equiped = true;
-                    ps.UpdateDefense(ItemSystem.instance.armor_dict[temp].defense);
+                    ps.UpdateDefense();
                 }
             }
         }
@@ -169,15 +169,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         if (InventorySystem.instance.PutItem(item_id, i))
         {
-            if(item_id < 2000)
-            {
-                ps.UpdateAttack(-(ItemSystem.instance.weapon_dict[item_id].attack));
-            }
-            else if (item_id < 3000)
-            {
-                ps.UpdateDefense(-(ItemSystem.instance.armor_dict[item_id].defense));
-            }
             UnSetItem();
+            ps.UpdateAttack();
+            ps.UpdateDefense();
         }
     }
 

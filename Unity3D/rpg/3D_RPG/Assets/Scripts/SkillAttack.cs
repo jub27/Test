@@ -11,8 +11,10 @@ public class SkillAttack : MonoBehaviour
     public Collider skill_collider;
     void Start()
     {
-        skill_collider = GetComponent<Collider>();
-        skill_collider.enabled = false;
+        if (skill_collider = GetComponent<Collider>())
+            skill_collider.enabled = false;
+        else
+            transform.Rotate(0, -5, 0);
         StartCoroutine("SkillControl");
         Destroy(gameObject, 10.0f);
     }
@@ -30,7 +32,6 @@ public class SkillAttack : MonoBehaviour
             power = sklllPower[i];
             StartCoroutine("SkillColliderEnable");
         }
-        skill_collider.enabled = true; //지속아닌 스킬일때
         yield break;
     }
 

@@ -41,8 +41,6 @@ public class PlayerStatus : MonoBehaviour
             curExp = GameManager.instance.cur_user_data.curExp;
             maxMp = GameManager.instance.cur_user_data.maxMp;
             curMp = GameManager.instance.cur_user_data.curMp;
-            attack_stat.text = "공격력 : " + attack.ToString();
-            defense_stat.text = "방어력 : " + defense.ToString();
             level_stat.text = "레벨 : " + level.ToString();
             gold = GameManager.instance.cur_user_data.gold;
             gold_text.text = gold.ToString();
@@ -50,14 +48,14 @@ public class PlayerStatus : MonoBehaviour
             {
                 CharacterInfoSystem.instance.weaponSlot.SetItem(GameManager.instance.cur_user_data.weapon);
                 CharacterInfoSystem.instance.weaponSlot.equiped = true;
-                UpdateAttack(ItemSystem.instance.weapon_dict[GameManager.instance.cur_user_data.weapon].attack);
             }
             if (GameManager.instance.cur_user_data.armor != 0)
             {
                 CharacterInfoSystem.instance.armorSlot.SetItem(GameManager.instance.cur_user_data.armor);
                 CharacterInfoSystem.instance.armorSlot.equiped = true;
-                UpdateDefense(ItemSystem.instance.armor_dict[GameManager.instance.cur_user_data.armor].defense);
             }
+            UpdateAttack();
+            UpdateDefense();
 
         }
         else
@@ -124,16 +122,20 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    public void UpdateAttack(float attack)
+    public void UpdateAttack()
     {
-        this.attack += attack;
-        attack_stat.text = "공격력 : " + this.attack.ToString();
+        if (CharacterInfoSystem.instance.weaponSlot.item_id == 0)
+            attack_stat.text = "공격력 : " + attack;
+        else
+            attack_stat.text = "공격력 : " + (attack + ItemSystem.instance.weapon_dict[CharacterInfoSystem.instance.weaponSlot.item_id].attack).ToString();
     }
 
-    public void UpdateDefense(float defense)
+    public void UpdateDefense()
     {
-        this.defense += defense;
-        defense_stat.text = "방어력 : " + this.defense.ToString();
+        if (CharacterInfoSystem.instance.armorSlot.item_id == 0)
+            defense_stat.text = "방어력 : " + defense;
+        else
+            defense_stat.text = "방어력 : " + (defense + ItemSystem.instance.armor_dict[CharacterInfoSystem.instance.armorSlot.item_id].defense).ToString();
     }
 
     public void UpdateGold(int gold)

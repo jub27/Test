@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class EnemyControl : MonoBehaviour
 {
     enum State
@@ -13,23 +13,22 @@ public class EnemyControl : MonoBehaviour
     private float delayTime;
     private float walkSpeed = 3.0f;
     private float runSpeed = 4.0f;
-    private float walkRange = 8.0f;
-    private float yVelocity = -1;
-    private float gravity = -1.0f;
+    private float walkRange = 10.0f;
     private Animator animator;
     private EnemyStatus cs;
     private Vector3 basePosition;
     private Vector3 destination;
     private Vector3 curDir;
     public Transform target = null;
-    public Transform rayForward;
+
+    private NavMeshAgent navMeshAgent;
+
     private bool attackEnd = true;
     private float walkStopDistance = 1.0f;
     public float attackStopDistance = 1.5f;
     public float retunStartDistance = 20.0f;
     private bool hitEnd = true;
-    private int randomDir;
-    public bool preAttack = false;
+    public bool preAttack = false; // 선공 후공
     public Item dropItem;
     public Gold dropGold;
     // Start is called before the first frame update
@@ -41,7 +40,7 @@ public class EnemyControl : MonoBehaviour
         delayTime = 0;
         animator = GetComponent<Animator>();
         cs = GetComponent<EnemyStatus>();
-        randomDir = Random.Range(0, 2);
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -52,15 +51,6 @@ public class EnemyControl : MonoBehaviour
             return;
         }
 
-        if (CheckBelow() > 0.1f)
-        {
-            transform.position += new Vector3(0, gravity * Time.deltaTime, 0);
-        }
-        else if(CheckBelow() <= 0)
-        {
-            transform.position -= new Vector3(0, gravity * Time.deltaTime, 0);
-        }
-
         delayTime -= Time.deltaTime;
         if(state == State.Idle && delayTime <= 0)
         {
@@ -69,7 +59,14 @@ public class EnemyControl : MonoBehaviour
             delayTime = Random.Range(0.0f, 4.0f);
             Vector2 randomValue = Random.insideUnitCircle * walkRange;
             destination = basePosition + new Vector3(randomValue.x, 0.0f, randomValue.y);
-            destination.y = transform.position.y;
+            destination.y = transform.position.y + 100;
+            Vector3 dir = Vector3.zero;
+            Ray ray = new Ray(destination, new Vector3(0, -1, 0));
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo, 1000.0f, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                destination.y = hitInfo.point.y;
+            }
         }
 
         switch (state)
@@ -93,61 +90,33 @@ public class EnemyControl : MonoBehaviour
 
     void Walking()
     {
-        destination.y = transform.position.y;
-        if ( Vector3.Distance(transform.position, destination) <= walkStopDistance)
+        if (navMeshAgent.stoppingDistance >= Vector3.Distance(destination, transform.position))
         {
             state = State.Idle;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.ResetPath();
             InitParameter();
             delayTime = Random.Range(0.0f, 4.0f);
         }
         else
         {
-            if (CollisionCheck())
-            {
-                curDir = transform.right;
-                curDir.y = 0;
-                curDir.Normalize();
-                transform.position += curDir * walkSpeed * Time.deltaTime;
-            }
-            else
-            {
-                curDir = destination - transform.position;
-                curDir.y = 0;
-                curDir.Normalize();
-                transform.forward = curDir;
-                transform.position += curDir * walkSpeed * Time.deltaTime;
-            }
-
+            navMeshAgent.SetDestination(destination);
         }
     }
 
     void Return()
     {
-        destination.y = transform.position.y;
-        if (Vector3.Distance(transform.position, destination) <= walkStopDistance)
+        if (navMeshAgent.stoppingDistance >= Vector3.Distance(destination, transform.position))
         {
             state = State.Idle;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.ResetPath();
             InitParameter();
             delayTime = Random.Range(0.0f, 4.0f);
         }
         else
         {
-            if (CollisionCheck())
-            {
-                curDir = transform.right;
-                curDir.y = 0;
-                curDir.Normalize();
-                transform.position += curDir * walkSpeed * Time.deltaTime;
-            }
-            else
-            {
-                curDir = destination - transform.position;
-                curDir.y = 0;
-                curDir.Normalize();
-                transform.forward = curDir;
-                transform.position += curDir * walkSpeed * Time.deltaTime;
-            }
-
+            navMeshAgent.SetDestination(destination);
         }
     }
 
@@ -166,6 +135,8 @@ public class EnemyControl : MonoBehaviour
         if (target == null)
         {
             state = State.Idle;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.ResetPath();
             InitParameter();
             return;
         }
@@ -174,15 +145,26 @@ public class EnemyControl : MonoBehaviour
         if ((target.position - transform.position).magnitude >= retunStartDistance)
         {
             state = State.Return;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.ResetPath();
             InitParameter();
             animator.SetBool("Walk", true);
             Vector2 randomValue = Random.insideUnitCircle * walkRange;
             destination = basePosition + new Vector3(randomValue.x, 0.0f, randomValue.y);
+            destination.y = transform.position.y + 100;
+            Ray ray = new Ray(destination, new Vector3(0, -1, 0));
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo, 1000.0f, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                destination.y = hitInfo.point.y;
+            }
             return;
         }
         if (Vector3.Distance(transform.position, target.position) <= attackStopDistance)
         {
             state = State.Attacking;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.ResetPath();
             InitParameter();
             animator.SetBool("Attack", true);
             attackEnd = false;
@@ -190,26 +172,7 @@ public class EnemyControl : MonoBehaviour
         }
         else
         {
-            if (CollisionCheck())
-            {
-                if (randomDir == 0)
-                    curDir = transform.right;
-                else
-                    curDir = -transform.right;
-                curDir.y = 0;
-                curDir.Normalize();
-                transform.position += curDir * runSpeed * Time.deltaTime;
-            }
-            else
-            {
-                curDir = target.position - transform.position;
-                curDir.y = 0;
-                curDir.Normalize();
-
-                transform.forward = curDir;
-                transform.position += curDir * runSpeed * Time.deltaTime;
-            }
-
+            navMeshAgent.SetDestination(GameObject.Find("Player").transform.position);
         }
     }
 
@@ -273,18 +236,6 @@ public class EnemyControl : MonoBehaviour
             return hitInfo.distance;
         }
         return 0;
-    }
-
-    bool CollisionCheck()
-    {
-        Vector3 dir = Vector3.zero;
-        Ray ray = new Ray(rayForward.position, transform.forward);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, 2.0f, 1 << LayerMask.NameToLayer("Enemy")))
-        {
-            return true;
-        }
-        return false;
     }
 
     public void DropItem()
