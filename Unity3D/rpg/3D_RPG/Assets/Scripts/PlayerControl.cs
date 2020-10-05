@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     private EnemyStatus target;
     public SkillAttack[] SkillList;
     static public PlayerControl instance = null;
-
+    public bool startLoad = false;
     private void Awake()
     {
         if (instance == null)

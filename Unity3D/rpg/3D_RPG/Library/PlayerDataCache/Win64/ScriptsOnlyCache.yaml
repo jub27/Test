@@ -353,7 +353,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11322}
     - Class: 114
-      Script: {instanceID: 210524}
+      Script: {instanceID: 122778}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -1712,7 +1712,7 @@ ScriptsOnlyBuild:
     className: UI
   - hash:
       serializedVersion: 2
-      Hash: fc036ee7af720c43003152f8c32f6204
+      Hash: 66902c4ac008939124d73a636b42574a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControl
