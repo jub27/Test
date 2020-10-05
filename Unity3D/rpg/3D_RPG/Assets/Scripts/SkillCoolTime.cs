@@ -34,7 +34,6 @@ public class SkillCoolTime : MonoBehaviour
 
     public void CoolStart()
     {
-        print(11);
         curTime = 0;
         skill_cool = false;
     }

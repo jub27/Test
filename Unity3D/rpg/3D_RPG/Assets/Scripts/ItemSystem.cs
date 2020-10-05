@@ -72,7 +72,7 @@ public class ItemSystem : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-
+            GameManager.instance.dontDestroyObjectList.Add(gameObject);
             string path = Application.dataPath + "/ItemData/itemData" + ".json";
             string jsonData = File.ReadAllText(path);
             itemList = JsonUtility.FromJson<ItemList>(jsonData);

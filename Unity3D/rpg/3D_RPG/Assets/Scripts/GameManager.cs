@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     static public GameManager instance = null;
     private PlayerStatus ps;
     public user_data cur_user_data;
+
+    public List<GameObject> dontDestroyObjectList;
 
     [System.Serializable]
     public struct slot_data
@@ -75,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
+            dontDestroyObjectList = new List<GameObject>();
             users_data_list = new List<user_data>();
             user_data_dict = new Dictionary<string, user_data>();
             string path = Application.dataPath + "/UsersData/usersData" + ".json";
@@ -154,5 +158,17 @@ public class GameManager : MonoBehaviour
     {
         SaveCurUserData();
         Application.Quit();
+    }
+
+    public void LogOut()
+    {
+        SaveCurUserData();
+        for(int i = 0; i <dontDestroyObjectList.Count; i++)
+        {
+            Destroy(dontDestroyObjectList[i]);
+        }
+        dontDestroyObjectList.Clear();
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Main");
     }
 }

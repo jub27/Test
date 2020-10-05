@@ -16,4 +16,9 @@ public class EscMenuManager : MonoBehaviour
     {
         gm.ExitGame();
     }
+
+    public void OnLogoutButtonClick()
+    {
+        gm.LogOut();
+    }
 }

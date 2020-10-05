@@ -9,11 +9,12 @@ public class CharacterInfoSystem : MonoBehaviour
     public ItemSlot weaponSlot;
     public ItemSlot armorSlot;
     private bool check = false;
-    private Vector3 offset;
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else
             Destroy(gameObject);
     }
@@ -31,7 +32,7 @@ public class CharacterInfoSystem : MonoBehaviour
             if (check == false)
                 check = true;
             else
-                transform.position = Input.mousePosition + offset;
+                transform.position = Input.mousePosition;
         }
         else
             check = false;

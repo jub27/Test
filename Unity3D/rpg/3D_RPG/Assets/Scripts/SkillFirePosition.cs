@@ -13,6 +13,7 @@ public class SkillFirePosition : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
+            GameManager.instance.dontDestroyObjectList.Add(gameObject);
         }
         else
         {

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 286759431}
   - component: {fileID: 286759430}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1714,8 +1714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab95bc0b60478d04e998cc47f58009be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  is_loaded: 0
-  load_data:
+  cur_user_data:
     id: 
     password: 
     level: 0
@@ -1731,9 +1730,9 @@ MonoBehaviour:
     armor: 0
     gold: 0
     inventory: []
-  users_data_list: []
   sd:
     users_data_arr: []
+  users_data_list: []
 --- !u!4 &1901714684
 Transform:
   m_ObjectHideFlags: 0

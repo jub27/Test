@@ -11,8 +11,6 @@ public class EnemyControl : MonoBehaviour
 
     private State state;
     private float delayTime;
-    private float walkSpeed = 3.0f;
-    private float runSpeed = 4.0f;
     private float walkRange = 10.0f;
     private Animator animator;
     private EnemyStatus cs;
@@ -24,7 +22,6 @@ public class EnemyControl : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     private bool attackEnd = true;
-    private float walkStopDistance = 1.0f;
     public float attackStopDistance = 1.5f;
     public float retunStartDistance = 20.0f;
     private bool hitEnd = true;

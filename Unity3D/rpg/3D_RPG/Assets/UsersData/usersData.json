@@ -6,7 +6,7 @@
             "level": 7,
             "attack": 10.0,
             "defense": 0.0,
-            "curExp": 17.007888793945314,
+            "curExp": 27.007888793945314,
             "maxExp": 298.5984802246094,
             "curHp": 293.5984802246094,
             "maxHp": 298.5984802246094,
@@ -14,115 +14,301 @@
             "maxMp": 298.5984802246094,
             "weapon": 1003,
             "armor": 2003,
-            "gold": 1979,
+            "gold": 7379,
             "inventory": [
                 {
-                    "item_id": 1003,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1000,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1000,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1000,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1003,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1000,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2,
-                    "item_nums": 3
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1000,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1000,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 2001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1001,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1003,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1002,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
-                    "item_id": 1003,
-                    "item_nums": 1
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                }
+            ]
+        },
+        {
+            "id": "123",
+            "password": "asd",
+            "level": 1,
+            "attack": 10.0,
+            "defense": 0.0,
+            "curExp": 0.0,
+            "maxExp": 100.0,
+            "curHp": 100.0,
+            "maxHp": 100.0,
+            "curMp": 100.0,
+            "maxMp": 100.0,
+            "weapon": 0,
+            "armor": 0,
+            "gold": 0,
+            "inventory": [
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
                 },
                 {
                     "item_id": 0,

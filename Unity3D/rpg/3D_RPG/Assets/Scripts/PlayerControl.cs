@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            GameManager.instance.dontDestroyObjectList.Add(gameObject);
         }
         else
         {

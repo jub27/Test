@@ -12,6 +12,7 @@ public class UI : MonoBehaviour
         {
             instance = gameObject;
             DontDestroyOnLoad(gameObject);
+            GameManager.instance.dontDestroyObjectList.Add(gameObject);
         }
         else
         {

@@ -13,6 +13,7 @@ public class DontDestroy : MonoBehaviour
         {
             instance = this.gameObject;
             DontDestroyOnLoad(gameObject);
+            GameManager.instance.dontDestroyObjectList.Add(gameObject);
         }
         else
         {
