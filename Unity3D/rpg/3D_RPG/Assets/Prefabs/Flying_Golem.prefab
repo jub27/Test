@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 9159676740662007687}
-  power: 5
+  power: 10
 --- !u!114 &2135704600501278530
 MonoBehaviour:
   m_ObjectHideFlags: 0

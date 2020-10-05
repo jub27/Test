@@ -39,6 +39,7 @@ public class PlayerControl : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         cs = GetComponent<PlayerStatus>();
         pa = GetComponent<PlayerAttack>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
         target = null;
     }
 
@@ -183,5 +184,11 @@ public class PlayerControl : MonoBehaviour
         cs.UpdateUI();
         playerAnimator.SetTrigger("Hukkatsu");
         yield break;
+    }
+    
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        instance.transform.position = GameObject.Find("PlayerStartPoint").transform.position;
+        SetDestination(instance.transform.position);
     }
 }

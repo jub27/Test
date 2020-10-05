@@ -26,23 +26,28 @@ public class PlayerHitArea : MonoBehaviour
         if (ps.dead)
             return;
         transform.root.GetComponent<PlayerAttack>().AttackDisable();
+        float armor = 0;
+        if(CharacterInfoSystem.instance.armorSlot.item_id != 0)
+        {
+            armor = ItemSystem.instance.armor_dict[CharacterInfoSystem.instance.armorSlot.item_id].defense;
+        }
         if (other.transform.root.GetComponent<EnemyAttack>() != null)
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.transform.root.GetComponent<EnemyAttack>().power - ps.defense, 0));
+            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.transform.root.GetComponent<EnemyAttack>().power - ps.defense - armor, 0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.transform.root.GetComponent<EnemyAttack>().power - ps.defense;
+            dt.damage = other.transform.root.GetComponent<EnemyAttack>().power - ps.defense - armor;
         }
         else if (other.GetComponent<RangeWeapon>() != null)
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage( Mathf.Max(other.GetComponent<RangeWeapon>().power - ps.defense, 0));
+            transform.root.GetComponent<PlayerStatus>().OnDamage( Mathf.Max(other.GetComponent<RangeWeapon>().power - ps.defense -armor, 0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.GetComponent<RangeWeapon>().power - ps.defense;
+            dt.damage = other.GetComponent<RangeWeapon>().power - ps.defense - armor;
         }
         else
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.GetComponent<SkillAttack>().power - ps.defense,0));
+            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.GetComponent<SkillAttack>().power - ps.defense - armor, 0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.GetComponent<SkillAttack>().power - ps.defense;
+            dt.damage = other.GetComponent<SkillAttack>().power - ps.defense/ -armor;
         }
         transform.root.GetComponent<PlayerControl>().OnDamage();
     }
