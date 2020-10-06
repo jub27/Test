@@ -188,7 +188,6 @@ public class PlayerControl : MonoBehaviour
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        instance.transform.position = GameObject.Find("PlayerStartPoint").transform.position;
-        SetDestination(instance.transform.position);
+        startLoad = false;
     }
 }

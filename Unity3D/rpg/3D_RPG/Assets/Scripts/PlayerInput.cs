@@ -29,6 +29,7 @@ public class PlayerInput : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
+            PlayerControl.instance.startLoad = true;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 mousePoint = new Vector3();
             RaycastHit hit;

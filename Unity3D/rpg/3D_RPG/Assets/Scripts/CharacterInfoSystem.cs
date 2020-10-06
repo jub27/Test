@@ -9,6 +9,7 @@ public class CharacterInfoSystem : MonoBehaviour
     public ItemSlot weaponSlot;
     public ItemSlot armorSlot;
     private bool check = false;
+    private Vector3 offset;
     private void Awake()
     {
         if (instance == null)
@@ -30,9 +31,12 @@ public class CharacterInfoSystem : MonoBehaviour
         if (GetComponentInChildren<DragWindow>().isMoving)
         {
             if (check == false)
+            {
                 check = true;
+                offset = transform.position - GetComponentInChildren<DragWindow>().baseMousePosition;
+            }
             else
-                transform.position = Input.mousePosition;
+                transform.position = Input.mousePosition + offset;
         }
         else
             check = false;

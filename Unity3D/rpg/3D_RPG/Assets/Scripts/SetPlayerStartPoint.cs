@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class SetPlayerStartPoint : MonoBehaviour
 {
-    void Awake()
+    void Update()
     {
-        PlayerControl.instance.transform.position = transform.position;
-        PlayerControl.instance.transform.rotation = transform.rotation;
-        PlayerControl.instance.SetDestination(transform.position);
-    }
-    void Start()
-    {
-        PlayerControl.instance.transform.position = transform.position;
-        PlayerControl.instance.transform.rotation = transform.rotation;
-        PlayerControl.instance.SetDestination(transform.position);
+        if (PlayerControl.instance.startLoad == false)
+        {
+            PlayerControl.instance.transform.position = transform.position;
+            PlayerControl.instance.SetDestination(transform.position);
+        }
     }
 }

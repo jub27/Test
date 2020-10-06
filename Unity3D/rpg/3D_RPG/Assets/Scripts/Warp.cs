@@ -22,7 +22,6 @@ public class Warp : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerControl.instance.startLoad = false;
             SceneManager.LoadScene(SceneNumber);
         }
     }

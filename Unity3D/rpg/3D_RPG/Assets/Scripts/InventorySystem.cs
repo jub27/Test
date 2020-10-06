@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class InventorySystem : MonoBehaviour
 {
     static public InventorySystem instance = null;
@@ -11,7 +11,10 @@ public class InventorySystem : MonoBehaviour
 
     public Color[] outLine;
     public ItemSlot[] itemSlots;
-
+    public int hpPotionCount;
+    public int mpPotionCount;
+    public Text hpPotion_text;
+    public Text mpPotion_text;
     private void Awake()
     {
         if (instance == null)
@@ -124,5 +127,11 @@ public class InventorySystem : MonoBehaviour
     public void InventoryClose()
     {
         gameObject.SetActive(false);
+    }
+
+    public void UpdateQuickSlot()
+    {
+        hpPotion_text.text = "X " + hpPotionCount.ToString();
+        mpPotion_text.text = "X " + mpPotionCount.ToString();
     }
 }
