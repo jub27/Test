@@ -21,6 +21,8 @@ public class PlayerStatus : MonoBehaviour
     public Image mpUI;
     public Text attack_stat;
     public Text defense_stat;
+    public Text Hp_stat;
+    public Text Mp_stat;
     public Text level_stat;
     public Text gold_text;
 
@@ -68,6 +70,7 @@ public class PlayerStatus : MonoBehaviour
     void Update()
     {
         UpdateUI();
+        UpdateStat();
     }
 
     public void OnDamage(float damage)
@@ -142,5 +145,11 @@ public class PlayerStatus : MonoBehaviour
     {
         this.gold += gold;
         gold_text.text = this.gold.ToString();
+    }
+
+    void UpdateStat()
+    {
+        Hp_stat.text = "HP : " + ((int)curHp).ToString() + " / " + ((int)maxHp).ToString();
+        Mp_stat.text = "MP : " + ((int)curMp).ToString() + " / " + ((int)maxMp).ToString();
     }
 }

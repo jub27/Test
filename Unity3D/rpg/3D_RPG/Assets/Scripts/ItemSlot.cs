@@ -127,12 +127,17 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                         }
                     }
                     else if (item_id < 2000)
+                    {
                         ps.UpdateGold(ItemSystem.instance.weapon_dict[item_id].price);
+                        UnSetItem();
+                    }
                     else if (item_id < 3000)
+                    {
                         ps.UpdateGold(ItemSystem.instance.armor_dict[item_id].price);
-                    UnSetItem();
+                        UnSetItem();
+                    }
                 }
-                if(item_id < 1000)
+                else if(item_id < 1000)
                 {
                     if(item_id == 1) // hp포션
                     {
@@ -187,6 +192,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
         else if(eventData.button == PointerEventData.InputButton.Left)
         {
+            if (shop_item)
+                return;
             if (item_id != 0)
             {
                 if (MoveItemByMouse.instance.origin != null)
@@ -218,7 +225,13 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                             return;
                         }
                     }
-
+                    if(MoveItemByMouse.instance.origin == InventorySystem.instance.quickSlot1 || MoveItemByMouse.instance.origin == InventorySystem.instance.quickSlot2)
+                    {
+                        if (item_id >= 1000)
+                        {
+                            return;
+                        }
+                    }
                     int temp_item_id = MoveItemByMouse.instance.origin.item_id;
                     int temp_item_nums = MoveItemByMouse.instance.origin.item_nums;
                     MoveItemByMouse.instance.origin.UnSetItem();
