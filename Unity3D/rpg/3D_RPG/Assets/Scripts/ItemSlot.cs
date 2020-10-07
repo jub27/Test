@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text;
+using System;
+using System.Net.NetworkInformation;
+
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public int item_id;
@@ -11,11 +14,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public bool equiped;
     public bool shop_item;
+    public bool quick;
     public int price;
 
     public Image image_child;
     private Image image;
-    private Text itemNums_Text;
+    public Text itemNums_Text;
     public GameObject itemInfo;
     public int index;
     private PlayerStatus ps;
@@ -28,6 +32,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         item_nums = 0;
         equiped = false;
         shop_item = false;
+        quick = false;
         price = 0;
     }
 
@@ -69,6 +74,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         image_child.color = new Color(1, 1, 1, 0);
         image.color = new Color(1, 1, 1, 0.39f);
         item_nums = 0;
+        itemNums_Text.text = "";
         itemInfo.GetComponentInChildren<Text>().text = "";
         itemInfo.SetActive(false);
         equiped = false;
@@ -89,10 +95,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (item_id == 0)
-        {
-            return;
-        }
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (equiped)
@@ -182,6 +184,102 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                     ps.UpdateDefense();
                 }
             }
+        }
+        else if(eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (item_id != 0)
+            {
+                if (MoveItemByMouse.instance.origin != null)
+                {
+                    if(MoveItemByMouse.instance.origin == this)
+                    {
+                        MoveItemByMouse.instance.Init();
+                        return;
+                    }
+
+                    if(this == CharacterInfoSystem.instance.weaponSlot)
+                    {
+                        if(MoveItemByMouse.instance.origin.item_id < 1000 || MoveItemByMouse.instance.origin.item_id >= 2000)
+                        {
+                            return;
+                        }
+                    }
+                    if(this == CharacterInfoSystem.instance.armorSlot)
+                    {
+                        if (MoveItemByMouse.instance.origin.item_id < 2000)
+                        {
+                            return;
+                        }
+                    }
+                    if(this == InventorySystem.instance.quickSlot1 || this == InventorySystem.instance.quickSlot2)
+                    {
+                        if(MoveItemByMouse.instance.origin.item_id >= 1000)
+                        {
+                            return;
+                        }
+                    }
+
+                    int temp_item_id = MoveItemByMouse.instance.origin.item_id;
+                    int temp_item_nums = MoveItemByMouse.instance.origin.item_nums;
+                    MoveItemByMouse.instance.origin.UnSetItem();
+                    MoveItemByMouse.instance.origin.SetItem(item_id);
+                    MoveItemByMouse.instance.origin.item_nums = item_nums;
+                    if(MoveItemByMouse.instance.origin.item_id < 1000)
+                    {
+                        MoveItemByMouse.instance.origin.itemNums_Text.text = "x" + MoveItemByMouse.instance.origin.item_nums.ToString();
+                    }
+                    UnSetItem();
+                    SetItem(temp_item_id);
+                    item_nums = temp_item_nums;
+                    if(item_id < 1000)
+                    {
+                        itemNums_Text.text = "x" + item_nums.ToString();
+                    }
+                    MoveItemByMouse.instance.Init();
+                }
+                else
+                {
+                    MoveItemByMouse.instance.SetItemInfo(this);
+                    InventorySystem.instance.InventoryOpen();
+                }
+            }
+            else
+            {
+                if(MoveItemByMouse.instance.origin != null)
+                {
+                    if (this == CharacterInfoSystem.instance.weaponSlot)
+                    {
+                        if (MoveItemByMouse.instance.origin.item_id < 1000 || MoveItemByMouse.instance.origin.item_id >= 2000)
+                        {
+                            return;
+                        }
+                    }
+                    if (this == CharacterInfoSystem.instance.armorSlot)
+                    {
+                        if (MoveItemByMouse.instance.origin.item_id < 2000)
+                        {
+                            return;
+                        }
+                    }
+                    if (this == InventorySystem.instance.quickSlot1 || this == InventorySystem.instance.quickSlot2)
+                    {
+                        if (MoveItemByMouse.instance.origin.item_id >= 1000)
+                        {
+                            return;
+                        }
+                    }
+                    SetItem(MoveItemByMouse.instance.origin.item_id);
+                    item_nums = MoveItemByMouse.instance.origin.item_nums;
+                    if (item_id < 1000)
+                    {
+                        itemNums_Text.text = "x" + item_nums.ToString();
+                    }
+                    MoveItemByMouse.instance.origin.UnSetItem();
+                    MoveItemByMouse.instance.Init();
+                }
+            }
+            ps.UpdateAttack();
+            ps.UpdateDefense();
         }
     }
 

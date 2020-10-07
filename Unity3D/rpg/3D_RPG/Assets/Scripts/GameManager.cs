@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
         public int armor;
         public int gold;
         public slot_data[] inventory;
+        public slot_data quickSlot1;
+        public slot_data quickSlot2;
         public user_data(string id, string password)
         {
             this.id = id;
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
             {
                 inventory[i] = new slot_data(0,0);
             }
+            quickSlot1 = new slot_data(0, 0);
+            quickSlot2 = new slot_data(0, 0);
         }
     }
 
@@ -136,6 +140,8 @@ public class GameManager : MonoBehaviour
         temp.weapon = CharacterInfoSystem.instance.weaponSlot.item_id;
         temp.armor = CharacterInfoSystem.instance.armorSlot.item_id;
         temp.gold = ps.gold;
+        temp.quickSlot1 = new slot_data(InventorySystem.instance.quickSlot1.item_id, InventorySystem.instance.quickSlot1.item_nums);
+        temp.quickSlot2 = new slot_data(InventorySystem.instance.quickSlot2.item_id, InventorySystem.instance.quickSlot2.item_nums);
         for (int i = 0; i < InventorySystem.instance.itemSlots.Length; i++)
         {
             temp.inventory[i].item_id = InventorySystem.instance.itemSlots[i].item_id;

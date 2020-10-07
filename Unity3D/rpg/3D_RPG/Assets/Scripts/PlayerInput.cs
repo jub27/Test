@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
     CharacterController characterController;
     PlayerControl cm;
     Animator playerAnimator;
+    PlayerStatus ps;
     public GameObject escMenu;
     // Start is called before the first frame update
     void Start()
     {
+        ps = GetComponent<PlayerStatus>();
         characterController = GetComponent<CharacterController>();
         cm = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
@@ -33,19 +36,22 @@ public class PlayerInput : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 mousePoint = new Vector3();
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Ground")))
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-                cm.SetDestination(mousePoint);
-            }
-            if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("NPC")))
-            {
-                mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            }
-            if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Enemy")))
-            {
-                mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-                cm.SetTarget(hit.collider.gameObject);
+                if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Ground")))
+                {
+                    mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                    cm.SetDestination(mousePoint);
+                }
+                if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("NPC")))
+                {
+                    mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                }
+                if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Enemy")))
+                {
+                    mousePoint = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                    cm.SetTarget(hit.collider.gameObject);
+                }
             }
         }
 
@@ -90,6 +96,57 @@ public class PlayerInput : MonoBehaviour
             {
                 escMenu.SetActive(false);
                 Time.timeScale = 1.0f;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (InventorySystem.instance.quickSlot1.item_id == 1) // hp포션
+            {
+                ps.DrinkHpPotion(50);
+                InventorySystem.instance.quickSlot1.item_nums--;
+                InventorySystem.instance.quickSlot1.itemNums_Text.text = "x" + InventorySystem.instance.quickSlot1.item_nums.ToString();
+                if (InventorySystem.instance.quickSlot1.item_nums == 0)
+                {
+                    InventorySystem.instance.quickSlot1.itemNums_Text.text = "";
+                    InventorySystem.instance.quickSlot1.UnSetItem();
+                }
+            }
+            else if (InventorySystem.instance.quickSlot1.item_id == 2)// mp포션
+            {
+                ps.DrinkMpPotion(50);
+                InventorySystem.instance.quickSlot1.item_nums--;
+                InventorySystem.instance.quickSlot1.itemNums_Text.text = "x" + InventorySystem.instance.quickSlot1.item_nums.ToString();
+                if (InventorySystem.instance.quickSlot1.item_nums == 0)
+                {
+                    InventorySystem.instance.quickSlot1.itemNums_Text.text = "";
+                    InventorySystem.instance.quickSlot1.UnSetItem();
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (InventorySystem.instance.quickSlot2.item_id == 1) // hp포션
+            {
+                ps.DrinkHpPotion(50);
+                InventorySystem.instance.quickSlot2.item_nums--;
+                InventorySystem.instance.quickSlot2.itemNums_Text.text = "x" + InventorySystem.instance.quickSlot2.item_nums.ToString();
+                if (InventorySystem.instance.quickSlot2.item_nums == 0)
+                {
+                    InventorySystem.instance.quickSlot2.itemNums_Text.text = "";
+                    InventorySystem.instance.quickSlot2.UnSetItem();
+                }
+            }
+            else if (InventorySystem.instance.quickSlot2.item_id == 2)// mp포션
+            {
+                ps.DrinkMpPotion(50);
+                InventorySystem.instance.quickSlot2.item_nums--;
+                InventorySystem.instance.quickSlot2.itemNums_Text.text = "x" + InventorySystem.instance.quickSlot2.item_nums.ToString();
+                if (InventorySystem.instance.quickSlot2.item_nums == 0)
+                {
+                    InventorySystem.instance.quickSlot2.itemNums_Text.text = "";
+                    InventorySystem.instance.quickSlot2.UnSetItem();
+                }
             }
         }
     }

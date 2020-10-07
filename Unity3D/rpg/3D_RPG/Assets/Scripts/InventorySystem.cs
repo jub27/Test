@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +12,8 @@ public class InventorySystem : MonoBehaviour
 
     public Color[] outLine;
     public ItemSlot[] itemSlots;
-    public int hpPotionCount;
-    public int mpPotionCount;
-    public Text hpPotion_text;
-    public Text mpPotion_text;
+    public ItemSlot quickSlot1;
+    public ItemSlot quickSlot2;
     private void Awake()
     {
         if (instance == null)
@@ -44,6 +43,18 @@ public class InventorySystem : MonoBehaviour
             {
                 PutItem(GameManager.instance.cur_user_data.inventory[i].item_id, i);
             }
+        }
+        if (GameManager.instance.cur_user_data.quickSlot1.item_id != 0)
+        {
+            quickSlot1.SetItem(GameManager.instance.cur_user_data.quickSlot1.item_id);
+            quickSlot1.item_nums = GameManager.instance.cur_user_data.quickSlot1.item_nums;
+            quickSlot1.itemNums_Text.text = "x" + quickSlot1.item_nums.ToString();
+        }
+        if (GameManager.instance.cur_user_data.quickSlot2.item_id != 0)
+        {
+            quickSlot2.SetItem(GameManager.instance.cur_user_data.quickSlot2.item_id);
+            quickSlot2.item_nums = GameManager.instance.cur_user_data.quickSlot2.item_nums;
+            quickSlot2.itemNums_Text.text = "x" + quickSlot2.item_nums.ToString();
         }
         gameObject.SetActive(false);
     }
@@ -92,6 +103,16 @@ public class InventorySystem : MonoBehaviour
             int j = -1;
             int k = 0;
             int m = -1;
+            if(quickSlot1.item_id == item_id)
+            {
+                quickSlot1.AddNums();
+                return true;
+            }
+            if(quickSlot2.item_id == item_id)
+            {
+                quickSlot2.AddNums();
+                return true;
+            }
             for (; k < itemSlots.Length; k++)
             {
                 if (itemSlots[k].item_id != 0 && itemSlots[k].item_id == item_id)
@@ -127,11 +148,29 @@ public class InventorySystem : MonoBehaviour
     public void InventoryClose()
     {
         gameObject.SetActive(false);
+        MoveItemByMouse.instance.Init();
     }
 
-    public void UpdateQuickSlot()
+    public void Sort()
     {
-        hpPotion_text.text = "X " + hpPotionCount.ToString();
-        mpPotion_text.text = "X " + mpPotionCount.ToString();
+        List<KeyValuePair<int, int>> temp = new List<KeyValuePair<int, int>>();
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            temp.Add(new KeyValuePair<int, int>(itemSlots[i].item_id, itemSlots[i].item_nums));
+        }
+        temp.Sort((a, b) => -(a.Key.CompareTo(b.Key)));
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].UnSetItem();
+            if (temp[i].Key != 0)
+            {
+                itemSlots[i].SetItem(temp[i].Key);
+                if (temp[i].Key < 1000)
+                {
+                    itemSlots[i].item_nums = temp[i].Value;
+                    itemSlots[i].itemNums_Text.text = "x" + itemSlots[i].item_nums.ToString();
+                }
+            }
+        }
     }
 }
