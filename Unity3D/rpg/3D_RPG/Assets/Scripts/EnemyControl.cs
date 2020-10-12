@@ -232,17 +232,6 @@ public class EnemyControl : MonoBehaviour
         navMeshAgent.ResetPath();
     }
 
-    float CheckBelow()
-    {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        RaycastHit hitInfo;
-        if(Physics.Raycast(ray, out hitInfo, 10000.0f, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            return hitInfo.distance;
-        }
-        return 0;
-    }
-
     public void DropItem()
     {
         float random = Random.Range(0, 100);

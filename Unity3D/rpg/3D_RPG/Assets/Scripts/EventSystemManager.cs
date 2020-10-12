@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroy : MonoBehaviour
+public class EventSystemManager : MonoBehaviour
 {
 
     static public GameObject instance = null;

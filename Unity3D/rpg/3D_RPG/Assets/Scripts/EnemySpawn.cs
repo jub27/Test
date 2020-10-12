@@ -35,7 +35,7 @@ public class EnemySpawn : MonoBehaviour
             {
                 Vector2 randomValue = Random.insideUnitCircle * spawnRange;
                 enemies[i] = Instantiate(enemyPrefab, transform.position, transform.rotation);
-                break;
+                return;
             }
         }
     }

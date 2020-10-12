@@ -9,7 +9,10 @@ public class Item : MonoBehaviour
     private Rigidbody rigid;
     public int item_id;
     private TextMeshPro tm;
-
+    public float legendary_drop_possibility = 10.0f;
+    public float epic_drop_possibility = 20.0f;
+    public float uncommon_drop_possibility = 40.0f;
+    public float common_drop_possibility = 80.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,18 +45,38 @@ public class Item : MonoBehaviour
 
         if(itemGrade == (int)ItemSystem.ItemGrade.LEGENDARY)
         {
+            float random_ = Random.Range(0, 100);
+            if (random_ > legendary_drop_possibility)
+            {
+                Destroy(gameObject);
+            }
             tm.color = new Color(255, 111, 0, 255);
         }
         else if(itemGrade == (int)ItemSystem.ItemGrade.EPIC)
         {
+            float random_ = Random.Range(0, 100);
+            if (random_ > epic_drop_possibility)
+            {
+                Destroy(gameObject);
+            }
             tm.color = new Color(112, 43, 255, 255);
         }
         else if(itemGrade == (int)ItemSystem.ItemGrade.UNCOMMON)
         {
+            float random_ = Random.Range(0, 100);
+            if (random_ > common_drop_possibility)
+            {
+                Destroy(gameObject);
+            }
             tm.color = new Color(0, 86, 255, 255);
         }
         else
         {
+            float random_ = Random.Range(0, 100);
+            if (random_ > legendary_drop_possibility)
+            {
+                Destroy(gameObject);
+            }
             tm.color = new Color(255, 241, 184, 125);
         }
         GameObject temp =  Instantiate(Effects[itemGrade], transform.position, transform.rotation);
@@ -62,6 +85,7 @@ public class Item : MonoBehaviour
         float y = Random.Range(10, 15);
         float z = Random.Range(-4, 4);
         rigid.AddForce(new Vector3(x, y, z), ForceMode.Impulse);
+        GetComponent<SphereCollider>().enabled = true;
     }
 
     // Update is called once per frame
