@@ -182,6 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  attackAnimationCount: 1
+  attackPower: 0a000000
+  curPower: 0
   attackStopDistance: 20
   retunStartDistance: 30
   preAttack: 1

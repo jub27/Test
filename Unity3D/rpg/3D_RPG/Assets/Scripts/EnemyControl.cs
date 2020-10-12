@@ -19,6 +19,9 @@ public class EnemyControl : MonoBehaviour
     private Vector3 curDir;
     public Transform target = null;
 
+    public int attackAnimationCount = 1;
+    public int[] attackPower;
+    public int curPower = 0;
     private NavMeshAgent navMeshAgent;
 
     private bool attackEnd = true;
@@ -163,7 +166,10 @@ public class EnemyControl : MonoBehaviour
             navMeshAgent.isStopped = true;
             navMeshAgent.ResetPath();
             InitParameter();
-            animator.SetBool("Attack", true);
+            int attackAnim = Random.Range(0, attackAnimationCount) + 1;
+            string param = "Attack" + attackAnim.ToString();
+            curPower = attackPower[attackAnim - 1];
+            animator.SetBool(param, true);
             attackEnd = false;
 
         }
@@ -184,6 +190,7 @@ public class EnemyControl : MonoBehaviour
         Vector3 dir = target.position - transform.position;
         dir.y = 0;
         transform.forward = dir;
+
         if (Vector3.Distance(transform.position, target.position) > attackStopDistance && attackEnd)
         {
             state = State.Chasing;
@@ -194,9 +201,8 @@ public class EnemyControl : MonoBehaviour
 
     public void InitParameter()
     {
-        animator.SetBool("Attack", false);
-        animator.SetBool("Jump", false);
-        animator.SetBool("Block", false);
+        animator.SetBool("Attack1", false);
+        animator.SetBool("Attack2", false);
         animator.SetBool("Chase", false);
         animator.SetBool("Walk", false);
         attackEnd = true;

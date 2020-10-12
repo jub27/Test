@@ -7,8 +7,11 @@ public class CameraControl : MonoBehaviour
     private Transform target;
     private PlayerControl cm;
     private float currentDistance = 15.0f;
+    private float distance = 15.0f;
     private float wheelDistance = 5.0f;
-
+    private float wheelDestination = 15.0f;
+    private LayerMask lineOfSightMask = -1;
+    private float distanceVelocity = 0.0f;
     private float x = 0.0f;
     private float y = -50.0f;
     // Start is called before the first frame update
@@ -22,7 +25,9 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        currentDistance = Mathf.Clamp(currentDistance - wheelDistance*wheelInput, 5.0f, 15.0f);
+        distance = Mathf.Clamp(distance - wheelDistance * wheelInput, 5.0f, 15.0f);
+        float targetDistance = AdjustLineOfSight(target.position, (transform.position - target.position).normalized);
+        currentDistance = Mathf.SmoothDamp(currentDistance, targetDistance, ref distanceVelocity, 0.3f);
         if (Input.GetMouseButton(2))
         {
             x += Input.GetAxis("Mouse X") * 4.0f;
@@ -35,5 +40,18 @@ public class CameraControl : MonoBehaviour
         transform.position = target.transform.position + rotation * Vector3.forward * currentDistance;
 
         transform.forward = (target.transform.position - transform.position).normalized;
+    }
+    private float AdjustLineOfSight(Vector3 target, Vector3 direction)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(target, direction, out hit, distance, 1 << LayerMask.NameToLayer("Ground"), QueryTriggerInteraction.UseGlobal))
+        {
+            if (hit.distance - 0.2f > 2.0f)
+                return hit.distance - 0.2f;
+            else
+                return distance;
+        }
+        else
+            return distance;
     }
 }

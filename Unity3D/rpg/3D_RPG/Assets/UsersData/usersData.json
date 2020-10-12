@@ -3,30 +3,30 @@
         {
             "id": "asd",
             "password": "123",
-            "level": 2,
+            "level": 4,
             "attack": 10.0,
             "defense": 0.0,
-            "curExp": 40.0,
-            "maxExp": 120.00000762939453,
-            "curHp": 120.00000762939453,
-            "maxHp": 120.00000762939453,
-            "curMp": 110.00000762939453,
-            "maxMp": 120.00000762939453,
-            "weapon": 0,
+            "curExp": 165.99998474121095,
+            "maxExp": 172.80001831054688,
+            "curHp": 172.80001831054688,
+            "maxHp": 172.80001831054688,
+            "curMp": 152.80001831054688,
+            "maxMp": 172.80001831054688,
+            "weapon": 1003,
             "armor": 0,
-            "gold": 493,
+            "gold": 952,
             "inventory": [
                 {
                     "item_id": 2000,
                     "item_nums": 1
                 },
                 {
-                    "item_id": 1003,
+                    "item_id": 1002,
                     "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1003,
+                    "item_nums": 1
                 },
                 {
                     "item_id": 1002,
@@ -37,32 +37,32 @@
                     "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2000,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2000,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2002,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1003,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1000,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1002,
+                    "item_nums": 1
                 },
                 {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 1,
+                    "item_nums": 1
                 },
                 {
                     "item_id": 0,
@@ -186,8 +186,8 @@
                 }
             ],
             "quickSlot1": {
-                "item_id": 2,
-                "item_nums": 1
+                "item_id": 0,
+                "item_nums": 0
             },
             "quickSlot2": {
                 "item_id": 0,

@@ -142,7 +142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4979837146096133553}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 34.87213, y: 76.1, z: 1.9}
+  m_LocalPosition: {x: 0, y: 76.1, z: 1.9}
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children: []
   m_Father: {fileID: 9159676740662365057}
@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 9159676740662007687}
-  power: 10
+  weapon2: {fileID: 0}
 --- !u!114 &2135704600501278530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,9 +855,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  attackAnimationCount: 2
+  attackPower: 0a00000014000000
+  curPower: 0
   attackStopDistance: 1.8
   retunStartDistance: 20
-  preAttack: 0
+  preAttack: 1
   dropItem: {fileID: 8320937043071758335, guid: 96585deccf96920409f19a1bbd2f31da,
     type: 3}
   dropGold: {fileID: 2851388916558136889, guid: 97f34bc5550bd7849a1806927e4b9555,

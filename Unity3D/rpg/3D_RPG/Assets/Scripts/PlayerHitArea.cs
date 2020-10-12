@@ -33,9 +33,9 @@ public class PlayerHitArea : MonoBehaviour
         }
         if (other.transform.root.GetComponent<EnemyAttack>() != null)
         {
-            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.transform.root.GetComponent<EnemyAttack>().power - ps.defense - armor, 0));
+            transform.root.GetComponent<PlayerStatus>().OnDamage(Mathf.Max(other.transform.root.GetComponent<EnemyControl>().curPower - ps.defense - armor, 0));
             DamageText dt = Instantiate(damageText, damagePrintPos.position, Camera.main.transform.rotation);
-            dt.damage = other.transform.root.GetComponent<EnemyAttack>().power - ps.defense - armor;
+            dt.damage = other.transform.root.GetComponent<EnemyControl>().curPower - ps.defense - armor;
         }
         else if (other.GetComponent<RangeWeapon>() != null)
         {
