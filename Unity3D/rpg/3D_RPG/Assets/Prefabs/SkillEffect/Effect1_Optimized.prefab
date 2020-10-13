@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c2a81fd024d9b499b2ca523fd777ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 100
+  power: 50
   colliderActiveTime: []
   sklllPower: []
   skillType: 1

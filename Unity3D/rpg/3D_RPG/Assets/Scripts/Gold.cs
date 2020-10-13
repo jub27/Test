@@ -16,7 +16,7 @@ public class Gold : MonoBehaviour
         tm = GetComponentInChildren<TextMeshPro>();
         tm.color = new Color(255, 241, 184, 125);
         gold = Random.Range(10, 100);
-        tm.text = gold.ToString() + " Gold";
+        tm.text = gold.ToString() + " 골드";
         GameObject temp = Instantiate(Effect, transform.position, transform.rotation);
         temp.transform.parent = transform;
         float x = Random.Range(-4, 4);

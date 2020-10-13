@@ -83,11 +83,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8320937043071758332}
     m_Modifications:
-    - target: {fileID: 4536828431963716408, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
-        type: 3}
-      propertyPath: m_Name
-      value: GoldFieldText
-      objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716402, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -193,11 +188,17 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4536828431963716408, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
+        type: 3}
+      propertyPath: m_Name
+      value: GoldFieldText
+      objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716403, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: -1674787913619209890, guid: b9399ab71b2536c4c854be7ac75e9653,
+        type: 2}
     - target: {fileID: 4536828431963716412, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_Mesh
@@ -221,44 +222,45 @@ PrefabInstance:
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_text
-      value: "\uC548\uB155\n"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+      objectReference: {fileID: 11400000, guid: b9399ab71b2536c4c854be7ac75e9653,
         type: 2}
     - target: {fileID: 4536828431963716414, guid: b3b39bcedf7136c44b4c21bf7175c4b4,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: -1674787913619209890, guid: b9399ab71b2536c4c854be7ac75e9653,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3b39bcedf7136c44b4c21bf7175c4b4, type: 3}
 --- !u!224 &2501690692808246215 stripped

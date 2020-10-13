@@ -860,7 +860,7 @@ MonoBehaviour:
   curPower: 0
   attackStopDistance: 1.8
   retunStartDistance: 20
-  preAttack: 1
+  preAttack: 0
   dropItem: {fileID: 8320937043071758335, guid: 96585deccf96920409f19a1bbd2f31da,
     type: 3}
   dropGold: {fileID: 2851388916558136889, guid: 97f34bc5550bd7849a1806927e4b9555,

@@ -2,7 +2,7 @@
     "consumeData_list": [
         {
             "id": 1,
-            "name": "hp_potion",
+            "name": "HP 포션",
             "itemType": 0,
             "itemGrade": 0,
 			"itemInfo" :"hp 50 회복",
@@ -11,7 +11,7 @@
         },
 		{
             "id": 2,
-            "name": "mp_potion",
+            "name": "MP 포션",
             "itemType": 0,
             "itemGrade": 0,
 			"itemInfo" :"mp 50 회복",
@@ -22,7 +22,7 @@
 	"weaponData_list": [
 		{
             "id": 1000,
-            "name": "Sword_Common",
+            "name": "검",
             "itemType": 1,
             "itemGrade": 0,
 			"itemInfo" :"무기",
@@ -31,7 +31,7 @@
         },
 		{
             "id": 1001,
-            "name": "Sword_UnCommon",
+            "name": "검",
             "itemType": 1,
             "itemGrade": 1,
 			"itemInfo" :"무기",
@@ -40,7 +40,7 @@
         },
 		{
             "id": 1002,
-            "name": "Sword_Epic",
+            "name": "검",
             "itemType": 1,
             "itemGrade": 2,
 			"itemInfo" :"무기",
@@ -49,7 +49,7 @@
         },
 		{
             "id": 1003,
-            "name": "Sword_Legendary",
+            "name": "검",
             "itemType": 1,
             "itemGrade": 3,
 			"itemInfo" :"무기",
@@ -60,7 +60,7 @@
 	"armorData_list":[
 		{
 			"id": 2000,
-            "name": "Armor_Common",
+            "name": "갑옷",
             "itemType": 2,
             "itemGrade": 0,
 			"itemInfo" :"갑옷",
@@ -69,7 +69,7 @@
 		},
 		{
 			"id": 2001,
-            "name": "Armor_UnCommon",
+            "name": "갑옷",
             "itemType": 2,
             "itemGrade": 1,
 			"itemInfo" :"갑옷",
@@ -78,7 +78,7 @@
 		},
 		{
 			"id": 2002,
-            "name": "Armor_Epic",
+            "name": "갑옷",
             "itemType": 2,
             "itemGrade": 2,
 			"itemInfo" :"갑옷",
@@ -87,7 +87,7 @@
 		},
 		{
 			"id": 2003,
-            "name": "Armor_Legendary",
+            "name": "갑옷",
             "itemType": 2,
             "itemGrade": 3,
 			"itemInfo" :"갑옷",

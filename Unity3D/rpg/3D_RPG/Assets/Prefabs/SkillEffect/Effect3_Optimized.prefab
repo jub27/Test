@@ -15387,20 +15387,19 @@ MonoBehaviour:
   - 4.8
   - 5.7
   sklllPower:
-  - 4
-  - 4
-  - 4
-  - 4
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
+  - 5
+  - 5
+  - 5
+  - 5
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
   - 20
   skillType: 2
   skill_collider: {fileID: 7399564987633781907}
   skill_num: 1
-  skill_cool_time: {fileID: 0}
 --- !u!135 &7399564987633781907
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -14,7 +14,6 @@ ScriptsOnlyBuild:
     - DamageText
     - Delay
     - DelayEnabledTrainRender
-    - DontDestroy
     - DragWindow
     - EffectNWayMotion
     - EnemyAttack
@@ -24,6 +23,7 @@ ScriptsOnlyBuild:
     - EnemySpawn
     - EnemyStatus
     - EscMenuManager
+    - EventSystemManager
     - FadeOutAlpha
     - FixQueue
     - GameManager
@@ -87,6 +87,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TMP_SubMesh
     - TMPro.TextMeshPro
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
@@ -186,6 +187,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11040}
     - Class: 114
       Script: {instanceID: 11228}
+    - Class: 114
+      Script: {instanceID: 11280}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -360,7 +363,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11326}
     - Class: 114
-      Script: {instanceID: 103758}
+      Script: {instanceID: 74656}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -971,18 +974,6 @@ ScriptsOnlyBuild:
     className: IKHandsFREE
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements
-    className: CallbackExecutor
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements.Editor
-    className: Placeholder
-  - hash:
-      serializedVersion: 2
       Hash: 357dc9516c87a9d2caf5c0f50c455e56
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnityStandardAssets.Water
@@ -1526,7 +1517,7 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: DontDestroy
+    className: EventSystemManager
   - hash:
       serializedVersion: 2
       Hash: 80eab7c41e089e47a9e070cd25ea0728
@@ -2201,7 +2192,7 @@ ScriptsOnlyBuild:
     className: guanyuDemo1
   - hash:
       serializedVersion: 2
-      Hash: 756e409e137b0da920bb62b50697f39c
+      Hash: 8a6b94fcd2b17b8779ee452a750bf907
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Item
@@ -2426,4 +2417,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Main.unity
   - Assets/Scenes/Town.unity
   - Assets/Scenes/Field1.unity
-  playerPath: "C:/Users/dosss/Desktop/\uC0C8 \uD3F4\uB354/3D_RPG.exe"
+  playerPath: "C:/Users/\uC7AC\uC5FD/Desktop/\uC0C8 \uD3F4\uB354/3D_RPG.exe"
