@@ -1,6 +1,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
-
+#include <Windows.h>
 LPDIRECT3D9 g_pD3D = NULL;
 LPDIRECT3DDEVICE9 g_pD3DDevice = NULL;
 LPDIRECT3DVERTEXBUFFER9 g_pSunVB = NULL;

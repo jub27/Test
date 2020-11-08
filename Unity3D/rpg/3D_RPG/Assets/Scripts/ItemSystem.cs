@@ -128,4 +128,14 @@ public class ItemSystem : MonoBehaviour
     {
         
     }
+
+    public ItemType GetItemType(int itemID)
+    {
+        if (itemID < 1000)
+            return ItemType.CONSUMED;
+        else if (itemID < 2000)
+            return ItemType.WEAPON;
+        else
+            return ItemType.ARMOR;
+    }
 }

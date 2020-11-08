@@ -12,7 +12,7 @@ public class EnemyStatus : MonoBehaviour
     public Slider hpSlider;
     private EnemyControl ec;
 
-    void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         ec = GetComponent<EnemyControl>();
@@ -27,9 +27,16 @@ public class EnemyStatus : MonoBehaviour
         if(curHp <= 0)
         {
             dead = true;
+            ec.state = EnemyControl.State.Dead;
             ec.DropItem();
             ec.DropGold();
             ec.StartCoroutine("Die");
         }
+    }
+    public void OnEnable()
+    {
+        curHp = 100;
+        dead = false;
+        ec.state = EnemyControl.State.Idle;
     }
 }

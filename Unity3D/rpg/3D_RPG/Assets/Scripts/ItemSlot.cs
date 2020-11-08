@@ -232,19 +232,19 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                             return;
                         }
                     }
-                    int temp_item_id = MoveItemByMouse.instance.origin.item_id;
+                    int temp_item_id = MoveItemByMouse.instance.origin.item_id; // 클릭해놓은 아이템 슬롯의 아이템 id 를 임시 변수에 저장
                     int temp_item_nums = MoveItemByMouse.instance.origin.item_nums;
-                    MoveItemByMouse.instance.origin.UnSetItem();
-                    MoveItemByMouse.instance.origin.SetItem(item_id);
+                    MoveItemByMouse.instance.origin.UnSetItem(); // 클릭해놓은 아이템 슬롯의 아이템 제거
+                    MoveItemByMouse.instance.origin.SetItem(item_id); // 클릭해놓은 아이템 슬롯에 현재 클릭한 아이템 슬롯의 아이템을 세팅
                     MoveItemByMouse.instance.origin.item_nums = item_nums;
-                    if(MoveItemByMouse.instance.origin.item_id < 1000)
+                    if (ItemSystem.instance.GetItemType(MoveItemByMouse.instance.origin.item_id) == ItemSystem.ItemType.CONSUMED)
                     {
                         MoveItemByMouse.instance.origin.itemNums_Text.text = "x" + MoveItemByMouse.instance.origin.item_nums.ToString();
                     }
-                    UnSetItem();
-                    SetItem(temp_item_id);
+                    UnSetItem(); // 현재 클릭한 아이템 슬롯의 아이템 제거
+                    SetItem(temp_item_id); // 클릭해놓았던 아이템 슬롯의 아이템을 세팅
                     item_nums = temp_item_nums;
-                    if(item_id < 1000)
+                    if(ItemSystem.instance.GetItemType(item_id) == ItemSystem.ItemType.CONSUMED)
                     {
                         itemNums_Text.text = "x" + item_nums.ToString();
                     }

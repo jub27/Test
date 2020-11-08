@@ -51,9 +51,6 @@ public class PlayerControl : MonoBehaviour
             return;
         }
         Move();
-        yVelocity += gravity * Time.deltaTime;
-        playerAnimator.SetFloat("Y_Speed", yVelocity);
-        characterController.Move(Vector3.up * yVelocity * Time.deltaTime);
     }
 
     public void SetDestination(Vector3 destination)

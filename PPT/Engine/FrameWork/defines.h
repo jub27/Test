@@ -1,0 +1,7 @@
+#pragma once
+
+enum SCENE_INDEX
+{
+	SCENE_INDEX_TITLE,
+	SCENE_INDEX_GAME,
+};

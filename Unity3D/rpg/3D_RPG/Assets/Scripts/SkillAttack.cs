@@ -35,11 +35,10 @@ public class SkillAttack : MonoBehaviour
         }
         yield break;
     }
-
-    IEnumerator SkillColliderEnable()
+    IEnumerator SkillColliderEnable()// 스킬의 Collider를 활성화
     {
         skill_collider.enabled = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         skill_collider.enabled = false;
         yield break;
     }

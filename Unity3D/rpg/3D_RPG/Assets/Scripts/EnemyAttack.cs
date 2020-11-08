@@ -8,11 +8,10 @@ public class EnemyAttack : MonoBehaviour
     public GameObject weapon2;
     Collider cc;
     Collider cc2;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         cc = weapon.GetComponent<Collider>();
-        if(weapon2 != null)
+        if (weapon2 != null)
         {
             cc2 = weapon2.GetComponent<Collider>();
         }

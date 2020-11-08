@@ -8,11 +8,15 @@ public class EnemyHitArea : MonoBehaviour
     EnemyStatus cs;
     public DamageText damageText;
     public Transform damagePrintPos;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         ec = transform.root.gameObject.GetComponent<EnemyControl>();
         cs = transform.root.gameObject.GetComponent<EnemyStatus>();
+    }
+
+    public void OnEnable()
+    {
+        GetComponent<Collider>().enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)

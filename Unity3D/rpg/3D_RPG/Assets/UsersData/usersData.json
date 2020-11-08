@@ -17,6 +17,10 @@
             "gold": 2349,
             "inventory": [
                 {
+                    "item_id": 2001,
+                    "item_nums": 1
+                },
+                {
                     "item_id": 2000,
                     "item_nums": 1
                 },
@@ -25,12 +29,8 @@
                     "item_nums": 1
                 },
                 {
-                    "item_id": 2001,
-                    "item_nums": 1
-                },
-                {
-                    "item_id": 0,
-                    "item_nums": 0
+                    "item_id": 2,
+                    "item_nums": 3
                 },
                 {
                     "item_id": 0,
@@ -190,8 +190,590 @@
                 "item_nums": 1
             },
             "quickSlot2": {
-                "item_id": 2,
-                "item_nums": 3
+                "item_id": 0,
+                "item_nums": 0
+            }
+        },
+        {
+            "id": "hfghf",
+            "password": "hfghfg",
+            "level": 1,
+            "attack": 10.0,
+            "defense": 0.0,
+            "curExp": 0.0,
+            "maxExp": 100.0,
+            "curHp": 100.0,
+            "maxHp": 100.0,
+            "curMp": 100.0,
+            "maxMp": 100.0,
+            "weapon": 0,
+            "armor": 0,
+            "gold": 0,
+            "inventory": [
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                }
+            ],
+            "quickSlot1": {
+                "item_id": 0,
+                "item_nums": 0
+            },
+            "quickSlot2": {
+                "item_id": 0,
+                "item_nums": 0
+            }
+        },
+        {
+            "id": "asd12345",
+            "password": "asd",
+            "level": 1,
+            "attack": 10.0,
+            "defense": 0.0,
+            "curExp": 0.0,
+            "maxExp": 100.0,
+            "curHp": 100.0,
+            "maxHp": 100.0,
+            "curMp": 100.0,
+            "maxMp": 100.0,
+            "weapon": 0,
+            "armor": 0,
+            "gold": 0,
+            "inventory": [
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                }
+            ],
+            "quickSlot1": {
+                "item_id": 0,
+                "item_nums": 0
+            },
+            "quickSlot2": {
+                "item_id": 0,
+                "item_nums": 0
+            }
+        },
+        {
+            "id": "111112222",
+            "password": "11111",
+            "level": 1,
+            "attack": 10.0,
+            "defense": 0.0,
+            "curExp": 0.0,
+            "maxExp": 100.0,
+            "curHp": 100.0,
+            "maxHp": 100.0,
+            "curMp": 70.0,
+            "maxMp": 100.0,
+            "weapon": 0,
+            "armor": 0,
+            "gold": 0,
+            "inventory": [
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                },
+                {
+                    "item_id": 0,
+                    "item_nums": 0
+                }
+            ],
+            "quickSlot1": {
+                "item_id": 0,
+                "item_nums": 0
+            },
+            "quickSlot2": {
+                "item_id": 0,
+                "item_nums": 0
             }
         }
     ]

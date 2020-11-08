@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private PlayerStatus ps;
     public user_data cur_user_data;
 
-    public List<GameObject> dontDestroyObjectList;
+    public List<GameObject> dontDestroyObjectList;//메인화면으로 돌아갈때 소멸시킬 dontDestroyObject들이 담긴 리스트
 
     [System.Serializable]
     public struct slot_data
@@ -75,26 +75,23 @@ public class GameManager : MonoBehaviour
     {
         public user_data[] users_data_arr;
     }
-    public SaveData sd; // json으로 저장할 전체 유저들 데이터
-    public Dictionary<string, user_data> user_data_dict; // 로그인 할때 id, password 참조할 dictionary
-    public List<user_data> users_data_list; // 새로 캐릭터 생성할때마다 이 리스트에 저장, json으로 저장할때는 SaveData 형태로 바꿔서 저장
-    private void Awake()// json 데이터 읽어와서 유저 데이터, list, dictionary 초기화
+    private SaveData sd; // 전체 유저들 데이터
+    private Dictionary<string, user_data> user_data_dict; // 로그인 할 때 아이디를 key로써 참조하기 위한 dictionary
+    private void Awake()// json 데이터 읽어와서 dictionary 초기화
     {
         if (instance == null)
         {
-            dontDestroyObjectList = new List<GameObject>();
-            users_data_list = new List<user_data>();
             user_data_dict = new Dictionary<string, user_data>();
             string path = Application.dataPath + "/UsersData/usersData" + ".json";
             string jsonData = File.ReadAllText(path);
-            sd = JsonUtility.FromJson<SaveData>(jsonData);
-
-            for (int i = 0; i < sd.users_data_arr.Length; i++)
+            sd = JsonUtility.FromJson<SaveData>(jsonData); // json 파일로부터 유저 데이터 읽어오기
+            for (int i = 0; i < sd.users_data_arr.Length; i++) // dictionary 초기화
             {
-                users_data_list.Add(sd.users_data_arr[i]);
-                user_data_dict.Add(sd.users_data_arr[i].id, sd.users_data_arr[i]);
+                user_data_dict.Add(sd.users_data_arr[i].id, sd.users_data_arr[i]); 
             }
+
             instance = this;
+            dontDestroyObjectList = new List<GameObject>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -110,13 +107,14 @@ public class GameManager : MonoBehaviour
             return false;
         }
         user_data temp = new user_data(id, password);
-        users_data_list.Add(temp);
-        sd.users_data_arr = new user_data[users_data_list.Count];
-        for (int i = 0; i < users_data_list.Count; i++)
+        user_data_dict.Add(temp.id, temp);
+        sd.users_data_arr = new user_data[user_data_dict.Count];
+        int index = 0;
+        foreach(var v in user_data_dict)
         {
-            sd.users_data_arr[i] = users_data_list[i];
+            sd.users_data_arr[index] = v.Value;
+            index++;
         }
-        user_data_dict.Add(id, temp);
         cur_user_data = instance.user_data_dict[id];
         string jsonData = JsonUtility.ToJson(sd, true);
         string path = Application.dataPath + "/UsersData/usersData" + ".json";
@@ -176,5 +174,20 @@ public class GameManager : MonoBehaviour
         dontDestroyObjectList.Clear();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Main");
+    }
+
+    public bool Id_JoongBok_Check(string id)
+    {
+        return user_data_dict.ContainsKey(id);
+    }
+
+    public bool Password_Check(string id, string password)
+    {
+        return user_data_dict[id].password == password;
+    }
+
+    public void SetCurUserData(string id)
+    {
+        cur_user_data = user_data_dict[id];
     }
 }

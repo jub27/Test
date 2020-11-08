@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyControl : MonoBehaviour
 {
-    enum State
+    public enum State
     {
-        Idle, Walking, Chasing, Attacking, Return
+        Idle, Walking, Chasing, Attacking, Return, Dead
     }
 
-    private State state;
+    public State state;
     private float delayTime;
     private float walkRange = 10.0f;
     private Animator animator;
@@ -31,8 +31,8 @@ public class EnemyControl : MonoBehaviour
     public bool preAttack = false; // 선공 후공
     public Item dropItem;
     public Gold dropGold;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         state = State.Idle;
         destination = transform.position;
@@ -42,17 +42,40 @@ public class EnemyControl : MonoBehaviour
         cs = GetComponent<EnemyStatus>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
+    private void OnEnable()
+    {
+        transform.position = basePosition;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (cs.dead)
+        switch (state)
         {
-            return;
+            case State.Idle:
+                Idle();
+                break;
+            case State.Walking:
+                Walking();
+                break;
+            case State.Chasing:
+                Chasing();
+                break;
+            case State.Attacking:
+                Attacking();
+                break;
+            case State.Return:
+                Return();
+                break;
+            case State.Dead:
+                break;
         }
+    }
 
+    void Idle()
+    {
         delayTime -= Time.deltaTime;
-        if(state == State.Idle && delayTime <= 0)
+        if (state == State.Idle && delayTime <= 0)
         {
             state = State.Walking;
             animator.SetBool("Walk", true);
@@ -67,24 +90,6 @@ public class EnemyControl : MonoBehaviour
             {
                 destination.y = hitInfo.point.y;
             }
-        }
-
-        switch (state)
-        {
-            case State.Idle:
-                break;
-            case State.Walking:
-                Walking();
-                break;
-            case State.Chasing:
-                Chasing();
-                break;
-            case State.Attacking:
-                Attacking();
-                break;
-            case State.Return:
-                Return();
-                break;
         }
     }
 
@@ -160,22 +165,17 @@ public class EnemyControl : MonoBehaviour
             }
             return;
         }
+        // 플레이어와의 거리가 공격거리 이내 일 때 state 를 공격으로 변경
         if (Vector3.Distance(transform.position, target.position) <= attackStopDistance)
         {
             state = State.Attacking;
             navMeshAgent.isStopped = true;
             navMeshAgent.ResetPath();
             InitParameter();
-            int attackAnim = Random.Range(0, attackAnimationCount) + 1;
-            string param = "Attack" + attackAnim.ToString();
-            curPower = attackPower[attackAnim - 1];
-            animator.SetBool(param, true);
-            attackEnd = false;
-
         }
-        else
+        else// 플레이어와의 거리가 공격거리 보다 크다면 플레이어를 추적
         {
-            navMeshAgent.SetDestination(GameObject.Find("Player").transform.position);
+            navMeshAgent.SetDestination(target.transform.position);
         }
     }
 
@@ -191,11 +191,20 @@ public class EnemyControl : MonoBehaviour
         dir.y = 0;
         transform.forward = dir;
 
+        // 플레이어와의 거리가 공격거리 보다 크다면 state를 추적으로 변경
         if (Vector3.Distance(transform.position, target.position) > attackStopDistance && attackEnd)
         {
             state = State.Chasing;
             InitParameter();
             animator.SetBool("Chase", true);
+        }
+        else // 플레이어를 향해서 무작위 공격 애니메이션으로 공격
+        {
+            int attackAnim = Random.Range(0, attackAnimationCount) + 1;
+            string param = "Attack" + attackAnim.ToString();
+            curPower = attackPower[attackAnim - 1];
+            animator.SetBool(param, true);
+            attackEnd = false;
         }
     }
 
@@ -254,7 +263,7 @@ public class EnemyControl : MonoBehaviour
     {
         animator.SetTrigger("Dead");
         yield return new WaitForSeconds(1.0f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         yield break;
     }
 }

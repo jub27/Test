@@ -153,19 +153,19 @@ public class InventorySystem : MonoBehaviour
 
     public void Sort()
     {
-        List<KeyValuePair<int, int>> temp = new List<KeyValuePair<int, int>>();
+        List<KeyValuePair<int, int>> temp = new List<KeyValuePair<int, int>>(); // <아이템 ID, 아이템 개수>
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            temp.Add(new KeyValuePair<int, int>(itemSlots[i].item_id, itemSlots[i].item_nums));
+            temp.Add(new KeyValuePair<int, int>(itemSlots[i].item_id, itemSlots[i].item_nums));// 현재 인벤토리를 복사
         }
-        temp.Sort((a, b) => -(a.Key.CompareTo(b.Key)));
-        for (int i = 0; i < itemSlots.Length; i++)
+        temp.Sort((a, b) => -(a.Key.CompareTo(b.Key)));// 복사한 인벤토리를 정렬
+        for (int i = 0; i < itemSlots.Length; i++) //인벤토리에 정렬한 값을 대입
         {
             itemSlots[i].UnSetItem();
             if (temp[i].Key != 0)
             {
                 itemSlots[i].SetItem(temp[i].Key);
-                if (temp[i].Key < 1000)
+                if (ItemSystem.instance.GetItemType(temp[i].Key) == ItemSystem.ItemType.CONSUMED)// 소비아이템인 경우 아이템 개수도 설정
                 {
                     itemSlots[i].item_nums = temp[i].Value;
                     itemSlots[i].itemNums_Text.text = "x" + itemSlots[i].item_nums.ToString();

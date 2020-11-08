@@ -17,11 +17,11 @@ public class MainMenuManager : MonoBehaviour
             notify.text = "아이디 또는 비밀번호를 입력해주세요.";
             return;
         }
-        if (GameManager.instance.user_data_dict.ContainsKey(id.text))
+        if (GameManager.instance.Id_JoongBok_Check(id.text))
         {
-            if (GameManager.instance.user_data_dict[id.text].password == password.text)
+            if (GameManager.instance.Password_Check(id.text, password.text))
             {
-                GameManager.instance.cur_user_data = GameManager.instance.user_data_dict[id.text];
+                GameManager.instance.SetCurUserData(id.text);
                 SceneManager.LoadScene("Town");
             }
             else

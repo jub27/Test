@@ -79,13 +79,13 @@ public class Item : MonoBehaviour
             }
             tm.color = new Color(255, 241, 184, 125);
         }
-        GameObject temp =  Instantiate(Effects[itemGrade], transform.position, transform.rotation);
-        temp.transform.parent = transform;
+
+        GameObject item =  Instantiate(Effects[itemGrade], transform.position, transform.rotation);
+        item.transform.parent = transform;
         float x = Random.Range(-4, 4);
         float y = Random.Range(10, 15);
         float z = Random.Range(-4, 4);
         rigid.AddForce(new Vector3(x, y, z), ForceMode.Impulse);
-        GetComponent<SphereCollider>().enabled = true;
     }
 
     // Update is called once per frame
